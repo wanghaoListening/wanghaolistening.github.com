@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>Jexl,jsonpath在项目中的应用 | haothink123</title>
+  <title>Tag: jexl | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="项目中需要对其他部门的大量数据源接口进行调用，接口都是http形式，访问不同的接口所使用的账号都是相同的唯一不同时的时请求的参数（例如：接口1：请求参数为reqname,reqid,而接口2的请求参数为passName，pid，iMonth）,请求参数含义较为统一，基本就是用户名，用户的身份证号，或者企业名称，不同的是请求的参数的Key的命名，不用接口各有差异。以及请求的方法（post,get）,">
-<meta name="keywords" content="jexl">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Jexl,jsonpath在项目中的应用">
-<meta property="og:url" content="https://wanghaolistening.github.io/2019/01/25/jsonpath在项目中的应用/index.html">
+  <meta name="description" content="后端程序员">
+<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer">
+<meta property="og:type" content="website">
+<meta property="og:title" content="haothink123">
+<meta property="og:url" content="https://wanghaolistening.github.io/tags/jexl/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="项目中需要对其他部门的大量数据源接口进行调用，接口都是http形式，访问不同的接口所使用的账号都是相同的唯一不同时的时请求的参数（例如：接口1：请求参数为reqname,reqid,而接口2的请求参数为passName，pid，iMonth）,请求参数含义较为统一，基本就是用户名，用户的身份证号，或者企业名称，不同的是请求的参数的Key的命名，不用接口各有差异。以及请求的方法（post,get）,">
+<meta property="og:description" content="后端程序员">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-25T11:42:27.837Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jexl,jsonpath在项目中的应用">
-<meta name="twitter:description" content="项目中需要对其他部门的大量数据源接口进行调用，接口都是http形式，访问不同的接口所使用的账号都是相同的唯一不同时的时请求的参数（例如：接口1：请求参数为reqname,reqid,而接口2的请求参数为passName，pid，iMonth）,请求参数含义较为统一，基本就是用户名，用户的身份证号，或者企业名称，不同的是请求的参数的Key的命名，不用接口各有差异。以及请求的方法（post,get）,">
+<meta name="twitter:title" content="haothink123">
+<meta name="twitter:description" content="后端程序员">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -183,65 +182,36 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-jsonpath在项目中的应用" class="article article-type-post " itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Jexl,jsonpath在项目中的应用
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/01/25/jsonpath在项目中的应用/" class="archive-article-date">
+  	<time datetime="2019-01-25T03:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-25</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/01/25/jsonpath在项目中的应用/">Jexl,jsonpath在项目中的应用</a>
     </h1>
   
 
-        
-        <a href="/2019/01/25/jsonpath在项目中的应用/" class="archive-article-date">
-  	<time datetime="2019-01-25T03:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>项目中需要对其他部门的大量数据源接口进行调用，接口都是http形式，访问不同的接口所使用的账号都是相同的唯一不同时的时请求的参数（例如：接口1：请求参数为reqname,reqid,而接口2的请求参数为passName，pid，iMonth）,请求参数含义较为统一，基本就是用户名，用户的身份证号，或者企业名称，不同的是请求的参数的Key的命名，不用接口各有差异。以及请求的方法（post,get）,而且随着业务的需要接口在不断的增加，基于此在其他项目的启发下，抽象了一套通用的调用方式，不需要根据不同的接口编写相应的实现类。</p>
-<a id="more"></a>
-<hr>
-<h3 id="Jexl-的使用需要"><a href="#Jexl-的使用需要" class="headerlink" title="Jexl 的使用需要"></a>Jexl 的使用需要</h3><p>官方对jexl的解释是，可以在应用实现动态的脚本特征，并且对JSTL表达式进行了扩展。<br>基于项目的需求，使用jexl表达式对不同接口请求参数实现key-value的map集合，如下接口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get 请求</span><br><span class="line">http//www.domain.com/api/flight_info/V1?passName=&quot;王某&quot;&amp;pid=&quot;123219573829x33421&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">post 请求</span><br><span class="line">http//www.domain.com/pkt/people_info/V1</span><br><span class="line"></span><br><span class="line">参数：reqname:&quot;王某&quot;</span><br><span class="line">     rid:&quot;123219573829x33421&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="规则的配置"><a href="#规则的配置" class="headerlink" title="规则的配置"></a>规则的配置</h3><p>基于上面的接口的实际的参数的含义都是一样的，都是用户名和身份证号，而仅仅是请求参数的key的名字不用而已，实际项目中需要请求几十个这样类型的接口，而且随着业务的需要，还在不断的增加接口。这种场景便可以使用jexl表达式进行很好的解决。</p>
-<p>将参数以及请求的方法进行规则化并且存储，当调用接口时根据规则进行相同规则的解析。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;method&quot;:&quot;get&quot;,&quot;param&quot;: [&quot;passName=$p.name&quot;,&quot;pid=$p.idNo&quot;],&quot;path&quot;:&quot;/api/flight_info/V1&quot;&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;&quot;method&quot;:&quot;post&quot;,&quot;param&quot;: [&quot;reqname=$p.name&quot;,&quot;reqid=$p.idNo&quot;],&quot;paht&quot;:&quot;/pkt/people_info/V1&quot;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="jexl的使用"><a href="#jexl的使用" class="headerlink" title="jexl的使用"></a>jexl的使用</h3>
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -253,7 +223,7 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -266,121 +236,17 @@ var _hmt = _hmt || [];
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/01/25/jsonpath在项目中的应用/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
   
   
-    <a href="/2019/01/16/hexo使用gitment评论系统/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo-yilia使用gitment评论系统</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
-  <div id="gitment-ctn"></div>
-<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
-<script src="https://jjeejj.github.io/js/gitment.js"></script> 
-<script>
-var gitment = new Gitment({
-  id: 'Fri Jan 25 2019 11:37:00 GMT+0800',
-  owner: 'wanghaoListening',
-  repo: 'wanghaolistening.github.com',
-  oauth: {
-    client_id: '0a40baefe58e4183769b',
-    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
-  },
-})
-gitment.render('gitment-ctn')
-</script>
-
-  
+    
 
 
           </div>
@@ -403,9 +269,9 @@ gitment.render('gitment-ctn')
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
