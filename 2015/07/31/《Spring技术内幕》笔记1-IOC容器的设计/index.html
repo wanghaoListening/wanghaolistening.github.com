@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/springspring-main.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/springbeanFactorymethod.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/springBeanFactoryExtend.png">
-<meta property="og:updated_time" content="2016-01-23T03:17:02.000Z">
+<meta property="og:updated_time" content="2019-02-16T12:06:35.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Spring技术内幕》笔记1-IOC容器的设计">
 <meta name="twitter:description" content="Spring Framework是一个开源的Java／Java EE全功能栈（full-stack）的应用程序框架Spring Framework提供了一个简易的开发方式，这种开发方式，将避免那些可能致使底层代码变得繁杂混乱的大量的属性文件和帮助类。所以必须要深入的去了解其内部工作机制。">
@@ -217,7 +217,7 @@ var _hmt = _hmt || [];
 <h4 id="通过继承不断的将BeanFactory扩建强大，以下是BeanFactory庞大的继承体系的一部分"><a href="#通过继承不断的将BeanFactory扩建强大，以下是BeanFactory庞大的继承体系的一部分" class="headerlink" title="通过继承不断的将BeanFactory扩建强大，以下是BeanFactory庞大的继承体系的一部分"></a>通过继承不断的将BeanFactory扩建强大，以下是BeanFactory庞大的继承体系的一部分</h4><p><img src="http://7xavwe.com1.z0.glb.clouddn.com/springBeanFactoryExtend.png" alt="BeanFactory继承结构" title="继承体系"></p>
 <h3 id="BeanFactory容器的设计与实现"><a href="#BeanFactory容器的设计与实现" class="headerlink" title="BeanFactory容器的设计与实现"></a>BeanFactory容器的设计与实现</h3><p>在BeanFactory的基础上，spring提供了一系列容器的实现供开发人员使用。作者以XMLBeanFactory的实现来说明IOC容器的设计原理。由上图BeanFactory继承结构可以看出XMLBeanFactory已经过时。而且它是很底层的实现，理解它实现有助于我们理常用的ApplicationContext与基本BeanFactory的联系。</p>
 <p>XMLBeanFactory功能是建立在DefaultListableBeanFactory的基础上，DefaultListableBeanFactory实际上包含了IOC容器所具有的重要功能，而XMLBeanFactory在此基础上扩展了xml操作的功能。在其构造方法中需要获得Resource 作为参数<br>对XmlBeanDefinitionReader对象的初始化，以及完成.loadBeanDefinitions(resource)的调用。这个调用从Resource 中<br>载入BeanDefinition的过程。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">XmlBeanFactory</span><span class="params">(Resource resource, BeanFactory parentBeanFactory)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(parentBeanFactory);</span><br><span class="line">		<span class="keyword">this</span>.reader.loadBeanDefinitions(resource);</span><br><span class="line">  &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">##### 编程式使用IOC</span><br><span class="line">``` bash</span><br><span class="line"><span class="number">1</span>.创建IOC配置文件的抽象资源，这个抽象资源包含了BeanDefination的定义信息</span><br><span class="line">ClassPathResource resource = <span class="keyword">new</span> ClassPathResource(<span class="string">"beans.xml"</span>);</span><br><span class="line"><span class="number">2</span>.创建一个Bean的工厂DefaultListableBeanFactory</span><br><span class="line">DefaultListableBeanFactory factory = <span class="keyword">new</span> DefaultListableBeanFactory();</span><br><span class="line"><span class="number">3</span>.创建一个载入BeanDefination的读取器，XmlBeanDefinitionReader，载入xml文件形式的BeanDefination</span><br><span class="line">，通过一个回调配置给BeanFactory</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> XmlBeanDefinitionReader reader = <span class="keyword">new</span> XmlBeanDefinitionReader(<span class="keyword">this</span>);<span class="comment">//this指factory。</span></span><br><span class="line"><span class="keyword">this</span>.reader.loadBeanDefinitions(resource);</span><br><span class="line"><span class="number">4</span>.从定义好的资源配置文件中读入配置信息，具体的解析过程由XmlBeanDefinitionReader完成，</span><br><span class="line">完成整个载入和注册之后，需要的IOC容器就建立起来了</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">### ApplicationContext的应用场景</span><br><span class="line"></span><br><span class="line">ApplicationContext是一个高级形态意义的IOC容器，它在BeanFactory的基础上提供了以下BeanFactory不具备的新特性</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApplicationContext</span> <span class="keyword">extends</span> <span class="title">EnvironmentCapable</span>, <span class="title">ListableBeanFactory</span>, <span class="title">HierarchicalBeanFactory</span>,</span></span><br><span class="line"><span class="class">		<span class="title">MessageSource</span>, <span class="title">ApplicationEventPublisher</span>, <span class="title">ResourcePatternResolver</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">XmlBeanFactory</span><span class="params">(Resource resource, BeanFactory parentBeanFactory)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(parentBeanFactory);</span><br><span class="line">		<span class="keyword">this</span>.reader.loadBeanDefinitions(resource);</span><br><span class="line">  &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">##### 编程式使用IOC</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>.创建IOC配置文件的抽象资源，这个抽象资源包含了BeanDefination的定义信息</span><br><span class="line">ClassPathResource resource = <span class="keyword">new</span> ClassPathResource(<span class="string">"beans.xml"</span>);</span><br><span class="line"><span class="number">2</span>.创建一个Bean的工厂DefaultListableBeanFactory</span><br><span class="line">DefaultListableBeanFactory factory = <span class="keyword">new</span> DefaultListableBeanFactory();</span><br><span class="line"><span class="number">3</span>.创建一个载入BeanDefination的读取器，XmlBeanDefinitionReader，载入xml文件形式的BeanDefination</span><br><span class="line">，通过一个回调配置给BeanFactory</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> XmlBeanDefinitionReader reader = <span class="keyword">new</span> XmlBeanDefinitionReader(<span class="keyword">this</span>);<span class="comment">//this指factory。</span></span><br><span class="line"><span class="keyword">this</span>.reader.loadBeanDefinitions(resource);</span><br><span class="line"><span class="number">4</span>.从定义好的资源配置文件中读入配置信息，具体的解析过程由XmlBeanDefinitionReader完成，</span><br><span class="line">完成整个载入和注册之后，需要的IOC容器就建立起来了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### ApplicationContext的应用场景</span><br><span class="line"></span><br><span class="line">ApplicationContext是一个高级形态意义的IOC容器，它在BeanFactory的基础上提供了以下BeanFactory不具备的新特性</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApplicationContext</span> <span class="keyword">extends</span> <span class="title">EnvironmentCapable</span>, <span class="title">ListableBeanFactory</span>, <span class="title">HierarchicalBeanFactory</span>,</span></span><br><span class="line"><span class="class">	<span class="title">MessageSource</span>, <span class="title">ApplicationEventPublisher</span>, <span class="title">ResourcePatternResolver</span> </span>&#123;</span><br></pre></td></tr></table></figure>
 <p>新特性：<br><em>支持不同信息原
 </em>访问资源，体现在ResourceLoader和Resource的支持上<br><em>支持事件应用
 </em>在ApplicationContext中提供附加服务</p>
@@ -542,11 +542,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,6 +566,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
@@ -574,19 +578,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
               </li>
              
               <li class="article-tag-list-item">

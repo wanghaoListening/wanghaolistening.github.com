@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
   <title>抽象类中的构造器 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。">
+  <meta name="description" content="一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。">
 <meta name="keywords" content="Java基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="抽象类中的构造器">
 <meta property="og:url" content="https://wanghaolistening.github.io/2015/06/30/抽象类中的构造器/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。">
+<meta property="og:description" content="一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass1.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass3.PNG">
-<meta property="og:updated_time" content="2016-01-23T03:13:34.000Z">
+<meta property="og:updated_time" content="2019-02-16T11:21:55.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="抽象类中的构造器">
-<meta name="twitter:description" content="一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。">
+<meta name="twitter:description" content="一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。">
 <meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass.PNG">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
@@ -207,13 +207,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象构造的作用是<br>用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。<br><a id="more"></a><br>    如图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass.PNG" alt="私有的构造器" title="私有的构造器"><br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass1.PNG" alt="受保护的构造器" title="受保护的构造器"></p>
-<pre><code class="bash">既然抽象类中可以有构造器，那么其构造器的作用又是什么呢？
-</code></pre>
-<pre><code>结合ClassLoader的构造器我觉得有两点
-</code></pre><p>（1）初始化抽象类的成员。<br>（2）为继承自它的子类使用。</p>
-<pre><code class="bash">既然private和protected都可以修饰抽象类的构造器，那么public呢？
-</code></pre>
+        <p>一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是<br>用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。<br><a id="more"></a><br>    如图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass.PNG" alt="私有的构造器" title="私有的构造器"><br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass1.PNG" alt="受保护的构造器" title="受保护的构造器"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">既然抽象类中可以有构造器，那么其构造器的作用又是什么呢？</span><br><span class="line">```	</span><br><span class="line">	</span><br><span class="line"> 结合ClassLoader的构造器我觉得有两点</span><br><span class="line">（1）初始化抽象类的成员。</span><br><span class="line">（2）为继承自它的子类使用。</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">既然private和protected都可以修饰抽象类的构造器，那么public呢？</span><br><span class="line">```</span><br></pre></td></tr></table></figure></p>
 <pre><code>//抽象父类
 public abstract class Father {
 
@@ -230,11 +224,8 @@ public class Son extends Father {
         System.out.println(&quot;这是儿子是个实例类&quot;);
     }
 }
-
-new子类Son创建对象时发现控制台的打印结果与普通构造器类似，
-</code></pre><p>都是先打印父类构造器内容再打印子类构造器内容。<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass3.PNG" alt="结果" title="结果">    </p>
-<pre><code>通过博友的博客newmoon2004的专栏:[on](http://blog.csdn.net/newmoon2004/article/details/5951437)
-</code></pre><p>了解到即使我们声明一个没有构造函数的抽象类，编译器还会为我们生成一个默认的保护级别的构造函数。子类<br>实例化时(不管是否为带参构造)只会调用所有父类的无参构造函数，而带参构造必须通过显式去调用.调用顺序是<br>先调用抽象类的无参构造函数，如果子类实例化时是使用带餐的构造函数，则再接着调用抽象类的带参构造函数，<br>最后调用子类本身的构造函数。<br>    *看来本人Java的基础还是需要加强</p>
+</code></pre><p><code>`</code><br>new子类Son创建对象时发现控制台的打印结果与普通构造器类似，都是先打印父类构造器内容再打印子类构造器内容。<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass3.PNG" alt="结果" title="结果">    </p>
+<p>通过博友的博客newmoon2004的专栏:<a href="http://blog.csdn.net/newmoon2004/article/details/5951437" target="_blank" rel="noopener">on</a><br>了解到即使我们声明一个没有构造函数的抽象类，编译器还会为我们生成一个默认的保护级别的构造函数。子类<br>实例化时(不管是否为带参构造)只会调用所有父类的无参构造函数，而带参构造必须通过显式去调用.调用顺序是<br>先调用抽象类的无参构造函数，如果子类实例化时是使用带餐的构造函数，则再接着调用抽象类的带参构造函数，最后调用子类本身的构造函数。</p>
 
       
 
@@ -525,11 +516,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,6 +540,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
@@ -557,19 +552,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
               </li>
              
               <li class="article-tag-list-item">

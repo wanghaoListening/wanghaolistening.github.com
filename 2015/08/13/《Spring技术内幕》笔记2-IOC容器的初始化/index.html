@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
   <title>《Spring技术内幕》笔记2-IOC容器的初始化 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="IOC容器的初始化过程之BeanDefinition的Resource定位上一篇博客结尾时介绍了refresh()过程牵扯IOC容器启动的一系列复杂过程，此方法也却为容器初始化的入口，具体来说这个启动包括BeanDefinition的Resource定位，载入和注册三个基本过程。第一个过程Resource定位过程指的是BeanDefinition的资源定位，也就是对xml配置文件的定位，我们要加载">
+  <meta name="description" content="接着上一篇">
 <meta name="keywords" content="SpringIOC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Spring技术内幕》笔记2-IOC容器的初始化">
 <meta property="og:url" content="https://wanghaolistening.github.io/2015/08/13/《Spring技术内幕》笔记2-IOC容器的初始化/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="IOC容器的初始化过程之BeanDefinition的Resource定位上一篇博客结尾时介绍了refresh()过程牵扯IOC容器启动的一系列复杂过程，此方法也却为容器初始化的入口，具体来说这个启动包括BeanDefinition的Resource定位，载入和注册三个基本过程。第一个过程Resource定位过程指的是BeanDefinition的资源定位，也就是对xml配置文件的定位，我们要加载">
+<meta property="og:description" content="接着上一篇">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/FileSystemXmlApplicationextend.png">
-<meta property="og:updated_time" content="2015-09-19T10:43:42.000Z">
+<meta property="og:updated_time" content="2019-02-16T12:08:45.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Spring技术内幕》笔记2-IOC容器的初始化">
-<meta name="twitter:description" content="IOC容器的初始化过程之BeanDefinition的Resource定位上一篇博客结尾时介绍了refresh()过程牵扯IOC容器启动的一系列复杂过程，此方法也却为容器初始化的入口，具体来说这个启动包括BeanDefinition的Resource定位，载入和注册三个基本过程。第一个过程Resource定位过程指的是BeanDefinition的资源定位，也就是对xml配置文件的定位，我们要加载">
+<meta name="twitter:description" content="接着上一篇">
 <meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/FileSystemXmlApplicationextend.png">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
@@ -205,11 +205,11 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="IOC容器的初始化过程之BeanDefinition的Resource定位"><a href="#IOC容器的初始化过程之BeanDefinition的Resource定位" class="headerlink" title="IOC容器的初始化过程之BeanDefinition的Resource定位"></a>IOC容器的初始化过程之BeanDefinition的Resource定位</h3><p>上一篇博客结尾时介绍了refresh()过程牵扯IOC容器启动的一系列复杂过程，此方法也却为容器初始化的入口，具体来说<br>这个启动包括BeanDefinition的Resource定位，载入和注册三个基本过程。<br>第一个过程Resource定位过程指的是BeanDefinition的资源定位，也就是对xml配置文件的定位，我们要加载资源文件当然先要找到它。<br>第二个过程是BeanDefinition的载入，也就是将资源文件中用户定义好的Bean用容器内部定义好的数据结构格式来表示。<br>第三个过程注册，将载入过程解析好的BeanDefinition注册到IOC容器中，容器内用HashMap来持有这些BeanDefinition。</p>
+        <p>接着上一篇<br><a id="more"></a></p>
+<h3 id="IOC容器的初始化过程之BeanDefinition的Resource定位"><a href="#IOC容器的初始化过程之BeanDefinition的Resource定位" class="headerlink" title="IOC容器的初始化过程之BeanDefinition的Resource定位"></a>IOC容器的初始化过程之BeanDefinition的Resource定位</h3><p>上一篇博客结尾时介绍了refresh()过程牵扯IOC容器启动的一系列复杂过程，此方法也却为容器初始化的入口，具体来说<br>这个启动包括BeanDefinition的Resource定位，载入和注册三个基本过程。<br>第一个过程Resource定位过程指的是BeanDefinition的资源定位，也就是对xml配置文件的定位，我们要加载资源文件当然先要找到它。<br>第二个过程是BeanDefinition的载入，也就是将资源文件中用户定义好的Bean用容器内部定义好的数据结构格式来表示。<br>第三个过程注册，将载入过程解析好的BeanDefinition注册到IOC容器中，容器内用HashMap来持有这些BeanDefinition。</p>
 <blockquote>
 <p>注意：容器的载入和依赖注入是两个不同的过程。</p>
 </blockquote>
-<a id="more"></a>
 <h4 id="BeanDefinition的Resource定位"><a href="#BeanDefinition的Resource定位" class="headerlink" title="BeanDefinition的Resource定位"></a>BeanDefinition的Resource定位</h4><p> 定位资源首先需要一个Resource，而在前头讲述的DefaultListableBeanFactory这个容器无法直接使用Resource，需要<br> 为期其配置读取器特定的读取器才能实现。spring为其配置了BeanDefinitionReader。而在ApplicationContext中为我<br> 们提供了一系列加载Resource读取器的实现。<br> 还是以FileSystemXmlApplicationContext为例，来具体分析Resource的定位过程。<br> 首先来看一下它的继承体系。FileSystemXmlApplicationContext为DefaultResourceLoader的子孙，那也就具备了以<br> ResourceLoader读入以Resource定义的BeanDefinition的能力。</p>
 <h4 id="FileSystemXmlApplicationContext的继承体系"><a href="#FileSystemXmlApplicationContext的继承体系" class="headerlink" title="FileSystemXmlApplicationContext的继承体系"></a>FileSystemXmlApplicationContext的继承体系</h4><p><img src="http://7xavwe.com1.z0.glb.clouddn.com/FileSystemXmlApplicationextend.png" alt="继承体系" title="接口方法"></p>
 <h4 id="FileSystemXmlApplicationContext内部的一些实现"><a href="#FileSystemXmlApplicationContext内部的一些实现" class="headerlink" title="FileSystemXmlApplicationContext内部的一些实现"></a>FileSystemXmlApplicationContext内部的一些实现</h4><pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemXmlApplicationContext</span> <span class="keyword">extends</span> <span class="title">AbstractXmlApplicationContext</span> </span>{
@@ -266,7 +266,8 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h4 id="构建IOC容器"><a href="#构建IOC容器" class="headerlink" title="构建IOC容器"></a>构建IOC容器</h4><p>我们从FileSystemXmlApplicationContext构造方法的refresh()切入,在refresh()中得到 obtainFreshBeanFactory();<br>我们继续从此方法深入内部，在AbstractApplicationContext的obtainFreshBeanFactory方法中得到抽象方法getBean<br>Factory()，在AbstractApplicationContext的抽象子类AbstractRefreshableApplicationContext中对getBeanFactory()<br>方法做了具体的实现(getBeanFactory()的实现是模版模式)，并在方法refreshBeanFactory()中创建了BeanFactory<br>由此得知refresh()方法中创建并且供ApplicationContext使用的IOC容器就是DefaultListableBeanFactory。如下：</p>
-<h5 id="refresh-方法的具体实现"><a href="#refresh-方法的具体实现" class="headerlink" title="refresh()方法的具体实现"></a>refresh()方法的具体实现</h5><pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>{
+<p>refresh()方法的具体实现</p>
+<pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>{
     <span class="keyword">synchronized</span> (<span class="keyword">this</span>.startupShutdownMonitor) {
         <span class="comment">// Prepare this context for refreshing.</span>
         prepareRefresh();
@@ -319,7 +320,8 @@ var _hmt = _hmt || [];
     }
 }
 </code></pre>
-<h5 id="refreshBeanFactory-方法的具体实现"><a href="#refreshBeanFactory-方法的具体实现" class="headerlink" title="refreshBeanFactory()方法的具体实现"></a>refreshBeanFactory()方法的具体实现</h5><pre><code class="java"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">refreshBeanFactory</span><span class="params">()</span> <span class="keyword">throws</span> BeansException </span>{
+<p>refreshBeanFactory()方法的具体实现</p>
+<pre><code class="java"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">refreshBeanFactory</span><span class="params">()</span> <span class="keyword">throws</span> BeansException </span>{
     <span class="keyword">if</span> (hasBeanFactory()) {
         destroyBeans();
         closeBeanFactory();
@@ -733,11 +735,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,6 +759,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
@@ -765,19 +771,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
               </li>
              
               <li class="article-tag-list-item">
