@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
   <title>说说工厂模式 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。 设计模式六大原则1.单一职责原则优点：降低类的复杂度，一个类只负责一项职责">
+  <meta name="description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="说说工厂模式">
 <meta property="og:url" content="https://wanghaolistening.github.io/2016/01/27/说说工厂模式/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。 设计模式六大原则1.单一职责原则优点：降低类的复杂度，一个类只负责一项职责">
+<meta property="og:description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2016-01-27T14:54:18.000Z">
+<meta property="og:updated_time" content="2019-02-16T11:06:15.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="说说工厂模式">
-<meta name="twitter:description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。 设计模式六大原则1.单一职责原则优点：降低类的复杂度，一个类只负责一项职责">
+<meta name="twitter:description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -204,6 +204,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，<br>偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自<br>身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，<br>由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。</p>
+<a id="more"></a>
 <h3 id="设计模式六大原则"><a href="#设计模式六大原则" class="headerlink" title="设计模式六大原则"></a>设计模式六大原则</h3><p>1.单一职责原则<br>优点：降低类的复杂度，一个类只负责一项职责，提高类的可读性，提高代码的重用性。<br>2.里氏替换原则<br>当一个类继承父类的时候，除添加新的方法完成新的功能外，尽量不要复写父类的方法，<br>也不要重载父类的方法。<br>3.依赖倒置原则<br>高层模块不应依赖低层模块，两者都应该依赖其抽象，抽象不应该依赖细节，而细节应该依赖抽象。抽象指的是接口或抽象类，细节则指的是具体实现类其核心思想是面向接口编程。<br>4.接口隔离原则<br>建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。<br>5.迪米特法则原则<br>一个对象应该对其他对象保持着最少的了解。降低类与类直接的耦合度<br>6.开闭原则<br>对扩展开发对修改关闭。</p>
 
       
@@ -320,11 +321,11 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/01/14/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/01/15/在职考研/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Hello World
+          在职考研
         
       </div>
     </a>
@@ -495,31 +496,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,11 +508,35 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,7 +548,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,19 +556,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">log4j日志处理</a>
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+                <a href="javascript:void(0)" class="js-tag color5">log4j日志处理</a>
               </li>
              
               <li class="article-tag-list-item">
