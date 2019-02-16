@@ -592,34 +592,33 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-java中的volatile" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+    <article id="post-说说工厂模式" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/05/java中的volatile/">java中的volatile</a>
+      <a class="article-title" href="/2016/01/27/说说工厂模式/">说说工厂模式</a>
     </h1>
   
 
         
-        <a href="/2016/01/05/java中的volatile/" class="archive-article-date">
-  	<time datetime="2016-01-05T09:21:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-05</time>
+        <a href="/2016/01/27/说说工厂模式/" class="archive-article-date">
+  	<time datetime="2016-01-27T13:32:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>对Java中的volatile变量一直是一知半解，虽然知道它可以实现一定的线程安全而且又是面试中常考的知识点。但是一直对其了解不够透彻，为了将来能在程序中更好的使用它也为不久的面试打打基础还是对其方面的相关知识整理了一下。以后遇到会继续补充。<br>java中的volatile变量可以被看做一种程度较轻的synchronized;与synchronized相比，volatile使用的编码较少，并且运行时的开销也更少，它所实现的功能仅为synchronized的一部分。锁提供了两种主要特性：互斥（mutual exclusion） 和可见性（visibility）。互斥即一次只允许一个线程持有某个特定的锁，因此可使用该特性实现对共享数据的协调访问协议，这样，一次就只有一个线程能够使用该共享数据。可见性要更加复杂一些，它必须确保释放锁之前对共享数据做出的更改对于随后获得该锁的另一个线程是可见的 —— 如果没有同步机制提供的这种可见性保证，线程看到的共享变量可能是修改前的值或不一致的值，这将引发许多严重问题。<br>
-        
-          <a class="article-more-a" href="/2016/01/05/java中的volatile/#more">more >></a>
-        
+        <p>设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，<br>偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自<br>身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，<br>由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。</p>
+<h3 id="设计模式六大原则"><a href="#设计模式六大原则" class="headerlink" title="设计模式六大原则"></a>设计模式六大原则</h3><p>1.单一职责原则<br>优点：降低类的复杂度，一个类只负责一项职责，提高类的可读性，提高代码的重用性。<br>2.里氏替换原则<br>当一个类继承父类的时候，除添加新的方法完成新的功能外，尽量不要复写父类的方法，<br>也不要重载父类的方法。<br>3.依赖倒置原则<br>高层模块不应依赖低层模块，两者都应该依赖其抽象，抽象不应该依赖细节，而细节应该依赖抽象。抽象指的是接口或抽象类，细节则指的是具体实现类其核心思想是面向接口编程。<br>4.接口隔离原则<br>建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。<br>5.迪米特法则原则<br>一个对象应该对其他对象保持着最少的了解。降低类与类直接的耦合度<br>6.开闭原则<br>对扩展开发对修改关闭。</p>
+
       
 
       
-    </p></div>
+    </div>
     <div class="article-info article-info-index">
       
       
@@ -628,7 +627,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">volatile关键字</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -640,7 +639,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/java基础//" class="article-tag-list-link color2">java基础</a>
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -649,7 +648,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/05/java中的volatile/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/01/27/说说工厂模式/">展开全文 >></a>
         </p>
       
 
@@ -679,6 +678,358 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-JVM-的几个收集器整理2" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/23/JVM-的几个收集器整理2/">JVM 的几个收集器整理2</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/23/JVM-的几个收集器整理2/" class="archive-article-date">
+  	<time datetime="2016-01-23T10:23:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇文章我们主要来讲解CMS收集器和G1收集器，这两款收集器是比较有颠覆性的收集器，CMS收集器是第一款真正意义上实现并发的收集器，实现了用户线程和垃圾收集线程的并发执行<br>而G1收集器通过将堆内存划分为多个大小相等的独立区域(Region)以不同的管理方式实现了<br>实现了可预测的停顿，并且其使命是未来可以替代掉jdk1.5发布的CMS收集器。</p>
+        
+          <a class="article-more-a" href="/2016/01/23/JVM-的几个收集器整理2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/23/JVM-的几个收集器整理2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-JVM-的几个收集器整理" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/21/JVM-的几个收集器整理/">JVM 的几个收集器整理</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/21/JVM-的几个收集器整理/" class="archive-article-date">
+  	<time datetime="2016-01-21T14:08:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>java虚拟机下有多款收集器，每款收集器都有各自的特性，以及各自所适应的应用场景，并且内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，虚拟机之所以提供多种不同的收集器以及大量的调节参数，是因为只有根据实际应用需求实现方式选择最优的收集策略才能获取最好的性能。所以我们有必要去了解它们。<br>
+        
+          <a class="article-more-a" href="/2016/01/21/JVM-的几个收集器整理/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/21/JVM-的几个收集器整理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-了解NIO-Selector" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/16/了解NIO-Selector/">了解NIO Selector</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/16/了解NIO-Selector/" class="archive-article-date">
+  	<time datetime="2016-01-16T13:56:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于NIO中三个重要的组件之一的Selector的一些学习了解。<br>选择器提供选择执行已经就绪的任务的能力，对象的多路复用器。它可以注册到很多个Channel上，监听各个Channel上发生的事件，并且能够根据事件情况做出相应的处理决定Channel读或写或其它。这样，通过一个线程管理多个Channel，就可以处理大量网络连接了，这一点上不同于传统的阻塞IO。</p>
+        
+          <a class="article-more-a" href="/2016/01/16/了解NIO-Selector/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NIO</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/16/了解NIO-Selector/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-反射机制处理数组" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/15/反射机制处理数组/">反射机制处理数组</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/15/反射机制处理数组/" class="archive-article-date">
+  	<time datetime="2016-01-15T06:02:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数组是一种比较常用的数据结构，在Java中也许他不如集合工具类那么灵活，但是大多时候它在效率及内存的损耗方面是由于集合工具类的，Java中数组看似简单，但真正使用起来却存在一些问题，经常出现的问题如“数组越界异常”，还有就是Java中不能创建泛型类型的数组，这其中不仅仅是泛型类型“编译期被擦除”的这个问题，在jvm底层所有数组类型都是Object。当然这并不是此博文的重点，主要还是想总结一下反射机制处理数组的一些方法，由于平时类似的程序相对写的较少，比较容易遗忘，所以想记录下来以备以后参考。<br>
+        
+          <a class="article-more-a" href="/2016/01/15/反射机制处理数组/#more">more >></a>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Reflection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/15/反射机制处理数组/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -801,15 +1152,71 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">log4j日志处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">javaweb基础</a>
               </li>
             
             <div class="clearfix"></div>
