@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>Category: 考研 | haothink123</title>
+  <title>java中的volatile | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="后端程序员">
-<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="haothink123">
-<meta property="og:url" content="https://wanghaolistening.github.io/categories/考研/index.html">
+  <meta name="description" content="对Java中的volatile变量一直是一知半解，虽然知道它可以实现一定的线程安全而且又是面试中常考的知识点。但是一直对其了解不够透彻，为了将来能在程序中更好的使用它也为不久的面试打打基础还是对其方面的相关知识整理了一下。以后遇到会继续补充。java中的volatile变量可以被看做一种程度较轻的synchronized;与synchronized相比，volatile使用的编码较少，并且运行时的">
+<meta name="keywords" content="volatile关键字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java中的volatile">
+<meta property="og:url" content="https://wanghaolistening.github.io/2016/01/05/java中的volatile/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="后端程序员">
+<meta property="og:description" content="对Java中的volatile变量一直是一知半解，虽然知道它可以实现一定的线程安全而且又是面试中常考的知识点。但是一直对其了解不够透彻，为了将来能在程序中更好的使用它也为不久的面试打打基础还是对其方面的相关知识整理了一下。以后遇到会继续补充。java中的volatile变量可以被看做一种程度较轻的synchronized;与synchronized相比，volatile使用的编码较少，并且运行时的">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-01-05T12:01:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="haothink123">
-<meta name="twitter:description" content="后端程序员">
+<meta name="twitter:title" content="java中的volatile">
+<meta name="twitter:description" content="对Java中的volatile变量一直是一知半解，虽然知道它可以实现一定的线程安全而且又是面试中常考的知识点。但是一直对其了解不够透彻，为了将来能在程序中更好的使用它也为不久的面试打打基础还是对其方面的相关知识整理了一下。以后遇到会继续补充。java中的volatile变量可以被看做一种程度较轻的synchronized;与synchronized相比，volatile使用的编码较少，并且运行时的">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -182,71 +183,211 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java中的volatile" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/15/在职考研/" class="archive-article-date">
-  	<time datetime="2019-01-15T13:31:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-15</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/15/在职考研/">在职考研</a>
+    <h1 class="article-title" itemprop="name">
+      java中的volatile
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2016/01/05/java中的volatile/" class="archive-article-date">
+  	<time datetime="2016-01-05T09:21:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对Java中的volatile变量一直是一知半解，虽然知道它可以实现一定的线程安全而且又是面试中常考的知识点。但是一直对其了解不够透彻，为了将来能在程序中更好的使用它也为不久的面试打打基础还是对其方面的相关知识整理了一下。以后遇到会继续补充。<br>java中的volatile变量可以被看做一种程度较轻的synchronized;与synchronized相比，volatile使用的编码较少，并且运行时的开销也更少，它所实现的功能仅为synchronized的一部分。锁提供了两种主要特性：互斥（mutual exclusion） 和可见性（visibility）。互斥即一次只允许一个线程持有某个特定的锁，因此可使用该特性实现对共享数据的协调访问协议，这样，一次就只有一个线程能够使用该共享数据。可见性要更加复杂一些，它必须确保释放锁之前对共享数据做出的更改对于随后获得该锁的另一个线程是可见的 —— 如果没有同步机制提供的这种可见性保证，线程看到的共享变量可能是修改前的值或不一致的值，这将引发许多严重问题。<br><a id="more"></a></p>
+<h3 id="Volatile-变量"><a href="#Volatile-变量" class="headerlink" title="Volatile 变量"></a>Volatile 变量</h3><p>Volatile 变量具有 synchronized 的可见性特性，但是不具备原子特性。这就是说线程能够自动发现 volatile 变量的最新值。Volatile 变量可用于提供线程安全，但是只能应用于非常有限的一组用例：多个变量之间或者某个变量的当前值与修改后值之间没有约束。因此，单独使用 volatile 还不足以实现计数器、互斥锁或任何具有与多个变量相关的不变式（Invariants）的类（例如 “start &lt;=end”）。volatile 变量不会像锁那样造成线程阻塞，因此也很少造成可伸缩性问题。在某些情况下，如果读操作远远大于写操作,volatile变量还可以提供优于锁的性能优势。</p>
+<h3 id="正确使用-volatile-变量的条件"><a href="#正确使用-volatile-变量的条件" class="headerlink" title="正确使用 volatile 变量的条件"></a>正确使用 volatile 变量的条件</h3><p>使用 volatile变量替代锁。要使volatile变量提供理想的线程安全，必须同时满足下面两个条件：</p>
+<blockquote>
+<p>对变量的写操作不依赖与当前的值<br>该变量没有包含在其它变量的不变式中</p>
+</blockquote>
+<p>第一个条件的限制使 volatile 变量不能用作线程安全计数器。虽然增量操作（x++）看上去类似一个单独操作，实际上它是一个由读取－修改－写入操作序列组成的组合操作，必须以原子方式执行，而volatile不能提供必须的原子特性。实现正确的操作需要使x的值在操作期间保持不变，而 volatile 变量无法实现这点。（然而，如果将值调整为只从单个线程写入，那么可以忽略第一个条件。）</p>
+<h3 id="性能考虑"><a href="#性能考虑" class="headerlink" title="性能考虑"></a>性能考虑</h3><p>使用 volatile 变量的主要原因是其简易性：在某些情形下，使用 volatile 变量要比使用相应的锁简单得多。使用 volatile 变量次要原因是其性能：某些情况下，volatile 变量同步机制的性能要优于锁。<br>很难做出准确、全面的评价，例如 “X 总是比 Y 快”，尤其是对 JVM 内在的操作而言（例如，某些情况下JVM也许能够完全删除锁机制，这使得我们难以抽象地比较volatile和 synchronized的开销。）就是说，在目前大多数的处理器架构上，volatile读操作开销非常低 —— 几乎和非 volatile 读操作一样。而volatile写操作的开销要比非volatile写操作多很多，因为要保证可见性需要实现内存界定（MemoryFence），即便如此volatile的总开销仍然要比锁获取低。<br>volatile 操作不会像锁一样造成阻塞，因此，在能够安全使用 volatile 的情况下，volatile 可以提供一些优于锁的可伸缩特性。如果读操作的次数要远远超过写操作，与锁相比，volatile 变量通常能够减少同步的性能开销。</p>
+<h3 id="正确使用-volatile-的模式"><a href="#正确使用-volatile-的模式" class="headerlink" title="正确使用 volatile 的模式"></a>正确使用 volatile 的模式</h3><p>很多并发性专家事实上往往引导用户远离 volatile 变量，因为使用它们要比使用锁更加容易出错。然而，如果谨慎地遵循一些良好定义的模式，就能够在很多场合内安全地使用 volatile变量。要始终牢记使用volatile的限制——只有在状态真正独立于程序内其他内容时才能使用 volatile —— 这条规则能够避免将这些模式扩展到不安全的用例。</p>
+<h3 id="关于volatile的问题"><a href="#关于volatile的问题" class="headerlink" title="关于volatile的问题"></a>关于volatile的问题</h3><h4 id="Java-中能创建-Volatile-数组吗？"><a href="#Java-中能创建-Volatile-数组吗？" class="headerlink" title="Java 中能创建 Volatile 数组吗？"></a>Java 中能创建 Volatile 数组吗？</h4><p>能，Java 中可以创建 volatile 类型数组，不过只是一个指向数组的引用,而不是整个数组我的意思是，如果改变引用指向的数组，将会受到volatile的保护，但是如果多个线程同时改变数组的元素，volatile 标示符就不能起到之前的保护作用了。</p>
+<h4 id="volatile-能使得一个非原子操作变成原子操作吗？"><a href="#volatile-能使得一个非原子操作变成原子操作吗？" class="headerlink" title="volatile 能使得一个非原子操作变成原子操作吗？"></a>volatile 能使得一个非原子操作变成原子操作吗？</h4><p>一种实践是用 volatile 修饰 long 和 double 变量，使其能按原子类型来读写。double 和 long 都是64位宽，因此对这两种类型的读是分为两部分的，第一次读取第一个 32 位，然后再读剩下的 32 位，这个过程不是原子的，但 Java 中 volatile 型的 long 或 double 变量的读写是原子的。volatile 修复符的另一个作用是提供内存屏障（memory barrier），例如在分布式框架中的应用。简单的说，就是当你写一个 volatile 变量之前，Java 内存模型会插入一个写屏障（write barrier），读一个 volatile 变量之前，会插入一个读屏障（read barrier）。意思就是说，在你写一个 volatile 域时，能保证任何线程都能看到你写的值，同时，在写之前，也能保证任何数值的更新对所有线程是可见的，因为内存屏障会将其他所有写的值更新到缓存</p>
+<h4 id="volatile-类型变量提供什么保证？"><a href="#volatile-类型变量提供什么保证？" class="headerlink" title="volatile 类型变量提供什么保证？"></a>volatile 类型变量提供什么保证？</h4><p>volatile变量提供顺序和可见性保证，例如，JVM或者JIT为了获得更好的性能会对语句重排序，但是volatile类型变量即使在没有同步块的情况下赋值也不会与其他语句重排序volatile提供happens-before 的保证，确保一个线程的修改能对其他线程是可见的。某些情况下,volatile还能提供原子性，如读 64 位数据类型，像 long 和 double 都不是原子的，但 volatile 类型的 double 和 long 就是原子的。</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>与锁相比，Volatile 变量是一种非常简单但同时又非常脆弱的同步机制，它在某些情况下将提供优于锁的性能和伸缩性。如果严格遵循volatile的使用条件——即变量真正独立于其他变量和自己以前的值 —— 在某些情况下可以使用 volatile 代替 synchronized 来简化代码。然而，使用 volatile 的代码往往比使用锁的代码更加容易出错。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">非全日制</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">volatile关键字</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/考研//" class="article-tag-list-link color3">考研</a>
+        			<a href="/categories/java基础//" class="article-tag-list-link color2">java基础</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2016/01/05/java中的volatile/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/01/14/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
   
   
-    </div></section>
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div>
+<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+<script src="https://jjeejj.github.io/js/gitment.js"></script> 
+<script>
+var gitment = new Gitment({
+  id: 'Tue Jan 05 2016 17:21:38 GMT+0800',
+  owner: 'wanghaoListening',
+  repo: 'wanghaolistening.github.com',
+  oauth: {
+    client_id: '0a40baefe58e4183769b',
+    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+
+  
 
 
           </div>
@@ -269,10 +410,10 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
