@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>Tag: SpringIOC | haothink123</title>
+  <title>命令模式 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="后端程序员">
-<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="haothink123">
-<meta property="og:url" content="https://wanghaolistening.github.io/tags/SpringIOC/index.html">
+  <meta name="description" content="维基百科对命令模式的定义：在物件导向程式设计的范畴中，命令模式（英语：Command pattern）是一种设计模式，它尝试以物件来代表实际行动。命令物件可以把行动(action) 及其参数封装起来，于是这些行动可以被：重复多次,取消(如果该物件有实作的话),取消后又再重做">
+<meta name="keywords" content="命令模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令模式">
+<meta property="og:url" content="https://wanghaolistening.github.io/2017/03/18/命令模式/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="后端程序员">
+<meta property="og:description" content="维基百科对命令模式的定义：在物件导向程式设计的范畴中，命令模式（英语：Command pattern）是一种设计模式，它尝试以物件来代表实际行动。命令物件可以把行动(action) 及其参数封装起来，于是这些行动可以被：重复多次,取消(如果该物件有实作的话),取消后又再重做">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-18T11:18:08.215Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="haothink123">
-<meta name="twitter:description" content="后端程序员">
+<meta name="twitter:title" content="命令模式">
+<meta name="twitter:description" content="维基百科对命令模式的定义：在物件导向程式设计的范畴中，命令模式（英语：Command pattern）是一种设计模式，它尝试以物件来代表实际行动。命令物件可以把行动(action) 及其参数封装起来，于是这些行动可以被：重复多次,取消(如果该物件有实作的话),取消后又再重做">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -182,120 +183,236 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-命令模式" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/08/13/《Spring技术内幕》笔记2-IOC容器的初始化/" class="archive-article-date">
-  	<time datetime="2015-08-13T09:00:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/08/13/《Spring技术内幕》笔记2-IOC容器的初始化/">《Spring技术内幕》笔记2-IOC容器的初始化</a>
+    <h1 class="article-title" itemprop="name">
+      命令模式
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/03/18/命令模式/" class="archive-article-date">
+  	<time datetime="2017-03-18T07:24:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>维基百科对命令模式的定义：在物件导向程式设计的范畴中，命令模式（英语：Command pattern）是一种设计模式，它尝试以物件来代表实际行动。命令物件可以把行动(action) 及其参数封装起来，于是这些行动可以被：重复多次,取消(如果该物件有实作的话),取消后又再重做</p>
+<a id="more"></a>
+<h3 id="模式结构角色"><a href="#模式结构角色" class="headerlink" title="模式结构角色"></a>模式结构角色</h3><ul>
+<li>Command: 抽象命令类</li>
+<li>ConcreteCommand: 具体命令类</li>
+<li>Invoker: 调用者</li>
+<li>Receiver: 接收者</li>
+<li>Client:客户类</li>
+</ul>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public abstract class AbstractCommand &#123;</span><br><span class="line"></span><br><span class="line">    public abstract void execute();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public abstract class AbstractReceiver &#123;</span><br><span class="line"></span><br><span class="line">    public abstract void action();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Invoker &#123;</span><br><span class="line"></span><br><span class="line">    private AbstractCommand command;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Invoker(AbstractCommand command) &#123;</span><br><span class="line">        this.command = command;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Invoker() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCommand(AbstractCommand command) &#123;</span><br><span class="line">        this.command = command;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 业务方法，用于调用命令类的execute()方法</span><br><span class="line">     */</span><br><span class="line">    public void call() &#123;</span><br><span class="line">        command.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public  class ConcreteCommand extends AbstractCommand &#123;</span><br><span class="line">    private AbstractReceiver receiver;</span><br><span class="line"></span><br><span class="line">    public ConcreteCommand(AbstractReceiver receiver) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.receiver = receiver;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void execute() &#123;</span><br><span class="line">        receiver.action();//调用请求接收者的业务处理方法action()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class ConcreteReceiver extends AbstractReceiver&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void action() &#123;</span><br><span class="line">        System.out.println(&quot;ConcreteReceiver receives the command!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">AbstractReceiver receiver = new ConcreteReceiver();</span><br><span class="line">AbstractCommand command = new ConcreteCommand(receiver);</span><br><span class="line"></span><br><span class="line">Invoker invoker = new Invoker();</span><br><span class="line">invoker.setCommand(command);</span><br><span class="line">invoker.call();</span><br></pre></td></tr></table></figure>
+<h3 id="命令模式分析"><a href="#命令模式分析" class="headerlink" title="命令模式分析"></a>命令模式分析</h3><p>个人理解，其实命令模式就是把命令这一过程对象化，把命令接受者和命令发送者按照一定的规则解耦，保证了两边各自变化而不受相互的影响，请求与接收两者分开后，使得请求的一方不必知道接收请求的一方的接口，更不必知道请求是怎么被接收，以及操作是否被执行、何时被执行，以及是怎么被执行的。命令模式引入抽象的命令接口，只有实现了抽象命令接口的命令才可以被发送者进行发送，接受者才会接收。</p>
+<h3 id="生活中的命令模式"><a href="#生活中的命令模式" class="headerlink" title="生活中的命令模式"></a>生活中的命令模式</h3><p>电视机是请求的接收者，遥控器是请求的发送者，遥控器上有一些按钮，不同的按钮对应电视机的不同操作。抽象命令角色由一个命令接口来扮演，有三个具体的命令类实现了抽象命令接口，这三个具体命令类分别代表三种操作：打开电视机、关闭电视机和切换频道。显然，电视机遥控器就是一个典型的命令模式应用实例。</p>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">        AbstractTelevation televation = new ConcreteTelevation();</span><br><span class="line">        AbstractCommand closeCommand = new TVCloseCommand(televation);</span><br><span class="line">        AbstractCommand openCommand = new TVOPenCommand(televation);</span><br><span class="line">        AbstractController controller = new ConcreteController();</span><br><span class="line">        controller.sendCommand(openCommand);</span><br><span class="line">        controller.sendCommand(closeCommand);</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">```具体实现</span><br><span class="line">public abstract class AbstractTelevation &#123;</span><br><span class="line"></span><br><span class="line">    public abstract void off();</span><br><span class="line"></span><br><span class="line">    public abstract void close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class ConcreteTelevation extends AbstractTelevation&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void off() &#123;</span><br><span class="line">        System.out.println(&quot;开启电视机....&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void close() &#123;</span><br><span class="line">        System.out.println(&quot;关闭电视机....&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public abstract class AbstractCommand &#123;</span><br><span class="line"></span><br><span class="line">    protected AbstractTelevation televation;</span><br><span class="line">    </span><br><span class="line">    public abstract void execute();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TVOPenCommand extends AbstractCommand&#123;</span><br><span class="line">    </span><br><span class="line">    public TVOPenCommand(AbstractTelevation televation)&#123;</span><br><span class="line">        this.televation = televation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void execute() &#123;</span><br><span class="line">        this.televation.off();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TVCloseCommand extends AbstractCommand&#123;</span><br><span class="line">    </span><br><span class="line">    public TVCloseCommand(AbstractTelevation televation)&#123;</span><br><span class="line">        this.televation = televation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void execute() &#123;</span><br><span class="line">        televation.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public abstract class AbstractController &#123;</span><br><span class="line"></span><br><span class="line">    protected AbstractCommand command;</span><br><span class="line"></span><br><span class="line">    public abstract void sendCommand(AbstractCommand command);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class ConcreteController extends AbstractController&#123;</span><br><span class="line"></span><br><span class="line">    public ConcreteController()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void sendCommand(AbstractCommand command) &#123;</span><br><span class="line">        this.command = command;</span><br><span class="line">        command.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="命令模式优点"><a href="#命令模式优点" class="headerlink" title="命令模式优点"></a>命令模式优点</h3><ul>
+<li>降低接受者与发送者系统的耦合度。</li>
+<li>新的命令可以很容易地加入到系统中。</li>
+<li>可以比较容易地设计一个命令队列和宏命令（组合命令）。</li>
+<li>可以方便地实现对请求的Undo和Redo。</li>
+</ul>
+<h3 id="命令模式缺点"><a href="#命令模式缺点" class="headerlink" title="命令模式缺点"></a>命令模式缺点</h3><ul>
+<li>导致创建过多的命令类</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>在命令模式中，将一个请求封装为一个对象，从而使我们可用不同的请求对客户进行参数化</li>
+<li>命令模式的本质是对命令进行封装，将发出命令的责任和执行命令的责任分割开。命令模式使请求本身成为一个对象，这个对象和其他对象一样可以被存储和传递。</li>
+<li>命令模式的主要优点在于降低系统的耦合度，增加新的命令很方便，而且可以比较容易地设计一个命令队列和宏命令，并方便地实现对请求的撤销和恢复；其主要缺点在于可能会导致某些系统有过多的具体命令类。</li>
+<li>命令模式适用情况包括：需要将请求调用者和请求接收者解耦，使得调用者和接收者不直接交互</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SpringIOC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">命令模式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
+        			<a href="/categories/设计模式//" class="article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2017/03/18/命令模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/07/31/《Spring技术内幕》笔记1-IOC容器的设计/" class="archive-article-date">
-  	<time datetime="2015-07-31T06:16:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-07-31</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/01/15/在职考研/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          在职考研
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/27/说说工厂模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">说说工厂模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/07/31/《Spring技术内幕》笔记1-IOC容器的设计/">《Spring技术内幕》笔记1-IOC容器的设计</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SpringIOC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div>
+<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+<script src="https://jjeejj.github.io/js/gitment.js"></script> 
+<script>
+var gitment = new Gitment({
+  id: 'Sat Mar 18 2017 15:24:42 GMT+0800',
+  owner: 'wanghaoListening',
+  repo: 'wanghaolistening.github.com',
+  oauth: {
+    client_id: '0a40baefe58e4183769b',
+    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+
+  
 
 
           </div>
@@ -318,9 +435,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

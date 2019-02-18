@@ -8,15 +8,18 @@
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
   <title>Hystrix 在项目中的应用 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Hystrix">
+  <meta name="description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
+<meta name="keywords" content="Hystrix">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hystrix 在项目中的应用">
 <meta property="og:url" content="https://wanghaolistening.github.io/2019/01/26/Hystrix-在项目中的应用/index.html">
 <meta property="og:site_name" content="haothink123">
+<meta property="og:description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-26T02:35:17.432Z">
+<meta property="og:updated_time" content="2019-02-18T09:19:21.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hystrix 在项目中的应用">
+<meta name="twitter:description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -200,7 +203,16 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用java juc相关的api来进行封装，利用多线程来对服务接口进行隔离，当然这样也可以很好的完成需求，但是无疑增大了工作量，本着不用重复造轮子的想法，调研了相关的框架，最后决定使用Netflix开源的Hystrix框架，Hystrix是一款容错系统，解决当外部依赖故障时拖垮业务系统、甚至引起雪崩的问题。</p>
+<a id="more"></a>
+<h3 id="Hystrix相关功能"><a href="#Hystrix相关功能" class="headerlink" title="Hystrix相关功能"></a>Hystrix相关功能</h3><ul>
+<li>故障熔断，错误率⾼高时熔断后续请求，快速失败</li>
+<li>服务降级，异常时回退执⾏行行</li>
+<li>请求隔离，⽤用线程池⼤大⼩小和信号量量限制并发数</li>
+<li>请求合并，将单个逻辑合并成批量量逻辑</li>
+<li>结果缓存，缓存同样key的请求结果</li>
+</ul>
+
       
 
       
@@ -485,11 +497,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,15 +521,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
               </li>
              
               <li class="article-tag-list-item">
