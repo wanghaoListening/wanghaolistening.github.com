@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>haothink123</title>
+  <title>es在项目中的应用 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="后端程序员">
-<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
-<meta property="og:type" content="website">
-<meta property="og:title" content="haothink123">
-<meta property="og:url" content="https://wanghaolistening.github.io/page/3/index.html">
+  <meta name="description" content="Elasticsearch 在搜索领域有广泛的应用，全文搜索属于最常见的需求，开源的 Elasticsearch 是目前全文搜索引擎的首选。它可以快速地储存、搜索和分析海量数据并且对于数据的增长进行弹性扩容。由于公司数据源管理平台对大数据量查询日志的查询需求，经调研决定使用es存储上下游数据源的调用日志。">
+<meta name="keywords" content="elastic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es在项目中的应用">
+<meta property="og:url" content="https://wanghaolistening.github.io/2018/05/21/es-在项目中的应用/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="后端程序员">
+<meta property="og:description" content="Elasticsearch 在搜索领域有广泛的应用，全文搜索属于最常见的需求，开源的 Elasticsearch 是目前全文搜索引擎的首选。它可以快速地储存、搜索和分析海量数据并且对于数据的增长进行弹性扩容。由于公司数据源管理平台对大数据量查询日志的查询需求，经调研决定使用es存储上下游数据源的调用日志。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-21T10:59:00.489Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="haothink123">
-<meta name="twitter:description" content="后端程序员">
+<meta name="twitter:title" content="es在项目中的应用">
+<meta name="twitter:description" content="Elasticsearch 在搜索领域有广泛的应用，全文搜索属于最常见的需求，开源的 Elasticsearch 是目前全文搜索引擎的首选。它可以快速地储存、搜索和分析海量数据并且对于数据的增长进行弹性扩容。由于公司数据源管理平台对大数据量查询日志的查询需求，经调研决定使用es存储上下游数据源的调用日志。">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -182,36 +183,64 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-《Spring技术内幕》笔记1-IOC容器的设计" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+            <article id="post-es-在项目中的应用" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/31/《Spring技术内幕》笔记1-IOC容器的设计/">《Spring技术内幕》笔记1-IOC容器的设计</a>
+    <h1 class="article-title" itemprop="name">
+      es在项目中的应用
     </h1>
   
 
         
-        <a href="/2015/07/31/《Spring技术内幕》笔记1-IOC容器的设计/" class="archive-article-date">
-  	<time datetime="2015-07-31T06:16:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-07-31</time>
+        <a href="/2018/05/21/es-在项目中的应用/" class="archive-article-date">
+  	<time datetime="2018-05-21T10:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Spring Framework是一个开源的Java／Java EE全功能栈（full-stack）的应用程序框架Spring Framework提供了一个简易的开发方式，这种开发方式，将避免那些可能致使底层代码变得繁杂混乱的大量的属性文件和帮助类。所以必须要深入的去了解其内部工作机制。<br>
-        
-          <a class="article-more-a" href="/2015/07/31/《Spring技术内幕》笔记1-IOC容器的设计/#more">more >></a>
-        
+        <p>Elasticsearch 在搜索领域有广泛的应用，全文搜索属于最常见的需求，开源的 Elasticsearch 是目前全文搜索引擎的首选。它可以快速地储存、搜索和分析海量数据并且对于数据的增长进行弹性扩容。由于公司数据源管理平台对大数据量查询日志的查询需求，经调研决定使用es存储上下游数据源的调用日志。</p>
+<a id="more"></a>
+<h3 id="使用es背景"><a href="#使用es背景" class="headerlink" title="使用es背景"></a>使用es背景</h3><ul>
+<li>oracle上下游接口日志表生产数据量大，查询响应极慢并且时间不能接受</li>
+<li>查询以及响应参数为一个大的json字符串，导致难以建索引优化</li>
+<li>增量数据较大，预估每天5万条数据左右且未来还会增长</li>
+</ul>
+<h3 id="生产es容量预估"><a href="#生产es容量预估" class="headerlink" title="生产es容量预估"></a>生产es容量预估</h3><p>生产数据源管理平台的两个日志表，目前每张表的数据接近2800万条，每张表3月份每天平均新增5万条数据左右<br>查询得4月19日两张log表的总量为2800<em>2=5600 万条，5月13日两张表预估 总量 为 ：5600+25</em>5<em>2=5850；从5月13日算起一年后的总量预估： 5850+365</em>5*2=9500，准生产安装的es 中两个log 总共的数据量为：556,001+472,849=1028850 约103万条数据 ，占用空间9G。</p>
+<p>计算：到明年 5月13日，es 大约空间为： 9500/103*9 =830G </p>
+<blockquote>
+<p>这样的大的数据量以及数据的增长速度oracle显然无法负担。</p>
+</blockquote>
+<h3 id="es线上配置"><a href="#es线上配置" class="headerlink" title="es线上配置"></a>es线上配置</h3>
       
 
       
-    </p></div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
     <div class="article-info article-info-index">
       
       
@@ -220,7 +249,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SpringIOC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">elastic</a>
         		</li>
       		
 		</ul>
@@ -232,7 +261,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
+        			<a href="/categories/项目//" class="article-tag-list-link color3">项目</a>
         		</li>
       		
 		</ul>
@@ -240,16 +269,84 @@ var _hmt = _hmt || [];
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/07/31/《Spring技术内幕》笔记1-IOC容器的设计/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2018/05/21/es-在项目中的应用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/01/15/在职考研/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          在职考研
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/18/命令模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">命令模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -269,360 +366,31 @@ var _hmt = _hmt || [];
 
 
 
-
-  
-    <article id="post-javaweb考前基础总结" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/javaweb考前基础总结/">javaweb考前基础总结</a>
-    </h1>
-  
-
-        
-        <a href="/2015/07/07/javaweb考前基础总结/" class="archive-article-date">
-  	<time datetime="2015-07-07T03:12:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>半个学期又要过去了，马上要进行期末考试了，这个学期学的专业课还是蛮多的，作为web开发，掌握Javaweb<br>的基础知识是必不可少，所以在javaweb考试之前对相关的知识做一个总结。<br>
-        
-          <a class="article-more-a" href="/2015/07/07/javaweb考前基础总结/#more">more >></a>
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">javaweb基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/javaweb//" class="article-tag-list-link color3">javaweb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/07/07/javaweb考前基础总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-抽象类中的构造器" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/30/抽象类中的构造器/">抽象类中的构造器</a>
-    </h1>
-  
-
-        
-        <a href="/2015/06/30/抽象类中的构造器/" class="archive-article-date">
-  	<time datetime="2015-06-30T12:37:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是<br>用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。<br>
-        
-          <a class="article-more-a" href="/2015/06/30/抽象类中的构造器/#more">more >></a>
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/06/30/抽象类中的构造器/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Iterator设计模式" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/11/Iterator设计模式/">Iterator设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2015/06/11/Iterator设计模式/" class="archive-article-date">
-  	<time datetime="2015-06-11T02:47:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近学习Java的设计模式，并看了一些Java集合工具类ArrayList,LinkedList的源码,发现迭代器的<br>实现实在是太巧妙了。以前只知道用不知道它的原理，现在总算搞明白了，它的实现也充分展现了<br>Java面向接口编程的思想以及优势。<br>
-        
-          <a class="article-more-a" href="/2015/06/11/Iterator设计模式/#more">more >></a>
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">设计模式,Iterator</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/设计模式//" class="article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/06/11/Iterator设计模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-动态页面静态化" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/17/动态页面静态化/">动态页面静态化</a>
-    </h1>
-  
-
-        
-        <a href="/2015/03/17/动态页面静态化/" class="archive-article-date">
-  	<time datetime="2015-03-17T07:23:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="动态页面静态化"><a href="#动态页面静态化" class="headerlink" title="动态页面静态化"></a>动态页面静态化</h3><p>顾名思义，静态页面动态化就是把动态页面如Javaweb中的JSP内容翻译到HTML中，<br>在网站中的某些页面的数据长时间不会变动，而这种数据放在动态的页面JSP上虽说<br>未尝不可，但是考虑到服务器（Tomcat）在响应客户端的请求时，需要把JSP翻译成<br>Java文件再由流输出到客户端浏览器。这无形中无疑加大了服务器的负担，而且增加<br>了响应时间。为了解决这个问题，就需要把这些长时间内容不变的动态页面翻译成静<br>态页面。让客户端直接访问这些静态的页面即可。<br>
-        
-          <a class="article-more-a" href="/2015/03/17/动态页面静态化/#more">more >></a>
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jsp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/javaweb//" class="article-tag-list-link color3">javaweb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/03/17/动态页面静态化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div>
+<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+<script src="https://jjeejj.github.io/js/gitment.js"></script> 
+<script>
+var gitment = new Gitment({
+  id: 'Mon May 21 2018 18:12:06 GMT+0800',
+  owner: 'wanghaoListening',
+  repo: 'wanghaolistening.github.com',
+  oauth: {
+    client_id: '0a40baefe58e4183769b',
+    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+
   
 
 
@@ -645,8 +413,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
