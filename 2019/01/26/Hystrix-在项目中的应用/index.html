@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-18T09:19:21.444Z">
+<meta property="og:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
+<meta property="og:updated_time" content="2019-02-21T10:04:24.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hystrix 在项目中的应用">
 <meta name="twitter:description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
+<meta name="twitter:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -58,7 +60,7 @@ var _hmt = _hmt || [];
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="http://pldjckfk1.bkt.clouddn.com/face.png" class="js-avatar">
+			<img src="/img/face.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">wanghao</a></h1>
@@ -124,7 +126,7 @@ var _hmt = _hmt || [];
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="http://pldjckfk1.bkt.clouddn.com/face.png" class="js-avatar">
+				<img src="/img/face.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">wanghao</h1>
@@ -203,15 +205,33 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用java juc相关的api来进行封装，利用多线程来对服务接口进行隔离，当然这样也可以很好的完成需求，但是无疑增大了工作量，本着不用重复造轮子的想法，调研了相关的框架，最后决定使用Netflix开源的Hystrix框架，Hystrix是一款容错系统，解决当外部依赖故障时拖垮业务系统、甚至引起雪崩的问题。</p>
+        <p>项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用java juc相关的api来进行封装，利用多线程来对服务接口进行隔离，当然这样也可以很好的完成需求，但是无疑增大了工作量，本着不用重复造轮子的想法，调研了相关的框架，最后决定使用Netflix开源的Hystrix框架，Hystrix是一款容错系统，解决当外部依赖故障时拖垮业务系统、甚至引起雪崩的问题。很少的解决当前项目遇到的问题。</p>
 <a id="more"></a>
 <h3 id="Hystrix相关功能"><a href="#Hystrix相关功能" class="headerlink" title="Hystrix相关功能"></a>Hystrix相关功能</h3><ul>
-<li>故障熔断，错误率⾼高时熔断后续请求，快速失败</li>
-<li>服务降级，异常时回退执⾏行行</li>
 <li>请求隔离，⽤用线程池⼤大⼩小和信号量量限制并发数</li>
+<li>故障熔断，错误率高时熔断后续请求，快速失败</li>
+<li>服务降级，异常时回退执⾏行行</li>
 <li>请求合并，将单个逻辑合并成批量量逻辑</li>
 <li>结果缓存，缓存同样key的请求结果</li>
 </ul>
+<h4 id="hystrix的请求隔离"><a href="#hystrix的请求隔离" class="headerlink" title="hystrix的请求隔离"></a>hystrix的请求隔离</h4><p>Hystrix通过将每个依赖服务分配独立的线程池进行资源隔离, 实现了请求的隔离，比如在此项目中需要同时请求大数据组和金融相关部门的接口，因为大数据组与金融部的数据是不同的业务类型，所以可以使用两个不同的线程池来进行资源的隔离。防止单个业务请求数据的同步等待影响整个系统的等待造成雪崩。如下图：</p>
+<p><img src="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg" alt="hystrix的请求隔离"></p>
+<h4 id="hystrix的故障熔断"><a href="#hystrix的故障熔断" class="headerlink" title="hystrix的故障熔断"></a>hystrix的故障熔断</h4><p>服务的健康状况 = 请求失败数 / 请求总数.<br>熔断器开关由关闭到打开的状态转换是通过当前服务健康状况和设定阈值比较决定的.</p>
+<p>1.当熔断器开关关闭时, 请求被允许通过熔断器. 如果当前健康状况高于设定阈值, 开关继续保持关闭. 如果当前健康状况低于设定阈值, 开关则切换为打开状态.</p>
+<p>2.当熔断器开关打开时, 请求被禁止通过.</p>
+<p>3.当熔断器开关处于打开状态, 经过一段时间后, 熔断器会自动进入半开状态, 这时熔断器只允许一个请求通过. 当该请求调用成功时, 熔断器恢复到关闭状态. 若该请求失败, 熔断器继续保持打开状态, 接下来的请求被禁止通过.</p>
+<p>熔断器的开关能保证服务调用者在调用异常服务时, 快速返回结果, 避免大量的同步等待. 并且熔断器能在一段时间后继续侦测请求执行结果, 提供恢复服务调用的可能.</p>
+<p>通过如下配置方式开启熔断器</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">HystrixCommandProperties</span><span class="selector-class">.Setter</span>()</span><br><span class="line"><span class="selector-class">.withCircuitBreakerErrorThresholdPercentage</span>(<span class="number">5</span>)<span class="comment">//(1)错误百分比超过5%</span></span><br><span class="line"><span class="selector-class">.withCircuitBreakerRequestVolumeThreshold</span>(<span class="number">10</span>)<span class="comment">//(2)10s以内调用次数10次，同时满足(1)(2)熔断器打开</span></span><br><span class="line"><span class="selector-class">.withCircuitBreakerSleepWindowInMilliseconds</span>(<span class="number">5000</span>)<span class="comment">//隔5s之后，熔断器会尝试半开(关闭)，重新放进来请求</span></span><br></pre></td></tr></table></figure>
+<h4 id="服务的降级"><a href="#服务的降级" class="headerlink" title="服务的降级"></a>服务的降级</h4><p>Hystrix使用<a href="https://wanghaolistening.github.io/2017/03/18/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/#more">命令模式</a>(继承HystrixCommand类)来包裹具体的服务调用逻辑(run方法), 并在命令模式中添加了服务调用失败后的降级逻辑(getFallback).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public class ApiClientHystrixCommand extends HystrixCommand&lt;ApiResult&gt; &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static Logger logger = LoggerFactory.getLogger(ApiClientHystrixCommand.class);</span><br><span class="line"></span><br><span class="line">    private final ApiClient apiClient;</span><br><span class="line">    private final Map&lt;String, Object&gt; paramsMap;</span><br><span class="line"></span><br><span class="line">    private final Map&lt;String, String&gt; mdcContext;</span><br><span class="line"></span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    public ApiClientHystrixCommand(final ApiClient apiClient, final Map&lt;String, Object&gt; paramsMap,</span><br><span class="line">                                   final com.netflix.hystrix.HystrixCommandProperties.Setter commandPropertiesDefaults,</span><br><span class="line">                                   final com.netflix.hystrix.HystrixThreadPoolProperties.Setter threadPoolPropertiesDefaults,</span><br><span class="line">                                   final String groupName) &#123;</span><br><span class="line">		</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected ApiResult run()&#123;</span><br><span class="line">        if (this.mdcContext != null) &#123;</span><br><span class="line">            MDC.setContextMap(this.mdcContext);</span><br><span class="line">        &#125;</span><br><span class="line">        // 调用apiclient 返回结果</span><br><span class="line">        logger.info(&quot;开始API的调用 apiclient:&#123;&#125;, paramsMap:&#123;&#125;&quot;, this.apiClient, this.paramsMap);</span><br><span class="line">        try &#123;</span><br><span class="line">            return this.apiClient.call(this.paramsMap);</span><br><span class="line">        &#125; catch (final Exception e) &#123;</span><br><span class="line">            logger.error(String.format(&quot;调用API client 异常. api client instance is %s, params is %s&quot;, this.apiClient,</span><br><span class="line">                    this.paramsMap), e);</span><br><span class="line">            // 继续抛出，才会调用调用fallback方法</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            MDC.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //服务的降级处理</span><br><span class="line">    @Override</span><br><span class="line">    protected ApiResult getFallback() &#123;</span><br><span class="line">        if (this.mdcContext != null) &#123;</span><br><span class="line">            MDC.setContextMap(this.mdcContext);</span><br><span class="line">        &#125;</span><br><span class="line">        try &#123;</span><br><span class="line">            final ApiResult result = new ApiResult();</span><br><span class="line">           </span><br><span class="line">            logger.error(String.format(&quot;调用API client 异常。有可能超时。 api client instance is %s, params is %s&quot;, this.apiClient,</span><br><span class="line">                    this.paramsMap), this.getExecutionException());</span><br><span class="line">            result.setCode(ProjectConstant.API_RESULT.ERROR);</span><br><span class="line"></span><br><span class="line">            return result;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            MDC.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于项目中并没有对降级进行了特别的处理，而且由于数据查询以公司名或人名及身份证号为维度，生成一个公司的报告后，数据的复用性不是很强，所以对降级的处理仅仅是简单的返回超时。</p>
+<h4 id="请求合并"><a href="#请求合并" class="headerlink" title="请求合并"></a>请求合并</h4><p>通常微服务架构中的依赖通过远程调用实现，而远程调用中最常见的问题就是通信消耗与连接数占用。在高并发的情况之下，因为服务提供者与消费者交互的次数增多，导致交互的时间，资源耗费增多。同时，因为对依赖服务的线程池资源有限，将出现排队等待与响应延迟的情况。为了优化这两个问题，Hystrix提供了HystrixCollapser来实现请求的合并，以此来减少通信消耗和线程数的占用。</p>
+<p>HystrixCollapser实现了在HystrixCommand之前放置一个合并处理器，它将处于一个很短时间窗（默认10毫秒）内对同一个依赖服务的多个请求进行合并以批量方式发起请求的功能（服务提供方也需要提供相应的批量实现接口）。</p>
+<p>当然此功能需要服务的提供方合作来实现，比如：在及其短暂的时间内，信用报告系统需要大量获取企业的工商数据，那么可以让服务提供方单独开一个批量获取多个公司工商信息的接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://big.data.com/gs/&#123;company&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://big.data.com/gs/list/&#123;companys&#125;</span><br></pre></td></tr></table></figure>
+<p>如下图展示了合并前与合并后的线程使用情况：</p>
+<h4 id="结果缓存"><a href="#结果缓存" class="headerlink" title="结果缓存"></a>结果缓存</h4><h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://segmentfault.com/a/1190000005988895" target="_blank" rel="noopener">防雪崩利器：熔断器 Hystrix 的原理与使用</a><br><a href="https://github.com/Netflix/Hystrix/wiki" target="_blank" rel="noopener">hystrix wiki</a></p>
 
       
 
@@ -497,15 +517,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,11 +525,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,7 +541,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,7 +549,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,11 +557,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -553,11 +569,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
               </li>
              
               <li class="article-tag-list-item">
