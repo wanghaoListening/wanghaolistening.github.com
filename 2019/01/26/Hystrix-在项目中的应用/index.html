@@ -17,7 +17,9 @@
 <meta property="og:description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
-<meta property="og:updated_time" content="2019-02-21T10:04:24.505Z">
+<meta property="og:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
+<meta property="og:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
+<meta property="og:updated_time" content="2019-02-22T07:21:56.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hystrix 在项目中的应用">
 <meta name="twitter:description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
@@ -231,7 +233,17 @@ var _hmt = _hmt || [];
 <p>当然此功能需要服务的提供方合作来实现，比如：在及其短暂的时间内，信用报告系统需要大量获取企业的工商数据，那么可以让服务提供方单独开一个批量获取多个公司工商信息的接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://big.data.com/gs/&#123;company&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://big.data.com/gs/list/&#123;companys&#125;</span><br></pre></td></tr></table></figure>
 <p>如下图展示了合并前与合并后的线程使用情况：</p>
-<h4 id="结果缓存"><a href="#结果缓存" class="headerlink" title="结果缓存"></a>结果缓存</h4><h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://segmentfault.com/a/1190000005988895" target="_blank" rel="noopener">防雪崩利器：熔断器 Hystrix 的原理与使用</a><br><a href="https://github.com/Netflix/Hystrix/wiki" target="_blank" rel="noopener">hystrix wiki</a></p>
+<p><img src="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg" alt="hystrix请求合并前"></p>
+<p><img src="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg" alt="hystrix请求合并后"></p>
+<h4 id="结果缓存"><a href="#结果缓存" class="headerlink" title="结果缓存"></a>结果缓存</h4><p>在 HystrixCommand 和 HystrixObservableCommand 的实现中，你可以定义一个缓存的 Key，这个 Key 用于在同一个请求上下文（全局或者用户级）中标识缓存的请求结果，当然，该缓存是线程安全的。</p>
+<p>请求缓存的好处：</p>
+<ul>
+<li>针对同一个依赖服务进行的重复请求（有同一个缓存 Key），不会对服务提供方调用多次</li>
+<li>数据获取具有一致性,除了第一次请求需要真正访问依赖服务以外，后续请求全部从缓存中获取</li>
+<li>避免不必要的线程执行,在 construct() 或 run() 方法执行之前，会先从请求缓存中获取数据,如果缓存中已经存在需要的数据，则不会另起线程请求服务，降低系统开销.</li>
+</ul>
+<p>考虑到项目中对于同一请求参数和服务的调用并不算频繁，所以并未开启Hystrix的缓存功能.</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://segmentfault.com/a/1190000005988895" target="_blank" rel="noopener">防雪崩利器：熔断器 Hystrix 的原理与使用</a><br><a href="https://github.com/Netflix/Hystrix/wiki" target="_blank" rel="noopener">hystrix wiki</a></p>
 
       
 
@@ -513,14 +525,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
@@ -529,7 +533,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,7 +549,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,19 +565,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,7 +573,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,7 +593,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,10 +606,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">javaweb基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
             
             <div class="clearfix"></div>
