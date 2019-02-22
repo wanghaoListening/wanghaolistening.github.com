@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>了解NIO Selector | haothink123</title>
+  <title>Archives: 2016/8 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对于NIO中三个重要的组件之一的Selector的一些学习了解。选择器提供选择执行已经就绪的任务的能力，对象的多路复用器。它可以注册到很多个Channel上，监听各个Channel上发生的事件，并且能够根据事件情况做出相应的处理决定Channel读或写或其它。这样，通过一个线程管理多个Channel，就可以处理大量网络连接了，这一点上不同于传统的阻塞IO。">
-<meta name="keywords" content="NIO">
-<meta property="og:type" content="article">
-<meta property="og:title" content="了解NIO Selector">
-<meta property="og:url" content="https://wanghaolistening.github.io/2016/01/16/了解NIO-Selector/index.html">
+  <meta name="description" content="后端程序员">
+<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
+<meta property="og:type" content="website">
+<meta property="og:title" content="haothink123">
+<meta property="og:url" content="https://wanghaolistening.github.io/archives/2016/08/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="对于NIO中三个重要的组件之一的Selector的一些学习了解。选择器提供选择执行已经就绪的任务的能力，对象的多路复用器。它可以注册到很多个Channel上，监听各个Channel上发生的事件，并且能够根据事件情况做出相应的处理决定Channel读或写或其它。这样，通过一个线程管理多个Channel，就可以处理大量网络连接了，这一点上不同于传统的阻塞IO。">
+<meta property="og:description" content="后端程序员">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/nio-selector.jpg">
-<meta property="og:updated_time" content="2016-01-21T13:20:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="了解NIO Selector">
-<meta name="twitter:description" content="对于NIO中三个重要的组件之一的Selector的一些学习了解。选择器提供选择执行已经就绪的任务的能力，对象的多路复用器。它可以注册到很多个Channel上，监听各个Channel上发生的事件，并且能够根据事件情况做出相应的处理决定Channel读或写或其它。这样，通过一个线程管理多个Channel，就可以处理大量网络连接了，这一点上不同于传统的阻塞IO。">
-<meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/nio-selector.jpg">
+<meta name="twitter:title" content="haothink123">
+<meta name="twitter:description" content="后端程序员">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -185,297 +182,71 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-了解NIO-Selector" class="article article-type-post " itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      了解NIO Selector
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/08/22/Zeppelin源码研读/" class="archive-article-date">
+  	<time datetime="2016-08-22T07:45:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-22</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/08/22/Zeppelin源码研读/">Zeppelin源码研读</a>
     </h1>
   
 
-        
-        <a href="/2016/01/16/了解NIO-Selector/" class="archive-article-date">
-  	<time datetime="2016-01-16T13:56:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对于NIO中三个重要的组件之一的Selector的一些学习了解。<br>选择器提供选择执行已经就绪的任务的能力，对象的多路复用器。它可以注册到很多个Channel上，监听各个Channel上发生的事件，并且能够根据事件情况做出相应的处理决定Channel读或写或其它。这样，通过一个线程管理多个Channel，就可以处理大量网络连接了，这一点上不同于传统的阻塞IO。</p>
-<a id="more"></a>
-<p>从最基础的层面来看，选择器提供了询问通道是否已经准备好执行每个I/0 操作的能力。例如，我们需要了解一个SocketChannel对象是否还有更多的字节需要读取，或者我们需要知道ServerSocketChannel是否有需要准备接受的连接。</p>
-<p>好像只要非阻塞模式就可以模拟就绪检查功能，但实际上还不够。即使简单地询问每个通道是否已经就绪的方法是可行的，在您的代码或一个类库的包里的某些代码需要遍历每一个候选的通道并按顺序进行检查的时候，仍然是有问题的。这会使得在检查每个通道是否就绪时都至少进行一次系统调用，这种代价是十分昂贵的，但是主要的问题是，这种检查不是原子性的。列表中的一个通道都有可能在它被检查之后就绪，但直到下一次轮询为止，您并不会觉察到这种情况。最糟糕的是，您除了不断地遍历列表之外将别无选择。您无法在某个您感兴趣的通道就绪时得到通知。</p>
-<p>这就是为什么传统的监控多个socket的Java解决方案是为每个socket创建一个线程并使得线程可以在read( )调用中阻塞，直到数据可用。这事实上将每个被阻塞的线程当作了socket监控器，并将Java虚拟机的线程调度当作了通知机制。这两者本来都不是为了这种目的而设计的。程序员和Java虚拟机都为管理所有这些线程的复杂性和性能损耗付出了代价，这在线程数量的增长失控时表现得更为突出。</p>
-<p>真正的就绪选择必须由操作系统来做。操作系统的一项最重要的功能就是处理I/O请求并通知各个线程它们的数据已经准备好了。选择器类提供了这种抽象，使得Java代码能够以可移植的方式，请求底层的操作系统提供就绪选择服务。</p>
-<h3 id="Selector模式的优点"><a href="#Selector模式的优点" class="headerlink" title="Selector模式的优点"></a>Selector模式的优点</h3><p>有了Selector，我们就可以利用一个线程来处理所有的channels。线程之间的切换对操作系统来说代价是很高的，并且每个线程也会占用一定的系统资源。所以，对操作系统来说使用的线程越少越好。当然现在操作系统的处理器向多核发展，如果不处理多任务反而是在浪费<br>处理器的资源。…这是后话，不在这里论述。</p>
-<p>下面这幅图展示了一个线程处理3个 Channel的情况：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/nio-selector.jpg" alt="Selector" title="Selector"></p>
-<h3 id="可选择通道-SelectableChannel"><a href="#可选择通道-SelectableChannel" class="headerlink" title="可选择通道(SelectableChannel)"></a>可选择通道(SelectableChannel)</h3><p>关于选择器(Selector)的创建，和向channel中注册选择器后面会去讲解唯一需要注意的是,FileChannel没有继承SelectableChannel。这意味着不能将FileChannel与Selector一起使用，因为FileChannel不能切换到非阻塞模式。而套接字通道都可以。SelectableChannel可以被注册到Selector对象上，同时可以指定对那个选择器而言，哪种操作是感兴趣的。一个通道可以被注册到多个选择器上，但对每个选择器而言只能被注册一次</p>
-<h4 id="选择器API"><a href="#选择器API" class="headerlink" title="选择器API"></a>选择器API</h4><p>SelectableChannel的相关API方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectableChannel</span> <span class="keyword">extends</span> <span class="title">AbstractChannel</span> <span class="keyword">implements</span> <span class="title">Channel</span></span></span><br><span class="line"><span class="class">  </span>&#123;</span><br><span class="line">      <span class="comment">// This is a partial API listing</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SelectionKey <span class="title">register</span> <span class="params">(Selector sel, <span class="keyword">int</span> ops)</span> <span class="keyword">throws</span> ClosedChannelException</span>;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SelectionKey <span class="title">register</span> <span class="params">(Selector sel, <span class="keyword">int</span> ops, Object att)</span> <span class="keyword">throws</span> ClosedChannelException</span>;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">isRegistered</span><span class="params">()</span></span>; </span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SelectionKey <span class="title">keyFor</span> <span class="params">(Selector sel)</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">validOps</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">configureBlocking</span> <span class="params">(<span class="keyword">boolean</span> block)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">isBlocking</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title">blockingLock</span><span class="params">()</span></span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-<p>调用可选择通道的register()方法会将它注册到一个选择器上。如果您试图注册一个处于阻塞状态的通道，register()将抛出未检查的IllegalBlockingModeException异常。此外，通道一旦被注册，就不能回到阻塞状态。试图这么做的话，将在调用configureBlocking( )方法时将抛出IllegalBlockingModeException异常。</p>
-<p>在我们进一步了解register( )和SelectableChannel的其他方法之前，让我们先了解一下Selector类的API，以确保我们可以更好地理解这种关系：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Selector</span></span></span><br><span class="line"><span class="class">   </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Selector <span class="title">open</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">isOpen</span><span class="params">()</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SelectionProvider <span class="title">provider</span><span class="params">()</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">select</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">select</span> <span class="params">(<span class="keyword">long</span> timeout)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">selectNow</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">wakeup</span><span class="params">()</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Set <span class="title">keys</span><span class="params">()</span></span>;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Set <span class="title">selectedKeys</span><span class="params">()</span></span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>尽管SelectableChannel类上定义了register()方法，还是应该将通道注册到选择器上，而不是另一种方式。选择器维护了一个需要监控的通道的集合。一个给定的通道可以被注册到多于一个的选择器上，而且不需要知道它被注册了那个Selector对象上。将register()放在SelectableChannel上而不是Selector上，这种做法看起来有点随意。它将返回一个封装了两个对象的关系的选择键对象。重要的是要记住选择器对象控制了被注册到它之上的通道的选择过程。选择器才是提供管理功能的对象，而不是可选择通道对象。选择器对象对注册到它之上的通道执行就绪选择，并管理选择键。</p>
-<p>对于键的interest（感兴趣的操作）集合和ready（已经准备好的操作）集合的解释是和特定的通道相关的。每个通道的实现，将定义它自己的选择键类。在register( )方法中构造它并将它传递给所提供的选择器对象。</p>
-<h3 id="创建选择器"><a href="#创建选择器" class="headerlink" title="创建选择器"></a>创建选择器</h3><p>为了建立监控三个Socket通道的选择器，您需要做像这样的事情：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Selector selector = Selector.open();</span><br><span class="line">channel1.register (selector, SelectionKey.OP_READ);</span><br><span class="line">channel2.register (selector, SelectionKey.OP_WRITE);</span><br><span class="line">channel3.register (selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);</span><br><span class="line"><span class="comment">// Wait up to 10 seconds for a channel to become ready</span></span><br><span class="line">readyCount = selector.select (<span class="number">10000</span>);</span><br></pre></td></tr></table></figure></p>
-<p>这些代码创建了一个新的选择器，然后将这三个(已经存在的)socket通道注册到选择器上，而且感兴趣的操作各不相同。select( )方法在将线程置于睡眠状态，直到这些感兴趣的事情中的一个发生或者10秒钟的时间过去。</p>
-<p>Selector对象是通过调用静态工厂方法open()来实例化的。选择器不是像通道或流(stream)那样的基本I/O对象：数据从来没有通过它们进行传递。类方法open()向SPI发出请求，通过默认的<br>SelectorProvider对象获取一个新的实例。通过调用一个自定义的SelectorProvider对象的openSelector()方法来创建一个Selector实例也是可行的。您可以通过调用provider()方法来决定由哪个SelectorProvider对象来创建给定的Selector实例。大多数情况下，您不需要关心SPI;只需要调用open( )方法来创建新的Selector对象。</p>
-<p>继续关于将Select作为I/O对象进行处理的话题的探讨：当您不再使用它时，需要调用close( )方法来释放它可能占用的资源并将所有相关的选择键设置为无效。一旦一个选择器被关闭，试图调用它的大多数方法都将导致ClosedSelectorException。注意ClosedSelectorException是一个非检查(运行时的)错误。您可以通过isOpen( )方法来测试一个选择器是否处于被打开的状态。</p>
-<p>就像之前提到的那样，register()方法位于SelectableChannel类，尽管通道实际上是被注册到选择器上的。您可以看到register()方法接受一个Selector对象作为参数，以及一个名为ops的整数参数。第二个参数表示所关心的通道操作。这是一个表示选择器在检查通道就绪状态时需要关心的操作的位掩码。特定的操作位值在SelectonKey类中被定义为public static字段。</p>
-<p>在JDK 1.4 中，有四种被定义的可选择操作：读(read)，写(write)，连接(connect)和接受(accept)。并非所有的操作都在所有的可选择通道上被支持。例如，SocketChannel不支持accept。试图注册不支持的操作将导致IllegalArgumentException。您可以通过调用validOps( )方法来获取特定的通道所支持的操作集合。</p>
-<p>一个单独的通道对象可以被注册到多个选择器上。可以调用isRegistered( )方法来检查一个通道是否被注册到任何一个选择器上。这个方法没有提供关于通道被注册到哪个选择器上的信息，而只能知道它至少被注册到了一个选择器上。此外，在一个键被取消之后，直到通道被注销为止，可能有时间上的延迟。这个方法只是一个提示，而不是确切的答案。</p>
-<p>任何一个通道和选择器的注册关系都被封装在一个SelectionKey对象中。keyFor( )方法将返回与该通道和指定的选择器相关的键。如果通道被注册到指定的选择器上，那么相关的键将被返回。如果它们之间没有注册关系，那么将返回null。</p>
-<h3 id="SelectionKey"><a href="#SelectionKey" class="headerlink" title="SelectionKey"></a>SelectionKey</h3><p>当向Selector注册Channel时会返回一个选择键，选择键封装了特定的通道与特定的选择器的注册关系。多个并发线程可安全地使用选择键。这个对象代表了注册到该Selector的通道。可以通过SelectionKey的selectedKeySet()方法访问这些对象。可以通过SelectionKey这来获取获取一些感兴趣的东西，比如你所选择的事件的集合以及通道已经准备就绪的操作的集合等。</p>
-<p>此案看看的SelectionKey的内部结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectionKey</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> OP_READ;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> OP_WRITE;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> OP_CONNECT;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> OP_ACCEPT;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SelectableChannel <span class="title">channel</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Selector <span class="title">selector</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">interestOps</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">interestOps</span> <span class="params">(<span class="keyword">int</span> ops)</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">readyOps</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isReadable</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isWritable</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isConnectable</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isAcceptable</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Object <span class="title">attach</span> <span class="params">(Object ob)</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Object <span class="title">attachment</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>键对象表示了一种特定的注册关系。当应该终结这种关系的时候，可以调用SelectionKey对象的cancel( )方法。可以通过调用isValid( )方法来检查它是否仍然表示一种有效的关系。当键被取消时，它将被放在相关的选择器的已取消的键的集合里。注册不会立即被取消，但键会立即失效（参见4.3节）。当再次调用select( )方法时（或者一个正在进行的select()调用结束时），已取消的键的集合中的被取消的键将被清理掉，并且相应的注销也将完成。通道会被注销，而新的SelectionKey将被返回。</p>
-<p>当通道关闭时，所有相关的键会自动取消（记住，一个通道可以被注册到多个选择器上）。当选择器关闭时，所有被注册到该选择器的通道都将被注销，并且相关的键将立即被无效化（取消）。一旦键被无效化，调用它的与选择相关的方法就将抛出CancelledKeyException。</p>
-<p>一个SelectionKey对象包含两个以整数形式进行编码的位掩码：一个用于指示那些通道/选择器组合体所关心的操作(instrest集合)，另一个表示通道准备好要执行的操作（ready集合）。当前的interest集合可以通过调用键对象的interestOps()方法来获取。最初，这应该是通道被注册时传进来的值。这个interset集合永远不会被选择器改变，但您可以通过调用interestOps( )方法并传入一个新的位掩码参数来改变它。interest集合也可以通过将通道注册到选择器上来改变（实际上使用一种迂回的方式调用interestOps( )）。当相关的Selector上的select( )操作正在进行时改变键的interest集合，不会影响那个正在进行的选择操作。所有更改将会在select( )的下一个调用中体现出来。</p>
-<p>可以通过调用键的readyOps( )方法来获取相关的通道的已经就绪的操作。ready集合是interest集<br>合的子集，并且表示了interest集合中从上次调用select()以来已经就绪的那些操作。例如，下面的代码测试了与键关联的通道是否就绪。如果就绪，就将数据读取出来，写入一个缓冲区，并将它送到一个consumer（消费者）方法中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((key.readyOps() &amp; SelectionKey.OP_READ) != <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    myBuffer.clear();</span><br><span class="line">    key.channel().read (myBuffer);</span><br><span class="line">    doSomethingWithBuffer (myBuffer.flip()); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：修改interest集合的操作是通过Selector对象进行同步的是很重要的。这可能会导致interestOps( )方法的调用会阻塞不确定长的一段时间。选择器所使用的锁策略（例如是否在整个选择过程中保持这些锁）是依赖于具体实现的。幸好，这种多路复用能力被特别地设计为可以使用单线程来管理多个通道。被多个线程使用的选择器也只会在系统特别复杂时产生问题。坦白地说，如果您在多线程中共享选择器时遇到了同步的问题，也许您需要重新思考一下您的设计。</p>
-<h4 id="使用选择器"><a href="#使用选择器" class="headerlink" title="使用选择器"></a>使用选择器</h4><p>在详细了解API之前，您需要知道一点和Selector内部工作原理相关的知识。选择器维护着注册过的通道的集合，并且这些注册关系中的任意一个都是封装在SelectionKey对象中的。每一个Selector对象维护三个键的集合。</p>
-<p><strong>已注册的键的集合(Registered key set)</strong></p>
-<blockquote>
-<p>与选择器关联的已经注册的键的集合。并不是所有注册过的键都仍然有效。这个集合通过keys( )方法返回，并且可能是空的。这个已注册的键的集合不是可以直接修改的；试图这么做的话将引起java.lang.UnsupportedOperationException。</p>
-</blockquote>
-<p><strong>已选择的键的集合(Selected key set)</strong></p>
-<blockquote>
-<p>已注册的键的集合的子集。这个集合的每个成员都是相关的通道被选择器（在前一个选择操作中）判断为已经准备好的，并且包含于键的interest集合中的操作。这个集合通过selectedKeys()方法返回（并有可能是空的）。</p>
-</blockquote>
-<blockquote>
-<p>不要将已选择的键的集合与ready集合弄混了。这是一个键的集合，每个键都关联一个已经准备好至少一种操作的通道。每个键都有一个内嵌的ready集合，指示了所关联的通道已经准备好的操作。键可以直接从这个集合中移除，但不能添加。试图向已选择的键的集合中添加元素将抛出java.lang.UnsupportedOperationException。</p>
-</blockquote>
-<p><strong>已取消的键的集合(Cancelled key set)</strong></p>
-<blockquote>
-<p>注册的键的集合的子集，这个集合包含了cancel( )方法被调用过的键（这个键已经被无效化），但它们还没有被注销。这个集合是选择器对象的私有成员，因而无法直接访问。</p>
-</blockquote>
-<p>在一个刚初始化的Selector对象中，这三个集合都是空的。</p>
-<p>Selector类的核心是选择过程。这个名词您已经在之前看过多次了——现在应该解释一下了。基本上来说，选择器是对select()、poll()等本地调用(native call)或者类似的操作系统特定的系统调用的一个包装。但是Selector所作的不仅仅是简单地向本地代码传送参数。它对每个选择操作应用了特定的过程。对这个过程的理解是合理地管理键和它们所表示的状态信息的基础。</p>
-<p>选择操作是select()被调用时，由选择器执行的。调用时下面步骤将被执行：</p>
-<p>1.已取消的键的集合将会被检查。如果它是非空的，每个已取消的键的集合中的键将从另外两个集合中移除，并且相关的通道将被注销。这个步骤结束后，已取消的键的集合将是空的</p>
-<p>2.已注册的键的集合中的键的interest集合将被检查。在这个步骤中的检查执行过后，对interest集合的改动不会影响剩余的检查过程。</p>
-<p>一旦就绪条件被定下来，底层操作系统将会进行查询，以确定每个通道所关心的操作的真实就绪状态。依赖于特定的select( )方法调用，如果没有通道已经准备好，线程可能会在这时阻塞，通常会有一个超时值。直到系统调用完成为止，这个过程可能会使得调用线程睡眠一段时间，然后当前每个通道的就绪状态将确定下来。对于那些还没准备好的通道将不会执行任何的操作。对于那些操作系统指示至少已经准备好interest集合中的一种操作的通道，将执行以下两种操作中的一种：</p>
-<ul>
-<li><p>如果通道的键还没有处于已选择的键的集合中，那么键的ready集合将被清空然<br>后表示操作系统发现的当前通道已经准备好的操作的位掩码将被设置。</p>
-</li>
-<li><p>否则，也就是键在已选择的键的集合中。键的ready集合将被表示操作系统发现的<br>当前已经准备好的操作的位掩码更新。所有之前的已经不再是就绪状态的操作不会<br>被清除。事实上，所有的比特位都不会被清理。由操作系统决定的ready集合是与之<br>前的ready集合按位分离的，一旦键被放置于选择器的已选择的键的集合中，它的<br>ready集合将是累积的。比特位只会被设置，不会被清理。</p>
-</li>
-</ul>
-<p>3.步骤2可能会花费很长时间，特别是所激发的线程处于休眠状态时。与该选择器相关的键可能会同时被取消。当步骤2结束时，步骤1将重新执行，以完成任意一个在选择进行的过程中，键已经被取消的通道的注销。</p>
-<p>4.select操作返回的值是ready集合在步骤2中被修改的键的数量，而不是已选择的键的集合中的通道的总数。返回值不是已准备好的通道的总数，而是从上一个select( )调用之后进入就绪状态的通道的数量。之前的调用中就绪的，并且在本次调用中仍然就绪的通道不会被计入，而那些在前一次调用中已经就绪但已经不再处于就绪状态的通道也不会被计入。这些通道可能仍然在已选择的键的集合中，但不会被计入返回值中。返回值可能是0。</p>
-<p>使用内部的已取消的键的集合来延迟注销，是一种防止线程在取消键时阻塞，并防止与正在进行的选择操作冲突的优化。注销通道是一个潜在的代价很高的操作，这可能需要重新分配资源（请记住，键是与通道相关的，并且可能与它们相关的通道对象之间有复杂的交互）。清理已取消的键，并在选择操作之前和之后立即注销通道，可以消除它们可能正好在选择的过程中执行的潜在棘手问题。这是另一个兼顾健壮性的折中方案。</p>
-<p>Selector类的select( )方法有以下三种不同的形式：</p>
-<p>这三种select的形式，仅仅在它们在所注册的通道当前都没有就绪时，是否阻塞的方面有所不同。最简单的没有参数的形式可以用如下方式调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = selector.select()</span><br></pre></td></tr></table></figure></p>
-<p>这种调用在没有通道就绪时将无限阻塞。一旦至少有一个已注册的通道就绪，选择器的选择键就会被更新，并且每个就绪的通道的ready集合也将被更新。返回值将会是已经确定就绪的通道的数目。正常情况下，这些方法将返回一个非零的值，因为直到一个通道就绪前它都会阻塞。但是它也可以返回0，如果选择器的wakeup( )方法被其他线程调用。</p>
-<p>有时您会想要限制线程等待通道就绪的时间。这种情况下，可以使用一个接受一个超时参数的select( )方法的重载形式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = selector.select (<span class="number">10000</span>);</span><br></pre></td></tr></table></figure></p>
-<p>这种调用与之前的例子完全相同，除了如果在您提供的超时时间（以毫秒计算）内没有通道就绪时，它将返回0。如果一个或者多个通道在时间限制终止前就绪，键的状态将会被更新，并且方法会在那时立即返回。将超时参数指定为0表示将无限期等待，那么它就在各个方面都等同于使用无参数版本的select( )了。</p>
-<p>就绪选择的第三种也是最后一种形式是完全非阻塞的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = selector.selectNow();</span><br></pre></td></tr></table></figure></p>
-<p>selectNow()方法执行就绪检查过程，但不阻塞。如果当前没有通道就绪，它将立即返回0。</p>
-<p>Selector的API中的最后一个方法，wakeup()，提供了使线程从被阻塞的select()方法中优雅地退出的能力。</p>
-<p>有三种方式可以唤醒在select()方法中睡眠的线程：</p>
-<p>调用wakeup()</p>
-<blockquote>
-<p>调用Selector对象的wakeup()方法将使得选择器上的第一个还没有返回的选择操作立即返回。如果当前没有在进行中的选择，那么下一次对select()方法的一种形式的调用将立即返回。后续的选择操作将正常进行。在选择操作之间多次调用wakeup( )方法与调用它一次没有什么不同。有时这种延迟的唤醒行为并不是您想要的。您可能只想唤醒一个睡眠中的线程，而使得后续的选择继续正常地进行。您可以通过在调用wakeup( )方法后调用selectNow( )方法来绕过这个问题。尽管如此，如果您将您的代码构造为合理地关注于返回值和执行选择集合，那么即使下一个select( )方法的调用在没有通道就绪时就立即返回，也应该不会有什么不同。不管怎么说，您应该为可能发生的事件做好准备。</p>
-</blockquote>
-<p>调用close()<br>如果选择器的close( )方法被调用，那么任何一个在选择操作中阻塞的线程都将被唤醒，就像wakeup( )方法被调用了一样。与选择器相关的通道将被注销，而键将被取消。</p>
-<p>调用interrupt()<br>如果睡眠中的线程的interrupt()方法被调用，它的返回状态将被设置。如果被唤醒的线程之后将试图在通道上执行I/O操作，通道将立即关闭，然后线程将捕捉到一个异常。这是由于通道的中断语义。使用wakeup()方法将会优雅地将一个在select( )方法中睡眠的线程唤醒。如果您想让一个睡眠的线程在直接中断之后继续执行，需要执行一些步骤来清理中断状态（参见Thread.interrupted( )的相关文档）。</p>
-<p>合理地管理键是非常重要的。一旦一个选择器将一个键添加到它的已选择的键的集合中，它就不会移除这个键。并且，一旦一个键处于已选择的键的集合中，这个键的ready集合将只会被设置，而不会被清理。乍一看，这好像会引起麻烦，因为选择操作可能无法表现出已注册的通道的正确状态。它提供了极大的灵活性，但把合理地管理键以确保它们表示的状态信息不会变得陈旧的任务交给了程序员。</p>
-<p>合理地使用选择器的秘诀是理解选择器维护的选择键集合所扮演的角色。最重要的部分是当键已经不再在已选择的键的集合中时将会发生什么。当通道上的至少一个感兴趣的操作就绪时，键的ready集合就会被清空，并且当前已经就绪的操作将会被添加到ready集合中。该键之后将被添加到已选择的键的集合中。</p>
-<p>清理一个SelectKey的ready集合的方式是将这个键从已选择的键的集合中移除。选择键的就绪状态只有在选择器对象在选择操作过程中才会修改。处理思想是只有在已选择的键的集合中的键才被认为是包含了合法的就绪信息的。这些信息将在键中长久地存在，直到键从已选择的键的集合中移除，以通知选择器您已经看到并对它进行了处理。如果下一次通道的一些感兴趣的操作发生时，键将被重新设置以反映当时通道的状态并再次被添加到已选择的键的集合中。</p>
-<p>这种框架提供了很多灵活性。通常的做法是在选择器上调用一次select操作(这将更新已选择的键的集合)，然后遍历selectKeys()方法返回的键的集合。在按顺序进行检查每个键的过程中，相关的通道也根据键的就绪集合进行处理。然后键将从已选择的键的集合中被移除（通过在Iterator对象上调用remove( )方法），然后检查下一个键。完成后，通过再次调用select( )方法重复这个循环。下面的代码是典型的服务器的例子(使用select()来为多个通道提供服务)。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.haothink.channel;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> java.net.InetSocketAddress;</span><br><span class="line">    <span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line">    <span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line">    <span class="keyword">import</span> java.nio.channels.SelectableChannel;</span><br><span class="line">    <span class="keyword">import</span> java.nio.channels.SelectionKey;</span><br><span class="line">    <span class="keyword">import</span> java.nio.channels.Selector;</span><br><span class="line">    <span class="keyword">import</span> java.nio.channels.ServerSocketChannel;</span><br><span class="line">    <span class="keyword">import</span> java.nio.channels.SocketChannel;</span><br><span class="line">    <span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Simple echo-back server which listens for incoming stream connections and</span></span><br><span class="line"><span class="comment">     * echoes back whatever it reads. A single Selector object is used to listen to</span></span><br><span class="line"><span class="comment">     * the server socket (to accept new connections) and all the active socket</span></span><br><span class="line"><span class="comment">     * channels.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> Ron Hitchens (ron@ronsoft.com)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectSockets</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> PORT_NUMBER = <span class="number">1234</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span> <span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">new</span> SelectSockets().go(argv);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">go</span><span class="params">(String[] argv)</span> <span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> port = PORT_NUMBER;</span><br><span class="line">            <span class="keyword">if</span> (argv.length &gt; <span class="number">0</span>)</span><br><span class="line">            &#123; <span class="comment">// Override default listen port</span></span><br><span class="line">                port = Integer.parseInt(argv[<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"Listening on port "</span> + port);</span><br><span class="line">            <span class="comment">// Allocate an unbound server socket channel</span></span><br><span class="line">            ServerSocketChannel serverChannel = ServerSocketChannel.open();</span><br><span class="line">            <span class="comment">// Get the associated ServerSocket to bind it with</span></span><br><span class="line">            ServerSocket serverSocket = serverChannel.socket();</span><br><span class="line">            <span class="comment">// Create a new Selector for use below</span></span><br><span class="line">            Selector selector = Selector.open();</span><br><span class="line">            <span class="comment">// Set the port the server channel will listen to</span></span><br><span class="line">            serverSocket.bind(<span class="keyword">new</span> InetSocketAddress(port));</span><br><span class="line">            <span class="comment">// Set nonblocking mode for the listening socket</span></span><br><span class="line">            serverChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// Register the ServerSocketChannel with the Selector</span></span><br><span class="line">            serverChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// This may block for a long time. Upon returning, the</span></span><br><span class="line">                <span class="comment">// selected set contains keys of the ready channels.</span></span><br><span class="line">                <span class="keyword">int</span> n = selector.select();</span><br><span class="line">                <span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">continue</span>; <span class="comment">// nothing to do</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// Get an iterator over the set of selected keys</span></span><br><span class="line">                Iterator&lt;SelectionKey&gt; it = selector.selectedKeys().iterator();</span><br><span class="line">                <span class="comment">// Look at each key in the selected set</span></span><br><span class="line">                <span class="keyword">while</span> (it.hasNext())</span><br><span class="line">                &#123;</span><br><span class="line">                    SelectionKey key = (SelectionKey) it.next();</span><br><span class="line">                    <span class="comment">// Is a new connection coming in?</span></span><br><span class="line">                    <span class="keyword">if</span> (key.isAcceptable())</span><br><span class="line">                    &#123;</span><br><span class="line">                        ServerSocketChannel server = (ServerSocketChannel) key.channel();</span><br><span class="line">                        SocketChannel channel = server.accept();</span><br><span class="line">                        registerChannel(selector, channel, SelectionKey.OP_READ);</span><br><span class="line">                        sayHello(channel);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// Is there data to read on this channel?</span></span><br><span class="line">                    <span class="keyword">if</span> (key.isReadable())</span><br><span class="line">                    &#123;</span><br><span class="line">                        readDataFromSocket(key);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// Remove key from selected set; it's been handled</span></span><br><span class="line">                    it.remove();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Register the given channel with the given selector for the given</span></span><br><span class="line"><span class="comment">         * operations of interest</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">registerChannel</span><span class="params">(Selector selector, SelectableChannel channel, <span class="keyword">int</span> ops)</span> <span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (channel == <span class="keyword">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span>; <span class="comment">// could happen</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// Set the new channel nonblocking</span></span><br><span class="line">            channel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// Register it with the selector</span></span><br><span class="line">            channel.register(selector, ops);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Use the same byte buffer for all channels. A single thread is</span></span><br><span class="line">        <span class="comment">// servicing all the channels, so no danger of concurrent acccess.</span></span><br><span class="line">        <span class="keyword">private</span> ByteBuffer buffer = ByteBuffer.allocateDirect(<span class="number">1024</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Sample data handler method for a channel with data ready to read.</span></span><br><span class="line"><span class="comment">         * </span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> key A SelectionKey object associated with a channel determined by</span></span><br><span class="line"><span class="comment">         *        the selector to be ready for reading. If the channel returns 142</span></span><br><span class="line"><span class="comment">         *        an EOF condition, it is closed here, which automatically</span></span><br><span class="line"><span class="comment">         *        invalidates the associated key. The selector will then de-register</span></span><br><span class="line"><span class="comment">         *        the channel on the next select call.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">readDataFromSocket</span><span class="params">(SelectionKey key)</span> <span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            SocketChannel socketChannel = (SocketChannel) key.channel();</span><br><span class="line">            <span class="keyword">int</span> count;</span><br><span class="line">            buffer.clear(); <span class="comment">// Empty buffer</span></span><br><span class="line">            <span class="comment">// Loop while data is available; channel is nonblocking</span></span><br><span class="line">            <span class="keyword">while</span> ((count = socketChannel.read(buffer)) &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                buffer.flip(); <span class="comment">// Make buffer readable</span></span><br><span class="line">                <span class="comment">// Send the data; don't assume it goes all at once</span></span><br><span class="line">                <span class="keyword">while</span> (buffer.hasRemaining())</span><br><span class="line">                &#123;</span><br><span class="line">                    socketChannel.write(buffer);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// WARNING: the above loop is evil. Because</span></span><br><span class="line">                <span class="comment">// it's writing back to the same nonblocking</span></span><br><span class="line">                <span class="comment">// channel it read the data from, this code can</span></span><br><span class="line">                <span class="comment">// potentially spin in a busy loop. In real life</span></span><br><span class="line">                <span class="comment">// you'd do something more useful than this.</span></span><br><span class="line">                buffer.clear(); <span class="comment">// Empty buffer</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (count &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Close channel on EOF, invalidates the key</span></span><br><span class="line">                socketChannel.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Spew a greeting to the incoming client connection.</span></span><br><span class="line"><span class="comment">         * </span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> channel The newly connected SocketChannel to say hello to.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">(SocketChannel channel)</span> <span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            buffer.clear();</span><br><span class="line">            buffer.put(<span class="string">"Hi there!\r\n"</span>.getBytes());</span><br><span class="line">            buffer.flip();</span><br><span class="line">            channel.write(buffer);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>这个简单的服务器创建了ServerSocketChannel和Selector对象，并将通道注册到选择器上。我们不在注册的键中保存服务器socket的引用，因为它永远不会被注销。这个无限循环在最上面先调用了select()，这可能会无限期地阻塞。当选择结束时，就遍历选择键并检查已经就绪的通道。</p>
-<p>如果一个键指示与它相关的通道已经准备好执行一个accecpt( )操作，我们就通过键获取关联的通道，并将它转换为SeverSocketChannel对象。我们都知道这么做是安全的，因为只有ServerSocketChannel支持OP_ACCEPT操作。我们也知道我们的代码只把对一个单一的ServerSocketChannel对象的OP_ACCEPT操作进行了注册。通过对服务器socket通道的引用，我们调用了它的accept( )方法，来获取刚到达的socket的句柄。返回的对象的类型是SocketChannel，也是一个可选择的通道类型。这时，与创建一个新线程来从新的连接中读取数据不同，我们只是简单地将socket注册到选择器上。我们通过传入OP_READ标记，告诉选择器我们关心新的socket通道什么时候可以准备好读取数据。</p>
-<p>如果键指示通道还没有准备好执行accept( )，我们就检查它是否准备好执行read( )。任何一个这么指示的socket通道一定是之前ServerSocketChannel创建的SocketChannel对象之一，并且被注册为只对读操作感兴趣。对于每个有数据需要读取的socket通道，我们调用一个公共的方法来读取并处理这个带有数据的socket。需要注意的是这个公共方法需要准备好以非阻塞的方式处理socket上的不完整的数据。它需要迅速地返回，以其他带有后续输入的通道能够及时地得到处理。</p>
-<p>在循环的底部，我们通过调用Iterator（迭代器）对象的remove()方法，将键从已选择的键的集合中移除。键可以直接从selectKeys()返回的Set中移除，但同时需要用Iterator来检查集合，您需要使用迭代器的remove()方法来避免破坏迭代器内部的状态。</p>
-<h3 id="并发性和异步可关闭性"><a href="#并发性和异步可关闭性" class="headerlink" title="并发性和异步可关闭性"></a>并发性和异步可关闭性</h3><p>选择器对象是线程安全的，但它们包含的键集合不是。通过keys( )和selectKeys( )返回的键的集合是Selector对象内部的私有的Set对象集合的直接引用。这些集合可能在任意时间被改变。已注册的键的集合是只读的。如果您试图修改它，那么您得到的奖品将是一个<br>java.lang.UnsupportedOperationException，但是当您在观察它们的时候，它们可能发生了改变的话，您仍然会遇到麻烦。Iterator对象是快速失败的(fail-fast)：如果底层的Set被改变了，它们将会抛出java.util.ConcurrentModificationException，因此如果您期望在多个线程间共享选择器和/或键，请对此做好准备。您可以直接修改选择键，但请注意您这么做时可能会彻底破坏另一个线程的Iterator。</p>
-<p>如果在多个线程并发地访问一个选择器的键的集合的时候存在任何问题，您可以采取一些步骤来合理地同步访问。在执行选择操作时，选择器在Selector对象上进行同步，然后是已注册的键的集合，最后是已选择的键的集合，按照这样的顺序。已取消的键的集合也在选择过程的的第1步和第3步之间保持同步（当与已取消的键的集合相关的通道被注销时）。</p>
-<p>在多线程的场景中，如果您需要对任何一个键的集合进行更改，不管是直接更改还是其他操作带来的副作用，您都需要首先以相同的顺序，在同一对象上进行同步。锁的过程是非常重要的。如果竞争的线程没有以相同的顺序请求锁，就将会有死锁的潜在隐患。如果您可以确保否其他线程不会同时访问选择器，那么就不必要进行同步了。</p>
-<p>Selector类的close( )方法与slect( )方法的同步方式是一样的，因此也有一直阻塞的可能性。在选择过程还在进行的过程中，所有对close( )的调用都会被阻塞，直到选择过程结束，或者执行选择的线程进入睡眠。</p>
-<p>关闭通道的过程不应该是一个耗时的操作。NIO的设计者们特别想要阻止这样的可能性：一个线程在关闭一个处于选择操作中的通道时，被阻塞于无限期的等待。当一个通道关闭时，它相关的键也就都被取消了。这并不会影响正在进行的select( )，但这意味着在您调用select( )时仍然是有效的键，在返回时可能会变为无效。您总是可以使用由选择器的selectKeys( )方法返回的已选择的键的集合：请不要自己维护键的集合。</p>
-<p>对单CPU的系统而言使用一个线程来为多个通道提供服务可能是一个好主意，因为在任何情况下都只有一个线程能够运行。通过消除在线程之间进行上下文切换带来的额外开销，总吞吐量可以得到提高。但对于一个多CPU的系统呢？在一个有n个CPU的系统上，当一个单一的线程线性地轮流处理每一个线程时，可能有n-1个cpu处于空闲状态。</p>
-<p>某些通道要求比其他通道更高的响应速度，可以通过使用两个选择器来解决：一个为命令连接服务，另一个为普通连接服务。但这种场景也可以使用与第一个场景十分相似的办法来解决。与将所有准备好的通道放到同一个线程池的做法不同，通道可以根据功能由不同的工作线程来处理。它们可能可以是日志线程池，命令/控制线程池，状态请求线程池，等等(使用线程池来为通道提供服务)。</p>
-<hr>
-<p>参考文献以及相关网址：<br>1.<a href="http://ifeve.com/java-nio-all/" target="_blank" rel="noopener">并发编程网</a><br>2.<a href="http://www.yangyong.me/" target="_blank" rel="noopener">Java NIO入门与详解</a></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NIO</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">zeppelin</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        			<a href="/categories/大数据//" class="article-tag-list-link color4">大数据</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2016/01/16/了解NIO-Selector/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2016/01/21/JVM-的几个收集器整理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JVM 的几个收集器整理
-        
-      </div>
-    </a>
   
   
-    <a href="/2016/01/15/反射机制处理数组/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">反射机制处理数组</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
-  <div id="gitment-ctn"></div>
-<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
-<script src="https://jjeejj.github.io/js/gitment.js"></script> 
-<script>
-var gitment = new Gitment({
-  id: 'Sat Jan 16 2016 21:56:15 GMT+0800',
-  owner: 'wanghaoListening',
-  repo: 'wanghaolistening.github.com',
-  oauth: {
-    client_id: '0a40baefe58e4183769b',
-    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
-  },
-})
-gitment.render('gitment-ctn')
-</script>
-
-  
+    
 
 
           </div>
@@ -498,8 +269,8 @@ gitment.render('gitment-ctn')
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
