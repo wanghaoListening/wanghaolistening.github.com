@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 26
+                    总文章数 27
                 </nav>
 		<nav class="header-smart-menu">
     		
@@ -102,8 +102,6 @@ var _hmt = _hmt || [];
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/wanghaoListening" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="rss" target="_blank" href="https://www.zhihu.com/rss" title="rss"><i class="icon-rss"></i></a>
 		        
 					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wanghaotime/" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
@@ -151,8 +149,6 @@ var _hmt = _hmt || [];
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/wanghaoListening" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="rss" target="_blank" href="https://www.zhihu.com/rss" title="rss"><i class="icon-rss"></i></a>
 			        
 						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wanghaotime/" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
@@ -214,10 +210,10 @@ var _hmt = _hmt || [];
 <h3 id="开启OAuth-Apps注意问题"><a href="#开启OAuth-Apps注意问题" class="headerlink" title="开启OAuth Apps注意问题"></a>开启OAuth Apps注意问题</h3><p>Homepage URL 与 Authorization callback URL都填写你自己的gitpage的访问域名即可，并且需要注意前面是https而不是http,如下：</p>
 <p><img src="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg" alt="oauth配置"></p>
 <h3 id="Error-Comments-Not-Initialized"><a href="#Error-Comments-Not-Initialized" class="headerlink" title="Error: Comments Not Initialized"></a>Error: Comments Not Initialized</h3><p>这个问题是由于自身博客主题所配置的gitment引用的js及css访问不通导致，处理方式是，将”/yilia/layout/_partial/post/gitment.ejs“ 文件的如下css以及js替换，当然也有其他的替换方式。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="attribute">rel</span>=<span class="string">"stylesheet"</span> <span class="attribute">href</span>=<span class="string">"//imsun.github.io/gitment/style/default.css"</span>&gt;</span><br><span class="line">&lt;script <span class="attribute">src</span>=<span class="string">"//imsun.github.io/gitment/dist/gitment.browser.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;//imsun.github.io/gitment/style/default.css&quot;&gt;</span><br><span class="line">&lt;script src=&quot;//imsun.github.io/gitment/dist/gitment.browser.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://jjeejj.github.io/css/gitment.css&quot;&gt;</span><br><span class="line">&lt;script src=&quot;https://jjeejj.github.io/js/gitment.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="Error：validation-failed"><a href="#Error：validation-failed" class="headerlink" title="Error：validation failed"></a>Error：validation failed</h3><p>这个问题也是由gitment.ejs内容中id的值造成的，看了网上的很多解决方案，个人认为最好的方案是，将id的值设置为每篇博客的发布日期，设定的id给评论对应的issue一个label，这个label的值就是id的值，那么id的作用应该是使issue和文章通过label连接在一起。所以不能给写死，具体改造方案如下图：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">id:</span> <span class="string">'&lt;%= page.date %&gt;'</span>,</span><br><span class="line"><span class="string">owner:</span> <span class="string">'&lt;%=theme.gitment_owner%&gt;'</span>,</span><br><span class="line"><span class="string">repo:</span> <span class="string">'&lt;%=theme.gitment_repo%&gt;'</span>,</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id: &apos;&lt;%= page.date %&gt;&apos;,</span><br><span class="line">owner: &apos;&lt;%=theme.gitment_owner%&gt;&apos;,</span><br><span class="line">repo: &apos;&lt;%=theme.gitment_repo%&gt;&apos;,</span><br></pre></td></tr></table></figure>
 
       
 
@@ -533,55 +529,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -593,15 +541,67 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">log4j日志处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">log4j日志处理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,7 +688,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">千里之行&lt;br&gt;&lt;br&gt;始于足下&lt;br&gt;额，是的</div>
   	  	
     	</section>
     

@@ -83,7 +83,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 26
+                    总文章数 27
                 </nav>
 		<nav class="header-smart-menu">
     		
@@ -104,8 +104,6 @@ var _hmt = _hmt || [];
 			<div class="social">
 				
 					<a class="github" target="_blank" href="https://github.com/wanghaoListening" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="rss" target="_blank" href="https://www.zhihu.com/rss" title="rss"><i class="icon-rss"></i></a>
 		        
 					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wanghaotime/" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
@@ -153,8 +151,6 @@ var _hmt = _hmt || [];
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/wanghaoListening" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="rss" target="_blank" href="https://www.zhihu.com/rss" title="rss"><i class="icon-rss"></i></a>
 			        
 						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wanghaotime/" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
@@ -227,7 +223,7 @@ var _hmt = _hmt || [];
 <p>3.当熔断器开关处于打开状态, 经过一段时间后, 熔断器会自动进入半开状态, 这时熔断器只允许一个请求通过. 当该请求调用成功时, 熔断器恢复到关闭状态. 若该请求失败, 熔断器继续保持打开状态, 接下来的请求被禁止通过.</p>
 <p>熔断器的开关能保证服务调用者在调用异常服务时, 快速返回结果, 避免大量的同步等待. 并且熔断器能在一段时间后继续侦测请求执行结果, 提供恢复服务调用的可能.</p>
 <p>通过如下配置方式开启熔断器</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">HystrixCommandProperties</span><span class="selector-class">.Setter</span>()</span><br><span class="line"><span class="selector-class">.withCircuitBreakerErrorThresholdPercentage</span>(<span class="number">5</span>)<span class="comment">//(1)错误百分比超过5%</span></span><br><span class="line"><span class="selector-class">.withCircuitBreakerRequestVolumeThreshold</span>(<span class="number">10</span>)<span class="comment">//(2)10s以内调用次数10次，同时满足(1)(2)熔断器打开</span></span><br><span class="line"><span class="selector-class">.withCircuitBreakerSleepWindowInMilliseconds</span>(<span class="number">5000</span>)<span class="comment">//隔5s之后，熔断器会尝试半开(关闭)，重新放进来请求</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HystrixCommandProperties.Setter()</span><br><span class="line">.withCircuitBreakerErrorThresholdPercentage(5)//(1)错误百分比超过5%</span><br><span class="line">.withCircuitBreakerRequestVolumeThreshold(10)//(2)10s以内调用次数10次，同时满足(1)(2)熔断器打开</span><br><span class="line">.withCircuitBreakerSleepWindowInMilliseconds(5000)//隔5s之后，熔断器会尝试半开(关闭)，重新放进来请求</span><br></pre></td></tr></table></figure>
 <h4 id="服务的降级"><a href="#服务的降级" class="headerlink" title="服务的降级"></a>服务的降级</h4><p>Hystrix使用<a href="https://wanghaolistening.github.io/2017/03/18/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/#more">命令模式</a>(继承HystrixCommand类)来包裹具体的服务调用逻辑(run方法), 并在命令模式中添加了服务调用失败后的降级逻辑(getFallback).</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public class ApiClientHystrixCommand extends HystrixCommand&lt;ApiResult&gt; &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static Logger logger = LoggerFactory.getLogger(ApiClientHystrixCommand.class);</span><br><span class="line"></span><br><span class="line">    private final ApiClient apiClient;</span><br><span class="line">    private final Map&lt;String, Object&gt; paramsMap;</span><br><span class="line"></span><br><span class="line">    private final Map&lt;String, String&gt; mdcContext;</span><br><span class="line"></span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    public ApiClientHystrixCommand(final ApiClient apiClient, final Map&lt;String, Object&gt; paramsMap,</span><br><span class="line">                                   final com.netflix.hystrix.HystrixCommandProperties.Setter commandPropertiesDefaults,</span><br><span class="line">                                   final com.netflix.hystrix.HystrixThreadPoolProperties.Setter threadPoolPropertiesDefaults,</span><br><span class="line">                                   final String groupName) &#123;</span><br><span class="line">		</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected ApiResult run()&#123;</span><br><span class="line">        if (this.mdcContext != null) &#123;</span><br><span class="line">            MDC.setContextMap(this.mdcContext);</span><br><span class="line">        &#125;</span><br><span class="line">        // 调用apiclient 返回结果</span><br><span class="line">        logger.info(&quot;开始API的调用 apiclient:&#123;&#125;, paramsMap:&#123;&#125;&quot;, this.apiClient, this.paramsMap);</span><br><span class="line">        try &#123;</span><br><span class="line">            return this.apiClient.call(this.paramsMap);</span><br><span class="line">        &#125; catch (final Exception e) &#123;</span><br><span class="line">            logger.error(String.format(&quot;调用API client 异常. api client instance is %s, params is %s&quot;, this.apiClient,</span><br><span class="line">                    this.paramsMap), e);</span><br><span class="line">            // 继续抛出，才会调用调用fallback方法</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            MDC.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //服务的降级处理</span><br><span class="line">    @Override</span><br><span class="line">    protected ApiResult getFallback() &#123;</span><br><span class="line">        if (this.mdcContext != null) &#123;</span><br><span class="line">            MDC.setContextMap(this.mdcContext);</span><br><span class="line">        &#125;</span><br><span class="line">        try &#123;</span><br><span class="line">            final ApiResult result = new ApiResult();</span><br><span class="line">           </span><br><span class="line">            logger.error(String.format(&quot;调用API client 异常。有可能超时。 api client instance is %s, params is %s&quot;, this.apiClient,</span><br><span class="line">                    this.paramsMap), this.getExecutionException());</span><br><span class="line">            result.setCode(ProjectConstant.API_RESULT.ERROR);</span><br><span class="line"></span><br><span class="line">            return result;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            MDC.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由于项目中并没有对降级进行了特别的处理，而且由于数据查询以公司名或人名及身份证号为维度，生成一个公司的报告后，数据的复用性不是很强，所以对降级的处理仅仅是简单的返回超时。</p>
@@ -553,55 +549,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,15 +561,67 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">log4j日志处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">log4j日志处理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,7 +708,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">千里之行&lt;br&gt;&lt;br&gt;始于足下&lt;br&gt;额，是的</div>
   	  	
     	</section>
     

@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>PermGen space问题及解决方案 | haothink123</title>
+  <title>Archives: 2017/4 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在做一个微生活平台的卡券管理系统的项目，先说一下项目所使用的开发环境，由于人家要求必须使用spring，所以就使用了自己比较熟悉的spring+hibernate并引用了不少第三发类库。项目开发进行到一段时间后eclipse老是出现 java.lang.OutOfMemoryError: PermGen space这个异常，由于本人了解一点jvm的知识，一看便知是jvm的永久代内存溢出，自己用">
-<meta name="keywords" content="jvm">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PermGen space问题及解决方案">
-<meta property="og:url" content="https://wanghaolistening.github.io/2015/12/12/PermGen-space问题及解决方案/index.html">
+  <meta name="description" content="后端程序员">
+<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
+<meta property="og:type" content="website">
+<meta property="og:title" content="haothink123">
+<meta property="og:url" content="https://wanghaolistening.github.io/archives/2017/04/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="最近在做一个微生活平台的卡券管理系统的项目，先说一下项目所使用的开发环境，由于人家要求必须使用spring，所以就使用了自己比较熟悉的spring+hibernate并引用了不少第三发类库。项目开发进行到一段时间后eclipse老是出现 java.lang.OutOfMemoryError: PermGen space这个异常，由于本人了解一点jvm的知识，一看便知是jvm的永久代内存溢出，自己用">
+<meta property="og:description" content="后端程序员">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvmPermGenSpace.PNG">
-<meta property="og:updated_time" content="2019-02-16T10:35:55.673Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PermGen space问题及解决方案">
-<meta name="twitter:description" content="最近在做一个微生活平台的卡券管理系统的项目，先说一下项目所使用的开发环境，由于人家要求必须使用spring，所以就使用了自己比较熟悉的spring+hibernate并引用了不少第三发类库。项目开发进行到一段时间后eclipse老是出现 java.lang.OutOfMemoryError: PermGen space这个异常，由于本人了解一点jvm的知识，一看便知是jvm的永久代内存溢出，自己用">
-<meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvmPermGenSpace.PNG">
+<meta name="twitter:title" content="haothink123">
+<meta name="twitter:description" content="后端程序员">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -184,230 +181,71 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-PermGen-space问题及解决方案" class="article article-type-post " itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      PermGen space问题及解决方案
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/04/01/Java并发知识记录/" class="archive-article-date">
+  	<time datetime="2017-04-01T08:00:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-01</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/04/01/Java并发知识记录/">Java并发知识记录</a>
     </h1>
   
 
-        
-        <a href="/2015/12/12/PermGen-space问题及解决方案/" class="archive-article-date">
-  	<time datetime="2015-12-12T13:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在做一个微生活平台的卡券管理系统的项目，先说一下项目所使用的开发环境，由于人家要求必须使用spring，所以就使用了自己比较熟悉的spring+hibernate并引用了不少第三发类库。项目开发进行到一段时间后eclipse老是出现 java.lang.OutOfMemoryError: PermGen space这个异常，由于本人了解一点jvm的知识，一看便知是jvm的永久代内存溢出，自己用的<br>jdk7，据说jdk8去除了永久代这一概念，所以并未太关心，只需重启服务器错误便消失，但伴随着项目的进度这个错误出现的频率增高。<br><a id="more"></a><br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvmPermGenSpace.PNG" alt="PermGen" title="PermGen"></p>
-<h3 id="关于持久代"><a href="#关于持久代" class="headerlink" title="关于持久代"></a>关于持久代</h3><p>Java虚拟机也创建了Java类的内部引用保存在持久代。在垃圾回收期间，Java对象和类都当做对象处理并且以同样的方式回收。最初Java对象和类都是保存在堆中。<br>一个性能优化措施：一旦持久代创建后，就会把classes放入里面。Classes是Java虚拟机的部分实现，我们不应该用我们的数据结构填满Java堆。持久代包含以下类信息：<br><em>类方法
-</em>类名称<br><em>常量池信息
-</em>对象数组和与类相关的类型数组<br><em>被Java虚拟机使用的内部对象
-</em>编译器用于优化的信息</p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>想解决这个问题必须了解问题发生的原因， PermGen space从表面上看就是内存益出，解决方法也一定是加大内存。说说为什么会内存益出：这一部分用于存放Class和Meta的信息,Class在被 Load的时候被放入PermGen space区域，它和和存放Instance的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的APP会LOAD很多CLASS的话,就很可能出现PermGen space错误。<br>由于本人的项目使用了spring及hibernate等开源框架，而他们的底层大量运用了字节码技术来完成类的创建。而且本人的前台页面运用的是jsp，而jsp最终是被翻译成class文件加载进入内存，所以才会出现这个问题。</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>解决这个问题的方案有两个：一个是解决目前的架构，二是增大堆内存，并及时卸载永久代的class元数据及其信息。前一种方法是暂时绝对不能改变的而且本人也暂时没能力解决，后者还是可以的。google了很长时间也尝试了很多方法，关于这个问题的解决方案，一种通过修改tomcat服务器的默认参数来间接改变jvm的默认启动配置解决这个问题，另一种则是直接对jvm初始话参数进行配置</p>
-<blockquote>
-<p>以下引用IT瘾(<a href="http://itindex.net" target="_blank" rel="noopener">http://itindex.net</a>)</p>
-</blockquote>
-<p>当Java虚拟机需要加载定义的一个新class，但是在持久代中没有足够的空间就会抛出‘Java.Lang.OutOfMemoryError: PermGen Space’异常。默认分配给持久代的大小在server模式下是64MB ，在client模式下是32MB 。这就有两个原因可能会引起持久代内存溢出问题的发生。<br>第一个原因可能是你应用或者服务器已经有非常多的class在你的持久代中，已经不能容纳所有的class了。</p>
-<h3 id="XX-MaxPermSize-XXXM"><a href="#XX-MaxPermSize-XXXM" class="headerlink" title="-XX:MaxPermSize=XXXM"></a>-XX:MaxPermSize=XXXM</h3><p>如果是因为大量的class导致持久代的空间的不足引起的问题，那么你可以增加持久代的大小通过–XX:MaxPermSize=XXm  参数。这将增加持久代的可用空间来保存class。看起来像这样： -XX:MaxPermSize=256m</p>
-<h3 id="XX-CMSClassUnloadingEnabled"><a href="#XX-CMSClassUnloadingEnabled" class="headerlink" title="-XX:+CMSClassUnloadingEnabled"></a>-XX:+CMSClassUnloadingEnabled</h3><p>这个参数表示在使用CMS垃圾回收机制的时候是否启用类卸载功能。默认这个是设置为不启用的，所以你想启用这个功能你需要在Java参数中明确的设置下面的参数：</p>
-<h3 id="XX-CMSClassUnloadingEnabled-1"><a href="#XX-CMSClassUnloadingEnabled-1" class="headerlink" title="-XX:+CMSClassUnloadingEnabled"></a>-XX:+CMSClassUnloadingEnabled</h3><p>如果你启用了CMSClassUnloadingEnabled ，垃圾回收会清理持久代，移除不再使用的classes。这个参数只有在 UseConcMarkSweepGC 也启用的情况下才有用。参数如下：-XX:+UseConcMarkSweepGC</p>
-<h3 id="XX-CMSPermGenSweepingEnabled"><a href="#XX-CMSPermGenSweepingEnabled" class="headerlink" title="-XX:+CMSPermGenSweepingEnabled"></a>-XX:+CMSPermGenSweepingEnabled</h3><p>这个参数表示是否会清理持久代。默认是不清理的，因此我们需要明确设置这个参数来调试持久代内存溢出问题。这个参数在Java6中被移除了，因此你需要使用 -XX:+CMSClassUnloadingEnabled 如果你是使用Java6或者后面更高的版本。那么解决持久代内存大小问题的参数看起来会是下面这样子：<br>-XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled<br>内存泄露<br>第二个原因可能是内存泄露。那么加载的类怎样变成不用的呢？<br>在Java中通常class是永久存在的。一旦class被加载，他们就呆在内存中，即使服务器上的应用停掉了。像cglib这样可以动态产生class的类库会使用很多持久代空间，因为它动态的创建很多class。频繁的使用在运行时创建的代理类。当一个类定义可以为多个实例重用时很容易创建新的代理类。</p>
-<p>Sping和Hibernate经常会代理某些class。这些代理的class是通过类加载器加载的。产生的类定义如果一直不回收就会导致持久代空间很快就满了。</p>
-<p>你需要确定是不是内存泄露引起的持久代空间的问题，同时解决它。增加持久代空间大小将不会有用，这只会延迟它的发生，因为在某个时间点持久代还是会被填满。</p>
-<p>如果你正在使用tomcat遇到了内存泄露问题，最新版本的tomcat有能力处理一些内存泄露问题。详细请看：<a href="http://wiki.apache.org/tomcat/MemoryLeakProtection" target="_blank" rel="noopener">点这里</a></p>
-<h3 id="1、首先是：java-lang-OutOfMemoryError-Java-heap-space"><a href="#1、首先是：java-lang-OutOfMemoryError-Java-heap-space" class="headerlink" title="1、首先是：java.lang.OutOfMemoryError: Java heap space"></a>1、首先是：java.lang.OutOfMemoryError: Java heap space</h3><p>解释：<br>Heap size 设置<br>JVM堆的设置是指java程序运行过程中JVM可以调配使用的内存空间的设置.JVM在启动的时候会自动设置Heap size的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。Heap size 的大小是Young Generation 和Tenured Generaion 之和。<br>提示：在JVM中如果98％的时间是用于GC且可用的Heap size 不足2％的时候将抛出此异常信息。<br>提示：Heap Size 最大不要超过可用物理内存的80％，一般的要将-Xms和-Xmx选项设置为相同，而-Xmn为1/4的-Xmx值。</p>
-<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p>手动设置Heap size<br>修改TOMCAT_HOME/bin/catalina.bat，在“echo “Using CATALINA_BASE: $CATALINA_BASE””上面加入以下行：<br>set JAVA_OPTS=%JAVA_OPTS% -server -Xms800m -Xmx800m -XX:MaxNewSize=256m<br>或修改catalina.sh<br>在“echo “Using CATALINA_BASE: $CATALINA_BASE””上面加入以下行：<br>JAVA_OPTS=”$JAVA_OPTS -server -Xms800m -Xmx800m -XX:MaxNewSize=256m”<br>[html]</p>
-<h3 id="2、其次是：java-lang-OutOfMemoryError-PermGen-space"><a href="#2、其次是：java-lang-OutOfMemoryError-PermGen-space" class="headerlink" title="2、其次是：java.lang.OutOfMemoryError: PermGen space"></a>2、其次是：java.lang.OutOfMemoryError: PermGen space</h3><p>原因：<br>PermGen space的全称是Permanent Generation space,是指内存的永久保存区域，这块内存主要是被JVM存放Class和Meta信息的,Class在被Loader时就会被放到PermGen space中，它和存放类实例(Instance)的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用中有很CLASS的话,就很可能出现PermGen space错误，这种错误常见在web服务器对JSP进行pre compile的时候。如果你的WEB APP下都用了大量的第三方jar, 其大小超过了jvm默认的大小(4M)那么就会产生此错误信息了。</p>
-<h3 id="解决方法：-1"><a href="#解决方法：-1" class="headerlink" title="解决方法："></a>解决方法：</h3><ol>
-<li>手动设置MaxPermSize大小<br>修改TOMCAT_HOME/bin/catalina.bat（Linux下为catalina.sh），在<br>[code]<br>“echo “Using CATALINA_BASE: $CATALINA_BASE””上面加入以下行：<br>set JAVA_OPTS=%JAVA_OPTS% -server -XX:PermSize=128M -XX:MaxPermSize=512m<br>catalina.sh下为：<br>JAVA_OPTS=”$JAVA_OPTS -server -XX:PermSize=128M -XX:MaxPermSize=512m”</li>
-</ol>
-<p>经过以上方法成功解决了永久代内存溢出，看来熟悉jvm还是非常有必要的。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java基础//" class="article-tag-list-link color2">Java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      
 
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2015/12/12/PermGen-space问题及解决方案/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2015/12/14/Map与Bean的互相转化/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Map与Bean的互相转化
-        
-      </div>
-    </a>
   
   
-    <a href="/2015/10/22/Log4j使用教程/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Log4j使用教程</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于持久代"><span class="toc-number">1.</span> <span class="toc-text">关于持久代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原因"><span class="toc-number">2.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XX-MaxPermSize-XXXM"><span class="toc-number">4.</span> <span class="toc-text">-XX:MaxPermSize=XXXM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XX-CMSClassUnloadingEnabled"><span class="toc-number">5.</span> <span class="toc-text">-XX:+CMSClassUnloadingEnabled</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XX-CMSClassUnloadingEnabled-1"><span class="toc-number">6.</span> <span class="toc-text">-XX:+CMSClassUnloadingEnabled</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XX-CMSPermGenSweepingEnabled"><span class="toc-number">7.</span> <span class="toc-text">-XX:+CMSPermGenSweepingEnabled</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、首先是：java-lang-OutOfMemoryError-Java-heap-space"><span class="toc-number">8.</span> <span class="toc-text">1、首先是：java.lang.OutOfMemoryError: Java heap space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法："><span class="toc-number">9.</span> <span class="toc-text">解决方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、其次是：java-lang-OutOfMemoryError-PermGen-space"><span class="toc-number">10.</span> <span class="toc-text">2、其次是：java.lang.OutOfMemoryError: PermGen space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法：-1"><span class="toc-number">11.</span> <span class="toc-text">解决方法：</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
-  <div id="gitment-ctn"></div>
-<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
-<script src="https://jjeejj.github.io/js/gitment.js"></script> 
-<script>
-var gitment = new Gitment({
-  id: 'Sat Dec 12 2015 21:14:17 GMT+0800',
-  owner: 'wanghaoListening',
-  repo: 'wanghaolistening.github.com',
-  oauth: {
-    client_id: '0a40baefe58e4183769b',
-    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
-  },
-})
-gitment.render('gitment-ctn')
-</script>
-
-  
+    
 
 
           </div>
@@ -430,8 +268,8 @@ gitment.render('gitment-ctn')
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
