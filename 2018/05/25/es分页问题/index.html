@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>Tag: enum | haothink123</title>
+  <title>es分页问题 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="后端程序员">
-<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
-<meta property="og:type" content="website">
-<meta property="og:title" content="haothink123">
-<meta property="og:url" content="https://wanghaolistening.github.io/tags/enum/index.html">
+  <meta name="description" content="es分页遇到的问题">
+<meta name="keywords" content="Elasticsearch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es分页问题">
+<meta property="og:url" content="https://wanghaolistening.github.io/2018/05/25/es分页问题/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="后端程序员">
+<meta property="og:description" content="es分页遇到的问题">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-25T10:59:39.310Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="haothink123">
-<meta name="twitter:description" content="后端程序员">
+<meta name="twitter:title" content="es分页问题">
+<meta name="twitter:description" content="es分页遇到的问题">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -181,71 +182,237 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-es分页问题" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/08/11/java中的枚举enum/" class="archive-article-date">
-  	<time datetime="2015-08-11T05:59:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/08/11/java中的枚举enum/">java中的枚举enum</a>
+    <h1 class="article-title" itemprop="name">
+      es分页问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/25/es分页问题/" class="archive-article-date">
+  	<time datetime="2018-05-25T10:31:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司运营人员反应线上数据源管理系统的分页有问题，查询页数比较大时数据返回页为空，后经过本人排查线上日志以及查询es的官方资料发现了这个问题，es的深度分页问题，由于es内部的处理机制问题使得es没法像MySQL那样通过指定偏移量的方式进行很好的分页查询.</p>
+<a id="more"></a>
+<h3 id="线上日志抛出的异常"><a href="#线上日志抛出的异常" class="headerlink" title="线上日志抛出的异常"></a>线上日志抛出的异常</h3><p>数据源管理系统es本地分页测试没问题，但是到了预发和线上发现分页不准确（预发比线上数据集比较大），每当查询page足够大时，发现不能返回数据，根据日志报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nested: QueryPhaseExecutionException[Result window is too large, from + size must be less than or equal to: [10000] but was [1600000]. See the scroll api for a more efficient way to request large data sets. This limit can be set by changing the [index.max_result_window] index level setting.]; &#125; at org.elasticsearch.action.search.AbstractSearchAsyncAction.onPhaseFailure(AbstractSearchAsyncAction.java:274) at org.elasticsearch.action.search.AbstractSearchAsyncAction.executeNextPhase(AbstractSearchAsyncAction.java:132) at org.elasticsearch.action.search.AbstractSearchAsyncAction.onPhaseDone(AbstractSearchAsyncAction.java:243) at org.elasticsearch.action.search.InitialSearchPhase.onShardFailure(InitialSearchPhase.java:107) at org.elasticsearch.action.search.InitialSearchPhase.access$100(InitialSearchPhase.java:49) at org.elasticsearch.action.search.InitialSearchPhase$2.lambda$onFailure$1(InitialSearchPhase.java:217) at org.elasticsearch.action.search.InitialSearchPhase.maybeFork(InitialSearchPhase.java:171) at org.elasticsearch.action.search.InitialSearchPhase.access$000(InitialSearchPhase.java:49) at org.elasticsearch.action.search.InitialSearchPhase$2.onFailure(InitialSearchPhase.java:217) at org.elasticsearch.action.ActionListenerResponseHandler.handleException(ActionListenerResponseHandler.java:51) at org.elasticsearch.action.search.SearchTransportService$ConnectionCountingHandler.handleException(SearchTransportService.java:531) at org.elasticsearch.transport.TransportService$ContextRestoreResponseHandler.handleException(TransportService.java:1056) at org.elasticsearch.transport.TransportService$DirectResponseChannel.processException(TransportService.java:1149) at org.elasticsearch.transport.TransportService$DirectResponseChannel.sendResponse(TransportService.java:1133) at org.elasticsearch.transport.TaskTransportChannel.sendResponse(TaskTransportChannel.java:66) at org.elasticsearch.action.search.SearchTransportService$5$1.onFailure(SearchTransportService.java:361) at org.elasticsearch.search.SearchService$1.onFailure(SearchService.java:269) at org.elasticsearch.search.SearchService$1.onResponse(SearchService.java:263) at org.elasticsearch.search.SearchService$1.onResponse(SearchService.java:257) at org.elasticsearch.search.SearchService$3.doRun(SearchService.java:996) at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:637) at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) at org.elasticsearch.common.util.concurrent.TimedRunnable.doRun(TimedRunnable.java:41) at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) at java.lang.Thread.run(Thread.java:745) Caused by: QueryPhaseExecutionException[Result window is too large, from + size must be less than or equal to: [10000] but was [1600000]. See the scroll api for a more efficient way to request large data sets. This limit can be set by changing the [index.max_result_window] index level setting.] at org.elasticsearch.search.DefaultSearchContext.preProcess(DefaultSearchContext.java:206) at org.elasticsearch.search.query.QueryPhase.preProcess(QueryPhase.java:90) at org.elasticsearch.search.SearchService.createContext(SearchService.java:564) at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:528) at org.elasticsearch.search.SearchService.executeDfsPhase(SearchService.java:275) at org.elasticsearch.search.SearchService.access$000(SearchService.java:113) at org.elasticsearch.search.SearchService$1.onResponse(SearchService.java:261) ... 9 more</span><br></pre></td></tr></table></figure>
+<h3 id="异常解释："><a href="#异常解释：" class="headerlink" title="异常解释："></a>异常解释：</h3><p>默认情况下当es分页查询的from+size大于10000条数据时，就会出现此异常，假如每页20条数据也就是当查询页数大于500时就会出现此异常，解决的方式有两种：</p>
+<p>1.index.max_result_window = 50000;调整此值的大小<br>2.使用es对于大数据量查询的支持scroll</p>
+<h3 id="关于scrollh和from-size的性能测试："><a href="#关于scrollh和from-size的性能测试：" class="headerlink" title="关于scrollh和from+size的性能测试："></a>关于scrollh和from+size的性能测试：</h3><p>查看：<a href="https://cloud.tencent.com/developer/article/1022294" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1022294</a></p>
+<p>通过测试数据我们可以看出from-size类型的分页，越往后的分页，执行的效率越低。刨去一些异常的数据，总体上还是会随着from的增加，消耗时间也会增加。而且数据量越大，效果越明显！，而scroll的查询随着数据量的增加基本趋于稳定，从图中可以看到仅仅30万，就相差接近一倍的性能。</p>
+<h3 id="分布式系统的深度分页"><a href="#分布式系统的深度分页" class="headerlink" title="分布式系统的深度分页"></a>分布式系统的深度分页</h3><p>关于es大数据量分页问题，官网给力如下解释：</p>
+<p>To understand why deep paging is problematic, let’s imagine that we are searching within a single index with five primary shards. When we request the first page of results (results 1 to 10), each shard produces its own top 10 results and returns them to the coordinating node, which then sorts all 50 results in order to select the overall top 10.</p>
+<p>Now imagine that we ask for page 1,000—results 10,001 to 10,010. Everything works in the same way except that each shard has to produce its top 10,010 results. The coordinating node then sorts through all 50,050 results and discards 50,040 of them!</p>
+<p>You can see that, in a distributed system, the cost of sorting results grows exponentially the deeper we page. There is a good reason that web search engines don’t return more than 1,000 results for any query.</p>
+<h3 id="es中对于大数据量查询的推荐做法"><a href="#es中对于大数据量查询的推荐做法" class="headerlink" title="es中对于大数据量查询的推荐做法"></a>es中对于大数据量查询的推荐做法</h3><ul>
+<li><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.4/search-request-scroll.html" target="_blank" rel="noopener">Scroll API</a></p>
+</li>
+<li><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.4/search-request-search-after.html" target="_blank" rel="noopener">Search After API</a></p>
+</li>
+</ul>
+<h3 id="关于es中from-size-VS-scroll-的具体使用场景以及优缺点总结"><a href="#关于es中from-size-VS-scroll-的具体使用场景以及优缺点总结" class="headerlink" title="关于es中from size VS scroll 的具体使用场景以及优缺点总结"></a>关于es中from size VS scroll 的具体使用场景以及优缺点总结</h3><p>ES的搜索是分2个阶段进行的，即Query阶段和Fetch阶段。Query阶段比较轻量级，通过查询倒排索引，获取满足查询结果的文档ID列表。 而Fetch阶段比较重，需要将每个shard的结果取回，在协调结点进行全局排序。  通过From+size这种方式分批获取数据的时候，随着from加大，需要全局排序并丢弃的结果数量随之上升，性能越来越差。</p>
+<p>而Scroll查询，先做轻量级的Query阶段以后，免去了繁重的全局排序过程。它只是将查询结果集，也就是doc id列表保留在一个上下文里，之后每次分批取回的时候，只需根据设置的size，在每个shard内部按照一定顺序（默认doc_id续)， 取回这个size数量的文档即可。 </p>
+<p>由此也可以看出scroll不适合支持那种实时的和用户交互的前端分页工作，其主要用途用于从ES集群分批拉取大量结果集的情况，一般都是offline的应用场景。比如需要将非常大的结果集拉取出来，存放到其他系统处理，或者需要做大索引的reindex等等。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">enum</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Elasticsearch</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
+        			<a href="/categories/项目//" class="article-tag-list-link color3">项目</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2018/05/25/es分页问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/01/15/在职考研/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          在职考研
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/05/21/es-在项目中的应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">es在项目中的应用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线上日志抛出的异常"><span class="toc-number">1.</span> <span class="toc-text">线上日志抛出的异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常解释："><span class="toc-number">2.</span> <span class="toc-text">异常解释：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于scrollh和from-size的性能测试："><span class="toc-number">3.</span> <span class="toc-text">关于scrollh和from+size的性能测试：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分布式系统的深度分页"><span class="toc-number">4.</span> <span class="toc-text">分布式系统的深度分页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es中对于大数据量查询的推荐做法"><span class="toc-number">5.</span> <span class="toc-text">es中对于大数据量查询的推荐做法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于es中from-size-VS-scroll-的具体使用场景以及优缺点总结"><span class="toc-number">6.</span> <span class="toc-text">关于es中from size VS scroll 的具体使用场景以及优缺点总结</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div>
+<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+<script src="https://jjeejj.github.io/js/gitment.js"></script> 
+<script>
+var gitment = new Gitment({
+  id: 'Fri May 25 2018 18:31:13 GMT+0800',
+  owner: 'wanghaoListening',
+  repo: 'wanghaolistening.github.com',
+  oauth: {
+    client_id: '0a40baefe58e4183769b',
+    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+
+  
 
 
           </div>
@@ -268,9 +435,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
