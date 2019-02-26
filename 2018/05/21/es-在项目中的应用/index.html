@@ -17,7 +17,7 @@
 <meta property="og:description" content="Elasticsearch 在搜索领域有广泛的应用，全文搜索属于最常见的需求，开源的 Elasticsearch 是目前全文搜索引擎的首选。它可以快速地储存、搜索和分析海量数据并且对于数据的增长进行弹性扩容。由于公司数据源管理平台对大数据量查询日志的查询需求，经调研决定使用es存储上下游数据源的调用日志。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://wanghaolistening.github.io/2018/05/21/es-在项目中的应用/es1.png">
-<meta property="og:updated_time" content="2019-02-25T11:06:17.595Z">
+<meta property="og:updated_time" content="2019-02-26T10:21:43.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es在项目中的应用">
 <meta name="twitter:description" content="Elasticsearch 在搜索领域有广泛的应用，全文搜索属于最常见的需求，开源的 Elasticsearch 是目前全文搜索引擎的首选。它可以快速地储存、搜索和分析海量数据并且对于数据的增长进行弹性扩容。由于公司数据源管理平台对大数据量查询日志的查询需求，经调研决定使用es存储上下游数据源的调用日志。">
@@ -82,7 +82,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 29
+                    总文章数 30
                 </nav>
 		<nav class="header-smart-menu">
     		
@@ -218,6 +218,8 @@ var _hmt = _hmt || [];
 <p>这样的大的数据量以及数据的增长速度oracle显然无法负担。</p>
 </blockquote>
 <h3 id="es线上配置"><a href="#es线上配置" class="headerlink" title="es线上配置"></a>es线上配置</h3><h3 id="ES系统配置注意事项"><a href="#ES系统配置注意事项" class="headerlink" title="ES系统配置注意事项"></a>ES系统配置注意事项</h3><p>这里主要说一下jvm堆的设置以及es所运行的系统的一些主要配置以及注意事项</p>
+<h4 id="关于分片配置"><a href="#关于分片配置" class="headerlink" title="关于分片配置"></a>关于分片配置</h4><p>The primary shard configuration is quite analogous to a hard disk partition, in which a repartition of raw disk space requires a user to back up, configure a new partition, and rewrite data onto the new partition</p>
+<p>需要注意的是在配置好分片的配置后，不能在集群的运行时进行修改，如果发现必须去修改分片数，则需要重新索引所有的源文档</p>
 <h4 id="堆内存的设置"><a href="#堆内存的设置" class="headerlink" title="堆内存的设置"></a>堆内存的设置</h4><p>由于es是跑在jvm上的,所以jvm的相关配置直接影响到es的性能。默认情况es告诉jvm使用堆的最大和最小为1GB大小，所以</p>
 <p>当项目移到生产环境后要格外注意，要配置足够的堆内存大小</p>
 <p>（一）jvm堆配置（默认在/etc/elasticsearch/jvm.options）：</p>
@@ -393,7 +395,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用es背景"><span class="toc-number">1.</span> <span class="toc-text">使用es背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生产es容量预估"><span class="toc-number">2.</span> <span class="toc-text">生产es容量预估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es线上配置"><span class="toc-number">3.</span> <span class="toc-text">es线上配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES系统配置注意事项"><span class="toc-number">4.</span> <span class="toc-text">ES系统配置注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆内存的设置"><span class="toc-number">4.1.</span> <span class="toc-text">堆内存的设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#系统的相关设置"><span class="toc-number">4.2.</span> <span class="toc-text">系统的相关设置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Disable-swapping"><span class="toc-number">4.2.1.</span> <span class="toc-text">Disable swapping</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#File-descriptors"><span class="toc-number">4.2.2.</span> <span class="toc-text">File descriptors</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Virtual-memory"><span class="toc-number">4.2.3.</span> <span class="toc-text">Virtual memory</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Number-of-threads"><span class="toc-number">4.2.4.</span> <span class="toc-text">Number of threads</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用es背景"><span class="toc-number">1.</span> <span class="toc-text">使用es背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生产es容量预估"><span class="toc-number">2.</span> <span class="toc-text">生产es容量预估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es线上配置"><span class="toc-number">3.</span> <span class="toc-text">es线上配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES系统配置注意事项"><span class="toc-number">4.</span> <span class="toc-text">ES系统配置注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于分片配置"><span class="toc-number">4.1.</span> <span class="toc-text">关于分片配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#堆内存的设置"><span class="toc-number">4.2.</span> <span class="toc-text">堆内存的设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#系统的相关设置"><span class="toc-number">4.3.</span> <span class="toc-text">系统的相关设置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Disable-swapping"><span class="toc-number">4.3.1.</span> <span class="toc-text">Disable swapping</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#File-descriptors"><span class="toc-number">4.3.2.</span> <span class="toc-text">File descriptors</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Virtual-memory"><span class="toc-number">4.3.3.</span> <span class="toc-text">Virtual memory</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Number-of-threads"><span class="toc-number">4.3.4.</span> <span class="toc-text">Number of threads</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -547,15 +549,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,15 +569,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">yilia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,6 +610,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">专业单词</a>
               </li>
              
               <li class="article-tag-list-item">
