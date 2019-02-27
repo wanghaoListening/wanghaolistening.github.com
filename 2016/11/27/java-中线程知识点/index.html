@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>Archives: 2018 | haothink123</title>
+  <title>java 中线程知识点 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="后端程序员">
-<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
-<meta property="og:type" content="website">
-<meta property="og:title" content="haothink123">
-<meta property="og:url" content="https://wanghaolistening.github.io/archives/2018/index.html">
+  <meta name="description" content="Java中线程的一些知识点总结">
+<meta name="keywords" content="线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 中线程知识点">
+<meta property="og:url" content="https://wanghaolistening.github.io/2016/11/27/java-中线程知识点/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="后端程序员">
+<meta property="og:description" content="Java中线程的一些知识点总结">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-27T07:32:19.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="haothink123">
-<meta name="twitter:description" content="后端程序员">
+<meta name="twitter:title" content="java 中线程知识点">
+<meta name="twitter:description" content="Java中线程的一些知识点总结">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -182,120 +183,290 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java-中线程知识点" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/25/es分页问题/" class="archive-article-date">
-  	<time datetime="2018-05-25T10:31:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/25/es分页问题/">es分页问题</a>
+    <h1 class="article-title" itemprop="name">
+      java 中线程知识点
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2016/11/27/java-中线程知识点/" class="archive-article-date">
+  	<time datetime="2016-11-27T06:45:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>线程是程序的一条执行线索，执行路径，是程序使用cpu的最小单位。线程本身不能运行，它只能运行在程序中，线程是依赖于程序存在的。本章把Java线程学习中一些比较模糊的知识点进行了一下总结。</p>
+<h3 id="线程的调度"><a href="#线程的调度" class="headerlink" title="线程的调度"></a>线程的调度</h3><p>线程调度是指CPU为线程分配处理器的使用权</p>
+<p>线程调度的方式：</p>
+<p>1.协同式线程调度<br>线程的执行时间由线程本身控制，线程把自己的工作完成之后，主动通知系统切换到另一个线程</p>
+<p>2.抢占式线程调度<br>每个线程由系统来分配执行时间，线程的切换不由线程本身控制</p>
+<blockquote>
+<p>Java语言中使用的是抢占式线程调度方式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">getPriority()获取线程的优先级，默认是5</span><br><span class="line">setPriority(int newPriority)设置优先级</span><br><span class="line">public final static int MIN_PRIORITY = 1;优先级最小</span><br><span class="line">public final static int MAX_PRIORITY = 10;优先级最大</span><br><span class="line">public final static int NORM_PRIORITY = 5;默认优先级</span><br><span class="line">仅仅表示线程获取执行权的几率</span><br></pre></td></tr></table></figure>
+<h3 id="线程控制"><a href="#线程控制" class="headerlink" title="线程控制"></a>线程控制</h3><p>void sleep(long millis)<br>在指定的毫秒数内让当前正在执行的线程休眠（暂停执行），此操作受到系统计时器和调度程序精度和准确性的影响。</p>
+<p>void join()<br>等待该线程终止。</p>
+<p>void yield()<br>让出执行时间，暂停当前正在执行的线程对象，并执行其他线程。</p>
+<p>void setDaemon(boolean on)<br>将该线程标记为守护线程或用户线程。当正在运行的线程都是守护线程时，Java 虚拟机退出。注意：(该方法必须在启动线程前调用。),该方法首先调用该线程的 checkAccess方法，且不带任何参数。这可能抛出 SecurityException（在当前线程中）。</p>
+<p>void interrupt()<br>中断线程。</p>
+<p>boolean interrupted()<br>测试当前线程是否已经中断。如果线程在调用 Object 类的 wait()、wait(long) 或 wait(long, int) 方法，或者该类的 join()、join(long)、join(long, int)、sleep(long) 或 sleep(long, int) 方法过程中受阻，则其中断状态将被清除，它还将收到一个 InterruptedException。</p>
+<h3 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h3><ul>
+<li>新建：创建线程对象</li>
+<li>就绪：线程有执行资格没有执行权start()之后进入就绪状态  </li>
+<li>运行：线程有执行资格有执行权</li>
+<li>死亡：线程对象变成垃圾等待回收。</li>
+</ul>
+<h3 id="Java语言定义的5种线程状态"><a href="#Java语言定义的5种线程状态" class="headerlink" title="Java语言定义的5种线程状态"></a>Java语言定义的5种线程状态</h3><ul>
+<li>新建：创建后尚未启动的线程。</li>
+<li>运行：</li>
+<li>无限期等待</li>
+<li>限期等待</li>
+<li>阻塞</li>
+<li>结束</li>
+</ul>
+<h3 id="Amdah1定律"><a href="#Amdah1定律" class="headerlink" title="Amdah1定律"></a>Amdah1定律</h3><p>摩尔定律：描述处理器晶体管数量与运行效率之间的发展关系。<br>Amdahl定律：通过系统中并行化与串行化的比重来描述多处理器系统能获得的运算加速能力。</p>
+<p>从摩尔定律到Amdahl定律的转变，代表了近年来硬件发展从追求处理器频率到追求多核心并行处理的发展过程。</p>
+<h3 id="Java中的线程安全"><a href="#Java中的线程安全" class="headerlink" title="Java中的线程安全"></a>Java中的线程安全</h3><p>按照线程安全的程度由强至弱来排序，我们将Java语言中各种操作共享的数据分为5类不可变，绝对线程安全，相对线程安全，线程兼容，线程对立</p>
+<h3 id="等待-唤醒机制。"><a href="#等待-唤醒机制。" class="headerlink" title="等待/唤醒机制。"></a>等待/唤醒机制。</h3><p>涉及的方法：</p>
+<p>1，wait(): 让线程处于冻结状态，被wait的线程会被存储到线程池中。<br>2，notify():唤醒线程池中一个线程(任意).<br>3，notifyAll():唤醒线程池中的所有线程。</p>
+<p>在其他线程调用此对象的 notify() 方法或 notifyAll()方法前，导致当前线程等待。换句话说，此方法的为就好像它仅执行wait(0)调用一样行。当前线程必须拥有此对象监视器(也就是我们所说的锁所以这些方法都必须定义在同步中)。<br>关于方法的定义：</p>
+<ul>
+<li>这些方法都必须定义在同步中。</li>
+<li>因为这些方法是用于操作线程状态的方法。</li>
+<li>必须要明确到底操作的是哪个锁上的线程。</li>
+</ul>
+<blockquote>
+<p>为什么操作线程的方法wait notify notifyAll定义在了Object类中？<br>因为这些方法是监视器的方法。监视器其实就是锁。锁可以是任意的对象，任意的对象调用的方式一定定义在Object类中。</p>
+</blockquote>
+<h3 id="代码demo"><a href="#代码demo" class="headerlink" title="代码demo"></a>代码demo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">//资源</span><br><span class="line">class IResource</span><br><span class="line">&#123;</span><br><span class="line">     String name;</span><br><span class="line">     String sex;</span><br><span class="line">     boolean flag = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//输入</span><br><span class="line">class InputR implements Runnable</span><br><span class="line">&#123;</span><br><span class="line">     IResource r ;</span><br><span class="line">//   Object obj = new Object();</span><br><span class="line">     InputR(IResource r2)</span><br><span class="line">     &#123;</span><br><span class="line">          this.r = r2;</span><br><span class="line">     &#125;</span><br><span class="line">     public void run()</span><br><span class="line">     &#123;</span><br><span class="line">          int x = 0;</span><br><span class="line">          while(true)</span><br><span class="line">          &#123;</span><br><span class="line">               synchronized(r)</span><br><span class="line">               &#123;</span><br><span class="line">                    if(r.flag)</span><br><span class="line">                         try&#123;r.wait();&#125;catch(InterruptedException e)&#123;&#125;</span><br><span class="line">                    if(x==0)</span><br><span class="line">                    &#123;</span><br><span class="line">                         r.name = &quot;mike&quot;;</span><br><span class="line">                         r.sex = &quot;nan&quot;;</span><br><span class="line">                    &#125;</span><br><span class="line">                    else</span><br><span class="line">                    &#123;</span><br><span class="line">                         r.name = &quot;lili&quot;;</span><br><span class="line">                         r.sex = &quot;female,female,female&quot;;</span><br><span class="line">                    &#125;</span><br><span class="line">                    r.flag = true;</span><br><span class="line">                    r.notify();</span><br><span class="line">               &#125;</span><br><span class="line">               x = (x+1)%2;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">class OutputR implements Runnable</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">     IResource r;</span><br><span class="line">//   Object obj = new Object();</span><br><span class="line">     OutputR(IResource r2)</span><br><span class="line">     &#123;</span><br><span class="line">          this.r = r2;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void run()</span><br><span class="line">     &#123;</span><br><span class="line">          while(true)</span><br><span class="line">          &#123;</span><br><span class="line">               synchronized(r)</span><br><span class="line">               &#123;</span><br><span class="line">                    if(!r.flag)</span><br><span class="line">                         try&#123;r.wait();&#125;catch(InterruptedException e)&#123;&#125;</span><br><span class="line">                    System.out.println(r.name+&quot;.....&quot;+r.sex);</span><br><span class="line">                    r.flag = false;</span><br><span class="line">                    r.notify();</span><br><span class="line">               &#125;</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> public static void main(String[] args)</span><br><span class="line">     &#123;</span><br><span class="line">          //创建资源。</span><br><span class="line">          IResource r = new IResource();</span><br><span class="line">          //创建任务。</span><br><span class="line">          InputR in = new InputR(r);</span><br><span class="line">          OutputR out = new OutputR(r);</span><br><span class="line">          //创建线程，执行路径。</span><br><span class="line">          Thread t1 = new Thread(in);</span><br><span class="line">          Thread t2 = new Thread(out);</span><br><span class="line">          //开启线程</span><br><span class="line">          t1.start();</span><br><span class="line">          t2.start();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="JDK1-5升级并发包-java-util-concurrent"><a href="#JDK1-5升级并发包-java-util-concurrent" class="headerlink" title="JDK1.5升级并发包(java.util.concurrent)"></a>JDK1.5升级并发包(java.util.concurrent)</h3><h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>BlockingDeque<br>BlockingQueue<br>Callable<br>CompletionService<br>ConcurrentMap<br>ConcurrentNavigableMap<br>Delayed<br>Executor<br>ExecutorService<br>Future<br>RejectedExecutionHandler<br>RunnableFuture<br>RunnableScheduledFuture<br>ScheduledExecutorService<br>ScheduledFuture<br>ThreadFactory</p>
+<h4 id="类"><a href="#类" class="headerlink" title="类"></a>类</h4><p>AbstractExecutorService<br>ArrayBlockingQueue<br>ConcurrentHashMap<br>ConcurrentLinkedQueue<br>ConcurrentSkipListMap<br>ConcurrentSkipListSet<br>CopyOnWriteArrayList<br>CopyOnWriteArraySet<br>CountDownLatch<br>CyclicBarrier<br>DelayQueue<br>Exchanger<br>ExecutorCompletionService<br>Executors<br>FutureTask<br>LinkedBlockingDeque<br>LinkedBlockingQueue<br>PriorityBlockingQueue<br>ScheduledThreadPoolExecutor<br>Semaphore<br>SynchronousQueue<br>ThreadPoolExecutor<br>ThreadPoolExecutor.AbortPolicy<br>ThreadPoolExecutor.CallerRunsPolicy<br>ThreadPoolExecutor.DiscardOldestPolicy<br>ThreadPoolExecutor.DiscardPolicy</p>
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>TimeUnit</p>
+<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4><p>BrokenBarrierException<br>CancellationException<br>ExecutionException<br>RejectedExecutionException<br>TimeoutException</p>
+<h4 id="atomic类"><a href="#atomic类" class="headerlink" title="atomic类"></a>atomic类</h4><p>AtomicBoolean<br>AtomicInteger<br>AtomicIntegerArray<br>AtomicIntegerFieldUpdater<br>AtomicLong<br>AtomicLongArray<br>AtomicLongFieldUpdater<br>AtomicMarkableReference<br>AtomicReference<br>AtomicReferenceArray<br>AtomicReferenceFieldUpdater<br>AtomicStampedReference</p>
+<h4 id="locks接口"><a href="#locks接口" class="headerlink" title="locks接口"></a>locks接口</h4><p>Condition<br>Lock<br>ReadWriteLock</p>
+<h4 id="locks类"><a href="#locks类" class="headerlink" title="locks类"></a>locks类</h4><p>AbstractOwnableSynchronizer<br>AbstractQueuedLongSynchronizer<br>AbstractQueuedSynchronizer<br>LockSupport<br>ReentrantLock<br>ReentrantReadWriteLock<br>ReentrantReadWriteLock.ReadLock<br>ReentrantReadWriteLock.WriteLock</p>
+<h3 id="wait-和-sleep-区别？"><a href="#wait-和-sleep-区别？" class="headerlink" title="wait 和 sleep 区别？"></a>wait 和 sleep 区别？</h3><p>1.wait可以指定时间也可以不指定。sleep必须指定时间。</p>
+<p>2.在同步中时，对cpu的执行权和锁的处理不同。<br>  wait：释放执行权，释放锁。<br>  sleep:释放执行权，不释放锁。</p>
+<h3 id="上下文切换的开销"><a href="#上下文切换的开销" class="headerlink" title="上下文切换的开销"></a>上下文切换的开销</h3><p>当CPU从执行一个线程切换到执行另外一个线程的时候，它需要先存储当前线程的本地的数据，程序指针等，然后载入另一个线程的本地数据，程序指针等，最后才开始执行。这种切换称为“上下文切换”(“context switch”)。CPU会在一个上下文中执行一个线程，然后切换到另外一个上下文中执行另外一个线程。上下文切换并不廉价。如果没有必要，应该减少上下文切换的发生。</p>
+<h3 id="资源消耗"><a href="#资源消耗" class="headerlink" title="资源消耗"></a>资源消耗</h3><p>线程在运行的时候需要从计算机里面得到一些资源。除了CPU，线程还需要一些内存来维持它本地的堆栈。它也需要占用操作系统中一些资源来管理线程</p>
+<blockquote>
+<p>注意问题<br>如果你的类中有一个方法在处理临界数据。那你必须同步所有相关的方法如果只同步一个方法，那么其他方法将会随意的忽略这个对象锁，并可以在无任何惩罚的情况下被调用。这是很重要的一点：每个访问临界共享资源的方法必须都被同步，否则它们就不会正确的工作。</p>
+</blockquote>
+<h3 id="线程本地存储"><a href="#线程本地存储" class="headerlink" title="线程本地存储"></a>线程本地存储</h3><p>防止任务在共享资源上产生冲突的第二种方式是根除对变量的共享。线程本地存储是一种自动化机制，可以为使用相同变量的每个不同的线程都创建不同的存储，因此，如果</p>
+<p>因为ThreadLocal在每个线程中对该变量会创建一个副本，即每个线程内部都会有一个该变量，且在线程内部任何地方都可以使用，线程之间互不影响，这样一来就不存在线程安全问题，也不会严重影响程序执行性能</p>
+<p>但是要注意，虽然ThreadLocal能够解决上面说的问题，但是由于在每个线程中都创建了副本，所以要考虑它对资源的消耗，比如内存的占用会比不使用ThreadLocal要大。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">private static ThreadLocal&lt;Connection&gt; connectionHolder</span><br><span class="line">= new ThreadLocal&lt;Connection&gt;() &#123;</span><br><span class="line">public Connection initialValue() &#123;</span><br><span class="line">    return DriverManager.getConnection(DB_URL);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">public static Connection getConnection() &#123;</span><br><span class="line">return connectionHolder.get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static final ThreadLocal threadSession = new ThreadLocal();</span><br><span class="line"></span><br><span class="line">public static Session getSession() throws InfrastructureException &#123;</span><br><span class="line">    Session s = (Session) threadSession.get();</span><br><span class="line">    try &#123;</span><br><span class="line">        if (s == null) &#123;</span><br><span class="line">            s = getSessionFactory().openSession();</span><br><span class="line">            threadSession.set(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (HibernateException ex) &#123;</span><br><span class="line">        throw new InfrastructureException(ex);</span><br><span class="line">    &#125;</span><br><span class="line">    return s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Java-Concurrency-API中的Lock接口对比同步代码块它有什么优势？"><a href="#Java-Concurrency-API中的Lock接口对比同步代码块它有什么优势？" class="headerlink" title="Java Concurrency API中的Lock接口对比同步代码块它有什么优势？"></a>Java Concurrency API中的Lock接口对比同步代码块它有什么优势？</h3><p>Lock接口比同步方法和同步块提供了更具扩展性的锁操作。他们允许更灵活的结构，可以具有完全不同的性质，并且可以支持多个相关类的条件对象。<br>它的优势有：</p>
+<ul>
+<li>可以使锁更公平</li>
+<li>可以使线程在等待锁的时候响应中断</li>
+<li>可以让线程尝试获取锁，并在无法获取锁的时候立即返回或者等待一段时间</li>
+<li>可以在不同的范围(condition)，以不同的顺序获取和释放锁</li>
+</ul>
+<p>Executor框架同java.util.concurrent.Executor接口在Java5中被引入。Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。利用Executors框架可以非常方便的创建一个线程池，阅读这篇文章可以了</p>
+<h3 id="什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？"><a href="#什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？" class="headerlink" title="什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？"></a>什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？</h3><p>阻塞队列(BlockingQueue) 接口是java collections框架的一部分,阻塞队列的实现都是线程安全的，所有的查询方法都是原子的并且使用了内部锁或者其他形式的并发控制。<br>java.util.concurrent.BlockingQueue的特性是：当队列是空的时，从队列中获取或删除元素的操作将会被阻塞，或者当队列是满时，往队列里添加元素的操作会被阻塞。<br>阻塞队列不接受空值，当你尝试向队列中添加空值的时候，它会抛出NullPointerException。<br>使用阻塞队列可以非常容易的解决生产者-消费者问题。</p>
+<h3 id="java-中的并发容器及其实现原理"><a href="#java-中的并发容器及其实现原理" class="headerlink" title="java 中的并发容器及其实现原理"></a>java 中的并发容器及其实现原理</h3><p>主要的类有ConcurrentHashMap, CopyOnWriteArrayList 和CopyOnWriteArraySet，</p>
+<p>ConcurrentHashMap使用了锁的分段技术，类似于使用了多个hashtable，可以使线程进行并发的读写不同的Segment,解决了之前并发粒度太小的问题。</p>
+<p>而CopyOnWriteArrayList 和CopyOnWriteArraySet这两个并发容器的思想是读写分离，当往容器写时，会拷贝一个新的容器对象，在新的容器对象中进行写，而此时读依然在原来的老对象中，写完后，将新对象更新的数据同步合并到老的对象。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Elasticsearch</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/项目//" class="article-tag-list-link color3">项目</a>
+        			<a href="/categories/java基础//" class="article-tag-list-link color2">java基础</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2016/11/27/java-中线程知识点/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/21/es-在项目中的应用/" class="archive-article-date">
-  	<time datetime="2018-05-21T10:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/03/18/命令模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          命令模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/26/英语专业单词总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">大数据领域英语专业单词总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/es-在项目中的应用/">es在项目中的应用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">elastic</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/项目//" class="article-tag-list-link color3">项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的调度"><span class="toc-number">1.</span> <span class="toc-text">线程的调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程控制"><span class="toc-number">2.</span> <span class="toc-text">线程控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的生命周期"><span class="toc-number">3.</span> <span class="toc-text">线程的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java语言定义的5种线程状态"><span class="toc-number">4.</span> <span class="toc-text">Java语言定义的5种线程状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Amdah1定律"><span class="toc-number">5.</span> <span class="toc-text">Amdah1定律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java中的线程安全"><span class="toc-number">6.</span> <span class="toc-text">Java中的线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等待-唤醒机制。"><span class="toc-number">7.</span> <span class="toc-text">等待/唤醒机制。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码demo"><span class="toc-number">8.</span> <span class="toc-text">代码demo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK1-5升级并发包-java-util-concurrent"><span class="toc-number">9.</span> <span class="toc-text">JDK1.5升级并发包(java.util.concurrent)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#接口"><span class="toc-number">9.1.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类"><span class="toc-number">9.2.</span> <span class="toc-text">类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#枚举"><span class="toc-number">9.3.</span> <span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异常"><span class="toc-number">9.4.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#atomic类"><span class="toc-number">9.5.</span> <span class="toc-text">atomic类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#locks接口"><span class="toc-number">9.6.</span> <span class="toc-text">locks接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#locks类"><span class="toc-number">9.7.</span> <span class="toc-text">locks类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wait-和-sleep-区别？"><span class="toc-number">10.</span> <span class="toc-text">wait 和 sleep 区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上下文切换的开销"><span class="toc-number">11.</span> <span class="toc-text">上下文切换的开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源消耗"><span class="toc-number">12.</span> <span class="toc-text">资源消耗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程本地存储"><span class="toc-number">13.</span> <span class="toc-text">线程本地存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Concurrency-API中的Lock接口对比同步代码块它有什么优势？"><span class="toc-number">14.</span> <span class="toc-text">Java Concurrency API中的Lock接口对比同步代码块它有什么优势？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？"><span class="toc-number">15.</span> <span class="toc-text">什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java-中的并发容器及其实现原理"><span class="toc-number">16.</span> <span class="toc-text">java 中的并发容器及其实现原理</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div>
+<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+<script src="https://jjeejj.github.io/js/gitment.js"></script> 
+<script>
+var gitment = new Gitment({
+  id: 'Sun Nov 27 2016 14:45:57 GMT+0800',
+  owner: 'wanghaoListening',
+  repo: 'wanghaolistening.github.com',
+  oauth: {
+    client_id: '0a40baefe58e4183769b',
+    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+
+  
 
 
           </div>
@@ -318,8 +489,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
