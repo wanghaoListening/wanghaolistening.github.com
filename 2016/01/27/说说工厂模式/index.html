@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
   <title>说说工厂模式 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。">
+  <meta name="description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，到目前为止在项目中本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他设计模式很少用到，一个是自己的编程经验以及做的项目还是太少，第二应该是自己代码抽象水平还不够，不能把具体的业务场景抽象转化成具体的设计模式来处理。这篇文章主要记录一下工厂模式，在面向对象编程的世界中，工厂模式（factory pattern">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="说说工厂模式">
 <meta property="og:url" content="https://wanghaolistening.github.io/2016/01/27/说说工厂模式/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。">
+<meta property="og:description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，到目前为止在项目中本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他设计模式很少用到，一个是自己的编程经验以及做的项目还是太少，第二应该是自己代码抽象水平还不够，不能把具体的业务场景抽象转化成具体的设计模式来处理。这篇文章主要记录一下工厂模式，在面向对象编程的世界中，工厂模式（factory pattern">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-16T11:06:15.747Z">
+<meta property="og:updated_time" content="2019-03-04T04:20:40.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="说说工厂模式">
-<meta name="twitter:description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。">
+<meta name="twitter:description" content="设计模式是前人们总结的一些写好代码的规则或者说方式，到目前为止在项目中本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他设计模式很少用到，一个是自己的编程经验以及做的项目还是太少，第二应该是自己代码抽象水平还不够，不能把具体的业务场景抽象转化成具体的设计模式来处理。这篇文章主要记录一下工厂模式，在面向对象编程的世界中，工厂模式（factory pattern">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -80,7 +80,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 33
+                    总文章数 34
                 </nav>
 		<nav class="header-smart-menu">
     		
@@ -203,9 +203,27 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>设计模式是前人们总结的一些写好代码的规则或者说方式，本人其实设计模式应用的并不多，<br>偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他基本用不到，不知是自<br>身水平太低还是自己代码写的太少，或者说项目太逊。最近学习复习jdk并发包中的线程池，<br>由于其使用了工厂方法并且比较经典，便想借此再复习巩固一下工厂方法这个设计模式。</p>
+        <p>设计模式是前人们总结的一些写好代码的规则或者说方式，到目前为止在项目中本人其实设计模式应用的并不多，偶尔可能会在项目中使用个单例模式，模板模式，装饰者模式，其他设计模式很少用到，一个是自己的编程经验以及做的项目还是太少，第二应该是自己代码抽象水平还不够，不能把具体的业务场景抽象转化成具体的设计模式来处理。这篇文章主要记录一下工厂模式，在面向对象编程的世界中，工厂模式（factory pattern）也是一个被广泛使用的设计模式。它是一个创建模式，它的目的是开发一个类，这个类的使命是创建一个或多个类的对象。然后，当我们要创建一个类的一个对象时，我们使用这个工厂来获取而不是使用new操作。开源框架spring对对象的管理就是运用了工厂模式的思想，还有比如Java并发包(java.util.concurrent)中的ThreadPoolExecutor,其对线程的管理也是运用了工厂模式的思想。</p>
 <a id="more"></a>
 <h3 id="设计模式六大原则"><a href="#设计模式六大原则" class="headerlink" title="设计模式六大原则"></a>设计模式六大原则</h3><p>1.单一职责原则<br>优点：降低类的复杂度，一个类只负责一项职责，提高类的可读性，提高代码的重用性。<br>2.里氏替换原则<br>当一个类继承父类的时候，除添加新的方法完成新的功能外，尽量不要复写父类的方法，<br>也不要重载父类的方法。<br>3.依赖倒置原则<br>高层模块不应依赖低层模块，两者都应该依赖其抽象，抽象不应该依赖细节，而细节应该依赖抽象。抽象指的是接口或抽象类，细节则指的是具体实现类其核心思想是面向接口编程。<br>4.接口隔离原则<br>建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。<br>5.迪米特法则原则<br>一个对象应该对其他对象保持着最少的了解。降低类与类直接的耦合度<br>6.开闭原则<br>对扩展开发对修改关闭。</p>
+<h3 id="工厂模式的分类"><a href="#工厂模式的分类" class="headerlink" title="工厂模式的分类"></a>工厂模式的分类</h3><p>工厂模式把创建对象的过程对外部隔离，对外暴露获取对象的接口，达到提高灵活性的目的。 </p>
+<ul>
+<li>工厂方法模式（Factory Method） </li>
+<li>抽象工厂模式（Abstract Factory）</li>
+</ul>
+<p>有的书籍把工厂模式模式分为三类，比上面多加上了一个简单工厂模式，其实简单工厂模式只是工厂方法模式的一种，简单工厂模式存在的目的就是定义一个用于创建对象的接口。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>工厂方法模式只有一个抽象产品类，而抽象工厂模式有多个。<br>工厂方法模式的具体工厂类只能创建一个具体产品类的实例，而抽象工厂模式可以创建多个。</p>
+<h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><h4 id="工厂方法模式组成"><a href="#工厂方法模式组成" class="headerlink" title="工厂方法模式组成"></a>工厂方法模式组成</h4><p>1)抽象工厂角色： 这是工厂方法模式的核心，它与应用程序无关。是具体工厂角色必须实现的接口或者必须继承的父类。在java中它由抽象类或者接口来实现。<br>2)具体工厂角色：它含有和具体业务逻辑有关的代码。由应用程序调用以创建对应的具体产品的对象。<br>3)抽象产品角色：它是具体产品继承的父类或者是实现的接口。在java中一般有抽象类或者接口来实现。<br>4)具体产品角色：具体工厂角色所创建的对象就是此角色的实例。在java中由具体的类来实现。 </p>
+<h4 id="生活中的工厂方法模式"><a href="#生活中的工厂方法模式" class="headerlink" title="生活中的工厂方法模式"></a>生活中的工厂方法模式</h4><p>下面我们用特斯拉汽车举例来实现demo</p>
+<figure class="highlight plain"><figcaption><span>汽车产品类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">abstract class Tesla &#123;</span><br><span class="line">	public Tesla()&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Models extends Tesla &#123;</span><br><span class="line">	public Models() &#123;</span><br><span class="line">		System.out.println(&quot;生产Models&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Modelx extends Tesla&#123;</span><br><span class="line">	public Modelx()&#123;</span><br><span class="line">		System.out.println(&quot;生产Modelx&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">interface TeslaFactory &#123;</span><br><span class="line">	Tesla createTesla();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public class ModelsFactory implements TeslaFactory&#123;</span><br><span class="line"> </span><br><span class="line">	@Override</span><br><span class="line">	public Models createTesla() &#123;</span><br><span class="line"> </span><br><span class="line">		return new Models();</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line">public class ModelxFactory implements TeslaFactory&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public Modelx createTesla() &#123;</span><br><span class="line"> </span><br><span class="line">		return new Modelx();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ModelsFactory modelsFactory = new ModelsFactory();</span><br><span class="line">Models models = modelsFactory.createTesla();</span><br><span class="line">ModelxFactory modelxFactory = new ModelxFactory();</span><br><span class="line">Modelx modelx = modelxFactory.createTesla();</span><br></pre></td></tr></table></figure>
+<h4 id="生活中的抽象工厂模式"><a href="#生活中的抽象工厂模式" class="headerlink" title="生活中的抽象工厂模式"></a>生活中的抽象工厂模式</h4><p>由于现在的C2B盛行，客户需要对汽车进行个性化的配置来满足的自己的需求，比如对不同座椅的需求，以及对不同引擎的需求等等。</p>
+<p>抽象工厂模式与工厂方法模式的最大区别就在于，工厂方法模式针对的是一个产品等级结构；而抽象工厂模式则需要面对多个产品等级结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//汽车座椅以及型号</span><br><span class="line">public interface CarSeat &#123;  </span><br><span class="line"> </span><br><span class="line">&#125;  </span><br><span class="line">public class CarSeatA extends CarSeat&#123;  </span><br><span class="line">    public CarSeatA()&#123;  </span><br><span class="line">        System.out.println(&quot;制造CarSeatA&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">public class CarSeatB Engine&#123;  </span><br><span class="line">    public CarSeatB()&#123;  </span><br><span class="line">        System.out.println(&quot;制造CarSeatB&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">//汽车引擎以及型号  </span><br><span class="line">public interface Engine &#123;  </span><br><span class="line"> </span><br><span class="line">&#125;  </span><br><span class="line">public class EngineA extends Engine&#123;  </span><br><span class="line">    public EngineA()&#123;  </span><br><span class="line">        System.out.println(&quot;制造EngineA&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">public class EngineB extends Engine&#123;  </span><br><span class="line">    public EngineB()&#123;  </span><br><span class="line">        System.out.println(&quot;制造EngineB&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//创建工厂的接口  </span><br><span class="line">public interface AbstractFactory &#123;  </span><br><span class="line">    //制造引擎</span><br><span class="line">    public Engine createEngine();</span><br><span class="line">    //制造座椅 </span><br><span class="line">    public CarSeat createCarSeat(); </span><br><span class="line">&#125;  </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">//为Models生产配件</span><br><span class="line">public class ModelsFactory implements AbstractFactory&#123;  </span><br><span class="line">      </span><br><span class="line">    @Override  </span><br><span class="line">    public Engine createEngine() &#123;    </span><br><span class="line">        return new EngineA();  </span><br><span class="line">    &#125;  </span><br><span class="line">    @Override  </span><br><span class="line">    public CarSeat createCarSeat() &#123;  </span><br><span class="line">        return new CarSeatA();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">//为Modelx生产配件</span><br><span class="line">public class ModelxFactory implements AbstractFactory &#123;  </span><br><span class="line">  </span><br><span class="line">     @Override  </span><br><span class="line">    public Engine createEngine() &#123;    </span><br><span class="line">        return new EngineB();  </span><br><span class="line">    &#125;  </span><br><span class="line">    @Override  </span><br><span class="line">    public CarSeat createCarSeat() &#123;  </span><br><span class="line">        return new CarSeatB();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//Models生产配件</span><br><span class="line">ModelsFactory modelsFactory = new ModelsFactory();  </span><br><span class="line">modelsFactory.createEngine();</span><br><span class="line">modelsFactory.createCarSeat();</span><br><span class="line">  </span><br><span class="line">//Modelx生产配件  </span><br><span class="line">ModelxFactory modelxFactory = new ModelxFactory();  </span><br><span class="line">modelxFactory.createEngine();</span><br><span class="line">modelxFactory.createCarSeat();</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>无论是哪一种设计模式都有他试用的场景，每种设计模式也都有自己的优缺点，他们的使用大多情况下都是为了解耦和扩展性，我们在选择设计模式时其实不要太纠结模式与模式的比较，只要这种模式可以很好的解决当前以及将来的需求扩展即可。</p>
 
       
 
@@ -359,7 +377,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#设计模式六大原则"><span class="toc-number">1.</span> <span class="toc-text">设计模式六大原则</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#设计模式六大原则"><span class="toc-number">1.</span> <span class="toc-text">设计模式六大原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂模式的分类"><span class="toc-number">2.</span> <span class="toc-text">工厂模式的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区别"><span class="toc-number">3.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂方法模式"><span class="toc-number">4.</span> <span class="toc-text">工厂方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#工厂方法模式组成"><span class="toc-number">4.1.</span> <span class="toc-text">工厂方法模式组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生活中的工厂方法模式"><span class="toc-number">4.2.</span> <span class="toc-text">生活中的工厂方法模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生活中的抽象工厂模式"><span class="toc-number">4.3.</span> <span class="toc-text">生活中的抽象工厂模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -509,11 +527,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,11 +551,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,11 +563,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,7 +579,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,11 +591,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
               </li>
              
               <li class="article-tag-list-item">

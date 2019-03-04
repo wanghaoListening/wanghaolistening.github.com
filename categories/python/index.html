@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>Java并发知识记录 | haothink123</title>
+  <title>Category: python | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java并发知识点记录">
-<meta name="keywords" content="并发">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java并发知识记录">
-<meta property="og:url" content="https://wanghaolistening.github.io/2017/04/01/Java并发知识记录/index.html">
+  <meta name="description" content="后端程序员">
+<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
+<meta property="og:type" content="website">
+<meta property="og:title" content="haothink123">
+<meta property="og:url" content="https://wanghaolistening.github.io/categories/python/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="Java并发知识点记录">
+<meta property="og:description" content="后端程序员">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-25T08:40:20.200Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java并发知识记录">
-<meta name="twitter:description" content="Java并发知识点记录">
+<meta name="twitter:title" content="haothink123">
+<meta name="twitter:description" content="后端程序员">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -183,251 +182,71 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java并发知识记录" class="article article-type-post " itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Java并发知识记录
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/07/20/python中的map-reduce/" class="archive-article-date">
+  	<time datetime="2016-07-20T04:24:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-20</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/07/20/python中的map-reduce/">python中的map/reduce</a>
     </h1>
   
 
-        
-        <a href="/2017/04/01/Java并发知识记录/" class="archive-article-date">
-  	<time datetime="2017-04-01T08:00:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Java语言的并发以及线程安全相关的问题一直是代码编写中的难点，重点问题，不当的线程安全编码可能在线上引起一些奇怪以及难以捕捉的问题，本篇文章梳理了一些在读《深入了解Java虚拟机》中记录的一些知识点。</p>
-<a id="more"></a>
-<h3 id="关于同步"><a href="#关于同步" class="headerlink" title="关于同步"></a>关于同步</h3><p>java 内存模型提供了lock。unlock,操作来满足这种需求，尽管虚拟机未把lock和unlocak开放给用户使用，但是却提供了更高层次的字节吗指令，monitor enter,和monitor exit来隐式的使用这两个操作，这两个字节吗指令直接反映到java代码中就是同步块-synchronized关键字，因此在synchronized块之间的操作也具备原子性。</p>
-<p>除了volatile之外，java还有两个关键字可以实现可见性，即synchronized和final（中一旦初始化完成，并且构造器没有把this的引用传递出去，那在其他线程中就能看到final字段的值）。</p>
-<p>java语言提供了volatile和synchronized两个关键字来保证线程之间操作的有序性，volatile关键字本身就包含禁止指令重排序的语义，而synchronized则是由一个变量在同一时刻只允许一条线程对其进行lock操作。</p>
-<h3 id="先行发生原则-happens-before"><a href="#先行发生原则-happens-before" class="headerlink" title="先行发生原则(happens-before)"></a>先行发生原则(happens-before)</h3><p>一个操作时间上的先发生不代表这个操作会是先行发生。反过来也不成立因为”指令重排”(先行发生原则)它是判断数据是否存在竞争，线程是否安全的主要依据。 java内存模型下的一些天然的先行发生关系，这些关系无需任何同步器协助就已经存在，可以在编码中直接使用。如果两个操作之间的关系不在次列，并且无法从下列规则推到下来的话，他们就没有顺序性保证，虚拟机可以对他们随意重排序。</p>
-<p>1.程序次序规则:在一个线程内程序前面的代码优先发生于后面的代码<br>2.管程锁定规则:一个lock操作优先发生于unlock操作<br>3.volatile变量规则：变量写操作优先发生于读操作<br>4.线程启动规则：线程的start()方法优先发生于线程的每一个操作<br>5.线程终止规则（thread.join()）<br>6.线程中断规则(thred.interrupted)<br>7.对象终结规则(finalize(）)一个对象的初始化完成优先发生于它的finalize(）方法。<br>8.传递性</p>
-<p>就映射到jdk线程模型基于操作系统原生模型来实现，对于sunJDK，他的window版和linux版都是使用一对一的线程模型实现的，一条java线程就映射到一条轻量级进程之中。因为window和linux系统提供的线程模型就是一对一的。</p>
-<h3 id="线程安全的等级与锁优化"><a href="#线程安全的等级与锁优化" class="headerlink" title="线程安全的等级与锁优化"></a>线程安全的等级与锁优化</h3><p>在Java的线程安全的等级中，共分了如下几种等级,线程安全性从左到右依次降低</p>
-<p>不可变，绝对线程安全，相对线程安全，线程兼容，线程对立 </p>
-<p>java api中的不可变对象String ,Long ,Double,等包装类型，BigInteger,BigDecimal，而同为Number的子类的原子类AtomicInteger,AtomicLong则并非不可变，</p>
-<p>绝对线程安全 ：java中标注的绝大多数的属于线程安全的类都不是线程安全的。<br>相对线程安全 ：Vector HashTable,Colectios,SynchronizedCollection()<br>线程兼容：线程兼容是指对象本身并不是线程安全的，但是可以通过在调用端使用一些同步手段来保证线程的安全。<br>线程对立：线程对立是指无论调用端是否采取同步措施，都无法在多线程环境下保证数据安全，一个线程对立的例子是Thread类的suspend()和resume()方法，已被标记为过时。还有System.setIn()和System.setOut()等。</p>
-<blockquote>
-<p>相比synchronized，reentrantLock增加了一些高级功能，等待可中断，可实现公平锁，锁可以绑定多个条件</p>
-</blockquote>
-<p>处理器指令：测试并设置(Test-Set)获取并增加(Fetch-and-increment)交换(Swap)比较并交换(compare-and-swap,)加载链接/条件存储(LL/SC)</p>
-<p>线程安全：如果一个方法，他的返回结果是可以预测的，只要输入相同的数据，就都能返回相同的结果，那它就满足可重入性要求，当然也就是线程安全的。</p>
-<h3 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h3><p>Java内存模型关于锁的优化共有如下几种:</p>
-<ul>
-<li>适应性自旋</li>
-<li>锁消除</li>
-<li>锁粗化</li>
-<li>轻量级锁</li>
-<li>偏量锁</li>
-</ul>
-<h4 id="自旋"><a href="#自旋" class="headerlink" title="自旋"></a>自旋</h4><p>在JDK1.6中已经改为默认开启了。可以使用 -XX:+UseSpinning参数来开启 ，自旋次数默认是10次用户可以使用参数-XX:PreBlockSpin来更改。JDK1.6中引入了自适应的自旋锁。自适应意味着自旋的时间不再固定，而是由前一个在同一个锁上的自旋时间及锁的拥有者的状态来决定</p>
-<h4 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h4><p>锁消除是指虚拟机即时编译器在运行时，对一些代码上要求同步但被检测到不可能存在共享数据竞争的锁进行消除（锁消除上网主要判断依据来源于逃逸分析的数据支持）</p>
-<h4 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h4><p>解决频繁的加锁，将多个加锁操作换成一个粗粒度的锁一并执行多个操作。</p>
-<h4 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h4><p>使用轻量级锁并不是为了取代重量级锁，它的本意是在没有多线程竞争的前提下，减少传统的重量级锁使用操作系统互斥量产生的性能消耗，使用CAS操作来避免互斥</p>
-<h4 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h4><p>偏向锁是jdk1.6中引入的一项锁优化，它的目的是消除数据在无竞争情况下的同步原语，进一步提高程序的运行性能。该锁在接下来的时间内如果没有其他线程访问，持有锁的线程将不再需要同步。-XX:+UseBiasedLocking</p>
-<h3 id="使用中的问题"><a href="#使用中的问题" class="headerlink" title="使用中的问题"></a>使用中的问题</h3><h4 id="怎么检测一个线程是否持有对象监视器"><a href="#怎么检测一个线程是否持有对象监视器" class="headerlink" title="怎么检测一个线程是否持有对象监视器"></a>怎么检测一个线程是否持有对象监视器</h4><p>答：Thread类提供了一个public static native boolean holdsLock(Object obj);方法当且仅当对象obj的监视器被某条线程持有时才返回true</p>
-<h4 id="线程类的构造方法，静态块是被哪个线程调用的？"><a href="#线程类的构造方法，静态块是被哪个线程调用的？" class="headerlink" title="线程类的构造方法，静态块是被哪个线程调用的？"></a>线程类的构造方法，静态块是被哪个线程调用的？</h4><p>答：是被new它的线程所调用的。</p>
-<h4 id="如何唤醒一个线程"><a href="#如何唤醒一个线程" class="headerlink" title="如何唤醒一个线程"></a>如何唤醒一个线程</h4><p>答：Object 中的notify(), notifyAll()方法</p>
-<h4 id="CopyOnWrite-处理线程安全处理"><a href="#CopyOnWrite-处理线程安全处理" class="headerlink" title="CopyOnWrite 处理线程安全处理"></a>CopyOnWrite 处理线程安全处理</h4><p>答：CopyOnWrite容器即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
-<p>未完待续。。。。。。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">map/reduce</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Java基础//" class="article-tag-list-link color2">Java基础</a>
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2017/04/01/Java并发知识记录/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/08/25/数据库日常开发规约/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据库日常开发规约
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/03/18/命令模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">命令模式</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于同步"><span class="toc-number">1.</span> <span class="toc-text">关于同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#先行发生原则-happens-before"><span class="toc-number">2.</span> <span class="toc-text">先行发生原则(happens-before)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程安全的等级与锁优化"><span class="toc-number">3.</span> <span class="toc-text">线程安全的等级与锁优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁优化"><span class="toc-number">4.</span> <span class="toc-text">锁优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自旋"><span class="toc-number">4.1.</span> <span class="toc-text">自旋</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#锁消除"><span class="toc-number">4.2.</span> <span class="toc-text">锁消除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#锁粗化"><span class="toc-number">4.3.</span> <span class="toc-text">锁粗化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#轻量级锁"><span class="toc-number">4.4.</span> <span class="toc-text">轻量级锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#偏向锁"><span class="toc-number">4.5.</span> <span class="toc-text">偏向锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用中的问题"><span class="toc-number">5.</span> <span class="toc-text">使用中的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#怎么检测一个线程是否持有对象监视器"><span class="toc-number">5.1.</span> <span class="toc-text">怎么检测一个线程是否持有对象监视器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程类的构造方法，静态块是被哪个线程调用的？"><span class="toc-number">5.2.</span> <span class="toc-text">线程类的构造方法，静态块是被哪个线程调用的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何唤醒一个线程"><span class="toc-number">5.3.</span> <span class="toc-text">如何唤醒一个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CopyOnWrite-处理线程安全处理"><span class="toc-number">5.4.</span> <span class="toc-text">CopyOnWrite 处理线程安全处理</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
-  <div id="gitment-ctn"></div>
-<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
-<script src="https://jjeejj.github.io/js/gitment.js"></script> 
-<script>
-var gitment = new Gitment({
-  id: 'Sat Apr 01 2017 16:00:41 GMT+0800',
-  owner: 'wanghaoListening',
-  repo: 'wanghaolistening.github.com',
-  oauth: {
-    client_id: '0a40baefe58e4183769b',
-    client_secret: 'ee09c046be99f0dd9e365d578a3f1f0ed426ab40',
-  },
-})
-gitment.render('gitment-ctn')
-</script>
-
-  
+    
 
 
           </div>
@@ -450,10 +269,10 @@ gitment.render('gitment-ctn')
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
