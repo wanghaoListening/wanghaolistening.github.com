@@ -16,12 +16,10 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="根据经纬度计算两点距离">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://en.wikipedia.org/wiki/Haversine_formula">
-<meta property="og:updated_time" content="2019-03-04T14:11:48.798Z">
+<meta property="og:updated_time" content="2019-03-04T14:19:52.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="根据经纬度计算两点距离">
 <meta name="twitter:description" content="根据经纬度计算两点距离">
-<meta name="twitter:image" content="https://en.wikipedia.org/wiki/Haversine_formula">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -205,7 +203,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参加中国软件杯大赛，我们的做的软件应用叫“解密陌生人”，是一款聊天软件，其中有一个功能是当用户上线时会给用户推荐1公里内的上线的人陌生人，类似于陌陌附近的人。移动端会获取用户的经纬度，然后发送给后端，让后端来计算当前用户周边一公里内的上线的人。google一下网上的解决方案，根据两点经纬度计算两点的距离，基本上都是推荐使用<img src="https://en.wikipedia.org/wiki/Haversine_formula" alt="Haversine formula"> 中文名叫半正矢公式，具体介绍可以参照维基百科。</p>
+        <p>参加中国软件杯大赛，我们的做的软件应用叫“解密陌生人”，是一款聊天软件，其中有一个功能是当用户上线时会给用户推荐1公里内的上线的人陌生人，类似于陌陌附近的人。移动端会获取用户的经纬度，然后发送给后端，让后端来计算当前用户周边一公里内的上线的人。google一下网上的解决方案，根据两点经纬度计算两点的距离，基本上都是推荐使用<a href="https://en.wikipedia.org/wiki/Haversine_formula" target="_blank" rel="noopener">Haversine formula</a> 中文名叫半正矢公式，具体介绍可以参照维基百科。</p>
 <a id="more"></a>
 <h3 id="Haversine-formula-javascript-实现"><a href="#Haversine-formula-javascript-实现" class="headerlink" title="Haversine formula javascript 实现"></a>Haversine formula javascript 实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) &#123;</span><br><span class="line">  var R = 6371; // Radius of the earth in km</span><br><span class="line">  var dLat = deg2rad(lat2-lat1);  // deg2rad below</span><br><span class="line">  var dLon = deg2rad(lon2-lon1); </span><br><span class="line">  var a = </span><br><span class="line">    Math.sin(dLat/2) * Math.sin(dLat/2) +</span><br><span class="line">    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * </span><br><span class="line">    Math.sin(dLon/2) * Math.sin(dLon/2)</span><br><span class="line">    ; </span><br><span class="line">  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); </span><br><span class="line">  var d = R * c; // Distance in km</span><br><span class="line">  return d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function deg2rad(deg) &#123;</span><br><span class="line">  return deg * (Math.PI/180)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Haversine-formula-java-实现"><a href="#Haversine-formula-java-实现" class="headerlink" title="Haversine formula java 实现"></a>Haversine formula java 实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;</span><br><span class="line">public int calculateDistanceInKilometer(double userLat, double userLng,</span><br><span class="line">  double venueLat, double venueLng) &#123;</span><br><span class="line"></span><br><span class="line">    double latDistance = Math.toRadians(userLat - venueLat);</span><br><span class="line">    double lngDistance = Math.toRadians(userLng - venueLng);</span><br><span class="line"></span><br><span class="line">    double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)</span><br><span class="line">      + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))</span><br><span class="line">      * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);</span><br><span class="line"></span><br><span class="line">    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));</span><br><span class="line"></span><br><span class="line">    return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -511,11 +509,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,19 +525,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,11 +557,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
