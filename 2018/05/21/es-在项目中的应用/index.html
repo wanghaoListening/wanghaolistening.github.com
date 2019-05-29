@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="Elasticsearch 在搜索领域有广泛的应用，全文搜索属于最常见的需求，开源的 Elasticsearch 是目前全文搜索引擎的首选。它可以快速地储存、搜索和分析海量数据并且对于数据的增长进行弹性扩容。由于公司数据源管理平台对大数据量查询日志的查询需求，经调研决定使用es存储上下游数据源的调用日志。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://wanghaolistening.github.io/2018/05/21/es-在项目中的应用/es1.png">
-<meta property="og:updated_time" content="2019-02-26T10:21:43.194Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/es-01-2019-2-15.png!picslt">
+<meta property="og:updated_time" content="2019-05-29T08:17:14.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es在项目中的应用">
 <meta name="twitter:description" content="Elasticsearch 在搜索领域有广泛的应用，全文搜索属于最常见的需求，开源的 Elasticsearch 是目前全文搜索引擎的首选。它可以快速地储存、搜索和分析海量数据并且对于数据的增长进行弹性扩容。由于公司数据源管理平台对大数据量查询日志的查询需求，经调研决定使用es存储上下游数据源的调用日志。">
-<meta name="twitter:image" content="https://wanghaolistening.github.io/2018/05/21/es-在项目中的应用/es1.png">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/es-01-2019-2-15.png!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -217,7 +217,8 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>这样的大的数据量以及数据的增长速度oracle显然无法负担。</p>
 </blockquote>
-<h3 id="es线上配置"><a href="#es线上配置" class="headerlink" title="es线上配置"></a>es线上配置</h3><h3 id="ES系统配置注意事项"><a href="#ES系统配置注意事项" class="headerlink" title="ES系统配置注意事项"></a>ES系统配置注意事项</h3><p>这里主要说一下jvm堆的设置以及es所运行的系统的一些主要配置以及注意事项</p>
+<h3 id="es线上配置"><a href="#es线上配置" class="headerlink" title="es线上配置"></a>es线上配置</h3><p>经过调研以及当前的数据情况最终决定，线上的es配置采用3个节点，考虑到每个type的数据量将会比较大，最终确定每个index(类似于数据库)放一个type(类似于表)考虑到每个6个primary 和1个replica的方式</p>
+<h3 id="ES系统配置注意事项"><a href="#ES系统配置注意事项" class="headerlink" title="ES系统配置注意事项"></a>ES系统配置注意事项</h3><p>这里主要说一下jvm堆的设置以及es所运行的系统的一些主要配置以及注意事项</p>
 <h4 id="关于分片配置"><a href="#关于分片配置" class="headerlink" title="关于分片配置"></a>关于分片配置</h4><p>The primary shard configuration is quite analogous to a hard disk partition, in which a repartition of raw disk space requires a user to back up, configure a new partition, and rewrite data onto the new partition</p>
 <p>需要注意的是在配置好分片的配置后，不能在集群的运行时进行修改，如果发现必须去修改分片数，则需要重新索引所有的源文档</p>
 <h4 id="堆内存的设置"><a href="#堆内存的设置" class="headerlink" title="堆内存的设置"></a>堆内存的设置</h4><p>由于es是跑在jvm上的,所以jvm的相关配置直接影响到es的性能。默认情况es告诉jvm使用堆的最大和最小为1GB大小，所以</p>
@@ -225,7 +226,7 @@ var _hmt = _hmt || [];
 <p>（一）jvm堆配置（默认在/etc/elasticsearch/jvm.options）：</p>
 <p>1.jvm的堆的Xms和Xmx设置成相等</p>
 <p>2.尽量多的堆内存配置（注意：设置Xmx不超过物理RAM的50%）</p>
-<p>3.不要设置Xmx内存超过关闭指针压缩的阀值（最好在zero-based compressed oops的内存阀值之下，对于大部分系统26GB是合适的，可以通过如下参数验证是否在限制之内）<br><img src="es1.png" alt=""></p>
+<p>3.不要设置Xmx内存超过关闭指针压缩的阀值（最好在zero-based compressed oops的内存阀值之下，对于大部分系统26GB是合适的，可以通过如下参数验证是否在限制之内）<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/es-01-2019-2-15.png!picslt" alt="es"></p>
 <h4 id="系统的相关设置"><a href="#系统的相关设置" class="headerlink" title="系统的相关设置"></a>系统的相关设置</h4><p>系统的设置主要注意，swap,文件句柄，mmapfs虚拟内存，以及es使用的最大线程数四部分</p>
 <h5 id="Disable-swapping"><a href="#Disable-swapping" class="headerlink" title="Disable swapping"></a>Disable swapping</h5><p>Most operating systems try to use as much memory as possible for file system caches and eagerly swap out unused application memory.</p>
 <p>This can result in parts of the JVM heap or even its executable pages being swapped out to disk.</p>
@@ -545,19 +546,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">

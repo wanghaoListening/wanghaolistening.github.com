@@ -16,14 +16,14 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
-<meta property="og:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
-<meta property="og:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
-<meta property="og:updated_time" content="2019-02-22T07:21:56.104Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019-2-21-hystrix的请求隔离.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019-2-21-hystrix请求合并前.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019-2-21-hystrix请求合并后.jpg!picslt">
+<meta property="og:updated_time" content="2019-05-29T07:58:28.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hystrix 在项目中的应用">
 <meta name="twitter:description" content="项目中需要在同一时间段大量的调用二方的http api，查询相关的数据，在项目中调用内部或外部的http接口自然的想到了httpclient，httpclient对请求相关的属性以及服务响应的数据进行了很好的封装以及解析，可以非常方便我们去使用。而项目中需要大量的调用二方的http api，而每个http 接口之间没有相互的依赖关系，一两个接口的失败不会影响其他接口的调用，这时我们也可能想到利用j">
-<meta name="twitter:image" content="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019-2-21-hystrix的请求隔离.jpg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -217,7 +217,7 @@ var _hmt = _hmt || [];
 <li>结果缓存，缓存同样key的请求结果</li>
 </ul>
 <h4 id="hystrix的请求隔离"><a href="#hystrix的请求隔离" class="headerlink" title="hystrix的请求隔离"></a>hystrix的请求隔离</h4><p>Hystrix通过将每个依赖服务分配独立的线程池进行资源隔离, 实现了请求的隔离，比如在此项目中需要同时请求大数据组和金融相关部门的接口，因为大数据组与金融部的数据是不同的业务类型，所以可以使用两个不同的线程池来进行资源的隔离。防止单个业务请求数据的同步等待影响整个系统的等待造成雪崩。如下图：</p>
-<p><img src="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg" alt="hystrix的请求隔离"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019-2-21-hystrix的请求隔离.jpg!picslt" alt="hystrix的请求隔离"></p>
 <h4 id="hystrix的故障熔断"><a href="#hystrix的故障熔断" class="headerlink" title="hystrix的故障熔断"></a>hystrix的故障熔断</h4><p>服务的健康状况 = 请求失败数 / 请求总数.<br>熔断器开关由关闭到打开的状态转换是通过当前服务健康状况和设定阈值比较决定的.</p>
 <p>1.当熔断器开关关闭时, 请求被允许通过熔断器. 如果当前健康状况高于设定阈值, 开关继续保持关闭. 如果当前健康状况低于设定阈值, 开关则切换为打开状态.</p>
 <p>2.当熔断器开关打开时, 请求被禁止通过.</p>
@@ -233,8 +233,8 @@ var _hmt = _hmt || [];
 <p>当然此功能需要服务的提供方合作来实现，比如：在及其短暂的时间内，信用报告系统需要大量获取企业的工商数据，那么可以让服务提供方单独开一个批量获取多个公司工商信息的接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://big.data.com/gs/&#123;company&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://big.data.com/gs/list/&#123;companys&#125;</span><br></pre></td></tr></table></figure>
 <p>如下图展示了合并前与合并后的线程使用情况：</p>
-<p><img src="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg" alt="hystrix请求合并前"></p>
-<p><img src="http://pldjckfk1.bkt.clouddn.com/2019-1-GitHub-oauth%E9%85%8D%E7%BD%AE.jpg" alt="hystrix请求合并后"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019-2-21-hystrix请求合并前.jpg!picslt" alt="hystrix请求合并前"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019-2-21-hystrix请求合并后.jpg!picslt" alt="hystrix请求合并后"></p>
 <h4 id="结果缓存"><a href="#结果缓存" class="headerlink" title="结果缓存"></a>结果缓存</h4><p>在 HystrixCommand 和 HystrixObservableCommand 的实现中，你可以定义一个缓存的 Key，这个 Key 用于在同一个请求上下文（全局或者用户级）中标识缓存的请求结果，当然，该缓存是线程安全的。</p>
 <p>请求缓存的好处：</p>
 <ul>
@@ -547,19 +547,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
