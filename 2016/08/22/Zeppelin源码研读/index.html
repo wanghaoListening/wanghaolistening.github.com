@@ -16,23 +16,23 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="Zeppelin 是一个提供交互数据分析且基于Web的notebook。方便你做出可数据驱动的、可交互且可协作的精美文档，并且支持多种语言，包括 Scala(使用 Apache Spark)、Python(Apache Spark)、SparkSQL、 Hive、 Markdown、Shell等等,项目组所负责的数据平台中原有数据分析的web交互页面不是特别好用，调研后发现zeppelin基于瀑布">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/1.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/2.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/3.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/4.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/5.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/6.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/7.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/8.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/9.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/10.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/11.png">
-<meta property="og:image" content="https://wanghaolistening.github.io/home/picture/12.png">
-<meta property="og:updated_time" content="2019-02-22T08:28:36.517Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-1.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-2.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-3.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-4.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-5.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-6.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-7.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-8.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-9.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-10.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-11.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-12.jpg!picslt">
+<meta property="og:updated_time" content="2019-05-29T08:49:03.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zeppelin源码研读">
 <meta name="twitter:description" content="Zeppelin 是一个提供交互数据分析且基于Web的notebook。方便你做出可数据驱动的、可交互且可协作的精美文档，并且支持多种语言，包括 Scala(使用 Apache Spark)、Python(Apache Spark)、SparkSQL、 Hive、 Markdown、Shell等等,项目组所负责的数据平台中原有数据分析的web交互页面不是特别好用，调研后发现zeppelin基于瀑布">
-<meta name="twitter:image" content="https://wanghaolistening.github.io/home/picture/1.png">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-1.jpg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -222,22 +222,22 @@ var _hmt = _hmt || [];
 <p>修改方法：<br>    经过研读源码发现，zeppelin中的权限管理是通过开源的权限管理框架shiro来完成的，在这里以zeppelinhub授权登录为例进行过程的讲解。在进行源码讲解之前我们先看一下shiro的认证，授权过程以及shiro各组件的功能作用。<a href="https://shiro.apache.org/" target="_blank" rel="noopener">shiro文档</a></p>
 <p>1.修改zeppelin的登录代码：<br>  位置：zeppelin-server中的org.apache.zeppelin.rest.LoginRestApi文件中修改：去掉匿名登录的逻辑和修改原有逻辑，其实不去除匿名判断逻辑代码也罢，只要在相关配置文件中设置了登录验证配置，匿名登录就不会成立。</p>
 <p>2.实现AuthorizingRealm抽象方法，实现自己的验证与授权逻辑。<br>  ZeppelinHubRealm的认证授权逻辑，在认证过程将用户名和密码封装成json字符串，在authenticateUser方法中去zeppelinhub自己的认证系统查看是否正确。并作出相应的反馈。而ZeppelinHubRealm并没有实现相应的授权逻辑。</p>
-<p><img src="/home/picture/1.png" alt="如下代码"><br><img src="/home/picture/2.png" alt="如下代码"><br><img src="/home/picture/3.png" alt="如下代码"><br>3.在shiro中进行注册，注册自己的Realm</p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-1.jpg!picslt" alt="如下代码"><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-2.jpg!picslt" alt="如下代码"><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-3.jpg!picslt" alt="如下代码"><br>3.在shiro中进行注册，注册自己的Realm</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">### A sample for configuring ZeppelinHub Realm</span><br><span class="line">zeppelinHubRealm = org.apache.zeppelin.realm.ZeppelinHubRealm</span><br><span class="line">## Url of ZeppelinHub</span><br><span class="line">zeppelinHubRealm.zeppelinhubUrl = https://www.zeppelinhub.com</span><br><span class="line">securityManager.realms = $zeppelinHubRealm</span><br></pre></td></tr></table></figure>
 <p>4.demo展示<br>需要注意的是我们实现的Realm与ZeppelinHubRealm同属于第三方的Realm，所以放到相同的目录下即可。</p>
 <h3 id="多个Spark集群怎么处理"><a href="#多个Spark集群怎么处理" class="headerlink" title="多个Spark集群怎么处理"></a>多个Spark集群怎么处理</h3><p>目前如果在zeppelin配置多个spark集群，那么只能在notebook上利用不同的前缀名加以区分，这样用户的体验并不是很好，基本场景是不同集群上的用户使用<br>Notebook的方式以及引用的interpreter的前缀是相同的，当用户提交任务是，我们在底层根据用户与不同集群的关系进行静默式的区分。</p>
 <p>首先我们需要了解一下interpreter的创建获取过程：<br>通过查看源码得知：当我们运行一个paragraph时，首先zeppelin内部会通过用户名，noteId,以及replName这三个变量唯一确定要使用那个interpreter去执行。</p>
-<p><img src="/home/picture/4.png" alt="如下代码"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-4.jpg!picslt" alt="如下代码"></p>
 <p>获取interpreter的具体流程：<br>当replName的为空时，也就是我们在paragraph中并未指定要引用那个interpreter时，则会去获取默认的InterpreterSetting(默认就是我们在interpreterbinding进行设置的第一个InterpreterSetting)，通过默认的InterpreterSetting去创建interpreter,当realName不为空时，则会根据指定的group和name来寻找指定的interpreter。类似于：%spark.sql这种形式，所以如果要实现对于不同intercepter的用户使用相同的引用的话则需要改变获取InterpreterSetting的逻辑，获取过程根据用户对于不同集群或interpreter的联系进行区分。</p>
-<p><img src="/home/picture/5.png" alt="如下代码"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-5.jpg!picslt" alt="如下代码"></p>
 <p>根据以上推断则需要改变getDefaultInterpreterSetting以及getInterpreterSettingByGroup的内部逻辑,如下：</p>
-<p><img src="/home/picture/6.png" alt="如下代码"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-6.jpg!picslt" alt="如下代码"></p>
 <h3 id="notebook权限问题"><a href="#notebook权限问题" class="headerlink" title="notebook权限问题"></a>notebook权限问题</h3><p>用户创建的notebook默认是对其它用户可见的以及notebook权限问题：首先在查看源码之前我们先来了解一下zepplein中notebook的权限</p>
 <blockquote>
 <p>Notebook的权限是什么？</p>
 </blockquote>
 <p>Notebook的权限指的是用户对notebook的读和写的权限，写权限也包括执行。<br>权限相关的操作都要落实到NotebookAuthorization这个类中，而权限信息的存储介质为conf/notebook-authorization.json文件中，对应的数据结构为<br>private static Map&lt;String, Map&lt;String, Set<string>&gt;&gt; authInfo = new HashMap&lt;&gt;();</string></p>
-<p><img src="/home/picture/7.png" alt="如下代码"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-7.jpg!picslt" alt="如下代码"></p>
 <p>第一个问题是目前zeppelin的用户创建notebook后对其它的用户默认是可见的并且其他的用户默认也可以执行。另一个问题是实际生产中可能会有大量的notebook建立，那么关于notebook权限的存储信息可能不仅仅是简单的一个json文件可以承载的，所以可能会将这部分信息存储到数据库当中。</p>
 <h4 id="Notebook创建后对其它用户不可见的demo"><a href="#Notebook创建后对其它用户不可见的demo" class="headerlink" title="Notebook创建后对其它用户不可见的demo."></a>Notebook创建后对其它用户不可见的demo.</h4><p>问题一解决方案：</p>
 <ol>
@@ -246,12 +246,12 @@ var _hmt = _hmt || [];
 <li><p>在显示notebook列表时对默认用户权限逻辑进行修改，当前的逻辑是如果notebook的权限设置还未设置，也就是初始化状态时，其它用户登录时就会对此notebook进行显示。如下：在Notebook中的getAllNotes(HashSet<string> userAndRoles)这个方法中会根据当前用户权限将符合权限的notebook从所有的notebook中拿出放入到集合中进行返回。在此判断了用户是否拥有对此notebook的读权限。</string></p>
 </li>
 </ol>
-<p><img src="/home/picture/8.png" alt="如下代码"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-8.jpg!picslt" alt="如下代码"></p>
 <p>进一步看一下NotebookAuthorization中的isReader方法</p>
-<p><img src="/home/picture/9.png" alt="如下代码"></p>
-<p>可以看到当notebook的reader权限为空也成立，也就是我们默认在Notebook的权限页什么都不填写的话，默认对其它用户是可见，可写的<br>如下：<br>  当前的notebook对其它的用户也是可读，可写的。<br>改正措施：去掉b.isEmpty()方法。<br><img src="/home/picture/10.png" alt="如下代码"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-9.jpg!picslt" alt="如下代码"></p>
+<p>可以看到当notebook的reader权限为空也成立，也就是我们默认在Notebook的权限页什么都不填写的话，默认对其它用户是可见，可写的<br>如下：<br>  当前的notebook对其它的用户也是可读，可写的。<br>改正措施：去掉b.isEmpty()方法。<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-10.jpg!picslt" alt="如下代码"></p>
 <p>权限信息存储介质的修改：<br>这里有一个问题需要注意的是，每次存储权限信息都是对原权限文件notebook-authorization.json进行覆盖，这就意味着所有的权限信息都会首先通过NotebookAuthorizationInfoSaving这个数据结构在内存过度，这样又会引发一个问题，当权限信息过多对内存的占用是非常可观的，所以我们必须修改原有的数据结构以及权限控制的逻辑进行修改。当我们为notebook设置相应的读写属主权限时，都会调用NotebookAuthorization的saveToFile方法保存相关权限信息，所以我们仅需要对其方法进行修改即可。</p>
-<p><img src="/home/picture/11.png" alt="如下代码"><br><img src="/home/picture/12.png" alt="如下代码"></p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-11.jpg!picslt" alt="如下代码"><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-08-zeppelin-12.jpg!picslt" alt="如下代码"></p>
 
       
 
@@ -575,10 +575,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
@@ -644,6 +640,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
