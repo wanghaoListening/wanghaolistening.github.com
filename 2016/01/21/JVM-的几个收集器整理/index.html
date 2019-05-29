@@ -16,17 +16,17 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="java虚拟机下有多款收集器，每款收集器都有各自的特性，以及各自所适应的应用场景，并且内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，虚拟机之所以提供多种不同的收集器以及大量的调节参数，是因为只有根据实际应用需求实现方式选择最优的收集策略才能获取最好的性能。所以我们有必要去了解它们。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-delete.jpg">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-copy.png">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-rar.png">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-copy.jpg!picslt">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-compact.jpg!picslt">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-Serial.jpg">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-parNew.jpg">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-parallelScavenge.png">
-<meta property="og:updated_time" content="2016-01-23T11:07:38.000Z">
+<meta property="og:updated_time" content="2019-05-29T10:00:02.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM 的几个收集器整理">
 <meta name="twitter:description" content="java虚拟机下有多款收集器，每款收集器都有各自的特性，以及各自所适应的应用场景，并且内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，虚拟机之所以提供多种不同的收集器以及大量的调节参数，是因为只有根据实际应用需求实现方式选择最优的收集策略才能获取最好的性能。所以我们有必要去了解它们。">
-<meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-delete.jpg">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -211,14 +211,14 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>java虚拟机下有多款收集器，每款收集器都有各自的特性，以及各自所适应的应用场景，并且内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，虚拟机之所以提供多种不同的收集器以及大量的调节参数，是因为只有根据实际应用需求实现方式选择最优的收集策略才能获取最好的性能。所以我们有必要去了解它们。<br><a id="more"></a></p>
-<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><p>在介绍垃圾收集器之前需要先了解Java垃圾回收的几种算法：<br>1.标记-清除算法<br>标记清除算法从名字就可以看出，它是分两个阶段的，第一阶段标记，然后下一个阶段清除，它是基于可达性算法分析算法对不能够与”GCRoot”节点关联的对象进行标记，之后对标记的对象进行清除。<br>如下图<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvm-delete.jpg" alt="标记清除" title="标记清除"></p>
+<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><p>在介绍垃圾收集器之前需要先了解Java垃圾回收的几种算法：<br>1.标记-清除算法<br>标记清除算法从名字就可以看出，它是分两个阶段的，第一阶段标记，然后下一个阶段清除，它是基于可达性算法分析算法对不能够与”GCRoot”节点关联的对象进行标记，之后对标记的对象进行清除。<br>如下图<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg!picslt" alt="标记清除" title="标记清除"></p>
 <p>标记清除法有两个不足，一个是效率问题，另一个是产生大量的不连续的内存碎片，内存碎片太多不利于大对象的分配,使其不得不提前触发一次GC。</p>
-<p>2.复制算法<br>为解决标记清除法的不足，出现了一种”复制”算法，其原理是将内存划分成两份，一份用来分配对象，而另二份用来在GC后将第一份还存活的对象复制过去，这样就可以将使用过得第一份空间一次清理掉。这样就不会产生效力问题，及内存的碎片问题。<br>如下图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvm-copy.png" alt="复制算法" title="复制算法"></p>
+<p>2.复制算法<br>为解决标记清除法的不足，出现了一种”复制”算法，其原理是将内存划分成两份，一份用来分配对象，而另二份用来在GC后将第一份还存活的对象复制过去，这样就可以将使用过得第一份空间一次清理掉。这样就不会产生效力问题，及内存的碎片问题。<br>如下图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-copy.jpg!picslt" alt="复制算法" title="复制算法"></p>
 <p>对于复制算法如果首次分配的对象太多，并且垃圾回收后存活的对象也很多，那么复制到第二份内存也需要花费较大的时间开销，但倘若分配及回收后存活的对象很少，那么对于整个<br>堆内存有显得有些浪费。<br>现在商业虚拟机都采用这种算法来回收新生代，并且根据研究表明，新生代的对象都有朝生夕死的特点，所以并不需要1:1来进行内存的划分，而是将内存划分成一块较大的Eden区和两块较大的Survivor区，每次分配对象都在Eden区和一块Survivor区，而另一块则用来存放GC后存活的对象，若Survivor不够用则需要老年代进行分配担保。当然如果需要复制的对象过多还是会有效率低的问题。</p>
 <blockquote>
 <p>HotSpot虚拟机默认的Eden：Survivor = 8:1</p>
 </blockquote>
-<p>3.标记-整理算法<br>复制算法在对象存活率较高时，就会效率降低，如果不想浪费太多的内存空间来储备存活对象，就需要额外的老年代进行分配担保。由于老年代一般对象较多而且存活时间较长所以不适合采用复制算法。<br>标记-整理原理：让存活的对象都向一端移动，然后直接清理掉端边界以外的内存。<br>如下图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvm-rar.png" alt="标记整理" title="标记整理"></p>
+<p>3.标记-整理算法<br>复制算法在对象存活率较高时，就会效率降低，如果不想浪费太多的内存空间来储备存活对象，就需要额外的老年代进行分配担保。由于老年代一般对象较多而且存活时间较长所以不适合采用复制算法。<br>标记-整理原理：让存活的对象都向一端移动，然后直接清理掉端边界以外的内存。<br>如下图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-compact.jpg!picslt" alt="标记整理" title="标记整理"></p>
 <blockquote>
 <p>现在虚拟机都采用”分代收集算法”根据各个年代的特点采用适当的收集算法.</p>
 </blockquote>
@@ -557,19 +557,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -578,6 +574,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,11 +597,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
