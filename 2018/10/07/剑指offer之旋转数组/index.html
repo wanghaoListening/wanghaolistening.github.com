@@ -17,7 +17,7 @@
 <meta property="og:description" content="剑指offer之旋转数组">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:updated_time" content="2019-07-07T11:52:30.785Z">
+<meta property="og:updated_time" content="2019-07-07T13:34:15.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer之旋转数组">
 <meta name="twitter:description" content="剑指offer之旋转数组">
@@ -206,6 +206,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转输出旋转数组的最小元素。例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。</p>
+<a id="more"></a>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>细想一下可以发现旋转之后的数组实际上可以划分为两个排序的子数组，而且前面排序的子数组的元素都大于或者等于后面子数组的元素，更重要的一点，最小的元素刚好是这两个子数组的分界线。<br>在排序的数组中可以使用二分查找法实现O(logn)的查找。和二分查找法一样，使用两个指针分别指向数组的第一个元素和最后一个元素。接着可以找到数组中间的元素。如果中间元素大于等于前一个指针指向的元素，则中间元素位于前一个数组。此时数组中的最小元素应该位于该中间元素的后面，这时可以把第一个指针指向该中间元素缩小查找的范围，移动之后的第一个指针仍然位于前面的递增子数组。同样如果中间指针小于等于第二个指针指向的元素。</p>
 <p>此时该数组的最小元素应该位于该中间元素的前面，可以把第二个指针指向该中间元素，移动之后的第一个指针仍然位于后面的递增子数组。不管移动第一个指针还是第二个指针，查找范围都会缩小到原来的一半。按照上述思路，第一个指针总是指向前面递增数组的元素，第二个指针总是指向后面递增数组的元素。最终第一个指针将指向前面子数组的最后应该元素，而第二个指针指向后面子数组的第一个元素。也就是它们最终会指向两个相邻的元素，而第二个指针指向的刚好是最小的元素。</p>
@@ -522,11 +523,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,6 +547,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
@@ -554,15 +559,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,6 +587,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">跳台阶</a>
               </li>
              
@@ -606,11 +607,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
