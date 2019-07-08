@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/springspring-main.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/springbeanFactorymethod.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/springBeanFactoryExtend.png">
-<meta property="og:updated_time" content="2019-07-08T03:21:01.326Z">
+<meta property="og:updated_time" content="2019-07-08T03:31:22.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Spring技术内幕》笔记1-IOC容器的设计">
 <meta name="twitter:description" content="Spring Framework是一个开源的Java／Java EE全功能栈（full-stack）的应用程序框架Spring Framework提供了一个简易的开发方式，这种开发方式，将避免那些可能致使底层代码变得繁杂混乱的大量的属性文件和帮助类。所以必须要深入的去了解其内部工作机制。">
@@ -207,7 +207,8 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Spring Framework是一个开源的Java／Java EE全功能栈（full-stack）的应用程序框架Spring Framework提供了一个简易的开发方式，这种开发方式，将避免那些可能致使底层代码变得繁杂混乱的大量的属性文件和帮助类。所以必须要深入的去了解其内部工作机制。<br><a id="more"></a></p>
+        <p>Spring Framework是一个开源的Java／Java EE全功能栈（full-stack）的应用程序框架Spring Framework提供了一个简易的开发方式，这种开发方式，将避免那些可能致使底层代码变得繁杂混乱的大量的属性文件和帮助类。所以必须要深入的去了解其内部工作机制。</p>
+<a id="more"></a>
 <h4 id="Java开源框架Spring"><a href="#Java开源框架Spring" class="headerlink" title="Java开源框架Spring"></a>Java开源框架Spring</h4><p><img src="http://7xavwe.com1.z0.glb.clouddn.com/springspring-main.PNG" alt="Spring" title="Spring"></p>
 <blockquote>
 <p>注意：本人使用了spring3.1.1版本进行学习的。</p>
@@ -215,23 +216,10 @@ var _hmt = _hmt || [];
 <h3 id="BeanFactory的应用场景"><a href="#BeanFactory的应用场景" class="headerlink" title="BeanFactory的应用场景"></a>BeanFactory的应用场景</h3><p>SpringFrameWork的核心：IOC容器的实现,顶层接口BeanFactory定义了一个BeanFactory的基本契约，Factory的创建都需要直接或间接的实现这些契约并以此扩展自己独有特色的Factory。通过自己独有特色的Factory管理资源(Bean)，作者将Factory比作水桶，通过水桶基本的架构体系可以建立不同功能的水桶。    </p>
 <h4 id="通过BeanFactory的接口方法勾勒出IOC的基本架构"><a href="#通过BeanFactory的接口方法勾勒出IOC的基本架构" class="headerlink" title="通过BeanFactory的接口方法勾勒出IOC的基本架构"></a>通过BeanFactory的接口方法勾勒出IOC的基本架构</h4><p><img src="http://7xavwe.com1.z0.glb.clouddn.com/springbeanFactorymethod.PNG" alt="BeanFactory的接口方法" title="接口方法"></p>
 <h4 id="通过继承不断的将BeanFactory扩建强大，以下是BeanFactory庞大的继承体系的一部分"><a href="#通过继承不断的将BeanFactory扩建强大，以下是BeanFactory庞大的继承体系的一部分" class="headerlink" title="通过继承不断的将BeanFactory扩建强大，以下是BeanFactory庞大的继承体系的一部分"></a>通过继承不断的将BeanFactory扩建强大，以下是BeanFactory庞大的继承体系的一部分</h4><p><img src="http://7xavwe.com1.z0.glb.clouddn.com/springBeanFactoryExtend.png" alt="BeanFactory继承结构" title="继承体系"></p>
-<h3 id="BeanFactory容器的设计与实现"><a href="#BeanFactory容器的设计与实现" class="headerlink" title="BeanFactory容器的设计与实现"></a>BeanFactory容器的设计与实现</h3><p>在BeanFactory的基础上，spring提供了一系列容器的实现供开发人员使用。作者以XMLBeanFactory的实现来说明IOC容器的设计原理。由上图BeanFactory继承结构可以看出XMLBeanFactory已经过时。而且它是很底层的实现，理解它实现有助于我们理常用的ApplicationContext与基本BeanFactory的联系。</p>
-<p>XMLBeanFactory功能是建立在DefaultListableBeanFactory的基础上，DefaultListableBeanFactory实际上包含了IOC容器所具有的重要功能，而XMLBeanFactory在此基础上扩展了xml操作的功能。在其构造方法中需要获得Resource 作为参数<br>对XmlBeanDefinitionReader对象的初始化，以及完成.loadBeanDefinitions(resource)的调用。这个调用从Resource 中<br>载入BeanDefinition的过程。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  public XmlBeanFactory(Resource resource, BeanFactory parentBeanFactory) throws BeansException &#123;</span><br><span class="line">		super(parentBeanFactory);</span><br><span class="line">		this.reader.loadBeanDefinitions(resource);</span><br><span class="line">  &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 编程式使用IOC</span><br><span class="line"></span><br><span class="line">1.创建IOC配置文件的抽象资源，这个抽象资源包含了BeanDefination的定义信息</span><br><span class="line">ClassPathResource resource = new ClassPathResource(&quot;beans.xml&quot;);</span><br><span class="line">2.创建一个Bean的工厂DefaultListableBeanFactory</span><br><span class="line">DefaultListableBeanFactory factory = new DefaultListableBeanFactory();</span><br><span class="line">3.创建一个载入BeanDefination的读取器，XmlBeanDefinitionReader，载入xml文件形式的BeanDefination</span><br><span class="line">，通过一个回调配置给BeanFactory</span><br><span class="line">private final XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this);//this指factory。</span><br><span class="line">this.reader.loadBeanDefinitions(resource);</span><br><span class="line">4.从定义好的资源配置文件中读入配置信息，具体的解析过程由XmlBeanDefinitionReader完成，</span><br><span class="line">完成整个载入和注册之后，需要的IOC容器就建立起来了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### ApplicationContext的应用场景</span><br><span class="line"></span><br><span class="line">ApplicationContext是一个高级形态意义的IOC容器，它在BeanFactory的基础上提供了以下BeanFactory不具备的新特性</span><br></pre></td></tr></table></figure>
-<p>public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory,<br>    MessageSource, ApplicationEventPublisher, ResourcePatternResolver {</p>
-<pre><code>
-新特性：
-*支持不同信息原
-*访问资源，体现在ResourceLoader和Resource的支持上
-*支持事件应用
-*在ApplicationContext中提供附加服务
-
-
-### ApplicationContext容器的设计原理
-在ApplicationContext容器中，我们以FileSystemXmlApplicationContext为例说明，他与我们常在项目中常用的跟它同级的类ClassPathXmlApplicationContext基本类似。
-FileSystemXmlApplicationContext的构造方法和getResourceByPath方法
-
-</code></pre><pre><code>FileSystemXmlApplicationContext的构造方法
+<h3 id="BeanFactory容器的设计与实现"><a href="#BeanFactory容器的设计与实现" class="headerlink" title="BeanFactory容器的设计与实现"></a>BeanFactory容器的设计与实现</h3><p>在BeanFactory的基础上，spring提供了一系列容器的实现供开发人员使用。作者以XMLBeanFactory的实现来说明IOC容器的设计原理。由上图BeanFactory继承结构可以看出XMLBeanFactory已经过时。而且它是很底层的实现，理解它实现有助于我们理常用的ApplicationContext与基本BeanFactory的联系。<br>XMLBeanFactory功能是建立在DefaultListableBeanFactory的基础上，DefaultListableBeanFactory实际上包含了IOC容器所具有的重要功能，而XMLBeanFactory在此基础上扩展了xml操作的功能。在其构造方法中需要获得Resource 作为参数<br>对XmlBeanDefinitionReader对象的初始化，以及完成.loadBeanDefinitions(resource)的调用。这个调用从Resource 中<br>载入BeanDefinition的过程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  public XmlBeanFactory(Resource resource, BeanFactory parentBeanFactory) throws BeansException &#123;</span><br><span class="line">		super(parentBeanFactory);</span><br><span class="line">		this.reader.loadBeanDefinitions(resource);</span><br><span class="line">  &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 编程式使用IOC</span><br><span class="line"></span><br><span class="line">1.创建IOC配置文件的抽象资源，这个抽象资源包含了BeanDefination的定义信息</span><br><span class="line">ClassPathResource resource = new ClassPathResource(&quot;beans.xml&quot;);</span><br><span class="line">2.创建一个Bean的工厂DefaultListableBeanFactory</span><br><span class="line">DefaultListableBeanFactory factory = new DefaultListableBeanFactory();</span><br><span class="line">3.创建一个载入BeanDefination的读取器，XmlBeanDefinitionReader，载入xml文件形式的BeanDefination通过一个回调配置给BeanFactory</span><br><span class="line">private final XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this);//this指factory。</span><br><span class="line">this.reader.loadBeanDefinitions(resource);</span><br><span class="line">4.从定义好的资源配置文件中读入配置信息，具体的解析过程由XmlBeanDefinitionReader完成，</span><br><span class="line">完成整个载入和注册之后，需要的IOC容器就建立起来了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### ApplicationContext的应用场景</span><br><span class="line"></span><br><span class="line">ApplicationContext是一个高级形态意义的IOC容器，它在BeanFactory的基础上提供了以下BeanFactory不具备的新特性</span><br></pre></td></tr></table></figure>
+<p>public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory,<br>    MessageSource, ApplicationEventPublisher, ResourcePatternResolver {<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">新特性：</span><br><span class="line">* 支持不同信息原</span><br><span class="line">* 访问资源，体现在ResourceLoader和Resource的支持上</span><br><span class="line">* 支持事件应用</span><br><span class="line">* 在ApplicationContext中提供附加服务</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### ApplicationContext容器的设计原理</span><br><span class="line"></span><br><span class="line">在ApplicationContext容器中，我们以FileSystemXmlApplicationContext为例说明，他与我们常在项目中常用的跟它同级的类ClassPathXmlApplicationContext基本类似。</span><br><span class="line">FileSystemXmlApplicationContext的构造方法和getResourceByPath方法</span><br></pre></td></tr></table></figure></p>
+<pre><code>FileSystemXmlApplicationContext的构造方法
 public FileSystemXmlApplicationContext(String[] configLocations, boolean refresh, ApplicationContext parent)
         throws BeansException {
 
@@ -257,10 +245,11 @@ protected Resource getResourceByPath(String path) {
     if (path != null &amp;&amp; path.startsWith(&quot;/&quot;)) {
         path = path.substring(1);
     }
-    return new FileSystemResource(path);//得到FileSystemResource的资源定位
+    //得到FileSystemResource的资源定位
+    return new FileSystemResource(path);
 }    
-</code></pre><p><code>`</code> </p>
-<p>一个功能是构造方法中的的refresh()牵扯到启动容器的一系列复杂过程。<br>另一个功能与FileSystemXmlApplicationContext设计息息相关，通过这个过程，可以为在文件系统中读取xml形式的BeanDefinition做准备，不同应用的上下文实现对应着不同的读取BeanDefinition的方式FileSystemXmlApplicationContext<br>中的实现代码如上。</p>
+</code></pre><p><code>`</code></p>
+<p>一个功能是构造方法中的的refresh()牵扯到启动容器的一系列复杂过程。另一个功能与FileSystemXmlApplicationContext设计息息相关，通过这个过程，可以为在文件系统中读取xml形式的BeanDefinition做准备，不同应用的上下文实现对应着不同的读取BeanDefinition的方式FileSystemXmlApplicationContext中的实现代码如上。</p>
 <p><strong>可以看到调用FileSystemResource方法可以得到资源的定位</strong></p>
 <p><a href="http://spring.io/" target="_blank" rel="noopener">Spring官网</a><br>[Spring项目源码的托管平台]<a href="https://github.com/SpringSource/spring-framework" target="_blank" rel="noopener">https://github.com/SpringSource/spring-framework</a></p>
 
@@ -565,15 +554,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,6 +563,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,6 +594,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
@@ -617,15 +610,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">双栈实现队列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -637,7 +630,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
+                <a href="javascript:void(0)" class="js-tag color4">跳台阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,15 +638,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">跳台阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,7 +650,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,11 +658,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -686,6 +671,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
