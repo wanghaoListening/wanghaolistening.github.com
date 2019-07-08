@@ -16,14 +16,12 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass.PNG">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass1.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass3.PNG">
-<meta property="og:updated_time" content="2019-02-16T11:21:55.032Z">
+<meta property="og:updated_time" content="2019-07-08T08:02:25.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="抽象类中的构造器">
 <meta name="twitter:description" content="一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。">
-<meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass.PNG">
+<meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass3.PNG">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -213,25 +211,19 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是<br>用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。<br><a id="more"></a><br>    如图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass.PNG" alt="私有的构造器" title="私有的构造器"><br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass1.PNG" alt="受保护的构造器" title="受保护的构造器"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">既然抽象类中可以有构造器，那么其构造器的作用又是什么呢？</span><br><span class="line">```	</span><br><span class="line">	</span><br><span class="line"> 结合ClassLoader的构造器我觉得有两点</span><br><span class="line">（1）初始化抽象类的成员。</span><br><span class="line">（2）为继承自它的子类使用。</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">既然private和protected都可以修饰抽象类的构造器，那么public呢？</span><br><span class="line">```</span><br></pre></td></tr></table></figure></p>
-<pre><code>//抽象父类
-public abstract class Father {
-
-    private String name;
-    public Father(){
-        System.out.println(&quot;这是父亲是个抽象类&quot;);
-    }
-
-}
-//实例子类
-public class Son extends Father {
-
-    public Son(){
-        System.out.println(&quot;这是儿子是个实例类&quot;);
-    }
-}
-</code></pre><p><code>`</code><br>new子类Son创建对象时发现控制台的打印结果与普通构造器类似，都是先打印父类构造器内容再打印子类构造器内容。<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass3.PNG" alt="结果" title="结果">    </p>
-<p>通过博友的博客newmoon2004的专栏:<a href="http://blog.csdn.net/newmoon2004/article/details/5951437" target="_blank" rel="noopener">on</a><br>了解到即使我们声明一个没有构造函数的抽象类，编译器还会为我们生成一个默认的保护级别的构造函数。子类<br>实例化时(不管是否为带参构造)只会调用所有父类的无参构造函数，而带参构造必须通过显式去调用.调用顺序是<br>先调用抽象类的无参构造函数，如果子类实例化时是使用带餐的构造函数，则再接着调用抽象类的带参构造函数，最后调用子类本身的构造函数。</p>
+        <p>一直以来认为抽象类中没有构造器，因为抽象类不可以new一个对象,而构造的作用是用来创建对象的实例，而今天在查看抽象类ClassLoader的源码时发现了构造器。</p>
+<a id="more"></a>
+<p>如图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">private ClassLoader(Void var1, ClassLoader var2) &#123;</span><br><span class="line">    this.classes = new Vector();</span><br><span class="line">    this.defaultDomain = new ProtectionDomain(new CodeSource((URL)null, (Certificate[])null), (PermissionCollection)null, this, (Principal[])null);</span><br><span class="line">    this.packages = new HashMap();</span><br><span class="line">    this.nativeLibraries = new Vector();</span><br><span class="line">    this.defaultAssertionStatus = false;</span><br><span class="line">    this.packageAssertionStatus = null;</span><br><span class="line">    this.classAssertionStatus = null;</span><br><span class="line">    this.parent = var2;</span><br><span class="line">    if (ClassLoader.ParallelLoaders.isRegistered(this.getClass())) &#123;</span><br><span class="line">        this.parallelLockMap = new ConcurrentHashMap();</span><br><span class="line">        this.package2certs = new ConcurrentHashMap();</span><br><span class="line">        this.domains = Collections.synchronizedSet(new HashSet());</span><br><span class="line">        this.assertionLock = new Object();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        this.parallelLockMap = null;</span><br><span class="line">        this.package2certs = new Hashtable();</span><br><span class="line">        this.domains = new HashSet();</span><br><span class="line">        this.assertionLock = this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">protected ClassLoader(ClassLoader var1) &#123;</span><br><span class="line">    this(checkCreateClassLoader(), var1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">protected ClassLoader() &#123;</span><br><span class="line">    this(checkCreateClassLoader(), getSystemClassLoader());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>既然抽象类中可以有构造器，那么其构造器的作用又是什么呢？</p>
+</blockquote>
+<p>查阅网上的资料ClassLoader的构造器总结有两点<br>（1）初始化抽象类的成员。<br>（2）为继承自它的子类使用。</p>
+<blockquote>
+<p>既然private和protected都可以修饰抽象类的构造器，那么public呢？</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//抽象父类</span><br><span class="line">public abstract class Father &#123;</span><br><span class="line"></span><br><span class="line">	private String name;</span><br><span class="line">	public Father()&#123;</span><br><span class="line">		System.out.println(&quot;这是父亲是个抽象类&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">//实例子类</span><br><span class="line">public class Son extends Father &#123;</span><br><span class="line">	</span><br><span class="line">	public Son()&#123;</span><br><span class="line">		System.out.println(&quot;这是儿子是个实例类&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>new子类Son创建对象时发现控制台的打印结果与普通构造器类似，都是先打印父类构造器内容再打印子类构造器内容。<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/java_abstractclass3.PNG" alt="结果" title="结果">    </p>
+<p>通过博友的博客newmoon2004的专栏:<a href="http://blog.csdn.net/newmoon2004/article/details/5951437" target="_blank" rel="noopener">on</a>了解到即使我们声明一个没有构造函数的抽象类，编译器还会为我们生成一个默认的保护级别的构造函数。子类<br>实例化时(不管是否为带参构造)只会调用所有父类的无参构造函数，而带参构造必须通过显式去调用.调用顺序是<br>先调用抽象类的无参构造函数，如果子类实例化时是使用带参的构造函数，则再接着调用抽象类的带参构造函数，最后调用子类本身的构造函数。</p>
 
       
 
@@ -538,15 +530,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,11 +542,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,15 +566,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,11 +594,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
+                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,11 +618,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,11 +638,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
