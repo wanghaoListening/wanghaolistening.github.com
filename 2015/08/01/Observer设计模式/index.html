@@ -16,16 +16,13 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="概述有时被称作发布/订阅模式，观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。日常生活中例子，人们根据天气预报做出相应的反应，公司经理在接到上级指示后给自己员工的的指令算是一种被动的观察者模式。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/patternjdkobserver.PNG">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/patternobservablechanged.PNG">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/patternobservablenotifyPNG.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/patternobserverjieguo.PNG">
 <meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/patternobserverListener.PNG">
-<meta property="og:updated_time" content="2015-09-19T10:44:28.000Z">
+<meta property="og:updated_time" content="2019-07-08T08:34:54.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Observer设计模式">
 <meta name="twitter:description" content="概述有时被称作发布/订阅模式，观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。日常生活中例子，人们根据天气预报做出相应的反应，公司经理在接到上级指示后给自己员工的的指令算是一种被动的观察者模式。">
-<meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/patternjdkobserver.PNG">
+<meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/patternobserverjieguo.PNG">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -218,82 +215,69 @@ var _hmt = _hmt || [];
         <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>有时被称作发布/订阅模式，观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。<br>这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。日常生活中例子，人们根据天<br>气预报做出相应的反应，公司经理在接到上级指示后给自己员工的的指令算是一种被动的观察者模式。<br><a id="more"></a></p>
 <h3 id="模式中的角色"><a href="#模式中的角色" class="headerlink" title="模式中的角色"></a>模式中的角色</h3><p>1 抽象主题（Subject）：它把所有观察者对象的引用保存到一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。<br>2 具体主题（ConcreteSubject）：将有关状态存入具体观察者对象；在具体主题内部状态改变时，给所有登记过的观察者发出通知。<br>3 抽象观察者（Observer）：为所有的具体观察者定义一个接口，在得到主题通知时更新自己。<br>4 具体观察者（ConcreteObserver）：实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题状态协调。</p>
 <h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><h4 id="抽象主题"><a href="#抽象主题" class="headerlink" title="抽象主题"></a>抽象主题</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 目标对象，它知道观察它的观察着，并提供注册添加和删除观察着的接口</span><br><span class="line"> * @author wanghao</span><br><span class="line"> * </span><br><span class="line"> * */</span><br><span class="line">public class Subject &#123;</span><br><span class="line">	List&lt;Observer&gt; obs = new ArrayList&lt;Observer&gt;();	</span><br><span class="line">	public void attach(Observer observer)&#123;</span><br><span class="line">		obs.add(observer);</span><br><span class="line">	&#125;</span><br><span class="line">	/**</span><br><span class="line">	 * @param observer</span><br><span class="line">	 * */</span><br><span class="line">	public void delete(Observer observer)&#123;</span><br><span class="line">		obs.remove(observer);</span><br><span class="line">	&#125;</span><br><span class="line">	/**</span><br><span class="line">	 * 提醒所有的观察着</span><br><span class="line">	 * */</span><br><span class="line">	protected void <span class="function"><span class="title">notifyObs</span></span>()&#123;</span><br><span class="line">		<span class="keyword">for</span>(Observer ob : obs)&#123;</span><br><span class="line">			ob.update(this);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="抽象观察者"><a href="#抽象观察者" class="headerlink" title="抽象观察者"></a>抽象观察者</h4><pre><code class="bash">/**
- * 这是一个观察着接口，定义一个更新的接口给哪些在目标发生改变时被通知的对象
- * @author wanghao
- * */
-public interface Observer {
-    public void update(Subject subject);        
+<h4 id="抽象观察者"><a href="#抽象观察者" class="headerlink" title="抽象观察者"></a>抽象观察者</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 这是一个观察着接口，定义一个更新的接口给哪些在目标发生改变时被通知的对象</span><br><span class="line"> * @author wanghao</span><br><span class="line"> * */</span><br><span class="line">public interface Observer &#123;</span><br><span class="line">	public void update(Subject subject);		</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 具体主题</span></span><br><span class="line">``` bash</span><br><span class="line">public class ConcreteSubject extends Subject &#123;	</span><br><span class="line">	private String subjectState;</span><br><span class="line"></span><br><span class="line">	public String <span class="function"><span class="title">getSubjectState</span></span>() &#123;</span><br><span class="line">		<span class="built_in">return</span> subjectState;</span><br><span class="line">	&#125;</span><br><span class="line">	/**</span><br><span class="line">	 * 当目标者状态改变时提醒观察者 </span><br><span class="line">	 * */</span><br><span class="line">	public void setSubjectState(String subjectState) &#123;</span><br><span class="line">		this.subjectState = subjectState;</span><br><span class="line">		this.notifyObs();</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"><span class="comment">### 具体观察者</span></span><br><span class="line">``` bash</span><br><span class="line">public class ConcreteObserver implements Observer&#123;	</span><br><span class="line">	private String observerState;</span><br><span class="line">	/**</span><br><span class="line">	 * 获取目标者状态改变时同步到观察着</span><br><span class="line">	 * */</span><br><span class="line">	@Override</span><br><span class="line">	public void update(Subject subject) &#123;</span><br><span class="line">		</span><br><span class="line">		observerState = ((ConcreteSubject)subject).getSubjectState();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">Java jdk 提供了观察者模式的框架模型，我们只需去实现相应的接口，并去创建对象即可。在java.util的包下面提供了</span><br><span class="line">Observer接口，和Observable类，从名字就可以看出其在观察者模式所扮演的角色。</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 看具体代码：</span></span><br><span class="line"><span class="comment">#### 具体主题的实现</span></span><br><span class="line">``` bash</span><br><span class="line">public class WeatherSubject extends Observable &#123;</span><br><span class="line">	private String content;</span><br><span class="line"></span><br><span class="line">	public String <span class="function"><span class="title">getContent</span></span>() &#123;</span><br><span class="line">		<span class="built_in">return</span> content;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setContent(String content) &#123;</span><br><span class="line">		this.content = content;</span><br><span class="line">		//注意在通知观察者时此句话必不可少</span><br><span class="line">		this.setChanged();</span><br><span class="line">		//主动通知，推模型</span><br><span class="line">		//this.notifyObservers(content);</span><br><span class="line">		//主动通知，拉模型</span><br><span class="line">		this.notifyObservers();</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"><span class="comment">#### 具体观察者的实现</span></span><br><span class="line">``` bash</span><br><span class="line">public class ConcreteObserver implements Observer&#123;</span><br><span class="line">	private String name;</span><br><span class="line">	@Override</span><br><span class="line">	public void update(Observable o, Object arg) &#123;		</span><br><span class="line">		//System.out.println(name+<span class="string">"推送的"</span>+arg);</span><br><span class="line">		System.out.println(name+<span class="string">"拉取得"</span>+((WeatherSubject)o).getContent());		</span><br><span class="line">	&#125;</span><br><span class="line">	public String <span class="function"><span class="title">getName</span></span>() &#123;</span><br><span class="line">		<span class="built_in">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">查看Observer的源码发现其只有一个update方法，内部设计也遵循了观察者的设计模版。</span><br></pre></td></tr></table></figure>
+<p>public interface Observer {<br>    /**</p>
+<pre><code> * This method is called whenever the observed object is changed. An
+ * application calls an &lt;tt&gt;Observable&lt;/tt&gt; object&apos;s
+ * &lt;code&gt;notifyObservers&lt;/code&gt; method to have all the object&apos;s
+ * observers notified of the change.
+ *
+ * @param   o     the observable object.
+ * @param   arg   an argument passed to the &lt;code&gt;notifyObservers&lt;/code&gt;
+ *                 method.
+ */
+void update(Observable o, Object arg);
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">而Observable的内部设计也是遵循了主题的的设计模版。其通过setChanged()方法将改变的标志设为true，而在</span><br><span class="line">notifyObservers()方法中判断标志，若为true提醒所有观察者，具体代码如下</span><br><span class="line"></span><br><span class="line">#### changed方法</span><br></pre></td></tr></table></figure></p>
+<pre><code>protected synchronized void setChanged() {
+    changed = true;
 }
-</code></pre>
-<h4 id="具体主题"><a href="#具体主题" class="headerlink" title="具体主题"></a>具体主题</h4><pre><code class="bash">public class ConcreteSubject extends Subject {    
-    private String subjectState;
+    public synchronized boolean hasChanged() {
+    return changed;
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### notifyObservers方法</span><br></pre></td></tr></table></figure>
+<pre><code>  public void notifyObservers(Object arg) {
+    /*
+     * a temporary array buffer, used as a snapshot of the state of
+     * current Observers.
+     */
+    Object[] arrLocal;
 
-    public String <span class="function"><span class="title">getSubjectState</span></span>() {
-        <span class="built_in">return</span> subjectState;
-    }
-    /**
-     * 当目标者状态改变时提醒观察者 
-     * */
-    public void setSubjectState(String subjectState) {
-        this.subjectState = subjectState;
-        this.notifyObs();
-    }        
-}
-</code></pre>
-<h3 id="具体观察者"><a href="#具体观察者" class="headerlink" title="具体观察者"></a>具体观察者</h3><pre><code class="bash">public class ConcreteObserver implements Observer{    
-    private String observerState;
-    /**
-     * 获取目标者状态改变时同步到观察着
-     * */
-    @Override
-    public void update(Subject subject) {
-
-        observerState = ((ConcreteSubject)subject).getSubjectState();
-    }
-}
-</code></pre>
-<p>Java jdk 提供了观察者模式的框架模型，我们只需去实现相应的接口，并去创建对象即可。在java.util的包下面提供了<br>Observer接口，和Observable类，从名字就可以看出其在观察者模式所扮演的角色。</p>
-<h4 id="看具体代码："><a href="#看具体代码：" class="headerlink" title="看具体代码："></a>看具体代码：</h4><h4 id="具体主题的实现"><a href="#具体主题的实现" class="headerlink" title="具体主题的实现"></a>具体主题的实现</h4><pre><code class="bash">public class WeatherSubject extends Observable {
-    private String content;
-
-    public String <span class="function"><span class="title">getContent</span></span>() {
-        <span class="built_in">return</span> content;
+    synchronized (this) {
+        /* We don&apos;t want the Observer doing callbacks into
+         * arbitrary code while holding its own Monitor.
+         * The code where we extract each Observable from
+         * the Vector and store the state of the Observer
+         * needs synchronization, but notifying observers
+         * does not (should not).  The worst result of any
+         * potential race-condition here is that:
+         * 1) a newly-added Observer will miss a
+         *   notification in progress
+         * 2) a recently unregistered Observer will be
+         *   wrongly notified when it doesn&apos;t care
+         */
+        if (!changed)
+            return;
+        arrLocal = obs.toArray();
+        clearChanged();
     }
 
-    public void setContent(String content) {
-        this.content = content;
-        //注意在通知观察者时此句话必不可少
-        this.setChanged();
-        //主动通知，推模型
-        //this.notifyObservers(content);
-        //主动通知，拉模型
-        this.notifyObservers();
-    }        
+    for (int i = arrLocal.length-1; i&gt;=0; i--)
+        ((Observer)arrLocal[i]).update(this, arg);
 }
-</code></pre>
-<h4 id="具体观察者的实现"><a href="#具体观察者的实现" class="headerlink" title="具体观察者的实现"></a>具体观察者的实现</h4><pre><code class="bash">public class ConcreteObserver implements Observer{
-    private String name;
-    @Override
-    public void update(Observable o, Object arg) {        
-        //System.out.println(name+<span class="string">"推送的"</span>+arg);
-        System.out.println(name+<span class="string">"拉取得"</span>+((WeatherSubject)o).getContent());        
-    }
-    public String <span class="function"><span class="title">getName</span></span>() {
-        <span class="built_in">return</span> name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }    
-}
-</code></pre>
-<p>查看Observer的源码发现其只有一个update方法，内部设计也遵循了观察者的设计模版。<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/patternjdkobserver.PNG" alt="Observer类" title="Observer类"></p>
-<p>而Observable的内部设计也是遵循了主题的的设计模版。其通过setChanged()方法将改变的标志设为true，而在<br>notifyObservers()方法中判断标志，若为true提醒所有观察者，具体代码如下</p>
-<h4 id="changed方法"><a href="#changed方法" class="headerlink" title="changed方法"></a>changed方法</h4><p><img src="http://7xavwe.com1.z0.glb.clouddn.com/patternobservablechanged.PNG" alt="changed方法" title="changed方法"></p>
-<h4 id="notifyObservers方法"><a href="#notifyObservers方法" class="headerlink" title="notifyObservers方法"></a>notifyObservers方法</h4><p><img src="http://7xavwe.com1.z0.glb.clouddn.com/patternobservablenotifyPNG.PNG" alt="notifyObservers" title="notifyObs"></p>
-<h3 id="在具体程序中的应用"><a href="#在具体程序中的应用" class="headerlink" title="在具体程序中的应用"></a>在具体程序中的应用</h3><p>Spring中提供一些Aware相关接口，像是BeanFactoryAware、ApplicationContextAware、ResourceLoaderAware、<br>ServletContextAware等等，实现这些 Aware接口的Bean在被初始之后，可以取得一些相对应的资源。<br>ApplicationContextAware提供了publishEvent()方法，可以支持基于Observer模式的事件传播机制</p>
-<h4 id="在spring中的具体实现"><a href="#在spring中的具体实现" class="headerlink" title="在spring中的具体实现"></a>在spring中的具体实现</h4><p>在spring中实现观察者模式与jdk中的实现略有不同,在spring设计模式的实现上分为两个角色(目标主题，观察者)和一个中间消息的承载者。</p>
-<h4 id="实现程序"><a href="#实现程序" class="headerlink" title="实现程序"></a>实现程序</h4><pre><code class="bash">/**
+</code></pre><pre><code>
+### 在具体程序中的应用
+
+Spring中提供一些Aware相关接口，像是BeanFactoryAware、ApplicationContextAware、ResourceLoaderAware、
+ServletContextAware等等，实现这些 Aware接口的Bean在被初始之后，可以取得一些相对应的资源。
+ApplicationContextAware提供了publishEvent()方法，可以支持基于Observer模式的事件传播机制
+
+#### 在spring中的具体实现
+在spring中实现观察者模式与jdk中的实现略有不同,在spring设计模式的实现上分为两个角色(目标主题，观察者)和一个中间消息的承载者。
+
+#### 实现程序
+
+``` bash
+/**
  * 目标主题类实现ApplicationContextAware并实现setApplicationContext
  * 方法为ApplicationContext赋予实例，并在发布消息的方法中调用publishEvent
  * 相当于jdk Observable的notifyObservers(String content);是一个推
@@ -302,8 +286,8 @@ public interface Observer {
 public class Boss implements ApplicationContextAware{
     private ApplicationContext applicationContext;
     private String name;    
-    public String <span class="function"><span class="title">getName</span></span>() {        
-        <span class="built_in">return</span> name;        
+    public String getName() {        
+        return name;        
     }
     public void setName(String name) {
         this.name = name;
@@ -321,10 +305,10 @@ public class Boss implements ApplicationContextAware{
  * 创建消息承载者继承ApplicationEvent，在构造方法调用父类的构造
  * 方法，传递消息指令，在此也可做部分加工
  **/
-@SuppressWarnings(<span class="string">"serial"</span>)
+@SuppressWarnings(&quot;serial&quot;)
 public class Order extends ApplicationEvent{
-    public Order(Object <span class="built_in">source</span>) {
-        super(<span class="built_in">source</span>);
+    public Order(Object source) {
+        super(source);
     }
 }
 /**
@@ -332,11 +316,11 @@ public class Order extends ApplicationEvent{
  * 方法，调用参数ApplicationEvent的getSource()获取消息，并可根据消息做出
  * 相应的处理 
  * */
-@SuppressWarnings(<span class="string">"rawtypes"</span>)
+@SuppressWarnings(&quot;rawtypes&quot;)
 public class Employee implements ApplicationListener {
     private String name;
-    public String <span class="function"><span class="title">getName</span></span>() {
-        <span class="built_in">return</span> name;
+    public String getName() {
+        return name;
     }
     public void setName(String name) {
         this.name = name;
@@ -345,21 +329,20 @@ public class Employee implements ApplicationListener {
     public void onApplicationEvent(ApplicationEvent event) {
 
         System.out.println(name+(event.getSource().toString()));
-        System.out.println(<span class="string">"老板要求加班，今晚又要苦逼了"</span>);
+        System.out.println(&quot;老板要求加班，今晚又要苦逼了&quot;);
     }
 }
 
 //执行代码
 @Test
-public void <span class="function"><span class="title">testApplicationContext</span></span>(){
+public void testApplicationContext(){
     ApplicationContext context = 
-                 new ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);
-    Boss boss = (Boss) context.getBean(<span class="string">"boss"</span>);
-    Order order = new Order(<span class="string">"今天的任务必须加班完成"</span>);
+                 new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+    Boss boss = (Boss) context.getBean(&quot;boss&quot;);
+    Order order = new Order(&quot;今天的任务必须加班完成&quot;);
     boss.executeOrder(order);
 }            
-</code></pre>
-<p>创建并完成以上类之后，在spring的配置文件完成bean的配置。目标主题和观察者必须要在文件配置。而消息承载者可<br>以不配置，让其手工实例化。</p>
+</code></pre><p>创建并完成以上类之后，在spring的配置文件完成bean的配置。目标主题和观察者必须要在文件配置。而消息承载者可<br>以不配置，让其手工实例化。</p>
 <h4 id="以单元测试代码执行后结果如下："><a href="#以单元测试代码执行后结果如下：" class="headerlink" title="以单元测试代码执行后结果如下："></a>以单元测试代码执行后结果如下：</h4><p><img src="http://7xavwe.com1.z0.glb.clouddn.com/patternobserverjieguo.PNG" alt="结果" title="结果]"></p>
 <p><strong>为何会发送两次请求呢?</strong><br>除了boss所发送的那次请求，当容器启动加载bean时会调用实现了ApplicationListener接口的onApplicationEvent方法<br>去完成一些数据的缓存。所以结果如上</p>
 <h3 id="springObserver原理"><a href="#springObserver原理" class="headerlink" title="springObserver原理"></a>springObserver原理</h3><p>当boss去调用publishEvent()方法时内部会获取所有的实现了ApplicationListener的Bean并且去调用它的<br>onApplicationEvet(ApplicationEvent event)并把实现了ApplicationEvent的消息传送进去。源码如下</p>
@@ -518,7 +501,7 @@ public void <span class="function"><span class="title">testApplicationContext</s
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模式中的角色"><span class="toc-number">2.</span> <span class="toc-text">模式中的角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体实现"><span class="toc-number">3.</span> <span class="toc-text">具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#抽象主题"><span class="toc-number">3.1.</span> <span class="toc-text">抽象主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#抽象观察者"><span class="toc-number">3.2.</span> <span class="toc-text">抽象观察者</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#具体主题"><span class="toc-number">3.3.</span> <span class="toc-text">具体主题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体观察者"><span class="toc-number">4.</span> <span class="toc-text">具体观察者</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#看具体代码："><span class="toc-number">4.1.</span> <span class="toc-text">看具体代码：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#具体主题的实现"><span class="toc-number">4.2.</span> <span class="toc-text">具体主题的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#具体观察者的实现"><span class="toc-number">4.3.</span> <span class="toc-text">具体观察者的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#changed方法"><span class="toc-number">4.4.</span> <span class="toc-text">changed方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#notifyObservers方法"><span class="toc-number">4.5.</span> <span class="toc-text">notifyObservers方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在具体程序中的应用"><span class="toc-number">5.</span> <span class="toc-text">在具体程序中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在spring中的具体实现"><span class="toc-number">5.1.</span> <span class="toc-text">在spring中的具体实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现程序"><span class="toc-number">5.2.</span> <span class="toc-text">实现程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以单元测试代码执行后结果如下："><span class="toc-number">5.3.</span> <span class="toc-text">以单元测试代码执行后结果如下：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#springObserver原理"><span class="toc-number">6.</span> <span class="toc-text">springObserver原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#springObserver总结"><span class="toc-number">7.</span> <span class="toc-text">springObserver总结</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模式中的角色"><span class="toc-number">2.</span> <span class="toc-text">模式中的角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体实现"><span class="toc-number">3.</span> <span class="toc-text">具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#抽象主题"><span class="toc-number">3.1.</span> <span class="toc-text">抽象主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#抽象观察者"><span class="toc-number">3.2.</span> <span class="toc-text">抽象观察者</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以单元测试代码执行后结果如下："><span class="toc-number">3.3.</span> <span class="toc-text">以单元测试代码执行后结果如下：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#springObserver原理"><span class="toc-number">4.</span> <span class="toc-text">springObserver原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#springObserver总结"><span class="toc-number">5.</span> <span class="toc-text">springObserver总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -667,7 +650,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,19 +670,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">elastic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -707,7 +686,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -719,6 +698,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
@@ -727,19 +710,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数值的整数次方</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
+                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -751,15 +730,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,6 +751,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">

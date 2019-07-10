@@ -16,17 +16,19 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="java虚拟机下有多款收集器，每款收集器都有各自的特性，以及各自所适应的应用场景，并且内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，虚拟机之所以提供多种不同的收集器以及大量的调节参数，是因为只有根据实际应用需求实现方式选择最优的收集策略才能获取最好的性能。所以我们有必要去了解它们。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg!picslt">
-<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-copy.jpg!picslt">
-<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-compact.jpg!picslt">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-Serial.jpg">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-parNew.jpg">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-parallelScavenge.png">
-<meta property="og:updated_time" content="2019-05-29T10:00:02.823Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-copy.jpg">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-compact.jpg">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/serial-collector.jpg">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/ParNew.jpg">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/Parallel-Scavenge.jpg">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/Serial-old">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/Parallel-old.jpg">
+<meta property="og:updated_time" content="2019-07-10T05:02:28.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM 的几个收集器整理">
 <meta name="twitter:description" content="java虚拟机下有多款收集器，每款收集器都有各自的特性，以及各自所适应的应用场景，并且内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，虚拟机之所以提供多种不同的收集器以及大量的调节参数，是因为只有根据实际应用需求实现方式选择最优的收集策略才能获取最好的性能。所以我们有必要去了解它们。">
-<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg!picslt">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -216,15 +218,16 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>java虚拟机下有多款收集器，每款收集器都有各自的特性，以及各自所适应的应用场景，并且内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，虚拟机之所以提供多种不同的收集器以及大量的调节参数，是因为只有根据实际应用需求实现方式选择最优的收集策略才能获取最好的性能。所以我们有必要去了解它们。<br><a id="more"></a></p>
-<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><p>在介绍垃圾收集器之前需要先了解Java垃圾回收的几种算法：<br>1.标记-清除算法<br>标记清除算法从名字就可以看出，它是分两个阶段的，第一阶段标记，然后下一个阶段清除，它是基于可达性算法分析算法对不能够与”GCRoot”节点关联的对象进行标记，之后对标记的对象进行清除。<br>如下图<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg!picslt" alt="标记清除" title="标记清除"></p>
+        <p>java虚拟机下有多款收集器，每款收集器都有各自的特性，以及各自所适应的应用场景，并且内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，虚拟机之所以提供多种不同的收集器以及大量的调节参数，是因为只有根据实际应用需求实现方式选择最优的收集策略才能获取最好的性能。所以我们有必要去了解它们。</p>
+<a id="more"></a>
+<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><p>在介绍垃圾收集器之前需要先了解Java垃圾回收的几种算法：<br>1.标记-清除算法<br>标记清除算法从名字就可以看出，它是分两个阶段的，第一阶段标记，然后下一个阶段清除，它是基于可达性算法分析算法对不能够与”GCRoot”节点关联的对象进行标记，之后对标记的对象进行清除。<br>如下图<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-sweap.jpg" alt="标记清除" title="标记清除"></p>
 <p>标记清除法有两个不足，一个是效率问题，另一个是产生大量的不连续的内存碎片，内存碎片太多不利于大对象的分配,使其不得不提前触发一次GC。</p>
-<p>2.复制算法<br>为解决标记清除法的不足，出现了一种”复制”算法，其原理是将内存划分成两份，一份用来分配对象，而另二份用来在GC后将第一份还存活的对象复制过去，这样就可以将使用过得第一份空间一次清理掉。这样就不会产生效力问题，及内存的碎片问题。<br>如下图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-copy.jpg!picslt" alt="复制算法" title="复制算法"></p>
+<p>2.复制算法<br>为解决标记清除法的不足，出现了一种”复制”算法，其原理是将内存划分成两份，一份用来分配对象，而另二份用来在GC后将第一份还存活的对象复制过去，这样就可以将使用过得第一份空间一次清理掉。这样就不会产生效力问题，及内存的碎片问题。<br>如下图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-copy.jpg" alt="复制算法" title="复制算法"></p>
 <p>对于复制算法如果首次分配的对象太多，并且垃圾回收后存活的对象也很多，那么复制到第二份内存也需要花费较大的时间开销，但倘若分配及回收后存活的对象很少，那么对于整个<br>堆内存有显得有些浪费。<br>现在商业虚拟机都采用这种算法来回收新生代，并且根据研究表明，新生代的对象都有朝生夕死的特点，所以并不需要1:1来进行内存的划分，而是将内存划分成一块较大的Eden区和两块较大的Survivor区，每次分配对象都在Eden区和一块Survivor区，而另一块则用来存放GC后存活的对象，若Survivor不够用则需要老年代进行分配担保。当然如果需要复制的对象过多还是会有效率低的问题。</p>
 <blockquote>
 <p>HotSpot虚拟机默认的Eden：Survivor = 8:1</p>
 </blockquote>
-<p>3.标记-整理算法<br>复制算法在对象存活率较高时，就会效率降低，如果不想浪费太多的内存空间来储备存活对象，就需要额外的老年代进行分配担保。由于老年代一般对象较多而且存活时间较长所以不适合采用复制算法。<br>标记-整理原理：让存活的对象都向一端移动，然后直接清理掉端边界以外的内存。<br>如下图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-compact.jpg!picslt" alt="标记整理" title="标记整理"></p>
+<p>3.标记-整理算法<br>复制算法在对象存活率较高时，就会效率降低，如果不想浪费太多的内存空间来储备存活对象，就需要额外的老年代进行分配担保。由于老年代一般对象较多而且存活时间较长所以不适合采用复制算法。<br>标记-整理原理：让存活的对象都向一端移动，然后直接清理掉端边界以外的内存。<br>如下图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016-1-mark-compact.jpg" alt="标记整理" title="标记整理"></p>
 <blockquote>
 <p>现在虚拟机都采用”分代收集算法”根据各个年代的特点采用适当的收集算法.</p>
 </blockquote>
@@ -233,12 +236,12 @@ var _hmt = _hmt || [];
 <h4 id="Serial收集器（串行收集器）"><a href="#Serial收集器（串行收集器）" class="headerlink" title="Serial收集器（串行收集器）"></a>Serial收集器（串行收集器）</h4><ul>
 <li>特点：<br>单线程收集器，在它进行垃圾收集时必须暂停所有的工作线程，虚拟机运行在client模式下的默认新生代收集器，优点是简单高效（对于单个CPU的环境）。</li>
 </ul>
-<p>其工作原理如图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvm-Serial.jpg" alt="Serial" title="Serial"></p>
+<p>其工作原理如图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/serial-collector.jpg" alt="Serial" title="Serial"></p>
 <p>对于这款收集器是运行在client模式下的jvm是一个不错的选择，但令人头痛的便是<br>“Stop the word”带来的不良用户体验。使用jvm参数-XX:+UseSerialGC来开启使用此<br>收集器，开启此参数后使用Serial+Serial Old的组合来回收垃圾对象。</p>
 <h4 id="parNew收集器（并行收集器）"><a href="#parNew收集器（并行收集器）" class="headerlink" title="parNew收集器（并行收集器）"></a>parNew收集器（并行收集器）</h4><ul>
 <li>特点：<br>parNew收集器其实是Serial收集器的多线程版本server模式下首选的新生代收集器只有(parNew,Serial)可以与CMS收集器配合使用，</li>
 </ul>
-<p>其工作原理如图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvm-parNew.jpg" alt="parNew" title="parNew"></p>
+<p>其工作原理如图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/ParNew.jpg" alt="parNew" title="parNew"></p>
 <p>parNew收集器也是使用-XX:+UseConcMarkSweepGc选项后默认的新生代收集器，也可以使用<br>-XX:+UseParNewGC来强制指定他。此收集器默开启的收集线程数与CPU的数量相同<br>(-XX:+ParallelGCThreads参数指定垃圾收集线程数量)随着向多核趋势发展它对于GC时系统资源的有效利用还是很有好处的。    </p>
 <blockquote>
 <p>注意:本人使用的是jdk8当开启-XX:+UseParNewGC参数进行垃圾收集时出现:<br>Java HotSpot(TM) 64-Bit Server VM warning: Using the ParNew young collector with the Serial old collector is deprecated and will likely be removed in a future release<br>带着疑问本人Google了一下发现不仅ParNew+SerialOld 这个组合在不久会被移除而且<br>DefNew+CMS这个组合也将被移除，具体会在jdk10正式移除。关于为什么会去移除这些<br>组合，原因只找到下面这句话：<br>Oracle claims this is motivated by the cost of maintaining these GC combinations<br>It is hoped that this will free up resources to simplify the HotSpit GC code, thereby reducing bugs and improving other GC combinations.<br><strong>所以在未来的项目中我们还是要避免再去使用这对收集器组合</strong></p>
@@ -247,11 +250,13 @@ var _hmt = _hmt || [];
 <li>特点：<br>是一个新生代收集器，也是使用复制算法的收集器，其关注点是达到可控制的吞吐量<br>吞吐量=运行用户代码时间/(运行用户代码时间+垃圾收集时间)</li>
 <li>其优点是：<br>1良好的响应速度提升用户体验<br>2.高吞吐量高效利用CPU时间</li>
 </ul>
-<p>其工作原理如图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvm-parallelScavenge.png" alt="Parallel Scavenge" title="Parallel Scavenge"></p>
+<p>其工作原理如图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/Parallel-Scavenge.jpg" alt="Parallel Scavenge" title="Parallel Scavenge"></p>
 <p>控制最大垃圾收集停顿时间(-XX:MaxGCPauseMillis)大于0的毫秒数GC停顿时间缩短是以牺牲吞吐量和新生代空间吞吐量大小(-XX:GCTimeRatio)大于0小于100的整数垃圾收集时间占时间的比率1/(x+1)GC自适应调节策略<br>-XX:+UseAdaptiveSizePolicy : 这是一个开关参数，开这个参数之后就不需要手动开启<br>新生代大小(-Xmn).eden和survivor区的比例(-XX:SurvivorRatio)晋升老年代的对象年龄<br>(-XX:+PretenureThreshold)等细节参数了。pretenure预任期  Threshold阈<br>如果对虚拟机调优不太了解可以使用此款收集器开启自适应参数-XX:+UseAdaptiveSizePolicy，然后设置好-XX:MaxGCPauseMillis和-XX:GCTimeRatio给虚拟机设置一个优化目标自己去调节。</p>
 <h4 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h4><p>Serial的老年代版本，使用 标记-整理算法。<br>给client模式下的虚拟机使用。<br>在server模式下有两个用途：<br>1，在jdk1.5版本之前与Parallel Scavenge配合使用<br>2，作为CMS收集器发生concurrent mode failure 时作为后备方案使用。 </p>
-<h4 id="Parallel-old收集器"><a href="#Parallel-old收集器" class="headerlink" title="Parallel old收集器"></a>Parallel old收集器</h4><p>Parallel old是Parallel Scavenge的老年代的版本<br>使用多线程和标记-整理算法。<br>直到Parallel old的出现，“吞吐量优先”收集器终于有了比较名副其实的应用组合，</p>
-<h2 id="在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑使用Parallel-old和Parallel-Scavenge这对组合。"><a href="#在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑使用Parallel-old和Parallel-Scavenge这对组合。" class="headerlink" title="在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑使用Parallel old和Parallel Scavenge这对组合。"></a>在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑使用Parallel old和Parallel Scavenge这对组合。</h2><p>参考书籍《深入了解Java虚拟机》第二版</p>
+<p>其工作原理如图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/Serial-old" alt="Parallel Scavenge" title="Parallel Scavenge"></p>
+<h4 id="Parallel-old收集器"><a href="#Parallel-old收集器" class="headerlink" title="Parallel old收集器"></a>Parallel old收集器</h4><p>Parallel old是Parallel Scavenge的老年代的版本<br>使用多线程和标记-整理算法。<br>直到Parallel old的出现，“吞吐量优先”收集器终于有了比较名副其实的应用组合，<br>在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑使用Parallel old和Parallel Scavenge这对组合。</p>
+<p>其工作原理如图：</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/Parallel-old.jpg" alt="Parallel Scavenge" title="Parallel Scavenge"></h2><p>参考书籍《深入了解Java虚拟机》第二版</p>
 
       
 
@@ -405,7 +410,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集算法"><span class="toc-number">1.</span> <span class="toc-text">垃圾收集算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集器"><span class="toc-number">2.</span> <span class="toc-text">垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Serial收集器（串行收集器）"><span class="toc-number">2.1.</span> <span class="toc-text">Serial收集器（串行收集器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parNew收集器（并行收集器）"><span class="toc-number">2.2.</span> <span class="toc-text">parNew收集器（并行收集器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Parallel-Scavenge-清除-扫除-收集器"><span class="toc-number">2.3.</span> <span class="toc-text">Parallel Scavenge(清除,扫除) 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Serial-Old-收集器"><span class="toc-number">2.4.</span> <span class="toc-text">Serial Old 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Parallel-old收集器"><span class="toc-number">2.5.</span> <span class="toc-text">Parallel old收集器</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑使用Parallel-old和Parallel-Scavenge这对组合。"><span class="toc-number"></span> <span class="toc-text">在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑使用Parallel old和Parallel Scavenge这对组合。</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集算法"><span class="toc-number">1.</span> <span class="toc-text">垃圾收集算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集器"><span class="toc-number">2.</span> <span class="toc-text">垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Serial收集器（串行收集器）"><span class="toc-number">2.1.</span> <span class="toc-text">Serial收集器（串行收集器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parNew收集器（并行收集器）"><span class="toc-number">2.2.</span> <span class="toc-text">parNew收集器（并行收集器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Parallel-Scavenge-清除-扫除-收集器"><span class="toc-number">2.3.</span> <span class="toc-text">Parallel Scavenge(清除,扫除) 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Serial-Old-收集器"><span class="toc-number">2.4.</span> <span class="toc-text">Serial Old 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Parallel-old收集器"><span class="toc-number">2.5.</span> <span class="toc-text">Parallel old收集器</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number"></span> <span class="toc-text"></span></a>
                     </li></div>
                 </span>
             </div>
@@ -554,7 +559,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,19 +579,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">elastic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,7 +595,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,6 +607,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
@@ -614,19 +619,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数值的整数次方</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
+                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -638,15 +639,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,6 +660,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
