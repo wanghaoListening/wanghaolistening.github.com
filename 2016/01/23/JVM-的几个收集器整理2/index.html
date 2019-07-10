@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="这篇文章我们主要来讲解CMS收集器和G1收集器，这两款收集器是比较有颠覆性的收集器，CMS收集器是第一款真正意义上实现并发的收集器，实现了用户线程和垃圾收集线程的并发执行而G1收集器通过将堆内存划分为多个大小相等的独立区域(Region)以不同的管理方式实现了实现了可预测的停顿，并且其使命是未来可以替代掉jdk1.5发布的CMS收集器。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-cms.png">
-<meta property="og:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-G1.png">
-<meta property="og:updated_time" content="2019-02-16T11:22:01.493Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/CMS-collector.jpg">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/g1-collector.jpg">
+<meta property="og:updated_time" content="2019-07-10T06:32:57.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM 的几个收集器整理2">
 <meta name="twitter:description" content="这篇文章我们主要来讲解CMS收集器和G1收集器，这两款收集器是比较有颠覆性的收集器，CMS收集器是第一款真正意义上实现并发的收集器，实现了用户线程和垃圾收集线程的并发执行而G1收集器通过将堆内存划分为多个大小相等的独立区域(Region)以不同的管理方式实现了实现了可预测的停顿，并且其使命是未来可以替代掉jdk1.5发布的CMS收集器。">
-<meta name="twitter:image" content="http://7xavwe.com1.z0.glb.clouddn.com/jvm-cms.png">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/CMS-collector.jpg">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
 <li>重新标记</li>
 <li>并发清除</li>
 </ul>
-<p>如图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvm-cms.png" alt="CMS收集器" title="CMS收集器"></p>
+<p>如图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/CMS-collector.jpg" alt="CMS收集器" title="CMS收集器"></p>
 <p>初始标记阶段仅是标记一下GC Roots GC能直接关联的对象，速度很快，而并发标记阶段就是进行GC Roots Tracing 的过程，而重新标记阶段则是为了修正并发标记阶段期间因用户程序继续运作而导致的部分变动，这个阶段的停顿时间比初始阶段的稍长一些但远比并发阶段时间短。</p>
 <p>使用CMS收集器存在的问题：</p>
 <blockquote>
@@ -254,7 +254,7 @@ var _hmt = _hmt || [];
 <li>最终标记</li>
 <li>筛选回收</li>
 </ul>
-<p>如图：<br><img src="http://7xavwe.com1.z0.glb.clouddn.com/jvm-G1.png" alt="G1收集器" title="G1收集器"></p>
+<p>如图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/g1-collector.jpg" alt="G1收集器" title="G1收集器"></p>
 <p>在最终标记阶段是为了修正在并发标记期间因用户程序继续运作产生的变动的那部分记录，<br>虚拟机将对象变化的记录写在Remembered Set Logs 里面，最终再将Remembered Set Logs 中的记录合并到Remembered Set中，这段时间需要停顿线程，不过可以并行的执行。<br>而在筛选阶段从sun透露的信息来看这个阶段其实可以和用户线程一起并发执行的，由于只是回收一部分region，时间是用户可以控制的，而且停顿用户线程可以大幅提高收集效率。</p>
 <p>G1收集器如何处理GC后的存活对象：</p>
 <blockquote>
@@ -576,11 +576,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,7 +592,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,7 +600,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,19 +612,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,11 +640,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
+                <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,19 +664,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Haversine formula</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Haversine formula</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,11 +688,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
