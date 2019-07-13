@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 41
+                    总文章数 44
                 </nav>
 		<nav class="header-smart-menu">
     		
@@ -190,6 +190,200 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-如何解决CAS的ABA问题" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/13/如何解决CAS的ABA问题/">如何解决CAS的ABA问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/13/如何解决CAS的ABA问题/" class="archive-article-date">
+  	<time datetime="2019-07-13T14:26:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是ABA问题"><a href="#什么是ABA问题" class="headerlink" title="什么是ABA问题"></a>什么是ABA问题</h3><p>ABA问题是由乐观锁CAS在高并发状态下所引发出现的问题，我们都知道CAS非阻塞操作包括操作和冲突检测两个过程。每个操作过程是原子的，但是组合在一起所形成的CAS并不是一个原子操作，这就引发了上面所说的ABA问题，所谓ABA是线程1将对数据A进行修改，由于操作使用了CAS过程，所以线程1首先获取数据，发现当前数据值为A，因为CAS的语义，线程1在改变数据前需要首先检测一下当前数据的值是不是与自己刚才所获得的数据A相等，若相等则认为这期间数据没有被其它线程修改过，则可以修改数据，若不相等证明数据已经被其它线程修改，需要重新进行CAS过程。可是在这期间来了线程2，线程2对数据值修改为B,然后又来了线程3对数值从B修改为A。而这时线程1在校验数据时发现数据的值与自己所获得数据值相等都是A,则认为数据没有改变，遂对数据值做了修改，造成数据混乱。</p>
+<h3 id="ABA问题demo"><a href="#ABA问题demo" class="headerlink" title="ABA问题demo"></a>ABA问题demo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private static AtomicInteger atomicInteger = new AtomicInteger(1);</span><br><span class="line"></span><br><span class="line">Runnable main = () -&gt; &#123;</span><br><span class="line">       //定义变量 atomicInteger = 1</span><br><span class="line">       System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,初始值 = &quot; + atomicInteger);</span><br><span class="line">       try &#123;</span><br><span class="line">           //等待1秒 ，以便让干扰线程执行</span><br><span class="line">           Thread.sleep(1000);</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       // CAS操作</span><br><span class="line">       boolean isCASSuccess = atomicInteger.compareAndSet(1,2);</span><br><span class="line">       System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,CAS操作结果: &quot; + isCASSuccess);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   Runnable other = () -&gt; &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           //保证让main线程先执行操作</span><br><span class="line">           Thread.sleep(100);</span><br><span class="line">           atomicInteger.incrementAndGet(); // a 加 1, a + 1 = 1 + 1 = 2</span><br><span class="line">           System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【increment】 ,值 = &quot;+ atomicInteger);</span><br><span class="line">           atomicInteger.decrementAndGet(); // a 减 1, a - 1 = 2 - 1 = 1</span><br><span class="line">           System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【decrement】 ,值 = &quot;+ atomicInteger);</span><br><span class="line">       &#125;catch (Exception e)&#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
+<p>以上有两个线程main和other分别对atomicInteger进行修改，atomicInteger的原始数据为1，首先main获取到atomicInteger数值想要对其修改为2，而这时线程other率先一步先对atomicInteger增加到2，然后又对atomicInteger减到1，而这时main线程认为atomicInteger没有改变还是原先的1，遂对数据进行了修改。</p>
+<p>如下：程序执行结果</p>
+<blockquote>
+<p>操作线程Thread[pool-1-thread-1,5,main],初始值 = 1<br> 操作线程Thread[pool-1-thread-2,5,main],【increment】 ,值 = 2<br> 操作线程Thread[pool-1-thread-2,5,main],【decrement】 ,值 = 1<br> 操作线程Thread[pool-1-thread-1,5,main],CAS操作结果: true</p>
+</blockquote>
+<h3 id="如何解决上述问题"><a href="#如何解决上述问题" class="headerlink" title="如何解决上述问题"></a>如何解决上述问题</h3><p>解决上述问题最简单直观的便是对临界数据进行加锁，也是就说线程main在对atomicInteger进行完全修改完成之前，线程other不得对数据进行修改，但这样也带来了性能的开销，无论线程间竞争是否激烈，都需要对线程进行阻塞，用户态转内核态，维护锁计数器以及唤醒线程等一些列比较耗费性能的操作。</p>
+<p>有没有其他的解决方案呢？</p>
+<p>思路：</p>
+<p>解决ABA最简单的方案就是给值加一个修改版本号，每次值变化，都会修改它版本号，CAS操作时都对比此版本号。</p>
+<p>如下图：</p>
+<center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019/07/CAS-atomicStampedReference.jpg" alt="CAS"><br></center>
+
+<p>Java中使用AtomicStampedReference来解决ABA问题，AtomicStampedReference主要维护包含一个对象引用以及一个可以自动更新的整数”stamp”的pair对象，”stamp”就相当于版本号。</p>
+<p>我们看使用AtomicStampedReference来进行上述操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private static AtomicStampedReference&lt;Integer&gt; atomicStampedRef = new AtomicStampedReference&lt;&gt;(1, 0);  </span><br><span class="line"> Runnable main = () -&gt; &#123;</span><br><span class="line">     //定义变量 a = 1</span><br><span class="line">     System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,初始值 = &quot; + atomicStampedRef.getReference());</span><br><span class="line">     //获取当前标识别</span><br><span class="line">     int stamp = atomicStampedRef.getStamp();</span><br><span class="line">     try &#123;</span><br><span class="line">         //等待1秒 ，以便让干扰线程执行</span><br><span class="line">         Thread.sleep(1000);</span><br><span class="line">     &#125; catch (InterruptedException e) &#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">     &#125;</span><br><span class="line">     // CAS操作</span><br><span class="line">     boolean isCASSuccess = atomicStampedRef.compareAndSet(1,2,stamp,stamp +1);</span><br><span class="line">     System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,CAS操作结果: &quot; + isCASSuccess);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> Runnable other = () -&gt; &#123;</span><br><span class="line">     try &#123;</span><br><span class="line">         //保证让main线程先执行操作</span><br><span class="line">         atomicStampedRef.compareAndSet(1,2,atomicStampedRef.getStamp(),atomicStampedRef.getStamp() +1);</span><br><span class="line">         System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【increment】 ,值 = &quot;+ atomicStampedRef.getReference());</span><br><span class="line">         atomicStampedRef.compareAndSet(2,1,atomicStampedRef.getStamp(),atomicStampedRef.getStamp() +1);</span><br><span class="line">         System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【decrement】 ,值 = &quot;+ atomicStampedRef.getReference());</span><br><span class="line">     &#125;catch (Exception e)&#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+<p>如下：程序执行结果</p>
+<blockquote>
+<p>操作线程Thread[pool-1-thread-1,5,main],初始值 = 2<br> 操作线程Thread[pool-1-thread-2,5,main],【increment】 ,值 = 2<br> 操作线程Thread[pool-1-thread-2,5,main],【decrement】 ,值 = 1<br> 操作线程Thread[pool-1-thread-1,5,main],CAS操作结果: false</p>
+</blockquote>
+<p><strong>可以看到main任务执行失，败符合我们的预期。</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>关于CAS和锁同步，个人认为如果共享数据的竞争并不大则使用CAS是个好的选择，他可以避免锁的获取与释放所带来的状态转换的开销，而在竞争比较大的场景下，则使用锁同步更优。毕竟当竞争比较大时，操作失败的次数增多，CAS不断的循环重试也是非常大的开销。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CAS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/并发编程//" class="article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/13/如何解决CAS的ABA问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-剑指offer之在O-1-时间删除链表节点" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/13/剑指offer之在O-1-时间删除链表节点/">剑指offer之在O(1)时间删除链表节点</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/13/剑指offer之在O-1-时间删除链表节点/" class="archive-article-date">
+  	<time datetime="2019-05-13T14:22:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定单向链表的头指针head和一个节点指针p，定义一个函数在O(1)时间删除该节点p。</p>
+        
+          <a class="article-more-a" href="/2019/05/13/剑指offer之在O-1-时间删除链表节点/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">在O(1)时间删除链表节点</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/13/剑指offer之在O-1-时间删除链表节点/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-在职考研" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -249,6 +443,93 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/04/10/在职考研/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-剑指offer之斐波那契数列" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/13/剑指offer之斐波那契数列/">剑指offer之斐波那契数列</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/13/剑指offer之斐波那契数列/" class="archive-article-date">
+  	<time datetime="2019-03-13T13:11:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>斐波那契数列指的是这样一个数列 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610，987，1597，2584，4181，6765，<br>10946，17711，28657，46368……..这个数列从第3项开始，每一项都等于前两项之和。大家都知道斐波那契数列，现在要求输入一个整数n，<br>请你输出斐波那契数列的第n项（从0开始，第0项为0）。<br>n&lt;=39</p>
+        
+          <a class="article-more-a" href="/2019/03/13/剑指offer之斐波那契数列/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">斐波那契数列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/13/剑指offer之斐波那契数列/">展开全文 >></a>
         </p>
       
 
@@ -800,267 +1081,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-剑指offer之数值的整数次方" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/07/剑指offer之数值的整数次方/">剑指offer之数值的整数次方</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/07/剑指offer之数值的整数次方/" class="archive-article-date">
-  	<time datetime="2018-08-07T11:41:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个 double 类型的浮点数 base 和 int 类型的整数 exponent，求 base 的 exponent 次方。</p>
-        
-          <a class="article-more-a" href="/2018/08/07/剑指offer之数值的整数次方/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数值的整数次方</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/07/剑指offer之数值的整数次方/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-剑指offer之数组重复数判断" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/07/剑指offer之数组重复数判断/">剑指offer之数组重复数判断</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/07/剑指offer之数组重复数判断/" class="archive-article-date">
-  	<time datetime="2018-07-07T11:10:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>在一个长度为 n 的数组里的所有数字都在 0 到 n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
-        
-          <a class="article-more-a" href="/2018/07/07/剑指offer之数组重复数判断/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组重复数判断</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/07/剑指offer之数组重复数判断/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-剑指offer之变态跳台阶" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/06/剑指offer之变态跳台阶/">剑指offer之变态跳台阶</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/06/剑指offer之变态跳台阶/" class="archive-article-date">
-  	<time datetime="2018-06-06T09:35:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>一只青蛙一次可以跳上 1 级台阶，也可以跳上 2 级… 它也可以跳上 n 级。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。</p>
-        
-          <a class="article-more-a" href="/2018/06/06/剑指offer之变态跳台阶/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">变态跳台阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/06/剑指offer之变态跳台阶/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1179,15 +1199,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1195,7 +1211,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1204,10 +1228,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1227,15 +1247,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双栈实现队列</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">在O(1)时间删除链表节点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1243,11 +1263,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">双栈实现队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数值的整数次方</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">逆序打印链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1259,10 +1291,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">逆序打印链表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
@@ -1271,7 +1299,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">CAS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1279,11 +1307,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Haversine formula</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1295,11 +1327,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
