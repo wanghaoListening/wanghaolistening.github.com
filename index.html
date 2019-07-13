@@ -211,29 +211,9 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="什么是ABA问题"><a href="#什么是ABA问题" class="headerlink" title="什么是ABA问题"></a>什么是ABA问题</h3><p>ABA问题是由乐观锁CAS在高并发状态下所引发出现的问题，我们都知道CAS非阻塞操作包括操作和冲突检测两个过程。每个操作过程是原子的，但是组合在一起所形成的CAS并不是一个原子操作，这就引发了上面所说的ABA问题，所谓ABA是线程1将对数据A进行修改，由于操作使用了CAS过程，所以线程1首先获取数据，发现当前数据值为A，因为CAS的语义，线程1在改变数据前需要首先检测一下当前数据的值是不是与自己刚才所获得的数据A相等，若相等则认为这期间数据没有被其它线程修改过，则可以修改数据，若不相等证明数据已经被其它线程修改，需要重新进行CAS过程。可是在这期间来了线程2，线程2对数据值修改为B,然后又来了线程3对数值从B修改为A。而这时线程1在校验数据时发现数据的值与自己所获得数据值相等都是A,则认为数据没有改变，遂对数据值做了修改，造成数据混乱。</p>
-<h3 id="ABA问题demo"><a href="#ABA问题demo" class="headerlink" title="ABA问题demo"></a>ABA问题demo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private static AtomicInteger atomicInteger = new AtomicInteger(1);</span><br><span class="line"></span><br><span class="line">Runnable main = () -&gt; &#123;</span><br><span class="line">       //定义变量 atomicInteger = 1</span><br><span class="line">       System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,初始值 = &quot; + atomicInteger);</span><br><span class="line">       try &#123;</span><br><span class="line">           //等待1秒 ，以便让干扰线程执行</span><br><span class="line">           Thread.sleep(1000);</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       // CAS操作</span><br><span class="line">       boolean isCASSuccess = atomicInteger.compareAndSet(1,2);</span><br><span class="line">       System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,CAS操作结果: &quot; + isCASSuccess);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   Runnable other = () -&gt; &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           //保证让main线程先执行操作</span><br><span class="line">           Thread.sleep(100);</span><br><span class="line">           atomicInteger.incrementAndGet(); // a 加 1, a + 1 = 1 + 1 = 2</span><br><span class="line">           System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【increment】 ,值 = &quot;+ atomicInteger);</span><br><span class="line">           atomicInteger.decrementAndGet(); // a 减 1, a - 1 = 2 - 1 = 1</span><br><span class="line">           System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【decrement】 ,值 = &quot;+ atomicInteger);</span><br><span class="line">       &#125;catch (Exception e)&#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
-<p>以上有两个线程main和other分别对atomicInteger进行修改，atomicInteger的原始数据为1，首先main获取到atomicInteger数值想要对其修改为2，而这时线程other率先一步先对atomicInteger增加到2，然后又对atomicInteger减到1，而这时main线程认为atomicInteger没有改变还是原先的1，遂对数据进行了修改。</p>
-<p>如下：程序执行结果</p>
-<blockquote>
-<p>操作线程Thread[pool-1-thread-1,5,main],初始值 = 1<br> 操作线程Thread[pool-1-thread-2,5,main],【increment】 ,值 = 2<br> 操作线程Thread[pool-1-thread-2,5,main],【decrement】 ,值 = 1<br> 操作线程Thread[pool-1-thread-1,5,main],CAS操作结果: true</p>
-</blockquote>
-<h3 id="如何解决上述问题"><a href="#如何解决上述问题" class="headerlink" title="如何解决上述问题"></a>如何解决上述问题</h3><p>解决上述问题最简单直观的便是对临界数据进行加锁，也是就说线程main在对atomicInteger进行完全修改完成之前，线程other不得对数据进行修改，但这样也带来了性能的开销，无论线程间竞争是否激烈，都需要对线程进行阻塞，用户态转内核态，维护锁计数器以及唤醒线程等一些列比较耗费性能的操作。</p>
-<p>有没有其他的解决方案呢？</p>
-<p>思路：</p>
-<p>解决ABA最简单的方案就是给值加一个修改版本号，每次值变化，都会修改它版本号，CAS操作时都对比此版本号。</p>
-<p>如下图：</p>
-<center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019/07/CAS-atomicStampedReference.jpg" alt="CAS"><br></center>
-
-<p>Java中使用AtomicStampedReference来解决ABA问题，AtomicStampedReference主要维护包含一个对象引用以及一个可以自动更新的整数”stamp”的pair对象，”stamp”就相当于版本号。</p>
-<p>我们看使用AtomicStampedReference来进行上述操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private static AtomicStampedReference&lt;Integer&gt; atomicStampedRef = new AtomicStampedReference&lt;&gt;(1, 0);  </span><br><span class="line"> Runnable main = () -&gt; &#123;</span><br><span class="line">     //定义变量 a = 1</span><br><span class="line">     System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,初始值 = &quot; + atomicStampedRef.getReference());</span><br><span class="line">     //获取当前标识别</span><br><span class="line">     int stamp = atomicStampedRef.getStamp();</span><br><span class="line">     try &#123;</span><br><span class="line">         //等待1秒 ，以便让干扰线程执行</span><br><span class="line">         Thread.sleep(1000);</span><br><span class="line">     &#125; catch (InterruptedException e) &#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">     &#125;</span><br><span class="line">     // CAS操作</span><br><span class="line">     boolean isCASSuccess = atomicStampedRef.compareAndSet(1,2,stamp,stamp +1);</span><br><span class="line">     System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,CAS操作结果: &quot; + isCASSuccess);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> Runnable other = () -&gt; &#123;</span><br><span class="line">     try &#123;</span><br><span class="line">         //保证让main线程先执行操作</span><br><span class="line">         atomicStampedRef.compareAndSet(1,2,atomicStampedRef.getStamp(),atomicStampedRef.getStamp() +1);</span><br><span class="line">         System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【increment】 ,值 = &quot;+ atomicStampedRef.getReference());</span><br><span class="line">         atomicStampedRef.compareAndSet(2,1,atomicStampedRef.getStamp(),atomicStampedRef.getStamp() +1);</span><br><span class="line">         System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【decrement】 ,值 = &quot;+ atomicStampedRef.getReference());</span><br><span class="line">     &#125;catch (Exception e)&#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
-<p>如下：程序执行结果</p>
-<blockquote>
-<p>操作线程Thread[pool-1-thread-1,5,main],初始值 = 2<br> 操作线程Thread[pool-1-thread-2,5,main],【increment】 ,值 = 2<br> 操作线程Thread[pool-1-thread-2,5,main],【decrement】 ,值 = 1<br> 操作线程Thread[pool-1-thread-1,5,main],CAS操作结果: false</p>
-</blockquote>
-<p><strong>可以看到main任务执行失，败符合我们的预期。</strong></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>关于CAS和锁同步，个人认为如果共享数据的竞争并不大则使用CAS是个好的选择，他可以避免锁的获取与释放所带来的状态转换的开销，而在竞争比较大的场景下，则使用锁同步更优。毕竟当竞争比较大时，操作失败的次数增多，CAS不断的循环重试也是非常大的开销。</p>
-
+        
+          <a class="article-more-a" href="/2019/07/13/如何解决CAS的ABA问题/#more">more >></a>
+        
       
 
       
@@ -1207,11 +1187,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1223,11 +1203,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1239,11 +1219,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1255,7 +1235,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">在O(1)时间删除链表节点</a>
+                <a href="javascript:void(0)" class="js-tag color2">双栈实现队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1263,7 +1243,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双栈实现队列</a>
+                <a href="javascript:void(0)" class="js-tag color4">在O(1)时间删除链表节点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1271,15 +1251,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">逆序打印链表</a>
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1288,6 +1264,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">跳台阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">逆序打印链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1323,15 +1303,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NIO</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">

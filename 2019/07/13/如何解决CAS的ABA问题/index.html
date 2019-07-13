@@ -17,7 +17,7 @@
 <meta property="og:description" content="CAS的ABA问题">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2019/07/CAS-atomicStampedReference.jpg">
-<meta property="og:updated_time" content="2019-07-13T14:42:37.303Z">
+<meta property="og:updated_time" content="2019-07-13T14:46:51.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何解决CAS的ABA问题">
 <meta name="twitter:description" content="CAS的ABA问题">
@@ -212,6 +212,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="什么是ABA问题"><a href="#什么是ABA问题" class="headerlink" title="什么是ABA问题"></a>什么是ABA问题</h3><p>ABA问题是由乐观锁CAS在高并发状态下所引发出现的问题，我们都知道CAS非阻塞操作包括操作和冲突检测两个过程。每个操作过程是原子的，但是组合在一起所形成的CAS并不是一个原子操作，这就引发了上面所说的ABA问题，所谓ABA是线程1将对数据A进行修改，由于操作使用了CAS过程，所以线程1首先获取数据，发现当前数据值为A，因为CAS的语义，线程1在改变数据前需要首先检测一下当前数据的值是不是与自己刚才所获得的数据A相等，若相等则认为这期间数据没有被其它线程修改过，则可以修改数据，若不相等证明数据已经被其它线程修改，需要重新进行CAS过程。可是在这期间来了线程2，线程2对数据值修改为B,然后又来了线程3对数值从B修改为A。而这时线程1在校验数据时发现数据的值与自己所获得数据值相等都是A,则认为数据没有改变，遂对数据值做了修改，造成数据混乱。</p>
+<a id="more"></a>
 <h3 id="ABA问题demo"><a href="#ABA问题demo" class="headerlink" title="ABA问题demo"></a>ABA问题demo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private static AtomicInteger atomicInteger = new AtomicInteger(1);</span><br><span class="line"></span><br><span class="line">Runnable main = () -&gt; &#123;</span><br><span class="line">       //定义变量 atomicInteger = 1</span><br><span class="line">       System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,初始值 = &quot; + atomicInteger);</span><br><span class="line">       try &#123;</span><br><span class="line">           //等待1秒 ，以便让干扰线程执行</span><br><span class="line">           Thread.sleep(1000);</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       // CAS操作</span><br><span class="line">       boolean isCASSuccess = atomicInteger.compareAndSet(1,2);</span><br><span class="line">       System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,CAS操作结果: &quot; + isCASSuccess);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   Runnable other = () -&gt; &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           //保证让main线程先执行操作</span><br><span class="line">           Thread.sleep(100);</span><br><span class="line">           atomicInteger.incrementAndGet(); // a 加 1, a + 1 = 1 + 1 = 2</span><br><span class="line">           System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【increment】 ,值 = &quot;+ atomicInteger);</span><br><span class="line">           atomicInteger.decrementAndGet(); // a 减 1, a - 1 = 2 - 1 = 1</span><br><span class="line">           System.out.println(&quot;操作线程&quot; + Thread.currentThread() +&quot;,【decrement】 ,值 = &quot;+ atomicInteger);</span><br><span class="line">       &#125;catch (Exception e)&#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
 <p>以上有两个线程main和other分别对atomicInteger进行修改，atomicInteger的原始数据为1，首先main获取到atomicInteger数值想要对其修改为2，而这时线程other率先一步先对atomicInteger增加到2，然后又对atomicInteger减到1，而这时main线程认为atomicInteger没有改变还是原先的1，遂对数据进行了修改。</p>
 <p>如下：程序执行结果</p>
@@ -535,11 +536,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,11 +552,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +568,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,7 +584,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">在O(1)时间删除链表节点</a>
+                <a href="javascript:void(0)" class="js-tag color2">双栈实现队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,7 +592,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双栈实现队列</a>
+                <a href="javascript:void(0)" class="js-tag color4">在O(1)时间删除链表节点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,15 +600,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">逆序打印链表</a>
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,6 +613,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">跳台阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">逆序打印链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,15 +652,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NIO</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
