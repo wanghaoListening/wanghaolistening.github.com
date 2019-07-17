@@ -17,7 +17,7 @@
 <meta property="og:description" content="剑指offer之输出该链表中倒数第k个结点">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:updated_time" content="2019-07-16T12:47:00.568Z">
+<meta property="og:updated_time" content="2019-07-16T12:54:14.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer之输出该链表中倒数第k个结点">
 <meta name="twitter:description" content="剑指offer之输出该链表中倒数第k个结点">
@@ -84,7 +84,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 49
+                    总文章数 50
                 </nav>
 		<nav class="header-smart-menu">
     		
@@ -214,7 +214,7 @@ var _hmt = _hmt || [];
         <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>输入一个链表，输出该链表中倒数第k个结点。<br>本题从1开始计数，即链表的尾结点是倒数第1个结点。例如一个链表有6个结点，从头结点开始它们的值依次是5、8、3、6、2、9。这个链表的倒数第3个结点是值为6的结点。</p>
 <a id="more"></a>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>初始两个节点指针，before,after都指向链表的首节点。<br>然后before指针先不动，先让after指针向后移动k个位置，然后两个指针一起向后移动，由于before与after相差k个位置，所以当after指向最后一个节点时，则before<br>指针所指节点即为倒数k个节点</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>初始两个节点指针，before,after都指向链表的首节点。<br>然后before指针先不动，先让after指针向后移动k个位置，然后两个指针一起向后移动，由于before与after相差k个位置，所以当after指向最后一个节点时，则before指针所指节点即为倒数k个节点</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">public class ReciprocalKNodeInlinked &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        LinkedNode linkedNode = new LinkedNode(5,null);</span><br><span class="line">        LinkedNode linkedNode2 = new LinkedNode(8,linkedNode);</span><br><span class="line">        LinkedNode linkedNode3 = new LinkedNode(3,linkedNode2);</span><br><span class="line">        LinkedNode linkedNode4 = new LinkedNode(6,linkedNode3);</span><br><span class="line"></span><br><span class="line">        System.out.println(reciprocalKNode(linkedNode4,4));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *</span><br><span class="line">     * @param linkedNode</span><br><span class="line">     *         链表首节点</span><br><span class="line">     * @param k</span><br><span class="line">     *         倒数k个节点</span><br><span class="line">     * @return</span><br><span class="line">     *        返回倒数第k个节点</span><br><span class="line">     */</span><br><span class="line">    private static LinkedNode reciprocalKNode(LinkedNode linkedNode,int k)&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        if(Objects.isNull(linkedNode) || k&lt;1)&#123;</span><br><span class="line"></span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        LinkedNode before,after;</span><br><span class="line"></span><br><span class="line">        before = linkedNode;</span><br><span class="line">        after = linkedNode;</span><br><span class="line"></span><br><span class="line">        int kCount = 0;</span><br><span class="line">        while (Objects.nonNull(after))&#123;</span><br><span class="line">            kCount ++;</span><br><span class="line">            if(kCount &gt; k)&#123;</span><br><span class="line">               before = before.next;</span><br><span class="line">            &#125;</span><br><span class="line">            after = after.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return before;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码地址：<a href="http://dwz1.cc/31e9go" target="_blank" rel="noopener">http://dwz1.cc/31e9go</a></p>
 
@@ -523,7 +523,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -531,7 +531,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,7 +539,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,11 +547,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,11 +563,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +575,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">给定节点的下一个中序遍历节点</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color5">给定节点的下一个中序遍历节点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,15 +603,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">旋转数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -631,7 +631,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+                <a href="javascript:void(0)" class="js-tag color5">循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,11 +643,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,15 +671,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
