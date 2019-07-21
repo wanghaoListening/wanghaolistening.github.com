@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>python 列表生成式 | haothink123</title>
+  <title>剑指offer之二叉树镜像 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="python中的列表生成式学习整理">
-<meta name="keywords" content="列表生成式">
+  <meta name="description" content="剑指offer之二叉树镜像">
+<meta name="keywords" content="二叉树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python 列表生成式">
-<meta property="og:url" content="https://wanghaolistening.github.io/2016/07/15/python-列表生成式/index.html">
+<meta property="og:title" content="剑指offer之二叉树镜像">
+<meta property="og:url" content="https://wanghaolistening.github.io/2019/07/21/剑指offer之二叉树镜像/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="python中的列表生成式学习整理">
+<meta property="og:description" content="剑指offer之二叉树镜像">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-03T11:33:15.087Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-mirror.jpg">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
+<meta property="og:updated_time" content="2019-07-21T02:12:07.473Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python 列表生成式">
-<meta name="twitter:description" content="python中的列表生成式学习整理">
+<meta name="twitter:title" content="剑指offer之二叉树镜像">
+<meta name="twitter:description" content="剑指offer之二叉树镜像">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-mirror.jpg">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -189,63 +192,35 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python-列表生成式" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-剑指offer之二叉树镜像" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python 列表生成式
+      剑指offer之二叉树镜像
     </h1>
   
 
         
-        <a href="/2016/07/15/python-列表生成式/" class="archive-article-date">
-  	<time datetime="2016-07-15T10:06:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-15</time>
+        <a href="/2019/07/21/剑指offer之二叉树镜像/" class="archive-article-date">
+  	<time datetime="2019-07-21T02:06:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Python内置的列表生成式，可以用一种非常简洁的方式来创建列表，在上下文中执行一个特定的表达式，结果将返回一个新的列表，大大简化了我们创建一个普通列表的过程。</p>
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>操作给定的二叉树，将其变换为源二叉树的镜像。</p>
+<p><strong>如下将A转换成B</strong></p>
+<center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-mirror.jpg" alt="思考"><br></center>
+
 <a id="more"></a>
-<p>未使用列表生成式来生成列表，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new_list = []</span><br><span class="line">for i in old_list:</span><br><span class="line">    if filter(i):</span><br><span class="line">        new_list.append(expressions(i))</span><br></pre></td></tr></table></figure>
-<p>使用列表生成式完成上述过程，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_list = [expression(i) for i in old_list if filter(i)]</span><br></pre></td></tr></table></figure>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>列表生成式上下文为中括号[expression]</p>
-<p>基本的语法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ expression for item in list if conditional ]</span><br></pre></td></tr></table></figure>
-<p>与下面代码效果是相等的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for item in list:</span><br><span class="line">    if conditional:</span><br><span class="line">        expression</span><br></pre></td></tr></table></figure>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>创建一个简单的列表生成式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x = [i for i in range(10)]</span><br><span class="line">&gt;&gt;&gt; print(x)</span><br><span class="line">将得到如下结果</span><br><span class="line">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br></pre></td></tr></table></figure>
-<p>分别使用循环和列表生成式生成一个正方形面的的列表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">使用循环</span><br><span class="line">&gt;&gt;&gt; squares = []</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; for x in range(10):</span><br><span class="line">...     squares.append(x**2)</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; print(squares)</span><br><span class="line">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br><span class="line"></span><br><span class="line">使用列表生成式</span><br><span class="line">&gt;&gt;&gt; squares = [x**2 for x in range(10)]</span><br><span class="line">&gt;&gt;&gt; print(squares)</span><br><span class="line">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>需要记住语法[ expression for item in list if conditional ]</p>
-</blockquote>
-<p>列表的每个元素乘以3生成一个新的列表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list1 = [3,4,5]</span><br><span class="line">&gt;&gt;&gt;  </span><br><span class="line">... multiplied = [item*3 for item in list1] </span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; print(multiplied)</span><br><span class="line">[9, 12, 15]</span><br></pre></td></tr></table></figure>
-<p>获取列表中每个单词的第一个字母，生成一个新的列表</p>
-<figure class="highlight plain"><figcaption><span>letter</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; listOfWords = [&quot;this&quot;,&quot;is&quot;,&quot;a&quot;,&quot;list&quot;,&quot;of&quot;,&quot;words&quot;]</span><br><span class="line">&gt;&gt;&gt; tems = [ word[0] for word in listOfWords ]</span><br><span class="line">&gt;&gt;&gt; print(tems)</span><br><span class="line">[&apos;t&apos;, &apos;i&apos;, &apos;a&apos;, &apos;l&apos;, &apos;o&apos;, &apos;w&apos;]</span><br></pre></td></tr></table></figure>
-<p>从字符串中抽取所有的数字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; string = &quot;Hello 12345 World&quot;</span><br><span class="line">&gt;&gt;&gt; numbers = [x for x in string if x.isdigit()]</span><br><span class="line">&gt;&gt;&gt; print(numbers)</span><br><span class="line">[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果你想要所有字母，可以改变x.isdigit() 为x.isalpha()即可</p>
-</blockquote>
-<p>使用列表生成式从文本文件获取中获取指定的行</p>
-<p>创建如下test.txt文件，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">this is line1</span><br><span class="line">this is line2</span><br><span class="line">this is line3</span><br><span class="line">this is line4</span><br><span class="line">this is line5</span><br></pre></td></tr></table></figure></p>
-<p>读取包含line3的那行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; fh = open(&quot;/Users/admin/test.txt&quot;, &quot;r&quot;)</span><br><span class="line">&gt;&gt;&gt; result = [i for i in fh if &quot;line3&quot; in i]</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; print(result)</span><br><span class="line">[&apos;this is line3\n&apos;]</span><br></pre></td></tr></table></figure></p>
-<p>在列表生成式中使用自定义函数</p>
-<p>函数定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def double(x):</span><br><span class="line">...   return x*2</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; print(double(10))</span><br><span class="line">20</span><br></pre></td></tr></table></figure></p>
-<p>容易的在列表生成式中使用函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [double(x) for x in range(10) if x%2==0]</span><br><span class="line">[0, 4, 8, 12, 16]</span><br></pre></td></tr></table></figure></p>
-<p>参考<br><a href="http://docs.python.org/2/tutorial/datastructures.html" target="_blank" rel="noopener">http://docs.python.org/2/tutorial/datastructures.html</a></p>
-<p><a href="http://www.dalkescientific.com/writings/NBN/list_comps.html" target="_blank" rel="noopener">http://www.dalkescientific.com/writings/NBN/list_comps.html</a></p>
-<p><a href="http://effbot.org/zone/python-list.htm" target="_blank" rel="noopener">http://effbot.org/zone/python-list.htm</a></p>
-<p><a href="http://blog.cdleary.com/2010/04/learning-python-by-example-list-comprehensions/" target="_blank" rel="noopener">http://blog.cdleary.com/2010/04/learning-python-by-example-list-comprehensions/</a></p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>先前序遍历这棵树的每个节点，如果遍历到的节点有子节点，就交换它的两个子节点。当交换完所有非叶节点的左、右子节点之后，就得到了树的镜像。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class BiTreeMirror &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 输入一棵数的头结点</span><br><span class="line">     * @param head</span><br><span class="line">     *        头结点</span><br><span class="line">     */</span><br><span class="line">    private static void mirror(TreeNode head)&#123;</span><br><span class="line"></span><br><span class="line">        if(Objects.isNull(head))&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(Objects.isNull(head.left) &amp;&amp; Objects.isNull(head.right))&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        TreeNode tempNode = head.left;</span><br><span class="line">        head.left = head.right;</span><br><span class="line">        head.right = tempNode;</span><br><span class="line"></span><br><span class="line">        mirror(head.left);</span><br><span class="line">        mirror(head.right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="http://dwz1.cc/SbEFzdn" target="_blank" rel="noopener">http://dwz1.cc/SbEFzdn</a></p>
 
       
 
@@ -280,7 +255,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">列表生成式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
         		</li>
       		
 		</ul>
@@ -292,7 +267,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/pyhton//" class="article-tag-list-link color2">pyhton</a>
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
@@ -347,7 +322,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2016/07/15/python-列表生成式/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/07/21/剑指offer之二叉树镜像/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -361,18 +336,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2016/07/20/python中的map-reduce/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          python中的map/reduce
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/27/说说工厂模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">说说工厂模式</div>
+    <a href="/2019/07/20/剑指offer之判断B树是否为A树子结构/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer之判断B树是否为A树子结构</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -399,7 +365,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#语法"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-number">2.</span> <span class="toc-text">例子</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思考"><span class="toc-number">2.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题思路"><span class="toc-number">3.</span> <span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-number">4.</span> <span class="toc-text">代码实现</span></a></li></ol>
                     </div>
                 </span>
             </div>
