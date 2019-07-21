@@ -216,6 +216,9 @@ var _hmt = _hmt || [];
 <h3 id="Haversine-formula-java-实现"><a href="#Haversine-formula-java-实现" class="headerlink" title="Haversine formula java 实现"></a>Haversine formula java 实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;</span><br><span class="line">public int calculateDistanceInKilometer(double userLat, double userLng,</span><br><span class="line">  double venueLat, double venueLng) &#123;</span><br><span class="line"></span><br><span class="line">    double latDistance = Math.toRadians(userLat - venueLat);</span><br><span class="line">    double lngDistance = Math.toRadians(userLng - venueLng);</span><br><span class="line"></span><br><span class="line">    double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)</span><br><span class="line">      + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))</span><br><span class="line">      * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);</span><br><span class="line"></span><br><span class="line">    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));</span><br><span class="line"></span><br><span class="line">    return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
+      
+
+  <div class="declare" hidden="hidden"></div>
 
       
         <div class="page-reward">
@@ -539,11 +542,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,11 +554,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +570,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,11 +674,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -229,6 +229,9 @@ var _hmt = _hmt || [];
 <h3 id="总结现象的原因"><a href="#总结现象的原因" class="headerlink" title="总结现象的原因"></a>总结现象的原因</h3><p>当对Doug Lea进行删除的时候，由于在此期间modCount 是等于expectedModCount因为移除Doug Lea发生<br>在next之后，所以正常打印，而当next获取第二个元素时此时的modCount != expectedModCount条件成立，<br>故抛出了java.util.ConcurrentModificationException异常。<br>当对Joshua Bloch进行删除时，和对Doug Lea进行删除的原理相同，所以Joshua Bloch正常打印，而当进<br>入下一次hasNext()时由于移除了一个元素所以size应该减一后成为二，而cursor正是指向当前正要遍历元<br>素的索引下标也为二所以条件成立返回false所以不执行条件中的代码也就不打印Bruce Edition。</p>
 
       
+      
+
+  <div class="declare" hidden="hidden"></div>
 
       
         <div class="page-reward">
@@ -557,11 +560,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,11 +572,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,11 +588,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -689,11 +692,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
