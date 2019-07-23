@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>动态页面静态化 | haothink123</title>
+  <title>剑指offer之包含min函数的栈 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="动态页面静态化顾名思义，静态页面动态化就是把动态页面如Javaweb中的JSP内容翻译到HTML中，在网站中的某些页面的数据长时间不会变动，而这种数据放在动态的页面JSP上虽说未尝不可，但是考虑到服务器（Tomcat）在响应客户端的请求时，需要把JSP翻译成Java文件再由流输出到客户端浏览器。这无形中无疑加大了服务器的负担，而且增加了响应时间。为了解决这个问题，就需要把这些长时间内容不变的动态页">
-<meta name="keywords" content="jsp">
+  <meta name="description" content="包含min函数的栈">
+<meta name="keywords" content="栈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态页面静态化">
-<meta property="og:url" content="https://wanghaolistening.github.io/2015/03/17/动态页面静态化/index.html">
+<meta property="og:title" content="剑指offer之包含min函数的栈">
+<meta property="og:url" content="https://wanghaolistening.github.io/2019/05/23/剑指offer之包含min函数的栈/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="动态页面静态化顾名思义，静态页面动态化就是把动态页面如Javaweb中的JSP内容翻译到HTML中，在网站中的某些页面的数据长时间不会变动，而这种数据放在动态的页面JSP上虽说未尝不可，但是考虑到服务器（Tomcat）在响应客户端的请求时，需要把JSP翻译成Java文件再由流输出到客户端浏览器。这无形中无疑加大了服务器的负担，而且增加了响应时间。为了解决这个问题，就需要把这些长时间内容不变的动态页">
+<meta property="og:description" content="包含min函数的栈">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-08T07:46:34.372Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
+<meta property="og:updated_time" content="2019-07-23T12:28:08.283Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态页面静态化">
-<meta name="twitter:description" content="动态页面静态化顾名思义，静态页面动态化就是把动态页面如Javaweb中的JSP内容翻译到HTML中，在网站中的某些页面的数据长时间不会变动，而这种数据放在动态的页面JSP上虽说未尝不可，但是考虑到服务器（Tomcat）在响应客户端的请求时，需要把JSP翻译成Java文件再由流输出到客户端浏览器。这无形中无疑加大了服务器的负担，而且增加了响应时间。为了解决这个问题，就需要把这些长时间内容不变的动态页">
+<meta name="twitter:title" content="剑指offer之包含min函数的栈">
+<meta name="twitter:description" content="包含min函数的栈">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -183,124 +185,32 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-动态页面静态化" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-剑指offer之包含min函数的栈" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      动态页面静态化
+      剑指offer之包含min函数的栈
     </h1>
   
 
         
-        <a href="/2015/03/17/动态页面静态化/" class="archive-article-date">
-  	<time datetime="2015-03-17T07:23:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-03-17</time>
+        <a href="/2019/05/23/剑指offer之包含min函数的栈/" class="archive-article-date">
+  	<time datetime="2019-05-23T12:24:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="动态页面静态化"><a href="#动态页面静态化" class="headerlink" title="动态页面静态化"></a>动态页面静态化</h3><p>顾名思义，静态页面动态化就是把动态页面如Javaweb中的JSP内容翻译到HTML中，<br>在网站中的某些页面的数据长时间不会变动，而这种数据放在动态的页面JSP上虽说<br>未尝不可，但是考虑到服务器（Tomcat）在响应客户端的请求时，需要把JSP翻译成<br>Java文件再由流输出到客户端浏览器。这无形中无疑加大了服务器的负担，而且增加<br>了响应时间。为了解决这个问题，就需要把这些长时间内容不变的动态页面翻译成静<br>态页面。让客户端直接访问这些静态的页面即可。<br><a id="more"></a></p>
-<h3 id="实际解决方法"><a href="#实际解决方法" class="headerlink" title="实际解决方法"></a>实际解决方法</h3><p>想要解决这个问题就需要了解JSP原理，通过javaweb中对JSP的了解知道<br>JSP在响应客户端请求时，是由Tomcat将其翻译成Java文件再来运行响应。<br>查看本地安装tomcat服务器的Tomcat7\work\Catalina\localhost\目录中的<br>项目得知了其真身。也从中看到了JSP九大内置对象的身影，如下翻译后的JSP<br>文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">  Generated by the Jasper component of Apache Tomcat</span><br><span class="line">  Version: Apache Tomcat/7.0.59</span><br><span class="line">  Generated at: 2015-05-01 04:07:04 UTC</span><br><span class="line">  Note: The last modified time of this file was set to</span><br><span class="line">        the last modified time of the source file after</span><br><span class="line">        generation to assist with modification tracking.*</span><br><span class="line"> </span><br><span class="line">    package org.apache.jsp.view;</span><br><span class="line"></span><br><span class="line">    import javax.servlet.*;</span><br><span class="line">    import javax.servlet.http.*;</span><br><span class="line">    import javax.servlet.jsp.*;</span><br><span class="line">    import java.util.*;</span><br><span class="line"></span><br><span class="line">    public final class fileUpLoad_jsp extends org.apache.jasper.runtime.HttpJspBase</span><br><span class="line">        implements org.apache.jasper.runtime.JspSourceDependent &#123;</span><br><span class="line"></span><br><span class="line">      private static final javax.servlet.jsp.JspFactory _jspxFactory =</span><br><span class="line">              javax.servlet.jsp.JspFactory.getDefaultFactory();</span><br><span class="line"></span><br><span class="line">      private static java.util.Map&lt;java.lang.String,java.lang.Long&gt; _jspx_dependants;</span><br><span class="line"></span><br><span class="line">      private javax.el.ExpressionFactory _el_expressionfactory;</span><br><span class="line">      private org.apache.tomcat.InstanceManager _jsp_instancemanager;</span><br><span class="line"></span><br><span class="line">      public java.util.Map&lt;java.lang.String,java.lang.Long&gt; getDependants() &#123;</span><br><span class="line">        return _jspx_dependants;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public void _jspInit() &#123;</span><br><span class="line">        _el_expressionfactory = _jspxFactory.getJspApplicationContext(getServletConfig().getServletContext()).getExpressionFactory();</span><br><span class="line">        _jsp_instancemanager = org.apache.jasper.runtime.InstanceManagerFactory.getInstanceManager(getServletConfig());</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public void _jspDestroy() &#123;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public void _jspService(final javax.servlet.http.HttpServletRequest request, final javax.servlet.http.HttpServletResponse response)</span><br><span class="line">            throws java.io.IOException, javax.servlet.ServletException &#123;</span><br><span class="line"></span><br><span class="line">        final javax.servlet.jsp.PageContext pageContext;</span><br><span class="line">        javax.servlet.http.HttpSession session = null;</span><br><span class="line">        final javax.servlet.ServletContext application;</span><br><span class="line">        final javax.servlet.ServletConfig config;</span><br><span class="line">        javax.servlet.jsp.JspWriter out = null;</span><br><span class="line">        final java.lang.Object page = this;</span><br><span class="line">        javax.servlet.jsp.JspWriter _jspx_out = null;</span><br><span class="line">        javax.servlet.jsp.PageContext _jspx_page_context = null;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">          response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span><br><span class="line">          pageContext = _jspxFactory.getPageContext(this, request, response,</span><br><span class="line">                null, true, 8192, true);</span><br><span class="line">          _jspx_page_context = pageContext;</span><br><span class="line">          application = pageContext.getServletContext();</span><br><span class="line">          config = pageContext.getServletConfig();</span><br><span class="line">          session = pageContext.getSession();</span><br><span class="line">          out = pageContext.getOut();</span><br><span class="line">          _jspx_out = out;</span><br><span class="line"></span><br><span class="line">          out.write(&apos;\r&apos;);</span><br><span class="line">          out.write(&apos;\n&apos;);</span><br><span class="line"></span><br><span class="line">    String path = request.getContextPath();</span><br><span class="line">    String basePath = request.getScheme()+&quot;://&quot;+request.getServerName()+&quot;:&quot;+request.getServerPort()+path+&quot;/&quot;;</span><br><span class="line"></span><br><span class="line">          out.write(&quot;\r\n&quot;);</span><br><span class="line">          out.write(&quot;\r\n&quot;);</span><br><span class="line">          out.write(&quot;&lt;!DOCTYPE HTML PUBLIC \&quot;-//W3C//DTD HTML 4.01 Transitional//EN\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;&lt;html&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;  &lt;head&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;    &lt;base href=\&quot;&quot;);</span><br><span class="line">          out.print(basePath);</span><br><span class="line">          out.write(&quot;\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;    \r\n&quot;);</span><br><span class="line">          out.write(&quot;    &lt;title&gt;My JSP &apos;fileUpLoad.jsp&apos; starting page&lt;/title&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;    \r\n&quot;);</span><br><span class="line">          out.write(&quot;\t&lt;meta http-equiv=\&quot;pragma\&quot; content=\&quot;no-cache\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;\t&lt;meta http-equiv=\&quot;cache-control\&quot; content=\&quot;no-cache\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;\t&lt;meta http-equiv=\&quot;expires\&quot; content=\&quot;0\&quot;&gt;    \r\n&quot;);</span><br><span class="line">          out.write(&quot;\t&lt;meta http-equiv=\&quot;keywords\&quot; content=\&quot;keyword1,keyword2,keyword3\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;\t&lt;meta http-equiv=\&quot;description\&quot; content=\&quot;This is my page\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;\t&lt;!--\r\n&quot;);</span><br><span class="line">          out.write(&quot;\t&lt;link rel=\&quot;stylesheet\&quot; type=\&quot;text/css\&quot; href=\&quot;styles.css\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;\t--&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;\r\n&quot;);</span><br><span class="line">          out.write(&quot;  &lt;/head&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;  \r\n&quot;);</span><br><span class="line">          out.write(&quot;  &lt;body&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;    \t&lt;form action=\&quot;fileuploadTest2\&quot; method=\&quot;post\&quot; enctype=\&quot;multipart/form-data\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;    \t\t&lt;input type=\&quot;file\&quot; name=\&quot;file\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;    \t\t&lt;input type=\&quot;text\&quot; name=\&quot;desc\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;    \t\t&lt;input type=\&quot;submit\&quot; value=\&quot;提交\&quot;&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;    \t&lt;/form&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;  &lt;/body&gt;\r\n&quot;);</span><br><span class="line">          out.write(&quot;&lt;/html&gt;\r\n&quot;);</span><br><span class="line">        &#125; catch (java.lang.Throwable t) &#123;</span><br><span class="line">          if (!(t instanceof javax.servlet.jsp.SkipPageException))&#123;</span><br><span class="line">            out = _jspx_out;</span><br><span class="line">            if (out != null &amp;&amp; out.getBufferSize() != 0)</span><br><span class="line">              try &#123;</span><br><span class="line">                if (response.isCommitted()) &#123;</span><br><span class="line">                  out.flush();</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                  out.clearBuffer();</span><br><span class="line">                &#125;</span><br><span class="line">              &#125; catch (java.io.IOException e) &#123;&#125;</span><br><span class="line">            if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);</span><br><span class="line">            else throw new ServletException(t);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">          _jspxFactory.releasePageContext(_jspx_page_context);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">由此可以得出我们在JSP中所写的内容包括HTML的标签，都是由javax.servlet.jsp.JspWriter out = null;out这个流输出到客户端浏览器的再由客户端浏览器对其进行解析。通过对JSP真身的了解得知，这也许就是JSP中可以嵌入Java代码的原因。</span><br><span class="line">	</span><br><span class="line">### 页面静态化的具体解决代码</span><br></pre></td></tr></table></figure>
-<pre><code>import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
-
-public class StaticResponse extends HttpServletResponseWrapper {
-private PrintWriter pw;  
-
-* String path：html文件路径！   
-  public StaticResponse(HttpServletResponse response, String path) 
-    throws FileNotFoundException, UnsupportedEncodingException {
-    super(response);
-
-  // 创建一个与html文件路径在一起的流对象
-  pw = new PrintWriter(path, &quot;utf-8&quot;);
-  }
-
-  public PrintWriter getWriter() {
-  // 返回一个与html绑定在一起的printWriter对象
-  // jsp会使用它进行输出，这样数据都输出到html文件了。
-  return pw;
-  }
-}
-
-import java.io.File;
-import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-public class StaticFilter implements Filter {
-    private FilterConfig config;
-    public void destroy() {}
-    public void init(FilterConfig fConfig) throws ServletException {
-        this.config = fConfig;
-    }
-
-    public void doFilter(ServletRequest request, 
-            ServletResponse response, FilterChain chain) 
-                    throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        /*
-         * 1. 第一次访问时，查找请求对应的html页面是否存在，如果存在重定向到html
-         * 2. 如果不存在，放行！把servlet访问数据库后，输出给客户端的数据保存到一个html文件中
-         *   再重定向到html
-         */
-        /*
-         * 一、获取category参数！
-         * category有四种可能：
-         * * null --&gt; null.html
-         * * 1 --&gt; 1.html
-         * * 2 --&gt; 2.html
-         * * 3 --&gt; 3.html
-         * 
-         * html页面的保存路径, htmls目录下
-         * 
-         * 判断对应的html文件是否存在，如果存在，直接重定向！
-         */
-        String category = request.getParameter(&quot;category&quot;);
-        String htmlPage = category + &quot;.html&quot;;//得到对应的文件名称
-        String htmlPath = config.getServletContext().getRealPath(&quot;/htmls&quot;);//得到文件的存放目录
-        File destFile = new File(htmlPath, htmlPage);
-
-        if(destFile.exists()) {//如果文件存在
-            // 重定向到这个文件
-            res.sendRedirect(req.getContextPath() + &quot;/htmls/&quot; + htmlPage);
-            return;
-        }
-        /*
-         * 二、如果html文件不存在，我们要生成html
-         * 1. 放行，show.jsp会做出很多的输出，我们要让它别再输出给客户端，而是输出到我们指定的一个html文件中
-         * 完成：
-         * 调包response，让它的getWriter()与一个html文件绑定，那么show.jsp的输出就到了html文件中
-         */
-        StaticResponse sr = new StaticResponse(res, destFile.getAbsolutePath());
-        chain.doFilter(request, sr);//放行，即生成了html文件
-
-        // 这时页面已经存在，重定向到html文件
-        res.sendRedirect(req.getContextPath() + &quot;/htmls/&quot; + htmlPage);
-    }
- }
-</code></pre><p><code>`</code></p>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>因为JSP内容是通过流对象输出端客户端的那么我们可以改变其输出的目的地，因此继承了响应对象，<br>HttpServletResponseWrapper对象，在其子类中对PrintWriter对象进行了修饰改变了其输出的目的地。<br>再利用拦截器Filter对相应的请求进行拦截，判断是否是那个需要被被静态化的动态页面，若是（第一此），<br>那么调包response，让它的getWriter()与一个html文件绑定，当对请求放行后即生成了html文件然后，这是的静态页面已存在，重定向到这个页面。第二次往后判断拥有后直接重定向到此静态页面。</p>
-<blockquote>
-<blockquote>
-<p>优点，减轻了服务端的压力，缺点，变客户端的一次请求为两次，加大了客户端压力。</p>
-</blockquote>
-</blockquote>
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数，其时间复杂度应为O(1)。</p>
+<a id="more"></a>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>以空间换时间,使用一个辅助栈minStack存放每一次入栈操作的最小元素，min()函数直接从辅助栈minStack的栈顶即可取到最小元素，在O(1)时间内完成。<br>当最小元素从原数据栈stack内被弹出时，同时弹出辅助栈minStack内的栈顶元素，则mins辅助栈的新的栈顶元素就是下一个最小值。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class ContainMinFunOfStack &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private Stack&lt;Integer&gt; minStack = new Stack&lt;&gt;();</span><br><span class="line">    private Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void push(Integer value)&#123;</span><br><span class="line"></span><br><span class="line">        stack.push(value);</span><br><span class="line">        minStack.push(minStack.isEmpty()?value:Math.min(minStack.peek(),value));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer pop()&#123;</span><br><span class="line"></span><br><span class="line">        minStack.pop();</span><br><span class="line">        return stack.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer min()&#123;</span><br><span class="line"></span><br><span class="line">        return minStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ContainMinFunOfStack containMinFunOfStack = new ContainMinFunOfStack();</span><br><span class="line"></span><br><span class="line">        containMinFunOfStack.push(10);</span><br><span class="line">        containMinFunOfStack.push(4);</span><br><span class="line">        containMinFunOfStack.push(9);</span><br><span class="line">        containMinFunOfStack.push(2);</span><br><span class="line"></span><br><span class="line">        System.out.println(containMinFunOfStack.min());</span><br><span class="line">        System.out.println(containMinFunOfStack.pop());</span><br><span class="line">        System.out.println(containMinFunOfStack.min());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="http://dwz1.cc/U71PRPs" target="_blank" rel="noopener">http://dwz1.cc/U71PRPs</a></p>
 
       
       
@@ -344,7 +254,7 @@ public class StaticFilter implements Filter {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jsp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
         		</li>
       		
 		</ul>
@@ -356,7 +266,7 @@ public class StaticFilter implements Filter {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/javaweb//" class="article-tag-list-link color3">javaweb</a>
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
@@ -411,7 +321,7 @@ public class StaticFilter implements Filter {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2015/03/17/动态页面静态化/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/05/23/剑指offer之包含min函数的栈/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -425,18 +335,18 @@ public class StaticFilter implements Filter {
   
 <nav id="article-nav">
   
-    <a href="/2015/06/11/Iterator设计模式/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/06/14/剑指offer之二叉树给定节点的下一个中序遍历节点/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Iterator设计模式
+          剑指offer之二叉树给定节点的下一个中序遍历节点
         
       </div>
     </a>
   
   
-    <a href="/2014/10/08/根据经纬度计算两点距离/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">根据经纬度计算两点距离</div>
+    <a href="/2019/05/18/剑指offer之删除链表中重复的结点/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer之删除链表中重复的结点</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -463,7 +373,7 @@ public class StaticFilter implements Filter {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#动态页面静态化"><span class="toc-number">1.</span> <span class="toc-text">动态页面静态化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实际解决方法"><span class="toc-number">2.</span> <span class="toc-text">实际解决方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结："><span class="toc-number">3.</span> <span class="toc-text">总结：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思考"><span class="toc-number">2.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题思路"><span class="toc-number">3.</span> <span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-number">4.</span> <span class="toc-text">代码实现</span></a></li></ol>
                     </div>
                 </span>
             </div>
