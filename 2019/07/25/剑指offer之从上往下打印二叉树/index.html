@@ -6,22 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>剑指offer之删除链表中重复的结点 | haothink123</title>
+  <title>剑指offer之从上往下打印二叉树 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="剑指offer之删除链表中重复的结点">
-<meta name="keywords" content="链表">
+  <meta name="description" content="从上往下打印二叉树">
+<meta name="keywords" content="二叉树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer之删除链表中重复的结点">
-<meta property="og:url" content="https://wanghaolistening.github.io/2019/05/18/剑指offer之删除链表中重复的结点/index.html">
+<meta property="og:title" content="剑指offer之从上往下打印二叉树">
+<meta property="og:url" content="https://wanghaolistening.github.io/2019/07/25/剑指offer之从上往下打印二叉树/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="剑指offer之删除链表中重复的结点">
+<meta property="og:description" content="从上往下打印二叉树">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-printByLevel.jpg!picslt">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:updated_time" content="2019-07-22T06:44:21.329Z">
+<meta property="og:updated_time" content="2019-07-25T12:25:06.275Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer之删除链表中重复的结点">
-<meta name="twitter:description" content="剑指offer之删除链表中重复的结点">
-<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
+<meta name="twitter:title" content="剑指offer之从上往下打印二叉树">
+<meta name="twitter:description" content="从上往下打印二叉树">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-printByLevel.jpg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -185,37 +186,34 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer之删除链表中重复的结点" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-剑指offer之从上往下打印二叉树" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      剑指offer之删除链表中重复的结点
+      剑指offer之从上往下打印二叉树
     </h1>
   
 
         
-        <a href="/2019/05/18/剑指offer之删除链表中重复的结点/" class="archive-article-date">
-  	<time datetime="2019-05-18T12:37:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
+        <a href="/2019/07/25/剑指offer之从上往下打印二叉树/" class="archive-article-date">
+  	<time datetime="2019-07-25T12:02:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>在一个排序的链表中，如何删除重复的结点？</p>
-<p>如下：<br>链表1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5<br>处理后为 1-&gt;2-&gt;5</p>
-<a id="more"></a>
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。<br><a id="more"></a></p>
+<p><strong>如下二叉树</strong>：</p>
+<center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-printByLevel.jpg!picslt" alt="思考"><br></center>
+
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>这个题相对来说逻辑比较简单，有下面两种解题思路。</p>
-<p><strong>需要注意</strong>：头结点可能与后面的结点重复，也就是说头结点也可能被删除，所以在链表头添加一个结点。</p>
-<p>1.我们可以用一个指针记录当前值，另一个指针向后遍历，如果下一个节点值跟当前节点值的数值相等，则为重复就进行删除。</p>
-<p>2.我们每次都判断当前结点的值与下一个节点的值是否重复如果重复就循环寻找下一个不重复的节点，将他们链接到新链表的尾部（其实就是删除重复的节点）</p>
-<p><strong>在这里我使用了第二种思路</strong></p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public class DeleteDuplicatedLinkedNode &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        LinkedNode linkedNode1 = new LinkedNode(5,null);</span><br><span class="line">        LinkedNode linkedNode2 = new LinkedNode(5,linkedNode1);</span><br><span class="line">        LinkedNode linkedNode3 = new LinkedNode(3,linkedNode2);</span><br><span class="line">        LinkedNode linkedNode4 = new LinkedNode(3,linkedNode3);</span><br><span class="line">        LinkedNode linkedNode5 = new LinkedNode(2,linkedNode4);</span><br><span class="line">        LinkedNode linkedNode6 = new LinkedNode(2,linkedNode5);</span><br><span class="line">        LinkedNode linkedNode7 = new LinkedNode(1,linkedNode6);</span><br><span class="line">        LinkedNode head = new LinkedNode(0,linkedNode7);</span><br><span class="line"></span><br><span class="line">        LinkedNode.printLinkedNode(head,&quot;pre&quot;);</span><br><span class="line">        head = deleteDuplicateNode(head);</span><br><span class="line">        LinkedNode.printLinkedNode(head,&quot;after&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static LinkedNode deleteDuplicateNode(LinkedNode head)&#123;</span><br><span class="line"></span><br><span class="line">        if(Objects.isNull(head.next))&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        LinkedNode currentNode = head.next;</span><br><span class="line">        LinkedNode duplicatePrefixNode = head.next;</span><br><span class="line">        int currentValue = 0;</span><br><span class="line">        int count = 0;</span><br><span class="line"></span><br><span class="line">        while (Objects.nonNull(currentNode))&#123;</span><br><span class="line"></span><br><span class="line">            if(currentValue == currentNode.value)&#123;</span><br><span class="line">                count ++;</span><br><span class="line">                currentNode = currentNode.next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if(count &gt; 1)&#123;</span><br><span class="line">                //证明是重复节点，并且当前值不等于之前的值</span><br><span class="line">                duplicatePrefixNode.next = currentNode;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                count = 1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if(Objects.nonNull(currentNode)) &#123;</span><br><span class="line">                currentValue = currentNode.value;</span><br><span class="line">                duplicatePrefixNode = currentNode;</span><br><span class="line">                currentNode = currentNode.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码地址：<a href="http://dwz1.cc/vFsBef" target="_blank" rel="noopener">http://dwz1.cc/vFsBef</a></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>利用队列，首先将根节点入队，出队后打印根节点然后将根节点的左右子树入队，然后继续从队列出节点依次执行此操作.</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class BiTreePrintByLevel &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        TreeNode root1 = new TreeNode();</span><br><span class="line">        root1.value = 8;</span><br><span class="line"></span><br><span class="line">        root1.right = new TreeNode();</span><br><span class="line">        root1.right.value = 7;</span><br><span class="line"></span><br><span class="line">        root1.left = new TreeNode();</span><br><span class="line">        root1.left.value = 8;</span><br><span class="line"></span><br><span class="line">        root1.left.left = new TreeNode();</span><br><span class="line">        root1.left.left.value = 9;</span><br><span class="line"></span><br><span class="line">        root1.left.right = new TreeNode();</span><br><span class="line">        root1.left.right.value = 2;</span><br><span class="line"></span><br><span class="line">        root1.left.right.left = new TreeNode();</span><br><span class="line">        root1.left.right.left.value = 5;</span><br><span class="line">        root1.left.right.left.left = new TreeNode();</span><br><span class="line">        root1.left.right.left.left.value = 4;</span><br><span class="line">        root1.left.right.left.right = new TreeNode();</span><br><span class="line">        root1.left.right.left.right.value = 7;</span><br><span class="line"></span><br><span class="line">        printTree(root1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void printTree(TreeNode root)&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        if(Objects.isNull(root))&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        TreeNode treeNode;</span><br><span class="line">        while (Objects.nonNull(queue.peek()))&#123;</span><br><span class="line">            treeNode = queue.poll();</span><br><span class="line">            System.out.print(treeNode.value+&quot;，&quot;);</span><br><span class="line">            if(Objects.nonNull(treeNode.left)) &#123;</span><br><span class="line">                queue.offer(treeNode.left);</span><br><span class="line">            &#125;</span><br><span class="line">            if(Objects.nonNull(treeNode.right)) &#123;</span><br><span class="line">                queue.offer(treeNode.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="http://dwz1.cc/iZob70p" target="_blank" rel="noopener">http://dwz1.cc/iZob70p</a></p>
 
       
       
@@ -259,7 +257,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
         		</li>
       		
 		</ul>
@@ -326,7 +324,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/05/18/剑指offer之删除链表中重复的结点/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/07/25/剑指offer之从上往下打印二叉树/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -340,18 +338,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/05/23/剑指offer之包含min函数的栈/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          剑指offer之包含min函数的栈
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/05/13/剑指offer之在O-1-时间删除链表节点/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer之在O(1)时间删除链表节点</div>
+    <a href="/2019/07/24/剑指offer之栈的压入、弹出序列/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer之栈的压入、弹出序列</div>
       <i class="icon-circle-right"></i>
     </a>
   
