@@ -79,7 +79,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-            总文章数 60
+            总文章数 61
         </nav>
 		<nav class="header-smart-menu">
     		
@@ -183,6 +183,97 @@ var _hmt = _hmt || [];
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-python中的map-reduce" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/20/python中的map-reduce/">python中的map/reduce</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/20/python中的map-reduce/" class="archive-article-date">
+  	<time datetime="2016-07-20T04:24:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>刚开始了解map/reduce这个概念是在hadoop中，hadoop中的map/reduce采用了分而治之的思想，把一个很大的数据集合分成若干份，分别进行处理，然后再把每部分的处理结果进行一个汇总，这样并行的处理集合的数据可以大大缩短总的时间耗费，而现在hadoop其实也已经成为大数据存储计算领域的一个基础的标准了。当然hadoop中的map/reduce是从函数式编程语言借鉴的，比如java8函数式编程的新特性便提供了map/reduce这种函数。而这篇文章主要讲一下map/reduce在Python语言中的应用,想进一步了解map/reduce的概念可以看一下Google的那篇关于在大规模集群处理数据的论文<a href="https://ai.google/research/pubs/pub62" target="_blank" rel="noopener">MapReduce: Simplified Data Processing on Large Clusters</a>。</p>
+        
+          <a class="article-more-a" href="/2016/07/20/python中的map-reduce/#more">more >></a>
+        
+      
+      
+    
+    
+      <div hidden="hidden"></div>
+    
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">map/reduce</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/20/python中的map-reduce/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-python-列表生成式" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
@@ -1003,89 +1094,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-PermGen-space问题及解决方案" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/12/PermGen-space问题及解决方案/">PermGen space问题及解决方案</a>
-    </h1>
-  
-
-        
-        <a href="/2015/12/12/PermGen-space问题及解决方案/" class="archive-article-date">
-  	<time datetime="2015-12-12T13:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在做一个微生活平台的卡券管理系统的项目，先说一下项目所使用的开发环境，由于人家要求必须使用spring，所以就使用了自己比较熟悉的spring+hibernate并引用了不少第三发类库。项目开发进行到一段时间后eclipse老是出现 java.lang.OutOfMemoryError: PermGen space这个异常，由于本人了解一点jvm的知识，一看便知是jvm的永久代内存溢出，自己用的<br>jdk7，据说jdk8去除了永久代这一概念，所以并未太关心，只需重启服务器错误便消失，但伴随着项目的进度这个错误出现的频率增高。<br>
-        
-          <a class="article-more-a" href="/2015/12/12/PermGen-space问题及解决方案/#more">more >></a>
-        
-      
-      
-    
-    
-      <div hidden="hidden"></div>
-    
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/12/12/PermGen-space问题及解决方案/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
     </nav>
   
 
@@ -1296,11 +1307,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1328,11 +1339,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
