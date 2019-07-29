@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>反射机制处理数组 | haothink123</title>
+  <title>Tag: 二叉搜索树 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数组是一种比较常用的数据结构，在Java中也许他不如集合工具类那么灵活，但是大多时候它在效率及内存的损耗方面是由于集合工具类的，Java中数组看似简单，但真正使用起来却存在一些问题，经常出现的问题如“数组越界异常”，还有就是Java中不能创建泛型类型的数组，这其中不仅仅是泛型类型“编译期被擦除”的这个问题，在jvm底层所有数组类型都是Object。当然这并不是此博文的重点，主要还是想总结一下反射机">
-<meta name="keywords" content="Reflection">
-<meta property="og:type" content="article">
-<meta property="og:title" content="反射机制处理数组">
-<meta property="og:url" content="https://wanghaolistening.github.io/2016/01/15/反射机制处理数组/index.html">
+  <meta name="description" content="后端程序员">
+<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
+<meta property="og:type" content="website">
+<meta property="og:title" content="haothink123">
+<meta property="og:url" content="https://wanghaolistening.github.io/tags/二叉搜索树/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="数组是一种比较常用的数据结构，在Java中也许他不如集合工具类那么灵活，但是大多时候它在效率及内存的损耗方面是由于集合工具类的，Java中数组看似简单，但真正使用起来却存在一些问题，经常出现的问题如“数组越界异常”，还有就是Java中不能创建泛型类型的数组，这其中不仅仅是泛型类型“编译期被擦除”的这个问题，在jvm底层所有数组类型都是Object。当然这并不是此博文的重点，主要还是想总结一下反射机">
+<meta property="og:description" content="后端程序员">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2016-01-15T07:49:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="反射机制处理数组">
-<meta name="twitter:description" content="数组是一种比较常用的数据结构，在Java中也许他不如集合工具类那么灵活，但是大多时候它在效率及内存的损耗方面是由于集合工具类的，Java中数组看似简单，但真正使用起来却存在一些问题，经常出现的问题如“数组越界异常”，还有就是Java中不能创建泛型类型的数组，这其中不仅仅是泛型类型“编译期被擦除”的这个问题，在jvm底层所有数组类型都是Object。当然这并不是此博文的重点，主要还是想总结一下反射机">
+<meta name="twitter:title" content="haothink123">
+<meta name="twitter:description" content="后端程序员">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -183,249 +182,71 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-反射机制处理数组" class="article article-type-post " itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      反射机制处理数组
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/07/29/剑指offer之按之二叉搜索树的后序遍历序列/" class="archive-article-date">
+  	<time datetime="2019-07-29T12:50:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-29</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/07/29/剑指offer之按之二叉搜索树的后序遍历序列/">剑指offer之按之二叉搜索树的后序遍历序列</a>
     </h1>
   
 
-        
-        <a href="/2016/01/15/反射机制处理数组/" class="archive-article-date">
-  	<time datetime="2016-01-15T06:02:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>数组是一种比较常用的数据结构，在Java中也许他不如集合工具类那么灵活，但是大多时候它在效率及内存的损耗方面是由于集合工具类的，Java中数组看似简单，但真正使用起来却存在一些问题，经常出现的问题如“数组越界异常”，还有就是Java中不能创建泛型类型的数组，这其中不仅仅是泛型类型“编译期被擦除”的这个问题，在jvm底层所有数组类型都是Object。当然这并不是此博文的重点，主要还是想总结一下反射机制处理数组的一些方法，由于平时类似的程序相对写的较少，比较容易遗忘，所以想记录下来以备以后参考。<br><a id="more"></a></p>
-<h3 id="创建一个数组"><a href="#创建一个数组" class="headerlink" title="创建一个数组"></a>创建一个数组</h3><p>Java反射机制通过java.lang.reflect.Array这个类来处理数组。<br>例子：创建一个String类型的数组长度为3<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] sts = (String[]) Array.newInstance(String.class, <span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
-<p>Array.newInstance()方法的第一个参数表示了我们要创建一个什么类型的数组。第二个参数表示了这个数组的空间是多大。</p>
-<h3 id="访问一个数组"><a href="#访问一个数组" class="headerlink" title="访问一个数组"></a>访问一个数组</h3><p>例子：通过Java反射机制同样可以访问数组中的元素。具体可以使用Array.get(…)和Array.set(…)方法来访问。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String[] sts = (String[]) Array.newInstance(String.class, <span class="number">3</span>);</span><br><span class="line">Array.set(sts, <span class="number">0</span>, <span class="string">"apple"</span>);</span><br><span class="line">Array.set(sts, <span class="number">1</span>, <span class="string">"banana"</span>);</span><br><span class="line">Array.set(sts, <span class="number">2</span>, <span class="string">"orange"</span>);</span><br><span class="line">System.out.println(<span class="string">"length:"</span>+sts.length);</span><br><span class="line">System.out.println(Array.get(sts, <span class="number">1</span>));</span><br><span class="line">System.out.println(Array.get(sts, <span class="number">2</span>));</span><br></pre></td></tr></table></figure></p>
-<p>输出结果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">length:<span class="number">3</span></span><br><span class="line">sts[<span class="number">1</span>]banana</span><br><span class="line">sts[<span class="number">2</span>]orange</span><br></pre></td></tr></table></figure></p>
-<h3 id="获取数组的Class对象"><a href="#获取数组的Class对象" class="headerlink" title="获取数组的Class对象"></a>获取数组的Class对象</h3><p>如果不通过反射的话你可以这样来获取数组的Class对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class stringArrayClass = String[].class;</span><br></pre></td></tr></table></figure></p>
-<p>如果使用Class.forName()方法来获取Class对象则不是那么简单。比如你可以像这样来获得一个原生数据类型（primitive）int数组的Class对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class intArray = Class.forName(<span class="string">"[I"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>在JVM中字母I代表int类型，左边的‘[’代表我想要的是一个int类型的数组，这个规则同样适用于其他的原生数据类型。其它描述符标识字符含义。</p>
-<ul>
-<li>B 基本类型byte</li>
-<li>C 基本类型char</li>
-<li>D 基本类型double</li>
-<li>F 基本类型float</li>
-<li>I 基本类型int</li>
-<li>J 基本类型long</li>
-<li>S 基本类型short</li>
-<li>Z 基本类型boolean<br>参考深入了解Java虚拟机</li>
-</ul>
-<p>对于普通对象类型的数组有一点细微的不同：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class stringArrayClass = Class.forName(<span class="string">"[Ljava.lang.String;"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>注意‘[L’的右边是类名，类名的右边是一个‘;’符号。这个的含义是一个指定类型的数组。<br>不能写成java/lang/String。</p>
-<p>需要注意的是，你不能通过Class.forName()方法获取一个原生数据类型的Class对象。下面这三个例子都会报ClassNotFoundException：的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class class1 = Class.forName(<span class="string">"I"</span>);</span><br><span class="line">Class class2 = Class.forName(<span class="string">"int"</span>);</span><br><span class="line">Class class2 = Class.forName(<span class="string">"[Ljava/lang/String;"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>获取普通对象以及原生对象的Class对象看到网上有一个好的方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Class <span class="title">getClass</span><span class="params">(String className)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="string">"int"</span> .equals(className)) <span class="keyword">return</span> <span class="keyword">int</span> .class;</span><br><span class="line">  <span class="keyword">if</span>(<span class="string">"long"</span>.equals(className)) <span class="keyword">return</span> <span class="keyword">long</span>.class;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> Class.forName(className);</span><br><span class="line">&#125;</span><br><span class="line">通过指定的类型创建一个空的数组，然后通过这个空的数组来获取数组的Class对象</span><br><span class="line">Class clazz = getClass(theClassName);</span><br><span class="line">Class arrayClazz = Array.newInstance(clazz, <span class="number">0</span>).getClass();</span><br><span class="line"></span><br><span class="line">无需使用类名或其他方式来获取这个Class对象,为了确保Class对象是不是代表一个数组，你可以使用Class.isArray()方法来进行校验:</span><br><span class="line">System.out.println(<span class="string">"is array: "</span> + arrayClazz.isArray());</span><br></pre></td></tr></table></figure></p>
-<h3 id="获取数组的成员类型"><a href="#获取数组的成员类型" class="headerlink" title="获取数组的成员类型"></a>获取数组的成员类型</h3><p>一旦你获取了一个数组的Class对象，你就可以通过Class.getComponentType()方法获取这个数组的成员类型。成员类型就是数组存储的数据类型。例如，数组int[]的成员类型就是一个Class对象int.class。String[]的成员类型就是java.lang.String类的Class对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] str = <span class="keyword">new</span> String[<span class="number">3</span>];</span><br><span class="line">Class strA = str.getClass();</span><br><span class="line">Class ArrayType = strA.getComponentType();</span><br><span class="line">System.out.println(ArrayType);</span><br></pre></td></tr></table></figure>
-<p>总结：利用反射来操作数组，主要是获取数组的Class对象，要谨记Class.forName()的特殊用法。再一个就是利用反射技术创建数组了。</p>
-
-      
-      
-    
-    
-      <div hidden="hidden"></div>
-    
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/wechat.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Reflection</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">二叉搜索树</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2016/01/15/反射机制处理数组/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2016/01/16/了解NIO-Selector/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          了解NIO Selector
-        
-      </div>
-    </a>
   
   
-    <a href="/2016/01/14/NIO中的Buffer/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">NIO中的Buffer</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个数组"><span class="toc-number">1.</span> <span class="toc-text">创建一个数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#访问一个数组"><span class="toc-number">2.</span> <span class="toc-text">访问一个数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取数组的Class对象"><span class="toc-number">3.</span> <span class="toc-text">获取数组的Class对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取数组的成员类型"><span class="toc-number">4.</span> <span class="toc-text">获取数组的成员类型</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'true'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </section>
-  
-
-  
+    
 
 
           </div>
@@ -451,9 +272,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
