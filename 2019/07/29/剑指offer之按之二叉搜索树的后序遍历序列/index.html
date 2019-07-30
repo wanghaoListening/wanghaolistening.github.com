@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bst-bitree.png">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:updated_time" content="2019-07-29T13:08:02.368Z">
+<meta property="og:updated_time" content="2019-07-29T13:10:17.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer之按之二叉搜索树的后序遍历序列">
 <meta name="twitter:description" content="二叉搜索树的后序遍历序列">
@@ -83,7 +83,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-            总文章数 62
+            总文章数 63
         </nav>
 		<nav class="header-smart-menu">
     		
@@ -208,8 +208,7 @@ var _hmt = _hmt || [];
       
         <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。假设输入的数组的任意两个数字都互不相同。<br><a id="more"></a></p>
 <p><strong>如下：二叉搜索树</strong></p>
-<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bst-bitree.png" alt="BST"></p>
-<p><strong>后序遍历序列为：1,4,7,6,3,13,14,10,8</strong></p>
+<p><center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bst-bitree.png" alt="BST"><br></center><br><strong>后序遍历序列为：1,4,7,6,3,13,14,10,8</strong></p>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>BST的后序序列的合法序列是，对于一个序列S，最后一个元素是x （也就是根），如果去掉最后一个元素的序列为T，那么T满足：<br>T可以分成两段，前一段（左子树）小于x，后一段（右子树）大于x，且这两段（子树）都是合法的后序序列。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">public class BiTreePostOrderSequence &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] sequence = &#123;1,4,7,6,3,13,14,10,8&#125;;</span><br><span class="line">        System.out.println(verifySquenceOfBST(sequence));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static boolean verifySquenceOfBST(int[] sequence)&#123;</span><br><span class="line"></span><br><span class="line">        if(Objects.isNull(sequence) || sequence.length == 0)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return isBST(sequence,0,sequence.length-1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static boolean isBST(int[] sequence,int start,int end)&#123;</span><br><span class="line"></span><br><span class="line">        if(start &gt;= end)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        //取根节点</span><br><span class="line">        int root = sequence[end];</span><br><span class="line"></span><br><span class="line">        int middleIndex = start;</span><br><span class="line">        //寻找左右子树的分界</span><br><span class="line">        while (middleIndex &lt; end &amp;&amp; sequence[middleIndex] &lt;= root)&#123;</span><br><span class="line">            middleIndex++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //判断序列右边的节点是不是都大于root</span><br><span class="line"></span><br><span class="line">        for(int i=middleIndex;i&lt;end;i++)&#123;</span><br><span class="line"></span><br><span class="line">            if(sequence[i] &lt; root)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //需要注意由于已经去掉root节点所以应该是end-1</span><br><span class="line">        return isBST(sequence,start,middleIndex-1)&amp;&amp; isBST(sequence,middleIndex,end-1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -337,6 +336,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/07/30/剑指offer之按之二叉树中和为某一值的路径/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          剑指offer之按之二叉树中和为某一值的路径
+        
+      </div>
+    </a>
   
   
     <a href="/2019/07/28/剑指offer之按之字形顺序打印二叉树/" id="article-nav-older" class="article-nav-link-wrap">
@@ -539,11 +547,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +583,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,11 +599,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,11 +615,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数值的整数次方</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
+                <a href="javascript:void(0)" class="js-tag color3">数值的整数次方</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,11 +663,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">Haversine formula</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Haversine formula</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,11 +679,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
