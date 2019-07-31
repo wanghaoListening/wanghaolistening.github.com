@@ -17,7 +17,7 @@
 <meta property="og:description" content="二叉树中和为某一值的路径">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-path-sum.jpg!picslt">
-<meta property="og:updated_time" content="2019-07-30T13:06:49.316Z">
+<meta property="og:updated_time" content="2019-07-31T01:45:55.898Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer之按之二叉树中和为某一值的路径">
 <meta name="twitter:description" content="二叉树中和为某一值的路径">
@@ -206,6 +206,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>输入一棵二叉树和一个整数， 打印出二叉树中结点值的和为输入整数的所有路径。从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
+<a id="more"></a>
 <p><center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-path-sum.jpg!picslt" alt="思考"><br></center><br><strong>如上二叉树路径值为22的有10 5 7和10 12</strong></p>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>由于路径是从根结点出发到叶结点， 也就是说路径总是以根结点为起始点，因此我们首先需要遍历根结点。在树的前序、中序、后序三种遍历方式中，只有前序遍历是首先访问根结点的。当用前序遍历的方式访问到某一结点时， 我们把该结点添加到路径上，并累加该结点的值。如果该结点为叶结点并且路径中结点值的和刚好等于输入的整数， 则当前的路径符合要求，我们把它打印出来。如果当前结点不是叶结点，则继续访问它的子结点。当前结点访问结束后，递归函数将自动回到它的父结点。因此我们在函数退出之前要在路径上删除当前结点并减去当前结点的值，以确保返回父结点时路径刚好是从根结点到父结点的路径。不难看出保存路径的数据结构实际上是一个枝，因为路径要与递归调用状态一致， 而递归调用的本质就是一个压栈和出栈的过程。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public class BiTreePathOfSum &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        TreeNode root = new TreeNode();</span><br><span class="line">        root.value = 10;</span><br><span class="line">        root.left = new TreeNode();</span><br><span class="line">        root.left.value = 5;</span><br><span class="line">        root.left.left = new TreeNode();</span><br><span class="line">        root.left.left.value = 4;</span><br><span class="line">        root.left.right = new TreeNode();</span><br><span class="line">        root.left.right.value = 7;</span><br><span class="line">        root.right = new TreeNode();</span><br><span class="line">        root.right.value = 12;</span><br><span class="line"></span><br><span class="line">        List&lt;TreeNode&gt; treeNodeList = new ArrayList&lt;&gt;();</span><br><span class="line">        treeNodeList.add(root);</span><br><span class="line"></span><br><span class="line">        findPath(treeNodeList,0,22);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *</span><br><span class="line">     * @param treeNodeList</span><br><span class="line">     *        存放访问过的节点</span><br><span class="line">     * @param currentSum</span><br><span class="line">     *        当前访问节点的值的和</span><br><span class="line">     * @param pathValue</span><br><span class="line">     *        路径值</span><br><span class="line">     */</span><br><span class="line">    private static void findPath(List&lt;TreeNode&gt; treeNodeList, int currentSum, int pathValue)&#123;</span><br><span class="line"></span><br><span class="line">        if(!treeNodeList.isEmpty()) &#123;</span><br><span class="line">            TreeNode treeNode = treeNodeList.get(treeNodeList.size() - 1);</span><br><span class="line">            currentSum += treeNode.value;</span><br><span class="line">            if (Objects.isNull(treeNode.left) &amp;&amp; Objects.isNull(treeNode.right) &amp;&amp; currentSum == pathValue) &#123;</span><br><span class="line">                //证明以及是叶子节点，并且符合需求</span><br><span class="line">                treeNodeList.forEach(biTreeNode -&gt; System.out.print(biTreeNode.value+&quot; &quot;));</span><br><span class="line">                System.out.println();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            if (currentSum &lt; pathValue &amp;&amp; Objects.nonNull(treeNode.left)) &#123;</span><br><span class="line">                treeNodeList.add(treeNode.left);</span><br><span class="line">                findPath(treeNodeList, currentSum, pathValue);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            if (currentSum &lt; pathValue &amp;&amp; Objects.nonNull(treeNode.right)) &#123;</span><br><span class="line">                treeNodeList.add(treeNode.right);</span><br><span class="line">                findPath(treeNodeList, currentSum, pathValue);</span><br><span class="line">            &#125;</span><br><span class="line">            //此节点不符合要求，则删除此节点</span><br><span class="line">            treeNodeList.remove(treeNodeList.size() - 1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -527,11 +528,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,15 +556,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,11 +568,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,11 +624,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color5">二维数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">二维数组</a>
+                <a href="javascript:void(0)" class="js-tag color5">循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
