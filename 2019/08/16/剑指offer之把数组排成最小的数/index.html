@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>剑指offer之最小的K个数 | haothink123</title>
+  <title>剑指offer之把数组排成最小的数 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最小的K个数">
-<meta name="keywords" content="快速排序">
+  <meta name="description" content="把数组排成最小的数">
+<meta name="keywords" content="数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer之最小的K个数">
-<meta property="og:url" content="https://wanghaolistening.github.io/2019/08/11/剑指offer之最小的K个数/index.html">
+<meta property="og:title" content="剑指offer之把数组排成最小的数">
+<meta property="og:url" content="https://wanghaolistening.github.io/2019/08/16/剑指offer之把数组排成最小的数/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="最小的K个数">
+<meta property="og:description" content="把数组排成最小的数">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:updated_time" content="2019-08-11T09:43:49.726Z">
+<meta property="og:updated_time" content="2019-08-16T12:31:10.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer之最小的K个数">
-<meta name="twitter:description" content="最小的K个数">
+<meta name="twitter:title" content="剑指offer之把数组排成最小的数">
+<meta name="twitter:description" content="把数组排成最小的数">
 <meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
@@ -185,32 +185,32 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer之最小的K个数" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-剑指offer之把数组排成最小的数" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      剑指offer之最小的K个数
+      剑指offer之把数组排成最小的数
     </h1>
   
 
         
-        <a href="/2019/08/11/剑指offer之最小的K个数/" class="archive-article-date">
-  	<time datetime="2019-08-11T09:39:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
+        <a href="/2019/08/16/剑指offer之把数组排成最小的数/" class="archive-article-date">
+  	<time datetime="2019-08-16T12:24:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4。</p>
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组 {3，32，321}，则打印出这三个数字能排成的最小数字为 321323。此题在面试小米的时候遇到过。</p>
 <a id="more"></a>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>这道题咋一看有很多方法，各种经典的排序算法都可以实现，比如可以进行冒泡排序进行到第k趟排序即可停止，选择排序，选择最小的元素，也是进行到第k趟选择即可停止，还有利用小根堆排序的方式，选到第k轮次即可，当然在所有的排序方法当中快速排序的效率最高，我们可不可以利用快排的思想进行实现，我们知道在快排当中当我们以k为基准值，则k的前边所有元素即为小于k的元素，而k后面的元素即为大于k的元素，所以k以及其前面的元素即为最小的 K 个数。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public class MinKOfNumbers &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] nums = &#123;4,5,1,6,2,7,3,8&#125;;</span><br><span class="line">        quickSort(nums,0,nums.length-1,4);</span><br><span class="line">        System.out.println(Arrays.toString(nums));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static void quickSort(int[] nums,int startIndex,int endIndex,int k)&#123;</span><br><span class="line"></span><br><span class="line">        if(startIndex &gt; endIndex)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int shiftNum = nums[startIndex];</span><br><span class="line">        int lowIndex = startIndex,highIndex = endIndex;</span><br><span class="line"></span><br><span class="line">        while (startIndex &lt; endIndex)&#123;</span><br><span class="line"></span><br><span class="line">            while (nums[endIndex] &gt;= shiftNum &amp;&amp; startIndex &lt; endIndex)&#123;</span><br><span class="line">                endIndex --;</span><br><span class="line">            &#125;</span><br><span class="line">            while (nums[startIndex] &lt;= shiftNum &amp;&amp; startIndex &lt; endIndex)&#123;</span><br><span class="line">                startIndex ++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(startIndex &lt; endIndex)&#123;</span><br><span class="line">                int temp = nums[endIndex];</span><br><span class="line">                nums[endIndex] = nums[startIndex];</span><br><span class="line">                nums[startIndex] = temp;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        //将基准位置的数值放到两个列表中点位置</span><br><span class="line">        nums[lowIndex] = nums[startIndex];</span><br><span class="line">        nums[startIndex] = shiftNum;</span><br><span class="line">        if(k == (startIndex+1))&#123;</span><br><span class="line">            //证明前k个数以及是最小的k个数了,则停止继续快排序</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        quickSort(nums,lowIndex,startIndex-1,k);</span><br><span class="line">        quickSort(nums,startIndex+1,highIndex,k);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码地址：<a href="http://dwz1.cc/uiOmtd3" target="_blank" rel="noopener">http://dwz1.cc/uiOmtd3</a></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>由于数字排列后可能会非常大，所以要将数字数组转化成字符数组来进行处理。<br>首先将数组的元素进行从小到大的排序，当然这种排序不是单纯的根据字典序或者数值大小进行排序。而是根据如下的规则进行排序。<br>若ab &gt; ba 则 a &gt; b<br>若ab &lt; ba 则 a &lt; b<br>若ab = ba 则 a = b</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class ArrangeArraysToMinNumber &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] nums = &#123;3,32,321&#125;;</span><br><span class="line">        System.out.println(printMinNumber(nums));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static String printMinNumber(int[] nums)&#123;</span><br><span class="line">        String[] strNums = new String[nums.length];</span><br><span class="line">        for(int i=0;i&lt;strNums.length;i++)&#123;</span><br><span class="line">            strNums[i] = String.valueOf(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Arrays.sort(strNums,new StrComp());</span><br><span class="line"></span><br><span class="line">        StringBuilder stringBuilder = new StringBuilder();</span><br><span class="line">        for(String str: strNums)&#123;</span><br><span class="line">            stringBuilder.append(str);</span><br><span class="line">        &#125;</span><br><span class="line">        return stringBuilder.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static class StrComp implements Comparator&lt;String&gt;&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int compare(String o1, String o2) &#123;</span><br><span class="line">            String composeStr1 = o1+o2;</span><br><span class="line">            String composeStr2 = o2+o1;</span><br><span class="line"></span><br><span class="line">            return composeStr1.compareTo(composeStr2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="http://dwz1.cc/KsFVPyd" target="_blank" rel="noopener">http://dwz1.cc/KsFVPyd</a></p>
 
       
       
@@ -254,7 +254,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">快速排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
         		</li>
       		
 		</ul>
@@ -321,7 +321,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/08/11/剑指offer之最小的K个数/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/08/16/剑指offer之把数组排成最小的数/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -335,18 +335,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/08/14/剑指offer之连续子数组的最大和/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          剑指offer之连续子数组的最大和
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/10/剑指offer之数组中出现次数超过一半的数字/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer之数组中出现次数超过一半的数字</div>
+    <a href="/2019/08/14/剑指offer之连续子数组的最大和/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer之连续子数组的最大和</div>
       <i class="icon-circle-right"></i>
     </a>
   
