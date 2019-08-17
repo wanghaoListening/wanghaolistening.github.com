@@ -17,8 +17,8 @@
 <meta property="og:description" content="把数字翻译成字符串">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/digital-translation-to-string.jpg!picslt">
-<meta property="og:updated_time" content="2019-08-17T06:11:20.593Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/digital-translation-to-string.jpg">
+<meta property="og:updated_time" content="2019-08-17T06:21:28.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer之把数字翻译成字符串">
 <meta name="twitter:description" content="把数字翻译成字符串">
@@ -210,7 +210,7 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>第一种方式：可以采用自上而下的方式进行递归遍历。从字符串的左边到右边不断取1-2个字符直到到达最后的位置最后进行统计</p>
-<center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/digital-translation-to-string.jpg!picslt" alt="思考"><br></center>
+<center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/digital-translation-to-string.jpg" alt="思考"><br></center>
 
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public class DigitalTranslationToString &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static int count = 0;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(transToStr(12258));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static int transToStr(int number)&#123;</span><br><span class="line">        if(number &lt;0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        char[] chs = String.valueOf(number).toCharArray();</span><br><span class="line">        int[] numbers = new int[chs.length];</span><br><span class="line">        for(int i=0;i&lt;numbers.length;i++)&#123;</span><br><span class="line">            //利用Ascii码的性质</span><br><span class="line">            numbers[i] = chs[i] - 48;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        countPattern(numbers,0);</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //递归</span><br><span class="line">    private static void countPattern(int[] nums,int index)&#123;</span><br><span class="line"></span><br><span class="line">        if(index &gt;= nums.length-1)&#123;</span><br><span class="line">            //证明有一种情况已经走到头了。</span><br><span class="line">            ++count;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            if(0&lt;=nums[index] &amp;&amp; nums[index]&lt;=25)&#123;</span><br><span class="line">                countPattern(nums,index+1);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if((nums.length-1-index) &gt;=2 &amp;&amp; (nums[index]*10+nums[index+1])&lt;=25)&#123;</span><br><span class="line">                countPattern(nums,index+2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码地址：<a href="http://dwz1.cc/ca4ZFL8" target="_blank" rel="noopener">http://dwz1.cc/ca4ZFL8</a></p>
@@ -535,7 +535,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,7 +543,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,11 +571,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,15 +591,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,19 +651,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,11 +687,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
