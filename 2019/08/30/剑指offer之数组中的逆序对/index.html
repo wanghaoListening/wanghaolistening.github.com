@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>tags | haothink123</title>
+  <title>剑指offer之数组中的逆序对 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://wanghaolistening.github.io/tags/index.html">
+  <meta name="description" content="数组中的逆序对">
+<meta name="keywords" content="数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer之数组中的逆序对">
+<meta property="og:url" content="https://wanghaolistening.github.io/2019/08/30/剑指offer之数组中的逆序对/index.html">
 <meta property="og:site_name" content="haothink123">
+<meta property="og:description" content="数组中的逆序对">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-18T11:44:50.447Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
+<meta property="og:updated_time" content="2019-08-30T13:29:03.290Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="剑指offer之数组中的逆序对">
+<meta name="twitter:description" content="数组中的逆序对">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -180,27 +185,33 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope="" itemprop="blogPost">
+            <article id="post-剑指offer之数组中的逆序对" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      tags
+      剑指offer之数组中的逆序对
     </h1>
   
 
         
-        <a href="/tags/index.html" class="archive-article-date">
-  	<time datetime="2019-02-18T11:44:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-18</time>
+        <a href="/2019/08/30/剑指offer之数组中的逆序对/" class="archive-article-date">
+  	<time datetime="2019-08-30T13:20:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>在数组中的两个数字如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。例如在数组｛7, 5, 6, 4} 中， 一共存在5 个逆序对，分别是（7, 6）,（7，5）,(7, 4）,（6, 4）和（5, 4）。</p>
+<a id="more"></a>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>1.第一种比较容易想到的方法是逐个元素遍历跟后面的元素进行比较，由于每个数字都要和O(n)个数字作比较，因此这个算法的时间复杂度是O(n^2)<br>2.利用归并排序的思想，这里主要是对归并排序合并两个集合的过程进行改造，合并过程中我们对两个集合之间的逆序对进行统计并进行排序，例如对(5,7) (4,6)两个集合进行合并过程中，分别设置两个指针i,j分别指向两个集合的最大元素，第一个集合的最大元素7大于第二个集合的最大元素6，则出现的逆序对数为2，将7放入临时数组中，然后前一个集合的指针i向前移动一位，这时5小于6，则第二个集合的指针向前移动一位，发现前一个集合的5大于后一个集合的4则出现逆序对，不断对集合合并过程的逆序对进行统计则最终集合合并完成的逆序对数量即为所求。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">public class InversePairsInArray &#123;</span><br><span class="line"></span><br><span class="line">    private static int counter = 0;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] nums = &#123;7,5,6,4&#125;;</span><br><span class="line"></span><br><span class="line">        getInversePairs2(nums);</span><br><span class="line">        System.out.println(counter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static int getInversePairs(int[] nums)&#123;</span><br><span class="line">        int cur = 0;</span><br><span class="line">        for(int i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            for(int j=i+1;j&lt;nums.length;j++)&#123;</span><br><span class="line"></span><br><span class="line">                if(nums[j] &lt; nums[i])&#123;</span><br><span class="line">                    cur++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return cur;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //合并数组,对合并数组过程进行改造，统计逆序对(5,7) (4,6)</span><br><span class="line">    private static void merge(int[] nums,int low,int mid,int high)&#123;</span><br><span class="line"></span><br><span class="line">        int[] temp = new int[nums.length];</span><br><span class="line">        for(int k=low;k&lt;=high;k++)&#123;</span><br><span class="line">            temp[k] = nums[k];</span><br><span class="line">        &#125;</span><br><span class="line">        int i,j,k;</span><br><span class="line">        for(i=mid,j=high,k=high;i&gt;=low&amp;&amp;j&gt;=mid+1;k--)&#123;</span><br><span class="line">            if(temp[i] &gt; temp[j])&#123;</span><br><span class="line">                //前一个集合的元素大于后一个集合的元素则出现逆序对</span><br><span class="line">                counter+=(j-mid);</span><br><span class="line">                nums[k] = temp[i];</span><br><span class="line">                i--;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                nums[k] = temp[j];</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while(i&gt;=low)&#123;nums[k--]=temp[i--];&#125;</span><br><span class="line">        while(j&gt;=mid+1)&#123;nums[k--]=temp[j--];&#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //分割数组</span><br><span class="line">    private static void mergeSort(int[] nums,int low,int high)&#123;</span><br><span class="line"></span><br><span class="line">        if(low &lt; high)&#123;</span><br><span class="line">            int mid = (low+high)/2;</span><br><span class="line">            mergeSort(nums,low,mid);</span><br><span class="line">            mergeSort(nums,mid+1,high);</span><br><span class="line">            merge(nums,low,mid,high);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void getInversePairs2(int[] nums)&#123;</span><br><span class="line"></span><br><span class="line">       int low = 0;</span><br><span class="line">       int high = nums.length-1;</span><br><span class="line">       mergeSort(nums,low,high);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="https://dwz11.cn/2xqzGzI" target="_blank" rel="noopener">https://dwz11.cn/2xqzGzI</a></p>
+
       
       
     
@@ -238,7 +249,29 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -288,7 +321,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/tags/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/08/30/剑指offer之数组中的逆序对/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -300,6 +333,16 @@ var _hmt = _hmt || [];
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/27/剑指offer之第一个只出现一次的字符位置/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer之第一个只出现一次的字符位置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -321,7 +364,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思考"><span class="toc-number">2.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题思路"><span class="toc-number">3.</span> <span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-number">4.</span> <span class="toc-text">代码实现</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -382,7 +425,7 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
