@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="二叉查找树的第 K 个结点">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-path-sum.jpg!picslt">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bst-bitree.png">
-<meta property="og:updated_time" content="2019-09-01T08:20:39.581Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
+<meta property="og:updated_time" content="2019-09-01T08:24:46.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer之按之二叉查找树的第 K 个结点">
 <meta name="twitter:description" content="二叉查找树的第 K 个结点">
-<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-path-sum.jpg!picslt">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bst-bitree.png">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -207,9 +207,9 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一颗二叉搜索树，请找出其中的第k小的结点。<br><a id="more"></a><br><strong>如下第四个节点为6</strong></p>
-<center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bitree-path-sum.jpg!picslt" alt="思考"><br></center>
+<center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bst-bitree.png" alt="思考"><br></center>
 
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/bst-bitree.png" alt="思考"><br></center>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><center><br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"><br></center>
 
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>由于二叉搜索树的中序序列是一个有序的序列，所以按照中序序列遍历过程进行节点统计即可。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">public class KNodeOfBinarySearchTree &#123;</span><br><span class="line"></span><br><span class="line">    private static int counter = 0;</span><br><span class="line"></span><br><span class="line">    private static TreeNode kNode;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        TreeNode node4 = new TreeNode();</span><br><span class="line">        node4.value = 4;</span><br><span class="line"></span><br><span class="line">        TreeNode node7 = new TreeNode();</span><br><span class="line">        node7.value = 7;</span><br><span class="line"></span><br><span class="line">        TreeNode node6 = new TreeNode();</span><br><span class="line">        node6.value = 6;</span><br><span class="line">        node6.left = node4;</span><br><span class="line">        node6.right = node7;</span><br><span class="line"></span><br><span class="line">        TreeNode node1 = new TreeNode();</span><br><span class="line">        node1.value = 1;</span><br><span class="line"></span><br><span class="line">        TreeNode node3 = new TreeNode();</span><br><span class="line">        node3.value = 3;</span><br><span class="line">        node3.left = node1;</span><br><span class="line">        node3.right = node6;</span><br><span class="line"></span><br><span class="line">        TreeNode node13 = new TreeNode();</span><br><span class="line">        node13.value = 13;</span><br><span class="line"></span><br><span class="line">        TreeNode node14 = new TreeNode();</span><br><span class="line">        node14.value = 14;</span><br><span class="line">        node14.left = node13;</span><br><span class="line"></span><br><span class="line">        TreeNode node10 = new TreeNode();</span><br><span class="line">        node10.value = 10;</span><br><span class="line">        node10.right = node14;</span><br><span class="line"></span><br><span class="line">        TreeNode node8 = new TreeNode();</span><br><span class="line">        node8.value = 8;</span><br><span class="line">        node8.left = node3;</span><br><span class="line">        node8.right = node10;</span><br><span class="line"></span><br><span class="line">        System.out.println(getKTreeNode(node8,4).getValue());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static TreeNode getKTreeNode(TreeNode treeNode,int k)&#123;</span><br><span class="line">        middleFind(treeNode,k);</span><br><span class="line">        return kNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void middleFind(TreeNode treeNode,int k)&#123;</span><br><span class="line"></span><br><span class="line">        if(null == treeNode)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        middleFind(treeNode.left,k);</span><br><span class="line">        counter++;</span><br><span class="line">        if(counter == k)&#123;</span><br><span class="line">            kNode = treeNode;</span><br><span class="line">            return ;</span><br><span class="line">        &#125;</span><br><span class="line">        middleFind(treeNode.right,k);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -519,11 +519,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Fork/Join</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">IO线程模型</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Fork/Join</a>
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,10 +539,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
@@ -547,11 +547,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,11 +563,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,15 +583,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,11 +595,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -615,11 +611,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">复杂链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数值的整数次方</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">复杂链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,11 +655,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">命令模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,15 +687,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NIO</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
