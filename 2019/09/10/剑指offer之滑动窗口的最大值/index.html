@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>剑指offer之逆序打印链表 | haothink123</title>
+  <title>剑指offer之滑动窗口的最大值 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="剑指offer之逆序打印链表">
-<meta name="keywords" content="链表">
+  <meta name="description" content="滑动窗口的最大值">
+<meta name="keywords" content="数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer之逆序打印链表">
-<meta property="og:url" content="https://wanghaolistening.github.io/2018/08/23/剑指offer之逆序打印链表/index.html">
+<meta property="og:title" content="剑指offer之滑动窗口的最大值">
+<meta property="og:url" content="https://wanghaolistening.github.io/2019/09/10/剑指offer之滑动窗口的最大值/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="剑指offer之逆序打印链表">
+<meta property="og:description" content="滑动窗口的最大值">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:updated_time" content="2019-07-22T06:44:35.166Z">
+<meta property="og:updated_time" content="2019-09-10T12:53:35.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer之逆序打印链表">
-<meta name="twitter:description" content="剑指offer之逆序打印链表">
+<meta name="twitter:title" content="剑指offer之滑动窗口的最大值">
+<meta name="twitter:description" content="滑动窗口的最大值">
 <meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
@@ -185,41 +185,32 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer之逆序打印链表" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-剑指offer之滑动窗口的最大值" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      剑指offer之逆序打印链表
+      剑指offer之滑动窗口的最大值
     </h1>
   
 
         
-        <a href="/2018/08/23/剑指offer之逆序打印链表/" class="archive-article-date">
-  	<time datetime="2018-08-23T06:27:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
+        <a href="/2019/09/10/剑指offer之滑动窗口的最大值/" class="archive-article-date">
+  	<time datetime="2019-09-10T12:47:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>逆序打印单向链表 [1]-&gt;[2]-&gt;[3]</p>
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}。</p>
 <a id="more"></a>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>打印单项链表1-&gt;2-&gt;3,以下有两种方法。</p>
-<p>递归打印：要逆序打印链表 1-&gt;2-&gt;3（3,2,1)，可以先逆序打印链表 2-&gt;3(3,2)，最后再打印第一个节点 1。而链表2-&gt;3可以看成一个新的链表，要逆序打印该链表可以继续使用求解函数，也就是在求解函数中调用自己。</p>
-<p>节点头插法：头结点是在头插法中使用的一个额外节点，这个节点不存储值；然后遍历单项链表将节点头插法插入新的额外节点链表，最后顺序打印新的链表。</p>
-<p>如下：</p>
-<p>原链表：[1]-&gt;[2]-&gt;[3]</p>
-<p>新的空头结点链表插入过程</p>
-<p>[]</p>
-<p>[]-&gt;[1]</p>
-<p>[]-&gt;[2]-&gt;[1]</p>
-<p>[]-&gt;[3]-&gt;[2]-&gt;[1]</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class TailToHeadPrintLinke &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static List&lt;Integer&gt; values = new ArrayList&lt;&gt;();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ListNode listNode3 = new ListNode(3,null);</span><br><span class="line">        ListNode listNode2 = new ListNode(2,listNode3);</span><br><span class="line">        ListNode listNode = new ListNode(1,listNode2);</span><br><span class="line"></span><br><span class="line">        ListNode linkNode = printListFromTailToHeadeByHInsert(listNode);</span><br><span class="line"></span><br><span class="line">        linkNode = linkNode.getNext();</span><br><span class="line">        while (Objects.nonNull(linkNode))&#123;</span><br><span class="line"></span><br><span class="line">            System.out.println(linkNode.getValue());</span><br><span class="line"></span><br><span class="line">            linkNode = linkNode.getNext();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        //System.out.println(printListFromTailToHeadeByRcursion(listNode));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 递归方法打印</span><br><span class="line">     * @param listNode</span><br><span class="line">     * @return</span><br><span class="line">     *</span><br><span class="line">     * 要逆序打印链表 1-&gt;2-&gt;3（3,2,1)，可以先逆序打印链表 2-&gt;3(3,2)，最后再打印第一个节点 1。而链表 2-&gt;3 可以看成一个新的链表，</span><br><span class="line">     * 要逆序打印该链表可以继续使用求解函数，也就是在求解函数中调用自己</span><br><span class="line">     */</span><br><span class="line">    private static List&lt;Integer&gt; printListFromTailToHeadeByRcursion(ListNode listNode)&#123;</span><br><span class="line"></span><br><span class="line">        if(Objects.nonNull(listNode.next))&#123;</span><br><span class="line">            printListFromTailToHeadeByRcursion(listNode.next);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        values.add(listNode.value);</span><br><span class="line">        return values;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /***</span><br><span class="line">     * 采用头插法</span><br><span class="line">     * @param listNode</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    private static ListNode printListFromTailToHeadeByHInsert(ListNode listNode)&#123;</span><br><span class="line"></span><br><span class="line">        //初始一个空的节点</span><br><span class="line">        ListNode listNodeEmpty = new ListNode();</span><br><span class="line">        while (Objects.nonNull(listNode))&#123;</span><br><span class="line"></span><br><span class="line">            ListNode tempNode = new ListNode(listNode.getValue(),null);</span><br><span class="line">            if(Objects.isNull(listNodeEmpty.getNext()))&#123;</span><br><span class="line">                //直接插入</span><br><span class="line">                listNodeEmpty.setNext(tempNode);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                //说明已经有节点插入</span><br><span class="line">                tempNode.setNext(listNodeEmpty.getNext());</span><br><span class="line">                listNodeEmpty.setNext(tempNode);</span><br><span class="line">            &#125;</span><br><span class="line">            listNode = listNode.getNext();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return listNodeEmpty;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public ArrayList&lt;Integer&gt; printListFromTailToHeadByStack(ListNode listNode) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        while (listNode != null) &#123;</span><br><span class="line">            stack.add(listNode.value);</span><br><span class="line">            listNode = listNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        ArrayList&lt;Integer&gt; ret = new ArrayList&lt;&gt;();</span><br><span class="line">        while (!stack.isEmpty()) &#123;</span><br><span class="line">            ret.add(stack.pop());</span><br><span class="line">        &#125;</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static class ListNode&#123;</span><br><span class="line"></span><br><span class="line">        private Integer value;</span><br><span class="line"></span><br><span class="line">        private ListNode next;</span><br><span class="line"></span><br><span class="line">        public ListNode() &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public ListNode(Integer value, ListNode next) &#123;</span><br><span class="line">            this.value = value;</span><br><span class="line">            this.next = next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public Integer getValue() &#123;</span><br><span class="line">            return value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setValue(Integer value) &#123;</span><br><span class="line">            this.value = value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public ListNode getNext() &#123;</span><br><span class="line">            return next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setNext(ListNode next) &#123;</span><br><span class="line">            this.next = next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String toString() &#123;</span><br><span class="line">            return &quot;ListNode&#123;&quot; +</span><br><span class="line">                    &quot;value=&quot; + value +</span><br><span class="line">                    &quot;, next=&quot; + next +</span><br><span class="line">                    &apos;&#125;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码地址：<a href="http://dwz1.cc/zMDF9Y" target="_blank" rel="noopener">http://dwz1.cc/zMDF9Y</a></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>此题逻辑较为简单，设置两个指针分别指向滑动窗口的两边，取滑动窗口的元素的最大值，一直不断向后滑动直到结束。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class MaxValueInWindow &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] num = &#123;2,3,4,2,6,2,5,1&#125;;</span><br><span class="line">        System.out.println(maxValueInWindows(num,3));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static List&lt;Integer&gt; maxValueInWindows(int[] num,int size)&#123;</span><br><span class="line"></span><br><span class="line">        int startIndex = 0;</span><br><span class="line">        int endIndex = size;</span><br><span class="line"></span><br><span class="line">        List&lt;Integer&gt; maxValueList = new ArrayList&lt;&gt;();</span><br><span class="line">        while (endIndex &lt;= num.length)&#123;</span><br><span class="line"></span><br><span class="line">            int[] window = Arrays.copyOfRange(num,startIndex,endIndex);</span><br><span class="line">            maxValueList.add(selectMaxValue(window));</span><br><span class="line">            startIndex++;</span><br><span class="line">            endIndex++;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxValueList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static int selectMaxValue(int[] num)&#123;</span><br><span class="line"></span><br><span class="line">        int maxValue = num[0];</span><br><span class="line">        for(int i=1;i&lt;num.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            if(num[i] &gt; maxValue)&#123;</span><br><span class="line">                maxValue = num[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="https://dwz11.cn/E0L2NE7" target="_blank" rel="noopener">https://dwz11.cn/E0L2NE7</a></p>
 
       
       
@@ -263,7 +254,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
         		</li>
       		
 		</ul>
@@ -330,7 +321,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2018/08/23/剑指offer之逆序打印链表/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/09/10/剑指offer之滑动窗口的最大值/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,18 +335,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/10/07/剑指offer之旋转数组/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          剑指offer之旋转数组
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/07/剑指offer之数值的整数次方/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer之数值的整数次方</div>
+    <a href="/2019/09/05/剑指offer之和为S的连续正数序列/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer之和为S的连续正数序列</div>
       <i class="icon-circle-right"></i>
     </a>
   
