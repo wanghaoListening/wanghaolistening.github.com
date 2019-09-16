@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>剑指offer之连续子数组的最大和 | haothink123</title>
+  <title>剑指offer之股票的最大利润 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="连续子数组的最大和">
+  <meta name="description" content="股票的最大利润">
 <meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer之连续子数组的最大和">
-<meta property="og:url" content="https://wanghaolistening.github.io/2019/08/14/剑指offer之连续子数组的最大和/index.html">
+<meta property="og:title" content="剑指offer之股票的最大利润">
+<meta property="og:url" content="https://wanghaolistening.github.io/2019/09/16/剑指offer之股票的最大利润/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="连续子数组的最大和">
+<meta property="og:description" content="股票的最大利润">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:updated_time" content="2019-08-14T13:08:59.255Z">
+<meta property="og:updated_time" content="2019-09-16T11:43:16.190Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer之连续子数组的最大和">
-<meta name="twitter:description" content="连续子数组的最大和">
+<meta name="twitter:title" content="剑指offer之股票的最大利润">
+<meta name="twitter:description" content="股票的最大利润">
 <meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
@@ -185,32 +185,32 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer之连续子数组的最大和" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-剑指offer之股票的最大利润" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      剑指offer之连续子数组的最大和
+      剑指offer之股票的最大利润
     </h1>
   
 
         
-        <a href="/2019/08/14/剑指offer之连续子数组的最大和/" class="archive-article-date">
-  	<time datetime="2019-08-14T13:04:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
+        <a href="/2019/09/16/剑指offer之股票的最大利润/" class="archive-article-date">
+  	<time datetime="2019-09-16T11:37:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>输入一个整型数组，数组里有正数也有负数。数组中一个或连续的多个整数组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为 O(n)。</p>
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>一只股票在某些时间节点的价格{9,11,8,5,7,12,16,14},求在哪个时间锻买入和卖出，利润最大。</p>
 <a id="more"></a>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>可以利用动态规划的办法，用函数f(i)表示以第i个数字结尾的子数组的最大和，而我们需要求出max[f(i)]，其中0&lt;=i&lt;=n。可以用如下递归公式求f(i)。如果data[i]=0，就是第一项；如果f(i-1)&lt;=0,那么就将舍弃前面的子数列，因为加起来会使后面的自数列的值&lt;=自身子数列的值，所以舍弃。如果f(i-1)&gt;0,则f(i-1)+data[i]会使得以第i个数字结尾的子数组的和更大。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class MaximumSumOfContinuousSubarray &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] nums = &#123;6, -3, -2, 7, -15, 1, 2, 2&#125;;</span><br><span class="line">        System.out.println(maxSubArray(nums));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static int maxSubArray(int[] nums)&#123;</span><br><span class="line"></span><br><span class="line">        int max = nums[0];</span><br><span class="line">        int sum = nums[0];</span><br><span class="line"></span><br><span class="line">        for(int i=1;i&lt;nums.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            sum = (sum &lt;= 0)?nums[i]:sum+nums[i];</span><br><span class="line"></span><br><span class="line">            if(sum &gt; max)&#123;</span><br><span class="line">                max = sum;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码地址：<a href="http://dwz1.cc/gYSIXw5" target="_blank" rel="noopener">http://dwz1.cc/gYSIXw5</a></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>定义函数diff(i)为第i天卖出的最大利润，那么只需要在求第i天的时候记住前面i-1天的最小值。此题与剑指offer之连续子数组的最大和这个题目的，思路类似，可以利用动态规划的方法，用函数diff(i)表示以第i天卖出的最大利润，而我们需要求出max[diff(i)]，其中0&lt;=i&lt;=n。当前num<a href="当前值">i</a>-minNum(最小值)大于maxProfit(最大利润)将最大利润进行替换，而num<a href="当前值">i</a>小于minNum(最小值)值时将最小值进行替换</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class MaximumProfitOfStocks &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(maximumProfit(new int[]&#123;1,11,8,9,7,12,16,14&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static int maximumProfit(int[] num)&#123;</span><br><span class="line"></span><br><span class="line">        if(null == num || num.length&lt;=0)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int minNum = num[0];</span><br><span class="line">        int maxProfit = 0;</span><br><span class="line"></span><br><span class="line">        for(int i=1;i&lt;num.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            maxProfit = maxProfit==0?num[i]-minNum:((num[i]-minNum&gt;maxProfit)?(num[i]-minNum):maxProfit);</span><br><span class="line">            minNum = minNum &lt; num[i]?minNum:num[i];</span><br><span class="line">        &#125;</span><br><span class="line">        return maxProfit;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="http://dwz1.cc/lNhiRAI" target="_blank" rel="noopener">http://dwz1.cc/lNhiRAI</a></p>
 
       
       
@@ -321,7 +321,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/08/14/剑指offer之连续子数组的最大和/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/09/16/剑指offer之股票的最大利润/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -335,18 +335,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/08/16/剑指offer之把数组排成最小的数/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          剑指offer之把数组排成最小的数
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/11/剑指offer之最小的K个数/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer之最小的K个数</div>
+    <a href="/2019/09/15/剑指offer之扑克牌顺子/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer之扑克牌顺子</div>
       <i class="icon-circle-right"></i>
     </a>
   
