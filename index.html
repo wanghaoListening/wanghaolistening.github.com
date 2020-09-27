@@ -79,7 +79,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-            总文章数 86
+            总文章数 87
         </nav>
 		<nav class="header-smart-menu">
     		
@@ -183,6 +183,111 @@ var _hmt = _hmt || [];
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Are-Noisy-Sentences-Useless-for-Distant-Supervised-Relation-Extraction-阅读笔记" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/20/Are-Noisy-Sentences-Useless-for-Distant-Supervised-Relation-Extraction-阅读笔记/">Are Noisy Sentences Useless for Distant Supervised Relation Extraction?阅读笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/20/Are-Noisy-Sentences-Useless-for-Distant-Supervised-Relation-Extraction-阅读笔记/" class="archive-article-date">
+  	<time datetime="2020-09-20T11:48:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="作者思想"><a href="#作者思想" class="headerlink" title="作者思想"></a>作者思想</h3><p>作者认为noisy labeling problem的问题不是因为句子缺少有用的信息，而是因为缺少missing relation<br>labels，在这篇论文当中作者提出了一种新的方式为远程监督的关系抽取，其采用了unsupervised deep clustering 给noisy sentences生成一个reliable labels，模型包含了三个模块</p>
+<ul>
+<li>sentence encoder（得到feature representations.）</li>
+<li>noise detector（从sentence-bags 探测noisy sentences）</li>
+<li>label generator（为noisy sentences生成high-confidence relation labels）</li>
+</ul>
+<p>在主流的benchmark数据集上模型优于state-of-the-art baselines，缓解了noisy labeling问题</p>
+<h3 id="关系抽取"><a href="#关系抽取" class="headerlink" title="关系抽取"></a>关系抽取</h3><p>关系抽取最主要的挑战是之一是缺少大规模的手动标注数据，因此在09年Mintz et al.提出了远程监督去自动构造训练数据<br>远程监督假定在知识图谱两个实体 (e1; e2)有一个关系r,任何有这两个实体的句子，可能表达了关系r（这个假定也引入了noisy labeling的问题），这个假定的缺点也显而易见，他不能识别句子和关系的一对一映射</p>
+<h3 id="处理Noisy-Sentences问题"><a href="#处理Noisy-Sentences问题" class="headerlink" title="处理Noisy Sentences问题"></a>处理Noisy Sentences问题</h3><h4 id="先前的方式"><a href="#先前的方式" class="headerlink" title="先前的方式"></a>先前的方式</h4><p>先前的研究采用Multi-Instance Learning框架去处理这类问题，已存在的MIL研究大体上(broadly fall into)可以分为2类，一种是为句子添加软权重，减小noisy sentences的影响，第二种方式是尽力从sentence-bags移除noisy sentences来消除他们的影响。</p>
+<h4 id="论文提出的方式"><a href="#论文提出的方式" class="headerlink" title="论文提出的方式"></a>论文提出的方式</h4><p>先前的方式忽略了造成noisy labeling的根本-缺少正确的relation labels，而论文方式为解决这个问题从利用noisy sentences 的视角出发，纠正了noisy sentencdes 的relation label，这种方式带来了两种优势：</p>
+<p>(1) The negative influence of noisy sentences is reduced.<br>(2) The number of useful training data is increased.</p>
+<h3 id="Deep-Clustering-based-Relation-Extraction-model"><a href="#Deep-Clustering-based-Relation-Extraction-model" class="headerlink" title="Deep Clustering based Relation Extraction model"></a>Deep Clustering based Relation Extraction model</h3><p>模型采用了unsupervised deep clustering 为noisy sentences生成 high-confidence labels，如前面所述，DCRE由三部分组成，sentence encoder, noise detector ,label generator. sentence encoder得到sentence representation并且跟其它的两个模块共享, 而noise detector依照句子跟bag-level 目标的匹配度从sentence-bags 挑选noisy sentences. 句子的得分低于一个确定的阈值，将被认为是noisy sentence label generator在deep clustering neural network的帮助下为noisy sentences生成可依赖的labels.因为nsupervised clustering 的结果可能有误, 模型进一步利用clustering confidences作为缩放loss function的权重。</p>
+<h3 id="论文模型的贡献"><a href="#论文模型的贡献" class="headerlink" title="论文模型的贡献"></a>论文模型的贡献</h3><ul>
+<li>Different from existing bag-level de-noising methods, our model tries to convert the noisy sentences as useful training data and can simultaneously decrease noisy data and increase useful data.</li>
+<li>To the best of our knowledge, it is the first work to apply unsupervised deep clustering to obtain more appropriate relation labels for noisy sentences.</li>
+<li>Extensive experiments show that our model outperforms the state-of-the-art baselines.and can effectively alleviate the noisy labeling problem.</li>
+</ul>
+<h3 id="Unsupervised-Deep-Clustering"><a href="#Unsupervised-Deep-Clustering" class="headerlink" title="Unsupervised Deep Clustering"></a>Unsupervised Deep Clustering</h3>
+      
+      
+    
+    
+      <div hidden="hidden"></div>
+    
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">关系抽取</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/知识谱图//" class="article-tag-list-link color5">知识谱图</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/20/Are-Noisy-Sentences-Useless-for-Distant-Supervised-Relation-Extraction-阅读笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-2019-读书计划" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
@@ -1004,97 +1109,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-剑指offer之按之二叉查找树的第-K-个结点" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/01/剑指offer之按之二叉查找树的第-K-个结点/">剑指offer之按之二叉查找树的第 K 个结点</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/01/剑指offer之按之二叉查找树的第-K-个结点/" class="archive-article-date">
-  	<time datetime="2019-09-01T08:15:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一颗二叉搜索树，请找出其中的第k小的结点。<br>
-        
-          <a class="article-more-a" href="/2019/09/01/剑指offer之按之二叉查找树的第-K-个结点/#more">more >></a>
-        
-      
-      
-    
-    
-      <div hidden="hidden"></div>
-    
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">二叉搜索树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/01/剑指offer之按之二叉查找树的第-K-个结点/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1109,7 +1123,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 haothink|
+    		&copy; 2020 haothink|
          <span id="busuanzi_container_site_pv">总访问量: <span id="busuanzi_value_site_pv"></span>|</span>
          <span id="busuanzi_container_site_uv">总访客: <span id="busuanzi_value_site_uv"></span></span>
     	</div>
@@ -1220,23 +1234,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">IO线程模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color5">关系抽取</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1244,7 +1242,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">IO线程模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1256,11 +1270,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计模式Observer</a>
+                <a href="javascript:void(0)" class="js-tag color4">zeppelin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1276,10 +1290,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
@@ -1288,15 +1298,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">javaweb基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1316,11 +1330,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1364,7 +1378,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">逻辑运算符</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1372,7 +1386,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">逻辑运算符</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1380,15 +1394,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">二维数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">循环链表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1396,19 +1402,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CAS</a>
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Haversine formula</a>
+                <a href="javascript:void(0)" class="js-tag color5">二维数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1416,7 +1414,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Haversine formula</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1424,7 +1442,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
             
             <div class="clearfix"></div>
