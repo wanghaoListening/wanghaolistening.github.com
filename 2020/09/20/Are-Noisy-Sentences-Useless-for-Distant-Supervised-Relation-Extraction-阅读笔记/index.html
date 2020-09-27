@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="作者思想作者认为noisy labeling problem的问题不是因为句子缺少有用的信息，而是因为缺少missing relationlabels，在这篇论文当中作者提出了一种新的方式为远程监督的关系抽取，其采用了unsupervised deep clustering 给noisy sentences生成一个reliable labels，模型包含了三个模块  sentence encode">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-09-27T02:38:32.115Z">
+<meta property="og:updated_time" content="2020-09-27T03:21:30.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Are Noisy Sentences Useless for Distant Supervised Relation Extraction?阅读笔记">
 <meta name="twitter:description" content="作者思想作者认为noisy labeling problem的问题不是因为句子缺少有用的信息，而是因为缺少missing relationlabels，在这篇论文当中作者提出了一种新的方式为远程监督的关系抽取，其采用了unsupervised deep clustering 给noisy sentences生成一个reliable labels，模型包含了三个模块  sentence encode">
@@ -210,6 +210,7 @@ var _hmt = _hmt || [];
 <li>label generator（为noisy sentences生成high-confidence relation labels）</li>
 </ul>
 <p>在主流的benchmark数据集上模型优于state-of-the-art baselines，缓解了noisy labeling问题</p>
+<a id="more"></a>
 <h3 id="关系抽取"><a href="#关系抽取" class="headerlink" title="关系抽取"></a>关系抽取</h3><p>关系抽取最主要的挑战是之一是缺少大规模的手动标注数据，因此在09年Mintz et al.提出了远程监督去自动构造训练数据<br>远程监督假定在知识图谱两个实体 (e1; e2)有一个关系r,任何有这两个实体的句子，可能表达了关系r（这个假定也引入了noisy labeling的问题），这个假定的缺点也显而易见，他不能识别句子和关系的一对一映射</p>
 <h3 id="处理Noisy-Sentences问题"><a href="#处理Noisy-Sentences问题" class="headerlink" title="处理Noisy Sentences问题"></a>处理Noisy Sentences问题</h3><h4 id="先前的方式"><a href="#先前的方式" class="headerlink" title="先前的方式"></a>先前的方式</h4><p>先前的研究采用Multi-Instance Learning框架去处理这类问题，已存在的MIL研究大体上(broadly fall into)可以分为2类，一种是为句子添加软权重，减小noisy sentences的影响，第二种方式是尽力从sentence-bags移除noisy sentences来消除他们的影响。</p>
 <h4 id="论文提出的方式"><a href="#论文提出的方式" class="headerlink" title="论文提出的方式"></a>论文提出的方式</h4><p>先前的方式忽略了造成noisy labeling的根本-缺少正确的relation labels，而论文方式为解决这个问题从利用noisy sentences 的视角出发，纠正了noisy sentencdes 的relation label，这种方式带来了两种优势：</p>
