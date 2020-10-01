@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="作者思想作者认为noisy labeling problem的问题不是因为句子缺少有用的信息，而是因为缺少missing relationlabels，在这篇论文当中作者提出了一种新的方式为远程监督的关系抽取，其采用了unsupervised deep clustering 给noisy sentences生成一个reliable labels，模型包含了三个模块  sentence encode">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-09-27T03:21:30.448Z">
+<meta property="og:updated_time" content="2020-10-01T07:49:08.682Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Are Noisy Sentences Useless for Distant Supervised Relation Extraction?阅读笔记">
 <meta name="twitter:description" content="作者思想作者认为noisy labeling problem的问题不是因为句子缺少有用的信息，而是因为缺少missing relationlabels，在这篇论文当中作者提出了一种新的方式为远程监督的关系抽取，其采用了unsupervised deep clustering 给noisy sentences生成一个reliable labels，模型包含了三个模块  sentence encode">
@@ -221,7 +221,11 @@ var _hmt = _hmt || [];
 <li>To the best of our knowledge, it is the first work to apply unsupervised deep clustering to obtain more appropriate relation labels for noisy sentences.</li>
 <li>Extensive experiments show that our model outperforms the state-of-the-art baselines.and can effectively alleviate the noisy labeling problem.</li>
 </ul>
-<h3 id="Unsupervised-Deep-Clustering"><a href="#Unsupervised-Deep-Clustering" class="headerlink" title="Unsupervised Deep Clustering"></a>Unsupervised Deep Clustering</h3>
+<h3 id="Unsupervised-Deep-Clustering"><a href="#Unsupervised-Deep-Clustering" class="headerlink" title="Unsupervised Deep Clustering"></a>Unsupervised Deep Clustering</h3><p>当前无监督深度聚类算法的分类</p>
+<p>1).The first category of algorithms directly take advantage of the low dimensional features learned by other neural networks,and then run conventional clustering algorithm like kmeans.<br>2).The second category tries to learn the feature representation and clustering in an end-to-end mechanism</p>
+<p>文章当中采用的deep clustering neural architecture属于第二类，他利用了预训练句子编码器的特征，然后共同优化feature representation，最后以end-to-end的方式进行聚类。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>论文提出了一种基于远程监督学习的无监督深度聚类，论文方法不同于传统的方式注重减少noisy sentences，其为noisy sentences发现一种新的标签，将其转换成有用的训练数据。实验结果表明，其相较于传统的方式有更好的执行结果。文章最后给出了将来的探索方向。</p>
+
       
       
     
@@ -374,7 +378,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系抽取"><span class="toc-number">2.</span> <span class="toc-text">关系抽取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理Noisy-Sentences问题"><span class="toc-number">3.</span> <span class="toc-text">处理Noisy Sentences问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#先前的方式"><span class="toc-number">3.1.</span> <span class="toc-text">先前的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#论文提出的方式"><span class="toc-number">3.2.</span> <span class="toc-text">论文提出的方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Clustering-based-Relation-Extraction-model"><span class="toc-number">4.</span> <span class="toc-text">Deep Clustering based Relation Extraction model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#论文模型的贡献"><span class="toc-number">5.</span> <span class="toc-text">论文模型的贡献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unsupervised-Deep-Clustering"><span class="toc-number">6.</span> <span class="toc-text">Unsupervised Deep Clustering</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系抽取"><span class="toc-number">2.</span> <span class="toc-text">关系抽取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理Noisy-Sentences问题"><span class="toc-number">3.</span> <span class="toc-text">处理Noisy Sentences问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#先前的方式"><span class="toc-number">3.1.</span> <span class="toc-text">先前的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#论文提出的方式"><span class="toc-number">3.2.</span> <span class="toc-text">论文提出的方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Clustering-based-Relation-Extraction-model"><span class="toc-number">4.</span> <span class="toc-text">Deep Clustering based Relation Extraction model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#论文模型的贡献"><span class="toc-number">5.</span> <span class="toc-text">论文模型的贡献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unsupervised-Deep-Clustering"><span class="toc-number">6.</span> <span class="toc-text">Unsupervised Deep Clustering</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论"><span class="toc-number">7.</span> <span class="toc-text">结论</span></a></li></ol>
                     </div>
                 </span>
             </div>
