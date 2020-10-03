@@ -209,17 +209,9 @@ var _hmt = _hmt || [];
 <p>2）通过piecewise CNN开发了一个self-attention机制去获取丰富的上下文依赖作为本地依赖的补充物</p>
 <p>3）基于rich contextual representations 设计了一个pooling-equipped gate，作为聚合器去生成包级别的representation 为最终的关系分类。</p>
 <p>相比于Self-Attention,提出gating机制的一个主要优势，即使包中仅有一个句子，其依然是执行稳定。</p>
-<h3 id="方法创新"><a href="#方法创新" class="headerlink" title="方法创新"></a>方法创新</h3><p>文章提出了一种创新的Selective Gate (SeG) 框架为远程监督关系抽取</p>
-<p>1)同时采用entity embeddings和相关的position embeddings为关系抽取，提出entity-aware embedding方法，动态的集成实体信息到每个word embedding，生成更多expressively-powerful 的模块为下游</p>
-<p>2)为了增强PCNN在捕获长期依赖的能力，作者开发了一种light-weight self-attention机制去捕获丰富的依赖信息，并且通过为PCNN生成complementary representation，增强神经网络的能力。</p>
-<p>3)基于先前的通用特征，设计了一种selective gate 去合并sentence-level representations 到bag-level one 并且缓解了在selective attention出现的本质问题。</p>
-<p>相比于baseline 框架(elective attention for multi-instance learning),SeG能够产生entity-aware embeddings 和rich-contextual representations 促进下游的聚合模块稳定的从noisy training data学习，此外，SeG使用带pooling的gate机制去克服发生在selective attention的问题（one-sentence<br>bags problems），除此之外他仍旧保持light-weight去增强模型对的扩展性。</p>
-<h3 id="SeG的模块组成"><a href="#SeG的模块组成" class="headerlink" title="SeG的模块组成"></a>SeG的模块组成</h3><h4 id="Entity-Aware-Embedding"><a href="#Entity-Aware-Embedding" class="headerlink" title="Entity-Aware Embedding"></a>Entity-Aware Embedding</h4><p>论文提出了一种创新的entity-aware word embedding方法，通过head/tail的features去丰富传统的word embedding，最后一个position-wise gate机制去动态的介于relative position embedding和entity embeddings选择特征。</p>
-<h4 id="Self-Attention-Enhanced-Neural-Network"><a href="#Self-Attention-Enhanced-Neural-Network" class="headerlink" title="Self-Attention Enhanced Neural Network"></a>Self-Attention Enhanced Neural Network</h4><p>一些先前的工作发现由于缺少测量long-term的依赖导致CNNs在大多数自然语言处理的benchmarks下不能达到最优性能,即使堆叠多个模块，论文提出的神经模块能够捕获long-term 或 global依赖去产生补充物和更强大的sentence representation。</p>
-<p>论文模型基于并行计算以及性能考虑采用了self-attention机制，不像已存在的方法，以级联的形式顺序堆积self-attention 和CNN layers。而论文模型以并行的方式进行排列，这样对于相同的输入序列可以同时为local和local-trem生成特征描述。<br>每个包可能包含多个句子（达到20个），一个light-weight网络可以同时有效处理这些句子是最好的，基于此原因，论文的模型只有一个light-weight self-attention layer，实验表明两个模块并行排列优于堆叠的架构。</p>
-<h4 id="Piecewise-Convolutional-Neural-Network"><a href="#Piecewise-Convolutional-Neural-Network" class="headerlink" title="Piecewise Convolutional Neural Network"></a>Piecewise Convolutional Neural Network</h4><h4 id="Self-Attention-Mechanism"><a href="#Self-Attention-Mechanism" class="headerlink" title="Self-Attention Mechanism"></a>Self-Attention Mechanism</h4><h4 id="Selective-Gate"><a href="#Selective-Gate" class="headerlink" title="Selective Gate"></a>Selective Gate</h4><p>文章提出的gate机制能够处理one-sentence-bag wrongly labeled的问题，其通过直接并且动态的对齐低gating value到错误的句子，并且预防noise representation 被传播。</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>文章提出了一种新的框架为远程监督关系抽取，It incorporates an entity-aware embedding module and a self attention enhanced selective gate mechanism to integrate task-specific entity information into word embedding and then generates a complementary context-enriched representation for PCNN.<br>The proposed framework has certain merits over previously prevalent selective attention when handling wrongly labeled data, especially for a usual case that there are only one sentence in the most of bags.</p>
-
+        
+          <a class="article-more-a" href="/2020/10/02/Self-Attention-Enhanced-Selective-Gate-with-Entity-Aware-Embedding-阅读笔记/#more">more >></a>
+        
       
       
     

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="Self-Attention Enhanced Selective Gate with Entity-Aware Embedding for Distantly Supervised Relation Extraction">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-10-03T13:13:47.924Z">
+<meta property="og:updated_time" content="2020-10-03T13:19:20.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Self-Attention Enhanced Selective Gate with Entity-Aware Embedding-阅读笔记">
 <meta name="twitter:description" content="Self-Attention Enhanced Selective Gate with Entity-Aware Embedding for Distantly Supervised Relation Extraction">
@@ -208,6 +208,7 @@ var _hmt = _hmt || [];
 <p>2）通过piecewise CNN开发了一个self-attention机制去获取丰富的上下文依赖作为本地依赖的补充物</p>
 <p>3）基于rich contextual representations 设计了一个pooling-equipped gate，作为聚合器去生成包级别的representation 为最终的关系分类。</p>
 <p>相比于Self-Attention,提出gating机制的一个主要优势，即使包中仅有一个句子，其依然是执行稳定。</p>
+<a id="more"></a>
 <h3 id="方法创新"><a href="#方法创新" class="headerlink" title="方法创新"></a>方法创新</h3><p>文章提出了一种创新的Selective Gate (SeG) 框架为远程监督关系抽取</p>
 <p>1)同时采用entity embeddings和相关的position embeddings为关系抽取，提出entity-aware embedding方法，动态的集成实体信息到每个word embedding，生成更多expressively-powerful 的模块为下游</p>
 <p>2)为了增强PCNN在捕获长期依赖的能力，作者开发了一种light-weight self-attention机制去捕获丰富的依赖信息，并且通过为PCNN生成complementary representation，增强神经网络的能力。</p>
