@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
   <title>Large Scaled Relation Extraction with Reinforcement Learning阅读笔记 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="作者思想文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36% ###">
+  <meta name="description" content="作者思想文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36%">
 <meta name="keywords" content="关系抽取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Large Scaled Relation Extraction with Reinforcement Learning阅读笔记">
 <meta property="og:url" content="https://wanghaolistening.github.io/2020/10/04/Large-Scaled-Relation-Extraction-with-Reinforcement-Learning阅读笔记/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="作者思想文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36% ###">
+<meta property="og:description" content="作者思想文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36%">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-10-05T00:10:28.858Z">
+<meta property="og:updated_time" content="2020-10-05T15:21:50.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Large Scaled Relation Extraction with Reinforcement Learning阅读笔记">
-<meta name="twitter:description" content="作者思想文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36% ###">
+<meta name="twitter:description" content="作者思想文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36%">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -204,8 +204,12 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="作者思想"><a href="#作者思想" class="headerlink" title="作者思想"></a>作者思想</h3><p>文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36%</p>
-<p>### </p>
-
+<a id="more"></a>
+<h3 id="模型特点"><a href="#模型特点" class="headerlink" title="模型特点"></a>模型特点</h3><p>在公共的数据集上进行了对照实验，作者提出的模型方法与baselines模型相比有13.36%的性能提升。</p>
+<p>1）模型采用强化学习方法在远程监督数据集上学习sentence relation extractor，bag relation被使用在远程监督监控relation extractor的训练。<br>2）relation extractor的益处是，抽取bag’s sentences的关系可以帮助预测bag relation<br>3）不同于其他的模型方法基于supervised dataset，论文的模型方法专注于在远程监督数据集上learning relation extractor</p>
+<h3 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h3><p>强化学习已经成功的被应用到许多游戏，例如：Atari game,作者从强化学习在Atari Pong game游戏的应用得到启发，(Narasimhan,Yala, and Barzilay 2016) applied reinforcement learning on information extraction task by acquiring external evidence and they achieved huge improvements compared with traditional<br>extractors. (Narasimhan,Yala, and Barzilay 2016) applied reinforcement learning on information extraction task by acquiring external evidence and they achieved huge improvements compared with traditional extractors.</p>
+<h3 id="论文模型"><a href="#论文模型" class="headerlink" title="论文模型"></a>论文模型</h3><p>we first extract relation of every sentence independently.We then predict the bag relation based on the extracted relations and compare it with the gold bag relation. Finally, we use the result of comparison to guide the training of relation extractor.</p>
+<h4 id="关系抽取"><a href="#关系抽取" class="headerlink" title="关系抽取"></a>关系抽取</h4>
       
       
     
@@ -358,7 +362,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型特点"><span class="toc-number">2.</span> <span class="toc-text">模型特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强化学习"><span class="toc-number">3.</span> <span class="toc-text">强化学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#论文模型"><span class="toc-number">4.</span> <span class="toc-text">论文模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关系抽取"><span class="toc-number">4.1.</span> <span class="toc-text">关系抽取</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
