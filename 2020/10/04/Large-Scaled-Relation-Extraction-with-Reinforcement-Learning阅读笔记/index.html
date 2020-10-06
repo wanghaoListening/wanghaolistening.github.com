@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="作者思想文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36%">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-10-05T15:21:50.253Z">
+<meta property="og:updated_time" content="2020-10-06T07:59:51.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Large Scaled Relation Extraction with Reinforcement Learning阅读笔记">
 <meta name="twitter:description" content="作者思想文章作者基于强化学习提出了一个新模型，entity pair的relation被使用作为远程监督并且在强化学习方法的帮助下指导训练关系抽取器。文章在公共数据集上进行了两种类型的实验，实验结果表明，提出的方法相比baseline模型，效率提高了13.36%">
@@ -209,7 +209,23 @@ var _hmt = _hmt || [];
 <p>1）模型采用强化学习方法在远程监督数据集上学习sentence relation extractor，bag relation被使用在远程监督监控relation extractor的训练。<br>2）relation extractor的益处是，抽取bag’s sentences的关系可以帮助预测bag relation<br>3）不同于其他的模型方法基于supervised dataset，论文的模型方法专注于在远程监督数据集上learning relation extractor</p>
 <h3 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h3><p>强化学习已经成功的被应用到许多游戏，例如：Atari game,作者从强化学习在Atari Pong game游戏的应用得到启发，(Narasimhan,Yala, and Barzilay 2016) applied reinforcement learning on information extraction task by acquiring external evidence and they achieved huge improvements compared with traditional<br>extractors. (Narasimhan,Yala, and Barzilay 2016) applied reinforcement learning on information extraction task by acquiring external evidence and they achieved huge improvements compared with traditional extractors.</p>
 <h3 id="论文模型"><a href="#论文模型" class="headerlink" title="论文模型"></a>论文模型</h3><p>we first extract relation of every sentence independently.We then predict the bag relation based on the extracted relations and compare it with the gold bag relation. Finally, we use the result of comparison to guide the training of relation extractor.</p>
-<h4 id="关系抽取"><a href="#关系抽取" class="headerlink" title="关系抽取"></a>关系抽取</h4>
+<h4 id="关系抽取"><a href="#关系抽取" class="headerlink" title="关系抽取"></a>关系抽取</h4><p>首先将一个原生的sentence s1切成token ，然后转换每个token成dense vectors，然后将其作为输入，输入到CNN，然后使用正常的max-pooling替代piece-wise max-pooling，除此之外连接最大池的结果with the position embedding of two entities，最终一个带softmax的multi-layer perceptron被采用输出每个可能的关系（包括NA）</p>
+<h4 id="Word-Embeddings"><a href="#Word-Embeddings" class="headerlink" title="Word Embeddings"></a>Word Embeddings</h4><p>Word embeddings are lowdimensional vector of tokens, which are learned from<br>the large unlabeled text.<br>In this paper, we train<br>word embeddings on the New York Times (NYT) corpus with word2vec toolkit</p>
+<h4 id="Position-Embeddings"><a href="#Position-Embeddings" class="headerlink" title="Position Embeddings"></a>Position Embeddings</h4><p>Position embeddings are lowdimensional vectors of positions.<br>Every relative position is corresponding to a dense vector vp which is called position embedding.</p>
+<p>The vector representation v is concatenated by word embedding<br>vw and position embedding vp</p>
+<h3 id="Training-with-Reinforcement-Learning"><a href="#Training-with-Reinforcement-Learning" class="headerlink" title="Training with Reinforcement Learning"></a>Training with Reinforcement Learning</h3><p>不需要直接的指导去学习relation extractor，论文在强化学习当中引入policy gradient算法</p>
+<h3 id="Predict-the-Bag-Relation"><a href="#Predict-the-Bag-Relation" class="headerlink" title="Predict the Bag Relation"></a>Predict the Bag Relation</h3><p>在论文当中根据expressed-at-least-once假设去预测bag relation</p>
+<ul>
+<li><p>For sentence si, we select the relation with the highest<br>probability as the extracted relation of si.</p>
+</li>
+<li><p>If all sentences in bag are extracted as NA relation, we<br>predict the bag with relation NA</p>
+</li>
+<li><p>we ignore all sentences that predict to NA relation.<br>From the rest sentences, the extracted relation with<br>the highest probability is regarded as the relation of bag1</p>
+</li>
+</ul>
+<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><p>论文使用 REINFORCE 算法去优化模型的策略算法。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>论文中利用强化学习方法在远程监督数据集上学习relation extractor. bag relation在远程监督中使用指导relation extractor的训练. 模型也采用relation extractor去帮助bag relation extraction.</p>
+
       
       
     
@@ -362,7 +378,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型特点"><span class="toc-number">2.</span> <span class="toc-text">模型特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强化学习"><span class="toc-number">3.</span> <span class="toc-text">强化学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#论文模型"><span class="toc-number">4.</span> <span class="toc-text">论文模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关系抽取"><span class="toc-number">4.1.</span> <span class="toc-text">关系抽取</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型特点"><span class="toc-number">2.</span> <span class="toc-text">模型特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强化学习"><span class="toc-number">3.</span> <span class="toc-text">强化学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#论文模型"><span class="toc-number">4.</span> <span class="toc-text">论文模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关系抽取"><span class="toc-number">4.1.</span> <span class="toc-text">关系抽取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Word-Embeddings"><span class="toc-number">4.2.</span> <span class="toc-text">Word Embeddings</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Position-Embeddings"><span class="toc-number">4.3.</span> <span class="toc-text">Position Embeddings</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training-with-Reinforcement-Learning"><span class="toc-number">5.</span> <span class="toc-text">Training with Reinforcement Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Predict-the-Bag-Relation"><span class="toc-number">6.</span> <span class="toc-text">Predict the Bag Relation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimization"><span class="toc-number">7.</span> <span class="toc-text">Optimization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论"><span class="toc-number">8.</span> <span class="toc-text">结论</span></a></li></ol>
                     </div>
                 </span>
             </div>
