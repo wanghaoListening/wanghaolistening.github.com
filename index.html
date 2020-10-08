@@ -206,56 +206,9 @@ var _hmt = _hmt || [];
       
         <p>翻译自：<a href="https://www.guru99.com/reinforcement-learning-tutorial.html" target="_blank" rel="noopener">https://www.guru99.com/reinforcement-learning-tutorial.html</a></p>
 <h3 id="什么是强化学习"><a href="#什么是强化学习" class="headerlink" title="什么是强化学习"></a>什么是强化学习</h3><p>强化学习被定义作为机器学习，其主要关注软件代理在一个环境当中应当采取什么样的行动，强化学习是深度学习的一部分，帮助我们最大化累计奖励的一部分。</p>
-<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/2020-Reinforcement-Learning-term.png!picslt" alt="强化学习过程"></p>
-<h3 id="强化学习的重要术语"><a href="#强化学习的重要术语" class="headerlink" title="强化学习的重要术语"></a>强化学习的重要术语</h3><ul>
-<li>Agent: It is an assumed entity which performs actions in an environment to gain some reward.</li>
-<li>Environment (e): A scenario that an agent has to face.</li>
-<li>Reward (R): An immediate return given to an agent when he or she performs specific action or task.</li>
-<li>State (s): State refers to the current situation returned by the environment.</li>
-<li>Policy (π): It is a strategy which applies by the agent to decide the next action based on the current state.</li>
-<li>Value (V): It is expected long-term return with discount, as compared to the short-term reward.</li>
-<li>Value Function: It specifies the value of a state that is the total amount of reward. It is an agent which should be expected beginning from that state.</li>
-<li>Model of the environment: This mimics the behavior of the environment. It helps you to make inferences to be made and also determine how the environment will behave.</li>
-<li>Model based methods: It is a method for solving reinforcement learning problems which use model-based methods.</li>
-<li>Q value or action value (Q): Q value is quite similar to value. The only difference between the two is that it takes an additional parameter as a current action.</li>
-</ul>
-<h3 id="强化学习是如何工作的"><a href="#强化学习是如何工作的" class="headerlink" title="强化学习是如何工作的"></a>强化学习是如何工作的</h3><p>现在假定这样一个场景：教一只猫新的招数</p>
-<blockquote>
-<p>猫不理解人类语言，我们不能直接去教它去做什么</p>
-</blockquote>
-<p>我们预先仿真了一个场景，猫在这个场景当中以不同的方式作出相应，如果猫作出的是我们想要的方式，我们给猫一条鱼作为奖励</p>
-<p>现在只要猫暴露在相同的场景下，猫期望得到更多的奖励(食物)时，会更加热情的执行相似的动作。</p>
-<p>这就好像猫从积极的经历下学习去做什么，与此同时也去学习在负面经历下不去做什么</p>
-<h3 id="案例解释"><a href="#案例解释" class="headerlink" title="案例解释"></a>案例解释</h3><p>如下图过程<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/2020-Reinforcement-Learning-works.png!picslt" alt="强化学习过程"></p>
-<h3 id="实现强化学习算法"><a href="#实现强化学习算法" class="headerlink" title="实现强化学习算法"></a>实现强化学习算法</h3><p>有三种途径实现强化学习算法</p>
-<p>Value-Based:</p>
-<p>Policy-based:</p>
-<p>Model-Based:</p>
-<h3 id="强化学习的特点"><a href="#强化学习的特点" class="headerlink" title="强化学习的特点"></a>强化学习的特点</h3><p>1）没有上级，只有一个真实的数字或者奖励信号</p>
-<p>2）顺序决策</p>
-<p>3）在强化问题上，时间扮演了一个重要的角色</p>
-<p>4）反馈总是延时的而不是瞬时的</p>
-<p>5）代理的动作决定了接下来数据的接收</p>
-<h3 id="强化学习的类型"><a href="#强化学习的类型" class="headerlink" title="强化学习的类型"></a>强化学习的类型</h3><p>积极的：其被定义作为一个事件，因为特殊的行为而发生，他增加了行为的强度和频次，并且对代理执行的动作是影响积极的</p>
-<p>消极的：消极增强被定义作为行为的增强，其因为消极环境而发生，它可以帮助定义最低性能标准。</p>
-<h3 id="强化学习的学习模型"><a href="#强化学习的学习模型" class="headerlink" title="强化学习的学习模型"></a>强化学习的学习模型</h3><ul>
-<li>Markov Decision Process</li>
-<li>Q learning</li>
-</ul>
-<h3 id="监督学习对比强化学习"><a href="#监督学习对比强化学习" class="headerlink" title="监督学习对比强化学习"></a>监督学习对比强化学习</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/Reinforcement-Learning-vs-Supervised-Learning.png!picslt" alt="监督学习对比强化学习"></p>
-<h3 id="强化学习的应用"><a href="#强化学习的应用" class="headerlink" title="强化学习的应用"></a>强化学习的应用</h3><ul>
-<li>机器人为自动工业自动化</li>
-<li>商业策略计划</li>
-<li>机器学习和数据处理</li>
-<li>帮助创建训练系统，依照学生的需求提供定制化的指令和原料</li>
-<li>航空控制和机器人自动控制</li>
-</ul>
-<h3 id="为什么使用强化学习"><a href="#为什么使用强化学习" class="headerlink" title="为什么使用强化学习"></a>为什么使用强化学习</h3><p>It helps you to find which situation needs an action<br>Helps you to discover which action yields the highest reward over the longer period.<br>Reinforcement Learning also provides the learning agent with a reward function.<br>It also allows it to figure out the best method for obtaining large rewards.</p>
-<h3 id="为什么不能使用强化学习"><a href="#为什么不能使用强化学习" class="headerlink" title="为什么不能使用强化学习"></a>为什么不能使用强化学习</h3><p>You can’t apply reinforcement learning model is all the situation. Here are some conditions when you should not use reinforcement learning model.</p>
-<p>When you have enough data to solve the problem with a supervised learning method<br>You need to remember that Reinforcement Learning is computing-heavy and time-consuming. in particular when the action space is large.</p>
-<h3 id="强化学习的挑战"><a href="#强化学习的挑战" class="headerlink" title="强化学习的挑战"></a>强化学习的挑战</h3><p>Here are the major challenges you will face while doing Reinforcement earning:</p>
-<p>Feature/reward design which should be very involved<br>Parameters may affect the speed of learning.<br>Realistic environments can have partial observability.<br>Too much Reinforcement may lead to an overload of states which can diminish the results.<br>Realistic environments can be non-stationary.</p>
-
+        
+          <a class="article-more-a" href="/2020/10/08/Reinforcement-Learning-学习理解/#more">more >></a>
+        
       
       
     
