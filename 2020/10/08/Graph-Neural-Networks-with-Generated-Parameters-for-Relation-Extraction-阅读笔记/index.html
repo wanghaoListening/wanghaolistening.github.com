@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>Tag: 快速排序 | haothink123</title>
+  <title>Graph Neural Networks with Generated Parameters for Relation Extraction 阅读笔记 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="后端程序员">
-<meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
-<meta property="og:type" content="website">
-<meta property="og:title" content="haothink123">
-<meta property="og:url" content="https://wanghaolistening.github.io/tags/快速排序/index.html">
+  <meta name="description" content="Graph Neural Networks with Generated Parameters for Relation Extraction">
+<meta name="keywords" content="知识抽取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph Neural Networks with Generated Parameters for Relation Extraction 阅读笔记">
+<meta property="og:url" content="https://wanghaolistening.github.io/2020/10/08/Graph-Neural-Networks-with-Generated-Parameters-for-Relation-Extraction-阅读笔记/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="后端程序员">
+<meta property="og:description" content="Graph Neural Networks with Generated Parameters for Relation Extraction">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-10-10T11:17:51.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="haothink123">
-<meta name="twitter:description" content="后端程序员">
+<meta name="twitter:title" content="Graph Neural Networks with Generated Parameters for Relation Extraction 阅读笔记">
+<meta name="twitter:description" content="Graph Neural Networks with Generated Parameters for Relation Extraction">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -182,71 +183,227 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Graph-Neural-Networks-with-Generated-Parameters-for-Relation-Extraction-阅读笔记" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/剑指offer之最小的K个数/" class="archive-article-date">
-  	<time datetime="2019-08-11T09:39:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/剑指offer之最小的K个数/">剑指offer之最小的K个数</a>
+    <h1 class="article-title" itemprop="name">
+      Graph Neural Networks with Generated Parameters for Relation Extraction 阅读笔记
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/10/08/Graph-Neural-Networks-with-Generated-Parameters-for-Relation-Extraction-阅读笔记/" class="archive-article-date">
+  	<time datetime="2020-10-08T09:15:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="作者思想"><a href="#作者思想" class="headerlink" title="作者思想"></a>作者思想</h3><p>在论文当中，作者提出了一种新的带生成参数的图神经网络(GP-GNNs)，实验分别验证了GP-GNNs在bag-和instance-设置下的关系抽取，结果展示了multi-hop reasoning机制相比传统方式有显著的性能改善，</p>
+<a id="more"></a>
+<h3 id="传统关系抽取的局限"><a href="#传统关系抽取的局限" class="headerlink" title="传统关系抽取的局限"></a>传统关系抽取的局限</h3><p><a href="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/multi-hop-relational-reasoning.png" target="_blank" rel="noopener">muti-hop-relational-reasoning</a></p>
+<p>已存在的关系抽取模型，可以很容易的抽取Luc Besson directed a film L´eon:，The Professional and that<br>the film is in English，但是在没有multi-hop relational reasoning帮助下，不能够推理出Luc Besson 和English的关系，大多数的GNNs仅能够在预先定义的图下处理multi-hop relational reasoning，并且不能够直接应用于自然语言的关系关系挖掘。</p>
+<h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>作者在论文中提出了带参数的图神经网络解决上述问题，改写图神经网络去解决自然语言关系挖掘任务，在文本序列中,GP-CNNs首先构造了一个带实体的全连接图，之后采用三个模块去处理关系推理<br>（1):encoding module -enables edges to encode rich information from natural languages<br>（2):propagation module -propagates relational information among various nodes<br>（3):classification module -makes predictions with node representations</p>
+<p>相比于传统的GNNs，GP-GNNs可以从自然语言学习edge parameters，扩展传统方式从仅能在有限数量的edge types的关系图和非关系图执行推理到在非结构化文本作为输入进行推理。</p>
+<blockquote>
+<p>已存在方法的缺点是他们不能够在句子当中介于实体对和他们的关系充分使用multihop inference</p>
+</blockquote>
+<h3 id="Graph-Neural-Network-with-Generated-Parameters-GP-GNNs"><a href="#Graph-Neural-Network-with-Generated-Parameters-GP-GNNs" class="headerlink" title="Graph Neural Network with Generated Parameters (GP-GNNs)"></a>Graph Neural Network with Generated Parameters (GP-GNNs)</h3><p>GP-GNNs采用了三个模块，1.encoding module，2.propagation module，3.classification module。<br>encoding 模块将序列转换成一个跟edges相符的过渡矩阵（transition matrices），<br>propagation 模块从一层层的nodes学习representations<br>Classification 模块取node representations作为输入并且输出预测</p>
+<h3 id="Relation-Extraction-with-GP-GNNs"><a href="#Relation-Extraction-with-GP-GNNs" class="headerlink" title="Relation Extraction with GP-GNNs"></a>Relation Extraction with GP-GNNs</h3><p><a href="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/GP-GNNs.png" target="_blank" rel="noopener">muti-hop-relational-reasoning</a></p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>论文提出GP-GNN模型，通过编码自然语言作为参数解决了relational message-passing，并且执行层层之间的传播。模型也被认为是在非结构化输入的图生成问题更通用的框架。</p>
+
+      
+      
+    
+    
+      <div hidden="hidden"></div>
+    
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">快速排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识抽取</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        			<a href="/categories/知识图谱//" class="article-tag-list-link color5">知识图谱</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2020/10/08/Graph-Neural-Networks-with-Generated-Parameters-for-Relation-Extraction-阅读笔记/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/10/08/Reinforcement-Learning-学习理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Reinforcement Learning 学习理解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传统关系抽取的局限"><span class="toc-number">2.</span> <span class="toc-text">传统关系抽取的局限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理方案"><span class="toc-number">3.</span> <span class="toc-text">处理方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Graph-Neural-Network-with-Generated-Parameters-GP-GNNs"><span class="toc-number">4.</span> <span class="toc-text">Graph Neural Network with Generated Parameters (GP-GNNs)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Relation-Extraction-with-GP-GNNs"><span class="toc-number">5.</span> <span class="toc-text">Relation Extraction with GP-GNNs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论"><span class="toc-number">6.</span> <span class="toc-text">结论</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'true'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+  
+
+  
 
 
           </div>
@@ -272,9 +429,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
