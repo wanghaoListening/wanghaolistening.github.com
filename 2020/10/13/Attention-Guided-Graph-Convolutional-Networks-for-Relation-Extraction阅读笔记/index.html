@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>剑指offer之数字在排序数组中出现的次数 | haothink123</title>
+  <title>Attention Guided Graph Convolutional Networks for Relation Extraction阅读笔记 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数字在排序数组中出现的次数">
-<meta name="keywords" content="数组">
+  <meta name="description" content="Attention Guided Graph Convolutional Networks for Relation Extraction">
+<meta name="keywords" content="知识抽取">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer之数字在排序数组中出现的次数">
-<meta property="og:url" content="https://wanghaolistening.github.io/2019/08/31/剑指offer之数字在排序数组中出现的次数/index.html">
+<meta property="og:title" content="Attention Guided Graph Convolutional Networks for Relation Extraction阅读笔记">
+<meta property="og:url" content="https://wanghaolistening.github.io/2020/10/13/Attention-Guided-Graph-Convolutional-Networks-for-Relation-Extraction阅读笔记/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="数字在排序数组中出现的次数">
+<meta property="og:description" content="Attention Guided Graph Convolutional Networks for Relation Extraction">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
-<meta property="og:updated_time" content="2019-08-31T12:08:03.000Z">
+<meta property="og:updated_time" content="2020-10-13T15:17:19.998Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer之数字在排序数组中出现的次数">
-<meta name="twitter:description" content="数字在排序数组中出现的次数">
-<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt">
+<meta name="twitter:title" content="Attention Guided Graph Convolutional Networks for Relation Extraction阅读笔记">
+<meta name="twitter:description" content="Attention Guided Graph Convolutional Networks for Relation Extraction">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -185,32 +183,27 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer之数字在排序数组中出现的次数" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-Attention-Guided-Graph-Convolutional-Networks-for-Relation-Extraction阅读笔记" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      剑指offer之数字在排序数组中出现的次数
+      Attention Guided Graph Convolutional Networks for Relation Extraction阅读笔记
     </h1>
   
 
         
-        <a href="/2019/08/31/剑指offer之数字在排序数组中出现的次数/" class="archive-article-date">
-  	<time datetime="2019-08-31T12:04:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-31</time>
+        <a href="/2020/10/13/Attention-Guided-Graph-Convolutional-Networks-for-Relation-Extraction阅读笔记/" class="archive-article-date">
+  	<time datetime="2020-10-13T02:40:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Input:<br>nums = 1, 2, 3, 3, 3, 3, 4, 6<br>K = 3<br>Output:<br>4</p>
-<a id="more"></a>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/swordoffer/think.jpeg!picslt" alt="思考"></p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>由于数组中的元素是排序的则可以利用二分查找的思想先定位到元素，然后向前向后移动来统计此元素的个数</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public class NumberOfK &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] nums = &#123;1, 2, 3, 3, 3, 3, 4, 6&#125;;</span><br><span class="line">        System.out.println(binarySearchNumberOfK(nums,3));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static int binarySearchNumberOfK(int[] nums,int k)&#123;</span><br><span class="line">        int low = 0;</span><br><span class="line">        int high = nums.length-1;</span><br><span class="line">        int middle = (low+high)/2;</span><br><span class="line"></span><br><span class="line">        while (low &lt; high)&#123;</span><br><span class="line"></span><br><span class="line">            if(nums[middle] == k)&#123;</span><br><span class="line">                //找到元素位置</span><br><span class="line">                int counter = 1;</span><br><span class="line">                int leftIndex = middle-1;</span><br><span class="line">                int rightIndex = middle+1;</span><br><span class="line">                while(nums[leftIndex] == k)&#123;</span><br><span class="line">                    counter++;</span><br><span class="line">                    leftIndex--;</span><br><span class="line">                &#125;</span><br><span class="line">                while(nums[rightIndex] == k)&#123;</span><br><span class="line">                    counter++;</span><br><span class="line">                    rightIndex++;</span><br><span class="line">                &#125;</span><br><span class="line">                return counter;</span><br><span class="line">            &#125;else if(nums[middle] &gt; k)&#123;</span><br><span class="line">                high = middle-1;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                low = middle+1;</span><br><span class="line">            &#125;</span><br><span class="line">            middle = (low+high)/2;</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码地址：<a href="https://dwz11.cn/wA8qjy8" target="_blank" rel="noopener">https://dwz11.cn/wA8qjy8</a></p>
+        <h3 id="作者思想"><a href="#作者思想" class="headerlink" title="作者思想"></a>作者思想</h3><p>依赖树可以传递丰富的结构信息被证明在文本的实体间抽取关系是非常有用的，已存在的方式基于hard-pruning策略挑选相关的部分依赖结构并不总是产生最优的结果。而文章提出了一种的新的模型Attention Guided Graph Convolutional Networks (AGGCNs),直接取全依赖树作为输入，模型可以被认为是一个soft-pruning方法，自动去学习如何去挑选对于关系抽取任务是有用的相关sub-structures，在各种扩展任务执行的结果显示新模型可以更好地平衡全依赖树的结构信息，相比先前的方式有一个更好的结果。</p>
 
       
       
@@ -254,7 +247,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识抽取</a>
         		</li>
       		
 		</ul>
@@ -266,7 +259,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        			<a href="/categories/知识图谱//" class="article-tag-list-link color5">知识图谱</a>
         		</li>
       		
 		</ul>
@@ -321,7 +314,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2019/08/31/剑指offer之数字在排序数组中出现的次数/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2020/10/13/Attention-Guided-Graph-Convolutional-Networks-for-Relation-Extraction阅读笔记/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -335,18 +328,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/09/01/剑指offer之按之二叉查找树的第-K-个结点/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          剑指offer之按之二叉查找树的第 K 个结点
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/31/剑指offer之两个链表的第一个公共结点/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer之两个链表的第一个公共结点</div>
+    <a href="/2020/10/08/Graph-Neural-Networks-with-Generated-Parameters-for-Relation-Extraction-阅读笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Graph Neural Networks with Generated Parameters for Relation Extraction 阅读笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -373,7 +357,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思考"><span class="toc-number">2.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题思路"><span class="toc-number">3.</span> <span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-number">4.</span> <span class="toc-text">代码实现</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li></ol>
                     </div>
                 </span>
             </div>

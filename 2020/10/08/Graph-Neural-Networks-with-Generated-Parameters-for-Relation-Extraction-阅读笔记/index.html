@@ -16,10 +16,13 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="Graph Neural Networks with Generated Parameters for Relation Extraction">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-10-10T11:17:51.652Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/multi-hop-relational-reasoning.png">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/GP-GNNs.png">
+<meta property="og:updated_time" content="2020-10-13T02:42:43.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph Neural Networks with Generated Parameters for Relation Extraction 阅读笔记">
 <meta name="twitter:description" content="Graph Neural Networks with Generated Parameters for Relation Extraction">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/multi-hop-relational-reasoning.png">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -80,7 +83,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-            总文章数 93
+            总文章数 94
         </nav>
 		<nav class="header-smart-menu">
     		
@@ -205,7 +208,7 @@ var _hmt = _hmt || [];
       
         <h3 id="作者思想"><a href="#作者思想" class="headerlink" title="作者思想"></a>作者思想</h3><p>在论文当中，作者提出了一种新的带生成参数的图神经网络(GP-GNNs)，实验分别验证了GP-GNNs在bag-和instance-设置下的关系抽取，结果展示了multi-hop reasoning机制相比传统方式有显著的性能改善，</p>
 <a id="more"></a>
-<h3 id="传统关系抽取的局限"><a href="#传统关系抽取的局限" class="headerlink" title="传统关系抽取的局限"></a>传统关系抽取的局限</h3><p><a href="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/multi-hop-relational-reasoning.png" target="_blank" rel="noopener">muti-hop-relational-reasoning</a></p>
+<h3 id="传统关系抽取的局限"><a href="#传统关系抽取的局限" class="headerlink" title="传统关系抽取的局限"></a>传统关系抽取的局限</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/multi-hop-relational-reasoning.png" alt="muti-hop-relational-reasoning"></p>
 <p>已存在的关系抽取模型，可以很容易的抽取Luc Besson directed a film L´eon:，The Professional and that<br>the film is in English，但是在没有multi-hop relational reasoning帮助下，不能够推理出Luc Besson 和English的关系，大多数的GNNs仅能够在预先定义的图下处理multi-hop relational reasoning，并且不能够直接应用于自然语言的关系关系挖掘。</p>
 <h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>作者在论文中提出了带参数的图神经网络解决上述问题，改写图神经网络去解决自然语言关系挖掘任务，在文本序列中,GP-CNNs首先构造了一个带实体的全连接图，之后采用三个模块去处理关系推理<br>（1):encoding module -enables edges to encode rich information from natural languages<br>（2):propagation module -propagates relational information among various nodes<br>（3):classification module -makes predictions with node representations</p>
 <p>相比于传统的GNNs，GP-GNNs可以从自然语言学习edge parameters，扩展传统方式从仅能在有限数量的edge types的关系图和非关系图执行推理到在非结构化文本作为输入进行推理。</p>
@@ -213,7 +216,7 @@ var _hmt = _hmt || [];
 <p>已存在方法的缺点是他们不能够在句子当中介于实体对和他们的关系充分使用multihop inference</p>
 </blockquote>
 <h3 id="Graph-Neural-Network-with-Generated-Parameters-GP-GNNs"><a href="#Graph-Neural-Network-with-Generated-Parameters-GP-GNNs" class="headerlink" title="Graph Neural Network with Generated Parameters (GP-GNNs)"></a>Graph Neural Network with Generated Parameters (GP-GNNs)</h3><p>GP-GNNs采用了三个模块，1.encoding module，2.propagation module，3.classification module。<br>encoding 模块将序列转换成一个跟edges相符的过渡矩阵（transition matrices），<br>propagation 模块从一层层的nodes学习representations<br>Classification 模块取node representations作为输入并且输出预测</p>
-<h3 id="Relation-Extraction-with-GP-GNNs"><a href="#Relation-Extraction-with-GP-GNNs" class="headerlink" title="Relation Extraction with GP-GNNs"></a>Relation Extraction with GP-GNNs</h3><p><a href="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/GP-GNNs.png" target="_blank" rel="noopener">muti-hop-relational-reasoning</a></p>
+<h3 id="Relation-Extraction-with-GP-GNNs"><a href="#Relation-Extraction-with-GP-GNNs" class="headerlink" title="Relation Extraction with GP-GNNs"></a>Relation Extraction with GP-GNNs</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/GP-GNNs.png" alt="muti-hop-relational-reasoning"></p>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>论文提出GP-GNN模型，通过编码自然语言作为参数解决了relational message-passing，并且执行层层之间的传播。模型也被认为是在非结构化输入的图生成问题更通用的框架。</p>
 
       
@@ -338,6 +341,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/10/13/Attention-Guided-Graph-Convolutional-Networks-for-Relation-Extraction阅读笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Attention Guided Graph Convolutional Networks for Relation Extraction阅读笔记
+        
+      </div>
+    </a>
   
   
     <a href="/2020/10/08/Reinforcement-Learning-学习理解/" id="article-nav-older" class="article-nav-link-wrap">
@@ -528,19 +540,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">关系抽取</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Fork/Join</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,7 +548,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,7 +572,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">设计模式,Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color5">关系抽取</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -568,15 +580,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Reinforcement Learning</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,15 +588,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">elastic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,11 +604,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">列表生成式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,11 +632,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,7 +644,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color1">变态跳台阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -644,11 +652,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">平衡二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">递归</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">平衡二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,10 +676,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
@@ -676,15 +684,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">逻辑运算符</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组重复数判断</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">javaweb基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,23 +724,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CAS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -732,15 +736,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">javaweb基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
