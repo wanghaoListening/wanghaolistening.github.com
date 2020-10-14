@@ -16,10 +16,13 @@
 <meta property="og:site_name" content="haothink123">
 <meta property="og:description" content="Attention Guided Graph Convolutional Networks for Relation Extraction">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-10-13T15:17:19.998Z">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/An-example-dependency.png">
+<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/Attention-Guided-GCNs-components.png">
+<meta property="og:updated_time" content="2020-10-14T13:10:42.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Attention Guided Graph Convolutional Networks for Relation Extraction阅读笔记">
 <meta name="twitter:description" content="Attention Guided Graph Convolutional Networks for Relation Extraction">
+<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/An-example-dependency.png">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -204,7 +207,20 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="作者思想"><a href="#作者思想" class="headerlink" title="作者思想"></a>作者思想</h3><p>依赖树可以传递丰富的结构信息被证明在文本的实体间抽取关系是非常有用的，已存在的方式基于hard-pruning策略挑选相关的部分依赖结构并不总是产生最优的结果。而文章提出了一种的新的模型Attention Guided Graph Convolutional Networks (AGGCNs),直接取全依赖树作为输入，模型可以被认为是一个soft-pruning方法，自动去学习如何去挑选对于关系抽取任务是有用的相关sub-structures，在各种扩展任务执行的结果显示新模型可以更好地平衡全依赖树的结构信息，相比先前的方式有一个更好的结果。</p>
-
+<a id="more"></a>
+<h3 id="传统方法的缺点"><a href="#传统方法的缺点" class="headerlink" title="传统方法的缺点"></a>传统方法的缺点</h3><p>大多数已存在的关系抽取模型可以被分成两类，sequence-based 和 dependency-based，Sequence-based模型仅能在word sequences上进行操作。dependency-based模型合并依赖树到模型中，相比sequence-based模型，dependency-based模型能够去捕获non-local syntactic relations，这种关系表面上是非常晦涩的。各种pruning strategies被提出去提取依赖信息为了去进一步的提升性能。然而基于规则的pruning strategies可能消除在full<br>tree当中的一些重要信息。</p>
+<p>图1 展示了一个跨语句n-ary关系抽取的例子，如果模型仅仅考虑pruned tree那么关键tokens partial将被排除在外，模型应该能够通过在full tree当中加入或排除信息保持树的平衡。</p>
+<p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/An-example-dependency.png" alt="An-example-dependency"></p>
+<h3 id="论文方法"><a href="#论文方法" class="headerlink" title="论文方法"></a>论文方法</h3><p>在论文当中，作者提出了一种新的Attention Guided Graph Convolutional Networks (AGGCNs)方法，模型直接在full-tree上进行操作。直觉上，开发了一个“soft pruning”策略，转换原始的依赖树到全连接edge-weighted-graph，weights可以被认为是节点之间的关联强度。</p>
+<h3 id="GCNs"><a href="#GCNs" class="headerlink" title="GCNs"></a>GCNs</h3><p>对于GCNs，L层需要去排序捕获neighborhood信息。一个简陋的GCN模型可能不能够去捕获large graphs的non-local交互，一个更深的GCNs模型可以捕获更丰富的图的neighborhood信息。根据实践观察到最好的性能是2层的模型实现。在dense connections的帮助下，以更大的深度训练AGGCN模型，能够捕获rich local 和 non-local dependency信息。</p>
+<h3 id="作者的主要贡献"><a href="#作者的主要贡献" class="headerlink" title="作者的主要贡献"></a>作者的主要贡献</h3><ul>
+<li><p>We propose the novel AGGCNs that learn a “soft pruning” strategy in an end-to-end fashion,<br>which learns how to select and discard information. Combining with dense connections, our AGGCN model is able to learn a better graph representation.</p>
+</li>
+<li><p>Our model achieves new state-of-the-art results without additional computational overhead when compared with previous GCNs.2 Unlike tree-structured models (e.g., Tree-LSTM (Tai et al.,2015)), it can be efficiently applied over dependency trees in parallel.</p>
+</li>
+</ul>
+<h3 id="Attention-Guided-GCNs-模块组成"><a href="#Attention-Guided-GCNs-模块组成" class="headerlink" title="Attention Guided GCNs 模块组成"></a>Attention Guided GCNs 模块组成</h3><p><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/Attention-Guided-GCNs-components.png" alt="Attention-Guided-GCNs"></p>
+<h4 id="Attention-Guided-Layer"><a href="#Attention-Guided-Layer" class="headerlink" title="Attention Guided Layer"></a>Attention Guided Layer</h4>
       
       
     
@@ -357,7 +373,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作者思想"><span class="toc-number">1.</span> <span class="toc-text">作者思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传统方法的缺点"><span class="toc-number">2.</span> <span class="toc-text">传统方法的缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#论文方法"><span class="toc-number">3.</span> <span class="toc-text">论文方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCNs"><span class="toc-number">4.</span> <span class="toc-text">GCNs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作者的主要贡献"><span class="toc-number">5.</span> <span class="toc-text">作者的主要贡献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attention-Guided-GCNs-模块组成"><span class="toc-number">6.</span> <span class="toc-text">Attention Guided GCNs 模块组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention-Guided-Layer"><span class="toc-number">6.1.</span> <span class="toc-text">Attention Guided Layer</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
