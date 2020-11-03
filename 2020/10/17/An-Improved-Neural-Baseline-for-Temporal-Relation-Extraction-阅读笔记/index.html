@@ -6,23 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://wanghaolistening.github.io">
-  <title>JVM 的几个收集器整理2 | haothink123</title>
+  <title>An Improved Neural Baseline for Temporal Relation Extraction 阅读笔记 | haothink123</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这篇文章我们主要来讲解CMS收集器和G1收集器，这两款收集器是比较有颠覆性的收集器，CMS收集器是第一款真正意义上实现并发的收集器，实现了用户线程和垃圾收集线程的并发执行而G1收集器通过将堆内存划分为多个大小相等的独立区域(Region)以不同的管理方式实现了实现了可预测的停顿，并且其使命是未来可以替代掉jdk1.5发布的CMS收集器。">
-<meta name="keywords" content="jvm">
+  <meta name="keywords" content="后端,java,python,大数据,分布式,编码,程序猿,开源,开源,代码,Developer,数字货币，区块链">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM 的几个收集器整理2">
-<meta property="og:url" content="https://wanghaolistening.github.io/2016/01/23/JVM-的几个收集器整理2/index.html">
+<meta property="og:title" content="An Improved Neural Baseline for Temporal Relation Extraction 阅读笔记">
+<meta property="og:url" content="https://wanghaolistening.github.io/2020/10/17/An-Improved-Neural-Baseline-for-Temporal-Relation-Extraction-阅读笔记/index.html">
 <meta property="og:site_name" content="haothink123">
-<meta property="og:description" content="这篇文章我们主要来讲解CMS收集器和G1收集器，这两款收集器是比较有颠覆性的收集器，CMS收集器是第一款真正意义上实现并发的收集器，实现了用户线程和垃圾收集线程的并发执行而G1收集器通过将堆内存划分为多个大小相等的独立区域(Region)以不同的管理方式实现了实现了可预测的停顿，并且其使命是未来可以替代掉jdk1.5发布的CMS收集器。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/CMS-collector.jpg">
-<meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/g1-collector.jpg">
-<meta property="og:updated_time" content="2019-07-10T06:32:57.000Z">
+<meta property="og:updated_time" content="2020-10-17T13:33:59.065Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM 的几个收集器整理2">
-<meta name="twitter:description" content="这篇文章我们主要来讲解CMS收集器和G1收集器，这两款收集器是比较有颠覆性的收集器，CMS收集器是第一款真正意义上实现并发的收集器，实现了用户线程和垃圾收集线程的并发执行而G1收集器通过将堆内存划分为多个大小相等的独立区域(Region)以不同的管理方式实现了实现了可预测的停顿，并且其使命是未来可以替代掉jdk1.5发布的CMS收集器。">
-<meta name="twitter:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/CMS-collector.jpg">
+<meta name="twitter:title" content="An Improved Neural Baseline for Temporal Relation Extraction 阅读笔记">
   
     <link rel="alternative" href="/atom.xml" title="haothink123" type="application/atom+xml">
   
@@ -186,85 +180,27 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-JVM-的几个收集器整理2" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-An-Improved-Neural-Baseline-for-Temporal-Relation-Extraction-阅读笔记" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JVM 的几个收集器整理2
+      An Improved Neural Baseline for Temporal Relation Extraction 阅读笔记
     </h1>
   
 
         
-        <a href="/2016/01/23/JVM-的几个收集器整理2/" class="archive-article-date">
-  	<time datetime="2016-01-23T10:23:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-23</time>
+        <a href="/2020/10/17/An-Improved-Neural-Baseline-for-Temporal-Relation-Extraction-阅读笔记/" class="archive-article-date">
+  	<time datetime="2020-10-17T13:33:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这篇文章我们主要来讲解CMS收集器和G1收集器，这两款收集器是比较有颠覆性的收集器，CMS收集器是第一款真正意义上实现并发的收集器，实现了用户线程和垃圾收集线程的并发执行<br>而G1收集器通过将堆内存划分为多个大小相等的独立区域(Region)以不同的管理方式实现了<br>实现了可预测的停顿，并且其使命是未来可以替代掉jdk1.5发布的CMS收集器。</p>
-<a id="more"></a>
-<h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>特点：并发收集低停顿<br>CMS收集器是一种以获得最短的回收停顿时间为目标的收集器是基于标记-清除算法实现的。<br>它的运作过程相比较其它几款收集器过程更复杂一点。其运作过程可分四个阶段：</p>
-<ul>
-<li>初始标记</li>
-<li>并发标记</li>
-<li>重新标记</li>
-<li>并发清除</li>
-</ul>
-<p>如图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/CMS-collector.jpg" alt="CMS收集器" title="CMS收集器"></p>
-<p>初始标记阶段仅是标记一下GC Roots GC能直接关联的对象，速度很快，而并发标记阶段就是进行GC Roots Tracing 的过程，而重新标记阶段则是为了修正并发标记阶段期间因用户程序继续运作而导致的部分变动，这个阶段的停顿时间比初始阶段的稍长一些但远比并发阶段时间短。</p>
-<p>使用CMS收集器存在的问题：</p>
-<blockquote>
-<p>1.CMS默认启用的回收线程数是(CPU数量+3)/4,也就是当CPU在4个以上时，并发回收时垃圾收集线程不少于25%的CPU资源，并且随着CPU数量的增加而下降。但当CPU资源低于4个时，CMS对用户程序的影响可能变得很大。</p>
-</blockquote>
-<blockquote>
-<p>2.CMS无法处理浮动的垃圾，可能出现Concurrent Mode Failure 失败而导致另一次Full GC<br>的产生。并发清除阶段用户线程还在运行这时所产生的垃圾需要下一次FuLL GC 清理，这些就称为”浮动垃圾”，在jdk1.5的默认设置下，CMS收集器当老年代使用了68%的空间后就会被激活，这是一个偏保守的设置，如果在应用中老年代增长速度不是很快，可以适当调高参数 -XX:CMSInitiatingOccupancyFraction 的值来提高百分比，以降低内存的回收次数来获得更好的性能，而在jdk1.6中CMS的启动阈值已经提升至92%。要是CMS运行期间预留的内存无法满足程序需要，就会出现一次Concurrent Mode Failure 失败，这是jvm启动后备预案：临时启用Serial Old 收集器来重新进行老年代垃圾收集，这样停顿更长了，所以-XX:CMSInitiatingOccupancyFraction 设置的太高容易导致出现Concurrent Mode Failure 问题。所以要权衡好。</p>
-</blockquote>
-<blockquote>
-<p>3.由于CMS是基于标记-清除，所以会产生大量内存碎片，不得不触发一次Full GC 。为了解决这个问题，CMS提供了一个 -XX:+UseCMSCompactAtFullCollection<br>开关参数，用于在CMS顶不住要进行fullgc时开启内存碎片的合并整理过程，<br>当然这也意味着停顿时间变长了，<br>另外一个参数-XX:+CMSFullGCsBeforeCompaction,这个参数是用于设置多少次不压<br>缩的Full GC后跟着来一次带压缩的(默认为0，表示每次进行full Gc 时都进行压缩整理)。</p>
-</blockquote>
-<h3 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h3><p>是一款面向服务端的收集器。其使命是未来可以替代掉jdk1.5发布的收集器。</p>
-<ul>
-<li>特点：<br>1.并行与并发<br>能充分利用多CPU，多核环境。<br>2.分代收集<br>不需要配合其他收集器便可以管理整个堆<br>3.空间整合<br>G1收集器从整体看是基于标记-整理局部(两个region)看是基于复制算法<br>4.可预测的停顿<br>除了向CMS一样关注停顿时间，还有一优势预测停顿时间在，这几乎成了Java实时收集器<br>的特征了。</li>
-</ul>
-<p>注意：</p>
-<blockquote>
-<p>使用G1收集器时Java堆的内存布局就有了很大的差别，它将整个Java堆划分为多个大小相等的独立区域(Region可以通过-XX:G1HeapReginSize设置区域大小)，虽然还保留有新生代和老年代的概念，但新生代和老年代不在是物理隔离的了，它们都是一部分Region(不需要连续)的集合。</p>
-</blockquote>
-<p>前面说过G1收集器比起CMS收集器最大的优势是可以预测停顿时间，那么G1收集器是如何预测停顿时间的呢？</p>
-<p>1.他不是全局垃圾收集<br>2.G1跟踪各个Region里面的垃圾堆积的价值大小(回收所获得的空间的大小及回收所需要的经验值)，在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region(这也就是其名称的由来)：这种Region划分内存空间以及有优先级的区域回收方式，保证<br>了G1收集器在有限的时间内可以尽可能获取最大的效率。</p>
-<p>那么G1如何避免引用对象的全局扫描的呢？</p>
-<blockquote>
-<p>在G1收集器中，Region之间的对象引用以及其他收集器中的新生代与老年代之间的对象引用，虚拟机都是使用Remembered Set来避免全堆扫描。在G1中每个Region都有一个与之对应的<br>Remembered Set。虚拟机发现在对程序进行写操作时，会产生一个Writer Barrier 暂时中断写操作，检查Reference引用的对象是否处于不同的Region之中，如果是，便通过<br>CardTable把相关引用信息记录到被引用对象所属的Region的Remembered Set 之中，当进行内存回收时，在GC根节点的枚举范围中加入Remembered Set即可保证不对全堆扫描也不会有遗漏。</p>
-</blockquote>
-<p>G1进行垃圾收集的过程：</p>
-<ul>
-<li>初始标记</li>
-<li>并发标记</li>
-<li>最终标记</li>
-<li>筛选回收</li>
-</ul>
-<p>如图：<br><img src="http://wanghao-github-blog.test.upcdn.net/upaiyun/2016/jvm/g1-collector.jpg" alt="G1收集器" title="G1收集器"></p>
-<p>在最终标记阶段是为了修正在并发标记期间因用户程序继续运作产生的变动的那部分记录，<br>虚拟机将对象变化的记录写在Remembered Set Logs 里面，最终再将Remembered Set Logs 中的记录合并到Remembered Set中，这段时间需要停顿线程，不过可以并行的执行。<br>而在筛选阶段从sun透露的信息来看这个阶段其实可以和用户线程一起并发执行的，由于只是回收一部分region，时间是用户可以控制的，而且停顿用户线程可以大幅提高收集效率。</p>
-<p>G1收集器如何处理GC后的存活对象：</p>
-<blockquote>
-<p>G1并发地标记区域以跟踪区域之间的引用，同时关注收集区域中的最大空闲空间。这些区域在递增的全局暂停中被收集，存活的对象被剪切到一个空的区域里面，这样整个过程就是压缩的。在同一个周期里收集的区域叫做Collection Set。</p>
-</blockquote>
-<p>关于G1收集器的一些jvm参数</p>
-<blockquote>
-<p>G1（-XX:+UseG1GC）:启动G1收集器<br>-XX:G1HeapReginSize :设置Regin大小<br>–XX:MaxGCPauseMillis :设置延迟时间</p>
-</blockquote>
-<p>需要注意的G1是目标驱动的，–XX:MaxGCPauseMillis设置延迟时间，默认是200ms。该参数只会尽可能影响每个周期的工作量，但是不保证最终效果。设置为几十毫秒大多是徒劳的，而且几十毫秒也不是G1关注的目标。</p>
-<h3 id="G1相对于CMS的区别在："><a href="#G1相对于CMS的区别在：" class="headerlink" title="G1相对于CMS的区别在："></a>G1相对于CMS的区别在：</h3><p>1.G1在压缩空间方面有优势<br>G1通过将内存空间分成区域（Region）的方式避免内存碎片问题Eden, Survivor, Old区不再固定、在内存使用效率上来说更灵活。<br>2.预期停顿时间<br>G1可以通过设置预期停顿时间（Pause Time）来控制垃圾收集时间避免应用雪崩现象<br>G1在回收内存后会马上同时做合并空闲内存的工作、而CMS默认是在STW（stop the world）的时候做。<br>3.G1会在Young GC中使用、而CMS只能在Old区使用</p>
-<h3 id="适合G1的一些场景"><a href="#适合G1的一些场景" class="headerlink" title="适合G1的一些场景"></a>适合G1的一些场景</h3><p>就目前而言、CMS还是默认首选的GC策略、可能在以下场景下G1更适合：</p>
-<p>1.服务端多核CPU<br>2.JVM内存占用较大的应用（至少大于4G）<br>3.应用在运行过程中会产生大量内存碎片、需要经常压缩空间<br>4.想要更可控、可预期的GC停顿周期<br>5.防止高并发下应用雪崩现象</p>
-<hr>
-<p>总结：<br>内存回收与垃圾收集器在很多的时候都是影响系统性能，并发能力的主要因素之一，熟悉各种虚拟机垃圾收集器的特性不同场景下的优劣，以及收集器参数的配置尤为重要，而且正确的使用收集器及其参数配置在一定程度关系到我们app的性能，作为没有虚拟机调优实战经验的我，希望可以在不久的将来很好的去运用。</p>
-
+        
       
       
     
@@ -302,29 +238,7 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -374,7 +288,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2016/01/23/JVM-的几个收集器整理2/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wanghaolistening.github.io/2020/10/17/An-Improved-Neural-Baseline-for-Temporal-Relation-Extraction-阅读笔记/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -388,18 +302,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2016/01/27/说说工厂模式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          说说工厂模式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/21/JVM-的几个收集器整理/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JVM 的几个收集器整理</div>
+    <a href="/2020/10/13/Attention-Guided-Graph-Convolutional-Networks-for-Relation-Extraction阅读笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Attention Guided Graph Convolutional Networks for Relation Extraction阅读笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -426,7 +331,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CMS收集器"><span class="toc-number">1.</span> <span class="toc-text">CMS收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#G1收集器"><span class="toc-number">2.</span> <span class="toc-text">G1收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#G1相对于CMS的区别在："><span class="toc-number">3.</span> <span class="toc-text">G1相对于CMS的区别在：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#适合G1的一些场景"><span class="toc-number">4.</span> <span class="toc-text">适合G1的一些场景</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
