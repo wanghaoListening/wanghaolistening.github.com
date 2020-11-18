@@ -17,7 +17,7 @@
 <meta property="og:description" content="OpenNRE: 可一键运行的开源关系抽取工具包  Word2vec: 是一群用来产生词向量的相关模型  GloVe: 词表征（word representation）工具,可以把一个单词表达成一个由实数组成的向量，这些向量捕捉到了单词之间一些语义特性  关系抽取是一个文本分类问题  针对开放领域的关系抽取由于关系类型多样且不确定,可以采用无监督和远程监督等方法  NLTK(naturallan">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/lassification_of_relation_extraction.png!picslt">
-<meta property="og:updated_time" content="2020-11-06T02:23:49.065Z">
+<meta property="og:updated_time" content="2020-11-17T16:20:04.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识图谱学习工具资料总结">
 <meta name="twitter:description" content="OpenNRE: 可一键运行的开源关系抽取工具包  Word2vec: 是一群用来产生词向量的相关模型  GloVe: 词表征（word representation）工具,可以把一个单词表达成一个由实数组成的向量，这些向量捕捉到了单词之间一些语义特性  关系抽取是一个文本分类问题  针对开放领域的关系抽取由于关系类型多样且不确定,可以采用无监督和远程监督等方法  NLTK(naturallan">
@@ -270,8 +270,38 @@ var _hmt = _hmt || [];
 </li>
 <li><p>联合学习方法有３种,包括基于参数共享的实体关系抽取方法、基于序列标注的实体关系抽取方法和基于图的实体关系抽取方法．</p>
 </li>
-<li></li>
+<li><p>BERT Google AI Language发布了BERT模型,该模型在11个NLP任务上的表现刷新了记录,．BERT的出现,彻底改变了预训练产生词向量和<br>下游具体NLP任务的关系</p>
+</li>
+<li><p>BERT作为一个预训练语言表示模型,通过上下文全向的方式理解整个语句的语义,并将训练学到的知识(表示)用于关系抽取等领域</p>
+</li>
+<li><p>BERT不适合用于长文本．BERT 以基于注意力机制的转换器作为基础,不便于处理长文本</p>
+</li>
+<li><p>BERT 适用于短文本,而短文本中若出现不规则表示、错别字等噪音数据,这不仅会对关系触发词的抽取造成一定的影响,而且在联合学习时进行命名实体识别阶段也会产生错误的积累和传播,最终导致模型的性能下降</p>
+</li>
+<li><p>无法较好地处理一词多义问题．虽然通过上下文能在一定程度上缓解一词多义的影响,但一词多义对BERT的原始输入中的词编码影响极大．从而进行关系抽取时容易产生错误标签</p>
+</li>
+<li><p>开放领域的关系抽取的方法是信息抽取领域的新的研究方向，改关系抽取方法主要分为半监督和无监督2种</p>
+</li>
+<li><p>语形特征和语义特征 </p>
+</li>
+<li><p>开放领域的关系抽取方法主要有3个流程</p>
+</li>
 </ul>
+<p>1）深层解析小规模的语料集,自动抽取实体间关系三元组,利用朴素贝叶斯分类器训练已标注可信和不可信的关系三元组构建关系表示模型<br>2）利用关系抽取模型并输入词性、序列等特征等数据,在训练好的分类器上进行大量网络文献的关系抽取,获取候选关系三元组<br>3）合并候选三元组,通过统计的方法计算各个关系三元组的可信度,并建立索引</p>
+<ul>
+<li><p>二元关系抽取方法：先识别实体词的二元抽取方法，主要的信息抽取系统包括TextRunner,WOE,PATTY</p>
+</li>
+<li><p>二元关系抽取方法：先识别关系词的二元抽取方法，ReVerb,OLLIE,C１ausIE</p>
+</li>
+<li><p>中文开放领域文本关系抽取方法，为了解决中文中缺省某些语言成分和倒序的问题,研究者发布了CORE,ZORE,UnCORE 这３个面向开放领域的信息抽取系统</p>
+</li>
+</ul>
+<blockquote>
+<p>面向开放领域的关系抽取存在的问题</p>
+</blockquote>
+<p>1）如何继续提高实体二元关系的准确率和召回率，进一步实现对实体间多元关系的抽取<br>2）如何继续挖掘实体间的隐含关系，进一步提高实体间关系信息的有效利用<br>3）如何提出公认的评价体系，指定统一的评价标准</p>
+<p>实体抽取，实体链接（两个实体同一个含义需要规整），目前最主流的算法就是CNN+LSTM+CRF进行实体识别。<br>实体间关系抽取，拿到知识图谱最小单元三元组，比较经典算法的就是Piece-Wise-CNN和 LSTM+ Attention 。<br>知识存储，一般采用图数据库（neo4j等）。</p>
+<p>基于强化学习的神经关系抽取的优点是关系抽取不依赖于模型。因此，它可以很容易地适应任何神经网络结构，以有效地抽取关系。</p>
 
       
       
