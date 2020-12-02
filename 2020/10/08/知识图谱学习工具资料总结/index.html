@@ -17,7 +17,7 @@
 <meta property="og:description" content="知识图谱的关系抽取学习实验过程当中的一些总结">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/lassification_of_relation_extraction.png!picslt">
-<meta property="og:updated_time" content="2020-12-02T07:42:15.638Z">
+<meta property="og:updated_time" content="2020-12-02T08:46:09.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识图谱学习工具资料总结">
 <meta name="twitter:description" content="知识图谱的关系抽取学习实验过程当中的一些总结">
@@ -355,6 +355,8 @@ var _hmt = _hmt || [];
 <li><p>Input Representation 采用word vector + position vector，没有考虑潜在的实体类型信息，后期考虑加入实体类型信息。</p>
 </li>
 </ul>
+<h4 id="What-is-a-good-model"><a href="#What-is-a-good-model" class="headerlink" title="What is a good model?"></a>What is a good model?</h4><p>Best models would be able to capture 4 components:</p>
+<p>Lexical approach (relating to the words or vocabulary of a language)<br>Syntactic approach (the arrangement of words and phrases to create well-formed sentences in a language -&gt; grammar)<br>Semantic approach (relating to meaning in language -&gt; stretch the words beyond, understanding ambiguities)<br>Pragmatic approach (relating proximity between words and documents)</p>
 
       
       
@@ -517,7 +519,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型运行数据"><span class="toc-number">1.</span> <span class="toc-text">C2SA模型运行数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型"><span class="toc-number">2.</span> <span class="toc-text">C2SA模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型训练数据"><span class="toc-number">3.</span> <span class="toc-text">C2SA模型训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型的训练过程"><span class="toc-number">4.</span> <span class="toc-text">C2SA模型的训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关系抽取的难点"><span class="toc-number">4.1.</span> <span class="toc-text">关系抽取的难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention-的-N-种类型"><span class="toc-number">4.2.</span> <span class="toc-text">Attention 的 N 种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention相似度计算方式"><span class="toc-number">4.3.</span> <span class="toc-text">Attention相似度计算方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程监督关系抽取"><span class="toc-number">4.4.</span> <span class="toc-text">远程监督关系抽取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于对抗训练"><span class="toc-number">4.5.</span> <span class="toc-text">关于对抗训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bert-模型"><span class="toc-number">4.6.</span> <span class="toc-text">bert 模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对模型进行改造"><span class="toc-number">4.7.</span> <span class="toc-text">对模型进行改造</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型运行数据"><span class="toc-number">1.</span> <span class="toc-text">C2SA模型运行数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型"><span class="toc-number">2.</span> <span class="toc-text">C2SA模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型训练数据"><span class="toc-number">3.</span> <span class="toc-text">C2SA模型训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型的训练过程"><span class="toc-number">4.</span> <span class="toc-text">C2SA模型的训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关系抽取的难点"><span class="toc-number">4.1.</span> <span class="toc-text">关系抽取的难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention-的-N-种类型"><span class="toc-number">4.2.</span> <span class="toc-text">Attention 的 N 种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention相似度计算方式"><span class="toc-number">4.3.</span> <span class="toc-text">Attention相似度计算方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程监督关系抽取"><span class="toc-number">4.4.</span> <span class="toc-text">远程监督关系抽取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于对抗训练"><span class="toc-number">4.5.</span> <span class="toc-text">关于对抗训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bert-模型"><span class="toc-number">4.6.</span> <span class="toc-text">bert 模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对模型进行改造"><span class="toc-number">4.7.</span> <span class="toc-text">对模型进行改造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-a-good-model"><span class="toc-number">4.8.</span> <span class="toc-text">What is a good model?</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
