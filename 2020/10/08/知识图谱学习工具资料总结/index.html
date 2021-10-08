@@ -17,7 +17,7 @@
 <meta property="og:description" content="知识图谱的关系抽取学习实验过程当中的一些总结">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wanghao-github-blog.test.upcdn.net/upaiyun/2020/lassification_of_relation_extraction.png!picslt">
-<meta property="og:updated_time" content="2020-12-02T08:46:09.760Z">
+<meta property="og:updated_time" content="2020-12-05T07:49:33.960Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识图谱学习工具资料总结">
 <meta name="twitter:description" content="知识图谱的关系抽取学习实验过程当中的一些总结">
@@ -82,7 +82,7 @@ var _hmt = _hmt || [];
 			</ul>
 		</nav>
 		<nav>
-            总文章数 95
+            总文章数 94
         </nav>
 		<nav class="header-smart-menu">
     		
@@ -357,6 +357,10 @@ var _hmt = _hmt || [];
 </ul>
 <h4 id="What-is-a-good-model"><a href="#What-is-a-good-model" class="headerlink" title="What is a good model?"></a>What is a good model?</h4><p>Best models would be able to capture 4 components:</p>
 <p>Lexical approach (relating to the words or vocabulary of a language)<br>Syntactic approach (the arrangement of words and phrases to create well-formed sentences in a language -&gt; grammar)<br>Semantic approach (relating to meaning in language -&gt; stretch the words beyond, understanding ambiguities)<br>Pragmatic approach (relating proximity between words and documents)</p>
+<h4 id="预训练词向量"><a href="#预训练词向量" class="headerlink" title="预训练词向量"></a>预训练词向量</h4><p>在训练模型之前，我们发现在大规模语料库（如Common Crawl）中去除重复的句子非常重要。接下来，我们使用了一个在预处理步骤中构建短语的算法。最后，在cbow模型体系结构中添加依赖于位置的权重和子词特征，最终提高了准确性。本文描述的模型可以在fastText网页免费提供给研究人员和工程师，我们希望这些模型在使用文本数据的各种项目中都有用。</p>
+<h4 id="cross-relation-cross-bag"><a href="#cross-relation-cross-bag" class="headerlink" title="cross relation ,cross bag"></a>cross relation ,cross bag</h4><p>1.采用dropout strategy在输出层去防止过拟合<br>2.采用cosine similarity作为selective attention的scoring函数比dot product更有效<br>3.最终采用hyperbolic tangent function 双曲正切函数在输出矩阵作为激活函数</p>
+<h4 id="bert-三部分含义"><a href="#bert-三部分含义" class="headerlink" title="bert 三部分含义"></a>bert 三部分含义</h4><p>Token Embedding: 词义<br>Segment Embedding: 因为句子关系预测的任务，需要将所在句子的embedding也作为单词输入的一部分<br>Positionn Embeddinng: 位置信息，NLP中单词顺序十分重要</p>
+<h4 id="LSTM-VS-CNN"><a href="#LSTM-VS-CNN" class="headerlink" title="LSTM VS CNN"></a>LSTM VS CNN</h4><p>capable of learning long-term dependencies which make RNN smart at remembering things</p>
 
       
       
@@ -491,8 +495,8 @@ var _hmt = _hmt || [];
     </a>
   
   
-    <a href="/2020/10/06/Neural-Relation-Extraction-for-Knowledge-Base-Enrichment-阅读笔记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Neural Relation Extraction for Knowledge Base Enrichment 阅读笔记</div>
+    <a href="/2020/10/04/Large-Scaled-Relation-Extraction-with-Reinforcement-Learning阅读笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Large Scaled Relation Extraction with Reinforcement Learning阅读笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -519,7 +523,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型运行数据"><span class="toc-number">1.</span> <span class="toc-text">C2SA模型运行数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型"><span class="toc-number">2.</span> <span class="toc-text">C2SA模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型训练数据"><span class="toc-number">3.</span> <span class="toc-text">C2SA模型训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型的训练过程"><span class="toc-number">4.</span> <span class="toc-text">C2SA模型的训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关系抽取的难点"><span class="toc-number">4.1.</span> <span class="toc-text">关系抽取的难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention-的-N-种类型"><span class="toc-number">4.2.</span> <span class="toc-text">Attention 的 N 种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention相似度计算方式"><span class="toc-number">4.3.</span> <span class="toc-text">Attention相似度计算方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程监督关系抽取"><span class="toc-number">4.4.</span> <span class="toc-text">远程监督关系抽取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于对抗训练"><span class="toc-number">4.5.</span> <span class="toc-text">关于对抗训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bert-模型"><span class="toc-number">4.6.</span> <span class="toc-text">bert 模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对模型进行改造"><span class="toc-number">4.7.</span> <span class="toc-text">对模型进行改造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-a-good-model"><span class="toc-number">4.8.</span> <span class="toc-text">What is a good model?</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型运行数据"><span class="toc-number">1.</span> <span class="toc-text">C2SA模型运行数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型"><span class="toc-number">2.</span> <span class="toc-text">C2SA模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型训练数据"><span class="toc-number">3.</span> <span class="toc-text">C2SA模型训练数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2SA模型的训练过程"><span class="toc-number">4.</span> <span class="toc-text">C2SA模型的训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关系抽取的难点"><span class="toc-number">4.1.</span> <span class="toc-text">关系抽取的难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention-的-N-种类型"><span class="toc-number">4.2.</span> <span class="toc-text">Attention 的 N 种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attention相似度计算方式"><span class="toc-number">4.3.</span> <span class="toc-text">Attention相似度计算方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程监督关系抽取"><span class="toc-number">4.4.</span> <span class="toc-text">远程监督关系抽取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于对抗训练"><span class="toc-number">4.5.</span> <span class="toc-text">关于对抗训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bert-模型"><span class="toc-number">4.6.</span> <span class="toc-text">bert 模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对模型进行改造"><span class="toc-number">4.7.</span> <span class="toc-text">对模型进行改造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-a-good-model"><span class="toc-number">4.8.</span> <span class="toc-text">What is a good model?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#预训练词向量"><span class="toc-number">4.9.</span> <span class="toc-text">预训练词向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cross-relation-cross-bag"><span class="toc-number">4.10.</span> <span class="toc-text">cross relation ,cross bag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bert-三部分含义"><span class="toc-number">4.11.</span> <span class="toc-text">bert 三部分含义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSTM-VS-CNN"><span class="toc-number">4.12.</span> <span class="toc-text">LSTM VS CNN</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -564,7 +568,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 haothink|
+    		&copy; 2021 haothink|
          <span id="busuanzi_container_site_pv">总访问量: <span id="busuanzi_value_site_pv"></span>|</span>
          <span id="busuanzi_container_site_uv">总访客: <span id="busuanzi_value_site_uv"></span></span>
     	</div>
@@ -671,31 +675,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读书清单</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">关系抽取</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识抽取</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Fork/Join</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">IO线程模型</a>
+                <a href="javascript:void(0)" class="js-tag color5">读书清单</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">IO线程模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,11 +703,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">知识抽取</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">项目应用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+                <a href="javascript:void(0)" class="js-tag color5">关系抽取</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,7 +719,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NIO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Reinforcement Learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -735,10 +739,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
@@ -747,15 +747,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
+                <a href="javascript:void(0)" class="js-tag color5">javaweb基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+                <a href="javascript:void(0)" class="js-tag color3">Hystrix</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -763,11 +759,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
+                <a href="javascript:void(0)" class="js-tag color5">jexl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">volatile关键字</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -775,11 +775,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color5">SpringIOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -795,15 +795,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">平衡二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">递归</a>
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">二叉搜索树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">递归</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -831,15 +831,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">跳台阶</a>
+                <a href="javascript:void(0)" class="js-tag color1">map/reduce</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -847,15 +843,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">二维数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">二维数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -863,15 +855,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Reflection</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CAS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">平衡二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -879,15 +875,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Haversine formula</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">javaweb基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -895,7 +895,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">非全日制</a>
+                <a href="javascript:void(0)" class="js-tag color4">跳台阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
               </li>
             
             <div class="clearfix"></div>
